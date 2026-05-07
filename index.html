@@ -483,10 +483,17 @@
     <div class="error-msg" id="err-phone">Por favor, insira seu WhatsApp.</div>
   </div>
 
+  <!-- PASSO 02: Categoria -->
+  <div class="card" id="cat-card">
+    <div class="step-label">▸ PASSO 02</div>
+    <div class="field-label">Categoria do PC</div>
+    <div class="categories" id="categories-list"></div>
+  </div>
+
   <div id="err-category" style="display:none"></div>
 
   <!-- PASSO 03: grid + mapa lado a lado -->
-  <div id="pc-card">
+  <div id="pc-card" style="display:none;">
     <div style="display:flex; gap:10px; align-items:flex-start; margin-bottom:16px;">
 
       <!-- Grid selector -->
@@ -1154,8 +1161,8 @@
 
     // Pulse glow
     if (pulseActive) {
-      pulseAlpha += 0.015 * pulseDir;
-      if (pulseAlpha >= 0.10) pulseDir = -1;
+      pulseAlpha += 0.005 * pulseDir;
+      if (pulseAlpha >= 0.012) pulseDir = -1;
       if (pulseAlpha <= 0)    { pulseAlpha = 0; pulseDir = 1; }
       var cx = canvas.width / 2, cy = canvas.height * 1.2;
       var grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, canvas.width * 0.95);
@@ -1254,6 +1261,7 @@
     applyAllSavedData();
     updateCounts();
     updateCategoryDisabled();
+    buildCategoryCards();
     buildAllGrids();
     initVoteCard();
     document.getElementById('input-name').addEventListener('input', function() {
@@ -1285,22 +1293,69 @@
     });
   }
 
-  function updateCategoryDisabled() { /* categoria removida da UI — sem ação necessária */ }
+  function updateCategoryDisabled() {
+    buildCategoryCards();
+  }
+
+  function buildCategoryCards() {
+    var list = document.getElementById('categories-list');
+    if (!list) return;
+    list.innerHTML = '';
+    ['extreme','eplus','epro'].forEach(function(cat) {
+      var total = CATEGORIES[cat].pcs.length;
+      var taken = CATEGORIES[cat].pcs.filter(function(p){ return !!reserved[p]; }).length;
+      var sellable = cat === 'epro' ? total - 1 : total;
+      var takenSellable = cat === 'epro' ? taken - 1 : taken;
+      var avail = sellable - takenSellable;
+      var soldOut = avail <= 0;
+      var icons = { extreme:'🔥', eplus:'⭐', epro:'💎' };
+      var subs  = { extreme:'PCs 1 · 2 · 3 · 4 · 5', eplus:'PC 20', epro:'PCs 6-19 (exceto 13)' };
+      var opt = document.createElement('label');
+      opt.className = 'cat-option' + (soldOut ? ' disabled' : '');
+      var checked = (selectedCategory === cat) ? 'checked' : '';
+      opt.innerHTML =
+        '<input type="radio" name="category" value="'+cat+'" '+(soldOut?'disabled':'')+' '+checked+' onchange="selectCategory(\''+cat+'\')" />' +
+        '<div class="cat-card '+cat+'">' +
+          '<div class="cat-left">' +
+            '<div class="cat-icon">'+icons[cat]+'</div>' +
+            '<div><div class="cat-name">'+CATEGORIES[cat].label+'</div>' +
+            '<div class="cat-sub">'+subs[cat]+'</div></div>' +
+          '</div>' +
+          '<div class="cat-right">' +
+            '<div class="cat-price">R$ '+CATEGORIES[cat].price+'</div>' +
+            '<div class="cat-slots'+(soldOut?' soldout':'')+'">'+
+              (soldOut ? 'Esgotado' : (avail === 1 ? '1 vaga disponível' : avail + ' vagas disponíveis'))+
+            '</div>' +
+          '</div>' +
+        '</div>';
+      list.appendChild(opt);
+    });
+  }
 
   function selectCategory(cat) {
     selectedCategory = cat;
-    /* err-category removido */
+    // Reset PC selection when category changes
+    if (selectedPC && CATEGORIES[cat].pcs.indexOf(selectedPC) === -1) {
+      selectedPC = null;
+      document.getElementById('confirm-section').style.display = 'none';
+      updateMapDot(null, null);
+    }
+    // Show pc-card
+    document.getElementById('pc-card').style.display = '';
     startPulse(cat);
+    buildAllGrids();
+    // Scroll to pc-card
+    setTimeout(function(){
+      var el = document.getElementById('pc-card');
+      if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 100);
   }
 
   function buildAllGrids() {
     var grid = document.getElementById('pc-grid');
     grid.innerHTML = '';
-    ['extreme','eplus','epro'].forEach(function(cat) {
-      var sep = document.createElement('div');
-      sep.className = 'grid-cat-sep ' + cat;
-      sep.textContent = CATEGORIES[cat].label + ' — R$ ' + CATEGORIES[cat].price;
-      grid.appendChild(sep);
+    var catsToShow = selectedCategory ? [selectedCategory] : ['extreme','eplus','epro'];
+    catsToShow.forEach(function(cat) {
       CATEGORIES[cat].pcs.forEach(function(num) {
         var btn = document.createElement('button');
         btn.className = 'pc-btn';
@@ -1316,6 +1371,7 @@
           nameSpan.textContent = rName.split(' ')[0];
           btn.appendChild(nameSpan);
         } else {
+          if (selectedPC === num) btn.classList.add('selected', cat);
           (function(n, b, c) {
             b.onclick = function() { selectPC(n, b, c); };
           })(num, btn, cat);
@@ -1338,9 +1394,9 @@
     }
     // Auto-seleciona a categoria do PC clicado
     selectedCategory = cat;
-    var radio = document.querySelector('input[name="category"][value="'+cat+'"]');
-    if (radio) radio.checked = true;
-    /* err-category removido */
+    buildCategoryCards();
+    // Show pc-card (already visible but ensure)
+    document.getElementById('pc-card').style.display = '';
     document.querySelectorAll('.pc-btn').forEach(function(b) {
       b.classList.remove('selected','extreme','eplus','epro');
     });
@@ -1401,10 +1457,11 @@
         '📱 ' + phone + '\n' +
         '💻 PC ' + pcToReserve + ' — ' + CATEGORIES[catToReserve].label + '\n' +
         '💰 R$ ' + CATEGORIES[catToReserve].price + ',00\n' +
+        '🔗 Link Pagamento: ' + link + '\n' +
         '⏳ Aguardando confirmação de pagamento'
       );
       window.open('https://wa.me/5511930291427?text=' + adminMsg, '_blank');
-      window.open(link, '_blank');
+      setTimeout(function(){ window.open(link, '_blank'); }, 800);
       document.getElementById('confirm-section').innerHTML =
         '<div class="summary" style="border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.05)">' +
         '<div style="text-align:center;padding:12px 0">' +
@@ -1568,13 +1625,13 @@
   // ── VOTAÇÃO ───────────────────────────────────────────────────────────────
   function getEventSaturdays() {
     var result = [];
-    // Sábados entre 20/Nov e 20/Dez em qualquer ano futuro próximo
-    var now  = new Date();
-    for (var y = now.getFullYear(); y <= now.getFullYear() + 2; y++) {
+    var now = new Date();
+    // Verifica do ano anterior até +1 para pegar eventos passados/futuros
+    for (var y = now.getFullYear() - 1; y <= now.getFullYear() + 1; y++) {
       var start = new Date(y, 10, 20); // 20 Nov
       var end   = new Date(y, 11, 20); // 20 Dez
       for (var d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-        if (d.getDay() === 6) result.push(new Date(d)); // sábado
+        if (d.getDay() === 6) result.push(new Date(d));
       }
       if (result.length) break;
     }
