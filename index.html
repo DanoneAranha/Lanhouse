@@ -271,8 +271,6 @@
   .final-mvp { border-color:rgba(255,215,0,0.3); background:rgba(255,215,0,0.04); }
 
 </style>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 <body>
 <div class="container">
@@ -560,6 +558,8 @@
 </div>
 <div class="toast" id="toast"></div>
 
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
   const ADM_PASS = '190894';
 
@@ -1164,7 +1164,9 @@
     setTimeout(function() { t.classList.remove('show'); }, 3000);
   }
 
-  init();
+  document.addEventListener('DOMContentLoaded', function() {
+    init();
+  });
 </script>
 </body>
 </html>
