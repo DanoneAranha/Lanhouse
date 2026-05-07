@@ -271,6 +271,8 @@
   .final-mvp { border-color:rgba(255,215,0,0.3); background:rgba(255,215,0,0.04); }
 
 </style>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 <body>
 <div class="container">
@@ -373,7 +375,8 @@
   </div>
   <!-- ── FIM INFORMAÇÕES DO EVENTO ─────────────────────────────────── -->
 
-  <div class="availability-bar">
+  <div id="fb-loading" style="text-align:center;padding:12px;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);opacity:0.7;">⟳ CONECTANDO...</div>
+  <div class="availability-bar" style="display:none">
     <div class="avail-badge extreme"><div class="avail-dot"></div><span>EXTREME</span><span class="avail-count" id="count-extreme">5</span><span style="color:var(--text-dim);font-size:10px">vagas</span></div>
     <div class="avail-badge eplus"><div class="avail-dot"></div><span>EPLUS</span><span class="avail-count" id="count-eplus">1</span><span style="color:var(--text-dim);font-size:10px">vaga</span></div>
     <div class="avail-badge epro"><div class="avail-dot"></div><span>EPRO</span><span class="avail-count" id="count-epro">13</span><span style="color:var(--text-dim);font-size:10px">vagas</span></div>
@@ -561,37 +564,57 @@
   const ADM_PASS = '190894';
 
   const CATEGORIES = {
-    extreme: { label:'PC EXTREME', price:90,  pcs:[1,2,3,4,5], mpLink:'LINK_MP_EXTREME' },
-    eplus:   { label:'PC EPLUS',   price:100, pcs:[20],         mpLink:'LINK_MP_EPLUS' },
-    epro:    { label:'PC EPRO',    price:110, pcs:[6,7,8,9,10,11,12,13,14,15,16,17,18,19], mpLink:'LINK_MP_EPRO' }
+    extreme: { label:'PC EXTREME', price:90,  pcs:[1,2,3,4,5], mpLink:'https://mpago.la/2R63UJ2' },
+    eplus:   { label:'PC EPLUS',   price:100, pcs:[20],         mpLink:'https://mpago.la/2C8ifNR' },
+    epro:    { label:'PC EPRO',    price:110, pcs:[6,7,8,9,10,11,12,13,14,15,16,17,18,19], mpLink:'https://mpago.la/2w6Webg' }
   };
 
-  // ── ESTADO EM MEMÓRIA (não depende de localStorage) ───────────────────────
+  // ── FIREBASE ──────────────────────────────────────────────────────────────
+  var firebaseApp = firebase.initializeApp({
+    databaseURL: 'https://lanhouse-30903-default-rtdb.firebaseio.com'
+  });
+  var db = firebase.database();
+
   var reserved = {};
+  var interestList = [];
 
   function initReserved() {
-    // Tenta carregar do localStorage, se disponível
-    try {
-      var saved = localStorage.getItem('reserved');
-      if (saved) reserved = JSON.parse(saved);
-    } catch(e) { reserved = {}; }
-    // PC 13 sempre reservado como dono
-    if (!reserved[13]) {
-      reserved[13] = { name:'Indisponível', category:'epro', ts:0, owner:true };
-    }
-    saveReserved();
+    // Escuta mudanças em tempo real no Firebase
+    db.ref('reserved').on('value', function(snap) {
+      reserved = snap.val() || {};
+      // Garante PC 13 sempre reservado
+      if (!reserved[13]) {
+        reserved[13] = { name:'Indisponível', category:'epro', ts:0, owner:true };
+        db.ref('reserved/13').set(reserved[13]);
+      }
+      // Hide loading, show content
+      var fl = document.getElementById('fb-loading');
+      if (fl) fl.style.display = 'none';
+      document.querySelector('.availability-bar').style.display = 'flex';
+      updateCounts();
+      updateCategoryDisabled();
+      if (selectedCategory) buildPCGrid(selectedCategory);
+      updateConfirmedList();
+      renderInterestList();
+    });
+
+    db.ref('interestList').on('value', function(snap) {
+      interestList = snap.val() || [];
+      renderInterestList();
+    });
+
+    db.ref('eventoData').once('value', function(snap) {
+      if (snap.val()) { eventoData = snap.val(); updateEventoDisplay(); }
+    });
+
+    db.ref('gruposData').once('value', function(snap) {
+      if (snap.val()) { gruposData = snap.val(); updateGruposDisplay(); }
+    });
   }
 
   function saveReserved() {
-    try { localStorage.setItem('reserved', JSON.stringify(reserved)); } catch(e) {}
-    // Sempre mantém em memória independente do localStorage
+    db.ref('reserved').set(reserved);
   }
-
-  var interestList = [];
-  try {
-    var si = localStorage.getItem('interestList');
-    if (si) interestList = JSON.parse(si);
-  } catch(e) {}
 
 
 
@@ -645,7 +668,7 @@
 
   // ── INTEREST LIST ─────────────────────────────────────────────────────────
   function saveInterestList() {
-    try { localStorage.setItem('interestList', JSON.stringify(interestList)); } catch(e) {}
+    db.ref('interestList').set(interestList);
   }
 
   function toggleInterestForm() {
@@ -771,10 +794,7 @@
     valor: 'R$ 90 a R$ 110 por pessoa',
     obs:   '⚠️ Todos precisam ter o jogo comprado (exceto Minecraft). Comida e bebida individual.'
   };
-  try {
-    var saved = localStorage.getItem('eventoData');
-    if (saved) eventoData = JSON.parse(saved);
-  } catch(e) {}
+  // eventoData loaded from Firebase in initReserved
 
   function admLoadEvento() {
     document.getElementById('evt-data').value  = eventoData.data;
@@ -816,7 +836,7 @@
     eventoData.hora  = document.getElementById('evt-hora').value.trim()  || eventoData.hora;
     eventoData.valor = document.getElementById('evt-valor').value.trim() || eventoData.valor;
     eventoData.obs   = document.getElementById('evt-obs').value.trim()   || eventoData.obs;
-    try { localStorage.setItem('eventoData', JSON.stringify(eventoData)); } catch(e) {}
+    db.ref('eventoData').set(eventoData);
     // Update visible info on page
     updateEventoDisplay();
     showToast('✓ Informações do evento salvas');
@@ -841,10 +861,7 @@
     { title:'GRUPO 3', players:['Laporta','Nan','Harry','',''] },
     { title:'GRUPO 4', players:['Gabriel','Ricardo','Kadu','',''] }
   ];
-  try {
-    var sg = localStorage.getItem('gruposData');
-    if (sg) gruposData = JSON.parse(sg);
-  } catch(e) {}
+  // gruposData loaded from Firebase in initReserved
 
   function admLoadGrupos() {
     var editor = document.getElementById('adm-groups-editor');
@@ -867,7 +884,7 @@
         return el ? el.value.trim() : p;
       });
     });
-    try { localStorage.setItem('gruposData', JSON.stringify(gruposData)); } catch(e) {}
+    db.ref('gruposData').set(gruposData);
     updateGruposDisplay();
     showToast('✓ Grupos salvos');
   }
@@ -1026,21 +1043,14 @@
       document.getElementById('confirm-section').style.display = 'none';
       return;
     }
-    reserved[selectedPC] = { name:name, category:selectedCategory, ts:Date.now() };
-    saveReserved();
-    updateCounts();
-    updateCategoryDisabled();
-    buildPCGrid(selectedCategory);
-    updateConfirmedList();
-    renderInterestList();
-    var link = CATEGORIES[selectedCategory].mpLink;
-    if (link.indexOf('LINK_') === 0) {
-      showToast('✓ Reservado! Configure o link do MP.');
-      setTimeout(function() { alert('Configure o link do Mercado Pago! Variavel: CATEGORIES.' + selectedCategory + '.mpLink'); }, 1000);
-    } else {
+    var pcToReserve = selectedPC;
+    var catToReserve = selectedCategory;
+    var link = CATEGORIES[catToReserve].mpLink;
+    reserved[pcToReserve] = { name:name, category:catToReserve, ts:Date.now() };
+    db.ref('reserved/' + pcToReserve).set(reserved[pcToReserve]).then(function() {
       showToast('✓ Reservado! Abrindo pagamento...');
-      setTimeout(function() { window.location.href = link; }, 1000);
-    }
+      setTimeout(function() { window.open(link, '_blank'); }, 1000);
+    });
   }
 
   // ── ADMIN ─────────────────────────────────────────────────────────────────
