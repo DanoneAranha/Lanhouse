@@ -309,19 +309,8 @@
 
     <div class="info-card">
       <div class="info-card-title">✅ CONFIRMADOS</div>
-      <div class="player-grid">
-        <div class="player-chip confirmed">1. Danilo</div>
-        <div class="player-chip confirmed">2. Ronny</div>
-        <div class="player-chip confirmed">3. Bruno</div>
-        <div class="player-chip confirmed">4. Bonafin Boquetti</div>
-        <div class="player-chip confirmed">5. Laporta</div>
-        <div class="player-chip confirmed">6. Nan</div>
-        <div class="player-chip confirmed">7. Giano</div>
-        <div class="player-chip confirmed">8. Kadu</div>
-        <div class="player-chip confirmed">9. Harry</div>
-        <div class="player-chip confirmed">10. Gabriel Mamadura</div>
-        <div class="player-chip confirmed">11. Ricardo</div>
-        <div class="player-chip confirmed">12. Gabriel</div>
+      <div class="player-grid" id="confirmed-grid">
+        <div class="player-chip confirmed">1. Danilo — PC 13</div>
       </div>
     </div>
 
@@ -762,37 +751,28 @@
   }
 
   function updateConfirmedList() {
-    // Update the info-card with confirmed players
-    // Merge static confirmed names + reserved names, dedup by lowercase
-    var staticConfirmed = ['Danilo','Ronny','Bruno','Bonafin Boquetti','Laporta','Nan','Giano','Kadu','Harry','Gabriel Mamadura','Ricardo','Gabriel'];
-    var r = reserved;
-    var reservedNames = Object.entries(r)
-      .filter(function(e){ return !e[1].owner; })
-      .map(function(e){ return e[1].name; });
+    var grid = document.getElementById('confirmed-grid');
+    if (!grid) return;
 
-    // Merge: start with static, add reserved that aren't already there
-    var seen = {};
-    var merged = [];
-    staticConfirmed.forEach(function(n) { seen[n.toLowerCase()] = true; merged.push(n); });
-    reservedNames.forEach(function(n) {
-      if (n && !seen[n.toLowerCase()]) { seen[n.toLowerCase()] = true; merged.push(n); }
-    });
+    // Build list: Danilo always first (owner, PC 13)
+    var seen = { 'danilo': true };
+    var entries = [{ name: 'Danilo', pc: 13 }];
 
-    var chips = document.querySelectorAll('.player-chip.confirmed');
-    // Update existing chips
-    chips.forEach(function(chip, i) {
-      if (merged[i]) chip.textContent = (i+1) + '. ' + merged[i];
-    });
-    // Add new chips if more reserved than original list
-    var grid = chips[0] && chips[0].parentElement;
-    if (grid && merged.length > chips.length) {
-      for (var i = chips.length; i < merged.length; i++) {
-        var chip = document.createElement('div');
-        chip.className = 'player-chip confirmed';
-        chip.textContent = (i+1) + '. ' + merged[i];
-        grid.appendChild(chip);
-      }
-    }
+    // Add confirmed (non-pending, non-owner) reservations
+    Object.entries(reserved)
+      .filter(function(e) { return !e[1].owner && !e[1].pending; })
+      .sort(function(a, b) { return Number(a[0]) - Number(b[0]); })
+      .forEach(function(e) {
+        var n = e[1].name || '';
+        if (n && !seen[n.toLowerCase()]) {
+          seen[n.toLowerCase()] = true;
+          entries.push({ name: n, pc: Number(e[0]) });
+        }
+      });
+
+    grid.innerHTML = entries.map(function(e, i) {
+      return '<div class="player-chip confirmed">' + (i+1) + '. ' + e.name + ' — PC ' + e.pc + '</div>';
+    }).join('');
   }
 
   // ── ADM TABS ──────────────────────────────────────────────────────────────
@@ -928,20 +908,7 @@
     updateGruposDisplay();
     renderInterestList();
     updateConfirmedList();
-    // Also update confirmados list in page (player-chips)
-    var confirmed = document.querySelectorAll('.player-chip.confirmed');
-    var r = reserved;
-    var reservedNames = Object.entries(r)
-      .filter(function(e){ return !e[1].owner; })
-      .sort(function(a,b){ return a[0]-b[0]; });
-    // If there are reservations, update confirmed list
-    if (reservedNames.length > 0) {
-      confirmed.forEach(function(chip, i) {
-        if (reservedNames[i]) {
-          chip.textContent = (i+1) + '. ' + reservedNames[i][1].name;
-        }
-      });
-    }
+    // confirmed list is fully dynamic via updateConfirmedList()
   }
 
   function init() {
