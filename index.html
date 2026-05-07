@@ -161,6 +161,14 @@
   .adm-pc-badge.epro    { background:rgba(255,59,59,0.12);   color:var(--epro);    border:1px solid var(--epro); }
   .adm-item-name { font-size:14px; font-weight:600; color:#fff; }
   .adm-item-cat  { font-size:10px; color:var(--text-dim); letter-spacing:1px; margin-top:1px; }
+
+  .pc-btn.pending { border-color:#b8860b; background:rgba(184,134,11,0.12); color:#ffd700; cursor:not-allowed; }
+  .pc-btn.pending .pc-reserved-name { color:#8a6800; }
+  .adm-confirm-btn { background:none; border:1px solid rgba(127,255,0,0.4); border-radius:4px; color:var(--accent3); font-family:'Orbitron',monospace; font-size:9px; letter-spacing:1px; padding:5px 8px; cursor:pointer; transition:all 0.2s; }
+  .adm-confirm-btn:hover { background:rgba(127,255,0,0.15); border-color:var(--accent3); }
+  .adm-item.pending-item { border-color:rgba(255,215,0,0.3); background:rgba(255,215,0,0.04); }
+  .pending-badge { font-family:'Orbitron',monospace; font-size:8px; letter-spacing:1px; color:#ffd700; padding:2px 6px; border:1px solid rgba(255,215,0,0.4); border-radius:3px; }
+
   .adm-remove-btn { background:none; border:1px solid #3a2020; border-radius:4px; color:#663333; font-family:'Orbitron',monospace; font-size:9px; letter-spacing:1px; padding:5px 10px; cursor:pointer; transition:all 0.2s; }
   .adm-remove-btn:hover { border-color:#ff4444; color:#ff4444; background:rgba(255,68,68,0.1); }
   .adm-add-form { background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:16px; margin-top:8px; }
@@ -429,6 +437,7 @@
         <div class="legend" style="margin-top:10px">
           <div class="legend-item"><div class="legend-box" style="border-color:#555;background:#131920"></div>Disponível</div>
           <div class="legend-item"><div class="legend-box" style="border-color:#1a2030;background:#0a0e14"></div>Reservado</div>
+          <div class="legend-item"><div class="legend-box" style="border-color:#b8860b;background:rgba(184,134,11,0.12)"></div>Aguardando pag.</div>
         </div>
         <div class="error-msg" id="err-pc">Por favor, selecione um número de PC.</div>
       </div>
@@ -558,8 +567,6 @@
 </div>
 <div class="toast" id="toast"></div>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
   const ADM_PASS = '190894';
 
@@ -570,10 +577,23 @@
   };
 
   // ── FIREBASE ──────────────────────────────────────────────────────────────
-  var firebaseApp = firebase.initializeApp({
-    databaseURL: 'https://lanhouse-30903-default-rtdb.firebaseio.com'
-  });
-  var db = firebase.database();
+  var db;
+
+  function loadFirebase(callback) {
+    var s1 = document.createElement('script');
+    s1.src = 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js';
+    s1.onload = function() {
+      var s2 = document.createElement('script');
+      s2.src = 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js';
+      s2.onload = function() {
+        firebase.initializeApp({ databaseURL: 'https://lanhouse-30903-default-rtdb.firebaseio.com' });
+        db = firebase.database();
+        callback();
+      };
+      document.head.appendChild(s2);
+    };
+    document.head.appendChild(s1);
+  }
 
   var reserved = {};
   var interestList = [];
@@ -584,7 +604,7 @@
       reserved = snap.val() || {};
       // Garante PC 13 sempre reservado
       if (!reserved[13]) {
-        reserved[13] = { name:'Indisponível', category:'epro', ts:0, owner:true };
+        reserved[13] = { name:'Danilo', category:'epro', ts:0, owner:true };
         db.ref('reserved/13').set(reserved[13]);
       }
       // Hide loading, show content
@@ -989,12 +1009,12 @@
       numSpan.textContent = num;
       btn.appendChild(numSpan);
       if (reserved[num]) {
-        btn.classList.add('taken');
+        btn.classList.add(reserved[num].pending ? 'pending' : 'taken');
         btn.disabled = true;
         var nameSpan = document.createElement('span');
         nameSpan.className = 'pc-reserved-name';
         var rName = reserved[num].name || '';
-        nameSpan.textContent = reserved[num].owner ? '' : rName.split(' ')[0];
+        nameSpan.textContent = rName.split(' ')[0];
         btn.appendChild(nameSpan);
       } else {
         (function(n, b, c) {
@@ -1046,10 +1066,22 @@
     var pcToReserve = selectedPC;
     var catToReserve = selectedCategory;
     var link = CATEGORIES[catToReserve].mpLink;
-    reserved[pcToReserve] = { name:name, category:catToReserve, ts:Date.now() };
+    // Mark as PENDING (aguardando pagamento) — ADM confirms after payment
+    reserved[pcToReserve] = { name:name, category:catToReserve, ts:Date.now(), pending:true };
     db.ref('reserved/' + pcToReserve).set(reserved[pcToReserve]).then(function() {
-      showToast('✓ Reservado! Abrindo pagamento...');
-      setTimeout(function() { window.open(link, '_blank'); }, 1000);
+      // Open MP in new tab
+      window.open(link, '_blank');
+      // Show pending message on page
+      document.getElementById('confirm-section').innerHTML =
+        '<div class="summary" style="border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.05)">' +
+        '<div style="text-align:center;padding:12px 0">' +
+        '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#ffd700;margin-bottom:8px">⏳ AGUARDANDO PAGAMENTO</div>' +
+        '<div style="font-size:13px;color:var(--text-dim);line-height:1.7">O link do Mercado Pago foi aberto.<br>' +
+        'Após o pagamento, aguarde a confirmação.<br>' +
+        '<span style="color:#ffd700;font-size:11px">PC ' + pcToReserve + ' — ' + name + '</span></div>' +
+        '</div></div>';
+      selectedPC = null;
+      selectedCategory = null;
     });
   }
 
@@ -1093,11 +1125,27 @@
       var cat = data.category || 'epro';
       var item = document.createElement('div');
       item.className = 'adm-item';
-      var removeBtn = data.owner ? '' : '<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button>';
-      item.innerHTML = '<div class="adm-item-left"><div class="adm-pc-badge '+cat+'">PC'+pc+'</div><div><div class="adm-item-name">'+data.name+'</div><div class="adm-item-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+'</div></div></div>'+removeBtn;
+      if (data.pending) item.classList.add('pending-item');
+      var actionBtns = data.owner ? '' :
+        (data.pending
+          ? '<div style="display:flex;gap:6px;flex-direction:column;align-items:flex-end">' +
+            '<button class="adm-confirm-btn" onclick="admConfirm('+pc+')">✓ CONFIRMAR</button>' +
+            '<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button></div>'
+          : '<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button>');
+      var statusBadge = data.pending ? ' <span class="pending-badge">AGUARDANDO</span>' : '';
+      item.innerHTML = '<div class="adm-item-left"><div class="adm-pc-badge '+cat+'">PC'+pc+'</div><div><div class="adm-item-name">'+data.name+statusBadge+'</div><div class="adm-item-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+'</div></div></div>'+actionBtns;
       list.appendChild(item);
     });
     updateAdmPcSelect();
+  }
+
+  function admConfirm(pc) {
+    if (!reserved[pc]) return;
+    reserved[pc].pending = false;
+    db.ref('reserved/' + pc).set(reserved[pc]).then(function() {
+      renderAdmList();
+      showToast('✓ PC ' + pc + ' confirmado como pago!');
+    });
   }
 
   function admRemove(pc) {
@@ -1146,7 +1194,7 @@
   function admReset() {
     if (!confirm('Resetar TODAS as reservas? Não pode ser desfeito.')) return;
     reserved = {};
-    reserved[13] = { name:'Indisponível', category:'epro', ts:0, owner:true };
+    reserved[13] = { name:'Danilo', category:'epro', ts:0, owner:true };
     saveReserved();
     updateCounts();
     updateCategoryDisabled();
@@ -1165,7 +1213,9 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    init();
+    loadFirebase(function() {
+      init();
+    });
   });
 </script>
 </body>
