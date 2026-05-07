@@ -9,7 +9,7 @@
   :root {
     --bg: #080c10; --surface: #0d1117; --surface2: #131920;
     --border: #1e2d3d; --accent: #00d4ff; --accent3: #7fff00;
-    --text: #c9d1d9; --text-dim: #586069;
+    --text: #c9d1d9; --text-dim: #8a9aab;
     --extreme: #a0a0a0; --eplus: #3b9eff; --epro: #ff3b3b;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -26,6 +26,21 @@
   .header-tag { font-family:'Orbitron',monospace; font-size:10px; letter-spacing:4px; color:var(--accent); margin-bottom:12px; opacity:0.8; }
   .header h1 { font-family:'Orbitron',monospace; font-size:28px; font-weight:900; color:#fff; letter-spacing:2px; margin-bottom:8px; }
   .header h1 span { color:var(--accent); text-shadow:0 0 20px rgba(0,212,255,0.5); }
+  @keyframes rainbow-cycle {
+    0%   { color:#ff3b3b; text-shadow:0 0 16px #ff3b3b; }
+    16%  { color:#ff9500; text-shadow:0 0 16px #ff9500; }
+    33%  { color:#ffd700; text-shadow:0 0 16px #ffd700; }
+    50%  { color:#3bff6b; text-shadow:0 0 16px #3bff6b; }
+    66%  { color:#3b9eff; text-shadow:0 0 16px #3b9eff; }
+    83%  { color:#c03bff; text-shadow:0 0 16px #c03bff; }
+    100% { color:#ff3b3b; text-shadow:0 0 16px #ff3b3b; }
+  }
+  .rainbow-anim { animation:rainbow-cycle 3s linear infinite; }
+  .grid-cat-sep { width:100%; display:flex; align-items:center; gap:8px; margin:10px 0 8px; font-family:'Orbitron',monospace; font-size:9px; letter-spacing:2px; }
+  .grid-cat-sep.extreme { color:var(--extreme); }
+  .grid-cat-sep.eplus   { color:var(--eplus); }
+  .grid-cat-sep.epro    { color:var(--epro); }
+  .grid-cat-sep::after  { content:''; flex:1; height:1px; background:currentColor; opacity:0.2; }
   .header p { font-size:14px; color:var(--text-dim); letter-spacing:1px; }
   .divider { width:60px; height:2px; background:linear-gradient(90deg,var(--accent),transparent); margin:16px auto; }
 
@@ -139,8 +154,8 @@
 
   /* ADMIN */
   .adm-trigger { text-align:center; margin-top:32px; margin-bottom:8px; }
-  .adm-trigger-btn { background:none; border:1px solid #1e2d3d; border-radius:4px; color:#2a3a4a; font-family:'Orbitron',monospace; font-size:9px; letter-spacing:2px; padding:6px 14px; cursor:pointer; transition:all 0.2s; }
-  .adm-trigger-btn:hover { border-color:#ff6b35; color:#ff6b35; }
+  .adm-trigger-btn { background:rgba(255,107,53,0.08); border:1px solid #ff6b35; border-radius:4px; color:#ff6b35; font-family:'Orbitron',monospace; font-size:9px; letter-spacing:2px; padding:6px 14px; cursor:pointer; transition:all 0.2s; }
+  .adm-trigger-btn:hover { background:rgba(255,107,53,0.2); }
   .adm-login { background:var(--surface); border:1px solid #ff6b35; border-radius:8px; padding:20px; margin-bottom:16px; display:none; }
   .adm-login.visible { display:block; }
   .adm-login-title { font-family:'Orbitron',monospace; font-size:11px; letter-spacing:3px; color:#ff6b35; margin-bottom:12px; }
@@ -278,6 +293,73 @@
   .final-game { font-size:12px; color:var(--text); letter-spacing:0.3px; }
   .final-mvp { border-color:rgba(255,215,0,0.3); background:rgba(255,215,0,0.04); }
 
+
+  /* ── VER MAIS ── */
+  .btn-ver-mais { width:100%; padding:11px; background:rgba(0,212,255,0.06); border:1px dashed rgba(0,212,255,0.3); border-radius:6px; color:var(--accent); font-family:'Orbitron',monospace; font-size:10px; letter-spacing:2px; cursor:pointer; transition:all 0.2s; margin-bottom:4px; }
+  .btn-ver-mais:hover { background:rgba(0,212,255,0.12); }
+
+  /* ── EXTRA BTNS ── */
+  .extra-btns { display:flex; gap:8px; margin-top:8px; margin-bottom:8px; }
+  .btn-extra { flex:1; padding:11px; background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.2); border-radius:6px; color:var(--accent); font-family:'Orbitron',monospace; font-size:9px; letter-spacing:1px; cursor:pointer; transition:all 0.2s; }
+  .btn-extra:hover { background:rgba(0,212,255,0.12); border-color:var(--accent); }
+
+  /* ── MODAL ── */
+  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding:16px; }
+  .modal-overlay.open { display:flex; }
+  .modal-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; width:100%; max-width:500px; max-height:88vh; display:flex; flex-direction:column; overflow:hidden; }
+  .modal-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--border); flex-shrink:0; }
+  .modal-title { font-family:'Orbitron',monospace; font-size:12px; font-weight:700; letter-spacing:2px; color:#fff; }
+  .modal-close { background:none; border:1px solid var(--border); border-radius:4px; color:var(--text-dim); font-size:14px; width:28px; height:28px; cursor:pointer; transition:all 0.2s; }
+  .modal-close:hover { border-color:#ff4444; color:#ff4444; }
+  .modal-body { overflow-y:auto; padding:16px 20px; flex:1; }
+
+  /* ── FAQ ── */
+  .faq-item { border-bottom:1px solid var(--border); }
+  .faq-item:last-child { border-bottom:none; }
+  .faq-q { width:100%; background:none; border:none; padding:14px 0; color:#fff; font-family:'Rajdhani',sans-serif; font-size:14px; font-weight:600; letter-spacing:1px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; text-align:left; }
+  .faq-q:hover { color:var(--accent); }
+  .faq-arrow { font-size:16px; transition:transform 0.2s; color:var(--accent); }
+  .faq-q.open .faq-arrow { transform:rotate(180deg); }
+  .faq-a { display:none; padding:0 0 14px 0; font-size:13px; color:var(--text); line-height:1.7; }
+  .faq-a.open { display:block; }
+  .faq-a ol, .faq-a ul { padding-left:18px; margin-top:6px; }
+  .faq-a li { margin-bottom:4px; }
+  .faq-format-row { display:flex; align-items:flex-start; gap:10px; margin-bottom:8px; font-size:12px; }
+  .faq-fmt-badge { font-family:'Orbitron',monospace; font-size:8px; font-weight:700; padding:3px 7px; border-radius:3px; background:rgba(0,212,255,0.1); border:1px solid var(--accent); color:var(--accent); flex-shrink:0; margin-top:1px; }
+  .faq-score-row { display:flex; align-items:center; gap:10px; margin-bottom:8px; font-size:13px; }
+  .faq-round { display:flex; align-items:flex-start; gap:8px; margin-bottom:8px; font-size:12px; color:var(--text); }
+  .faq-final-row { font-size:13px; margin-bottom:8px; color:var(--text); }
+
+  /* ── GAMES TAGS with links ── */
+  a.gtag { text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:11px; padding:3px 8px; background:var(--surface2); border:1px solid var(--border); border-radius:3px; color:var(--text); letter-spacing:0.3px; transition:all 0.2s; }
+  a.gtag:hover { border-color:var(--accent); color:var(--accent); }
+  .gtag-free { font-family:'Orbitron',monospace; font-size:7px; letter-spacing:1px; color:var(--accent3); border:1px solid rgba(127,255,0,0.4); border-radius:2px; padding:1px 3px; }
+
+  /* ── RESERVA MODAL ── */
+  .reserva-card { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:18px; text-align:center; }
+  .reserva-pc-num { font-family:'Orbitron',monospace; font-size:36px; font-weight:900; margin-bottom:4px; }
+  .reserva-pc-num.extreme { color:var(--extreme); }
+  .reserva-pc-num.eplus   { color:var(--eplus); }
+  .reserva-pc-num.epro    { color:var(--epro); }
+  .reserva-cat  { font-family:'Orbitron',monospace; font-size:10px; letter-spacing:2px; margin-bottom:14px; }
+  .reserva-name { font-size:18px; font-weight:700; color:#fff; margin-bottom:6px; }
+  .reserva-status { font-family:'Orbitron',monospace; font-size:10px; letter-spacing:2px; padding:6px 12px; border-radius:4px; display:inline-block; margin-top:8px; }
+  .reserva-status.confirmed { background:rgba(127,255,0,0.1); border:1px solid rgba(127,255,0,0.4); color:var(--accent3); }
+  .reserva-status.pending   { background:rgba(255,215,0,0.1); border:1px solid rgba(255,215,0,0.4); color:#ffd700; }
+  .reserva-map-wrap { position:relative; display:inline-block; width:140px; margin-top:14px; }
+  .reserva-map-wrap img { width:100%; display:block; border-radius:6px; border:1px solid var(--border); }
+  .reserva-not-found { text-align:center; padding:20px; color:var(--text-dim); font-size:13px; letter-spacing:0.5px; }
+
+  /* ── PARTICLES CANVAS ── */
+  #particles-canvas { position:fixed; inset:0; pointer-events:none; z-index:2; }
+
+  /* ── ADM TIMES ── */
+  .times-player-toggle { font-size:12px; padding:5px 10px; border-radius:4px; border:1px solid var(--border); background:rgba(127,255,0,0.08); color:var(--accent3); cursor:pointer; transition:all 0.2s; letter-spacing:0.5px; }
+  .times-player-toggle.off { background:var(--surface2); color:var(--text-dim); border-color:var(--border); text-decoration:line-through; }
+  .times-result-group { background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:12px; margin-bottom:8px; }
+  .times-result-title { font-family:'Orbitron',monospace; font-size:9px; letter-spacing:2px; color:var(--accent); margin-bottom:8px; }
+  .times-result-player { font-size:13px; color:var(--text); padding:2px 0; }
+
 </style>
 </head>
 <body>
@@ -287,7 +369,7 @@
 
   <div class="header">
     <div class="header-tag">▸ Sistema de Reservas</div>
-    <h1>LAN <span>HOUSE</span></h1>
+    <h1>LAN <span class="rainbow-anim">HOUSE</span></h1>
     <div class="divider"></div>
     <p>Escolha seu PC • Garanta sua vaga</p>
   </div>
@@ -295,6 +377,9 @@
 
   <!-- ── INFORMAÇÕES DO EVENTO ──────────────────────────────────────── -->
   <div class="info-section">
+
+    <!-- Always visible -->
+    <div class="info-always">
 
     <div class="info-card">
       <div class="info-card-title">🌟 LAN FINAL DE ANO</div>
@@ -314,6 +399,16 @@
       </div>
     </div>
 
+    </div><!-- /info-always -->
+
+    <!-- Ver mais button -->
+    <button class="btn-ver-mais" id="btn-ver-mais" onclick="toggleVerMais()">
+      ▸ VER MAIS INFORMAÇÕES
+    </button>
+
+    <!-- Hidden section -->
+    <div class="info-more" id="info-more" style="display:none">
+
     <div class="info-card">
       <div class="info-card-title">🎲 GRUPOS SORTEADOS</div>
       <div class="groups-grid">
@@ -327,10 +422,10 @@
     <div class="info-card">
       <div class="info-card-title">🎮 JOGOS POR FORMATO</div>
       <div class="games-list">
-        <div class="games-format"><div class="games-format-title">5 × 5</div><div class="games-tags"><span class="gtag">CS2</span><span class="gtag">R6</span><span class="gtag">Valorant</span><span class="gtag">Fortnite</span><span class="gtag">Black Ops 2 MP</span><span class="gtag">Chivalry 2</span></div></div>
-        <div class="games-format"><div class="games-format-title">3 × 3</div><div class="games-tags"><span class="gtag">Rocket League</span><span class="gtag">Left 4 Dead 2</span><span class="gtag">Garry's Mod</span><span class="gtag">Fortnite</span><span class="gtag">Black Ops 2 MP</span></div></div>
-        <div class="games-format"><div class="games-format-title">2 × 2</div><div class="games-tags"><span class="gtag">Gang Beasts</span><span class="gtag">Minecraft</span><span class="gtag">Transformice</span><span class="gtag">Worms</span><span class="gtag">Castle Crashers</span><span class="gtag">BattleBlock Theater</span></div></div>
-        <div class="games-format"><div class="games-format-title">INDIVIDUAL</div><div class="games-tags"><span class="gtag">Among Us</span><span class="gtag">Minecraft PvP</span><span class="gtag">Clone Hero</span><span class="gtag">MK 10/11</span><span class="gtag">Fortnite</span><span class="gtag">BO2 FFA</span><span class="gtag">Chivalry 2 FFA</span></div></div>
+        <div class="games-format"><div class="games-format-title">5 × 5</div><div class="games-tags"><a class="gtag" href="https://store.steampowered.com/app/730/" target="_blank" rel="noopener">CS2<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/359550/" target="_blank" rel="noopener">R6<span class="gtag-free">FREE</span></a><a class="gtag" href="https://playvalorant.com" target="_blank" rel="noopener">Valorant<span class="gtag-free">FREE</span></a><a class="gtag" href="https://www.fortnite.com" target="_blank" rel="noopener">Fortnite<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/202990/" target="_blank" rel="noopener">Black Ops 2 MP</a><a class="gtag" href="https://store.steampowered.com/app/1824220/" target="_blank" rel="noopener">Chivalry 2</a></div></div>
+        <div class="games-format"><div class="games-format-title">3 × 3</div><div class="games-tags"><a class="gtag" href="https://store.steampowered.com/app/252950/" target="_blank" rel="noopener">Rocket League<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/550/" target="_blank" rel="noopener">Left 4 Dead 2</a><a class="gtag" href="https://store.steampowered.com/app/4000/" target="_blank" rel="noopener">Garry's Mod</a><a class="gtag" href="https://www.fortnite.com" target="_blank" rel="noopener">Fortnite<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/202990/" target="_blank" rel="noopener">Black Ops 2 MP</a></div></div>
+        <div class="games-format"><div class="games-format-title">2 × 2</div><div class="games-tags"><a class="gtag" href="https://store.steampowered.com/app/285900/" target="_blank" rel="noopener">Gang Beasts</a><a class="gtag" href="https://www.minecraft.net" target="_blank" rel="noopener">Minecraft</a><a class="gtag" href="https://store.steampowered.com/app/270170/" target="_blank" rel="noopener">Transformice<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/323220/" target="_blank" rel="noopener">Worms</a><a class="gtag" href="https://store.steampowered.com/app/204360/" target="_blank" rel="noopener">Castle Crashers</a><a class="gtag" href="https://store.steampowered.com/app/238460/" target="_blank" rel="noopener">BattleBlock Theater</a></div></div>
+        <div class="games-format"><div class="games-format-title">INDIVIDUAL</div><div class="games-tags"><a class="gtag" href="https://store.steampowered.com/app/945360/" target="_blank" rel="noopener">Among Us</a><a class="gtag" href="https://www.minecraft.net" target="_blank" rel="noopener">Minecraft PvP</a><a class="gtag" href="https://clonehero.net" target="_blank" rel="noopener">Clone Hero<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/976310/" target="_blank" rel="noopener">MK 10/11</a><a class="gtag" href="https://www.fortnite.com" target="_blank" rel="noopener">Fortnite<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/202990/" target="_blank" rel="noopener">BO2 FFA</a><a class="gtag" href="https://store.steampowered.com/app/1824220/" target="_blank" rel="noopener">Chivalry 2 FFA</a></div></div>
       </div>
     </div>
 
@@ -367,6 +462,7 @@
       </div>
     </div>
 
+    </div><!-- /info-more -->
   </div>
   <!-- ── FIM INFORMAÇÕES DO EVENTO ─────────────────────────────────── -->
 
@@ -382,6 +478,9 @@
     <div class="field-label">Seu Nome</div>
     <input type="text" id="input-name" placeholder="Digite seu nome completo..." autocomplete="off" />
     <div class="error-msg" id="err-name">Por favor, insira seu nome.</div>
+    <div class="field-label" style="margin-top:16px">WhatsApp</div>
+    <input type="tel" id="input-phone" placeholder="(11) 99999-9999" autocomplete="off" maxlength="20" />
+    <div class="error-msg" id="err-phone">Por favor, insira seu WhatsApp.</div>
   </div>
 
   <div class="card">
@@ -389,21 +488,21 @@
     <div class="field-label">Categoria do PC</div>
     <div class="categories">
       <label class="cat-option" id="opt-extreme">
-        <input type="radio" name="category" value="extreme" onchange="selectCategory('extreme')">
+        <input type="radio" name="category" value="extreme" onclick="selectCategory('extreme')">
         <div class="cat-card extreme">
           <div class="cat-left"><div class="cat-icon">🔥</div><div><div class="cat-name">PC EXTREME</div><div class="cat-sub">PCs 1 · 2 · 3 · 4 · 5</div></div></div>
           <div class="cat-right"><div class="cat-price">R$ 90</div><div class="cat-slots" id="slots-extreme">5 vagas disponíveis</div></div>
         </div>
       </label>
       <label class="cat-option" id="opt-eplus">
-        <input type="radio" name="category" value="eplus" onchange="selectCategory('eplus')">
+        <input type="radio" name="category" value="eplus" onclick="selectCategory('eplus')">
         <div class="cat-card eplus">
           <div class="cat-left"><div class="cat-icon">⭐</div><div><div class="cat-name">PC EPLUS</div><div class="cat-sub">PC 20</div></div></div>
           <div class="cat-right"><div class="cat-price">R$ 100</div><div class="cat-slots" id="slots-eplus">1 vaga disponível</div></div>
         </div>
       </label>
       <label class="cat-option" id="opt-epro">
-        <input type="radio" name="category" value="epro" onchange="selectCategory('epro')">
+        <input type="radio" name="category" value="epro" onclick="selectCategory('epro')">
         <div class="cat-card epro">
           <div class="cat-left"><div class="cat-icon">💎</div><div><div class="cat-name">PC EPRO</div><div class="cat-sub">PCs 6–19 (exceto 13)</div></div></div>
           <div class="cat-right"><div class="cat-price">R$ 110</div><div class="cat-slots" id="slots-epro">13 vagas disponíveis</div></div>
@@ -414,14 +513,14 @@
   </div>
 
   <!-- PASSO 03: grid + mapa lado a lado -->
-  <div id="pc-card" style="display:none">
+  <div id="pc-card">
     <div style="display:flex; gap:10px; align-items:flex-start; margin-bottom:16px;">
 
       <!-- Grid selector -->
       <div class="card" style="flex:1; min-width:0; margin-bottom:0; padding:18px;">
         <div class="step-label">▸ PASSO 03</div>
-        <div class="field-label">Número do PC</div>
-        <div class="pc-grid-label">Selecione um PC disponível</div>
+        <div class="field-label">Escolha o seu PC</div>
+        <div class="pc-grid-label">Clique em qualquer PC disponível para reservar</div>
         <div class="pc-grid" id="pc-grid"></div>
         <div class="legend" style="margin-top:10px">
           <div class="legend-item"><div class="legend-box" style="border-color:#555;background:#131920"></div>Disponível</div>
@@ -472,6 +571,30 @@
     <div class="player-grid" id="pre-confirm-grid"></div>
   </div>
 
+  <!-- Votação -->
+  <div class="card" id="vote-card" style="display:none">
+    <div class="step-label">🗳 VOTAÇÃO</div>
+    <div class="field-label">Jogo favorito para o evento</div>
+    <p style="font-size:12px;color:var(--text-dim);margin-bottom:14px;letter-spacing:0.5px">Use o código que você recebeu via WhatsApp. 1 voto por pessoa.</p>
+    <input type="text" id="vote-code" placeholder="Seu código (ex: A1B2C3)" autocomplete="off" style="text-transform:uppercase;margin-bottom:10px" />
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px" id="vote-options">
+      <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="radio" name="voto" value="cs2"> <span>CS2</span></label>
+      <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="radio" name="voto" value="valorant"> <span>Valorant</span></label>
+      <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="radio" name="voto" value="r6"> <span>R6 Siege</span></label>
+      <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="radio" name="voto" value="fortnite"> <span>Fortnite</span></label>
+      <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="radio" name="voto" value="bo2"> <span>Black Ops 2</span></label>
+    </div>
+    <div class="error-msg" id="err-vote" style="margin-bottom:8px">Código inválido ou já utilizado.</div>
+    <button class="btn-pay" onclick="handleVote()" style="background:rgba(127,255,0,0.12);border-color:var(--accent3);color:var(--accent3)">▸ VOTAR</button>
+    <div id="vote-success" style="display:none;text-align:center;padding:12px;color:var(--accent3);font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;margin-top:8px">✓ VOTO REGISTRADO!</div>
+  </div>
+
+  <!-- Extra action buttons -->
+  <div class="extra-btns">
+    <button class="btn-extra" onclick="document.getElementById('faq-modal').classList.add('open')">📘 REGULAMENTO</button>
+    <button class="btn-extra" onclick="document.getElementById('reserva-modal').classList.add('open')">🔍 MINHA RESERVA</button>
+  </div>
+
   <div class="location-card">
     <div class="location-icon">📍</div>
     <div class="location-info">
@@ -500,6 +623,8 @@
       <button class="adm-tab active" onclick="admTab('reservas')">RESERVAS</button>
       <button class="adm-tab" onclick="admTab('evento')">EVENTO</button>
       <button class="adm-tab" onclick="admTab('grupos')">GRUPOS</button>
+      <button class="adm-tab" onclick="admTab('times')">TIMES</button>
+      <button class="adm-tab" onclick="admTab('votos')">VOTOS</button>
     </div>
 
     <!-- Tab: Reservas -->
@@ -509,6 +634,7 @@
       <div class="adm-section-title">▸ ADICIONAR RESERVA</div>
       <div class="adm-add-form">
         <div class="adm-add-row"><input type="text" id="adm-add-name" placeholder="Nome da pessoa..." /></div>
+        <div class="adm-add-row"><input type="tel" id="adm-add-phone" placeholder="WhatsApp (opcional)..." /></div>
         <div class="adm-add-row">
           <select id="adm-add-cat" onchange="updateAdmPcSelect()">
             <option value="">Categoria...</option>
@@ -549,6 +675,13 @@
       <div class="adm-section-title">▸ EDITAR GRUPOS</div>
       <div class="adm-groups-editor" id="adm-groups-editor"></div>
       <button class="adm-add-btn" style="margin-top:12px" onclick="admSaveGrupos()">▸ SALVAR GRUPOS</button>
+    </div>
+
+    <!-- Tab: Votos -->
+    <div id="adm-tab-votos" style="display:none">
+      <div class="adm-section-title">▸ RESULTADO DA VOTAÇÃO</div>
+      <div id="adm-votos-result" style="font-size:13px;line-height:2;padding:4px 0"></div>
+      <button class="adm-add-btn" style="margin-top:10px" onclick="renderVoteResults()">↻ ATUALIZAR</button>
     </div>
   </div>
 
@@ -599,10 +732,11 @@
       // Hide loading, show content
       var fl = document.getElementById('fb-loading');
       if (fl) fl.style.display = 'none';
-      document.querySelector('.availability-bar').style.display = 'flex';
+      var avBar = document.querySelector('.availability-bar'); if(avBar) avBar.style.display = 'flex';
       updateCounts();
       updateCategoryDisabled();
-      if (selectedCategory) buildPCGrid(selectedCategory);
+      buildAllGrids();
+      document.getElementById('vote-card').style.display = 'block';
       updateConfirmedList();
       renderInterestList();
     });
@@ -777,14 +911,16 @@
 
   // ── ADM TABS ──────────────────────────────────────────────────────────────
   function admTab(tab) {
-    ['reservas','evento','grupos'].forEach(function(t) {
-      document.getElementById('adm-tab-' + t).style.display = t === tab ? 'block' : 'none';
+    ['reservas','evento','grupos','times','votos'].forEach(function(t) {
+      var el = document.getElementById('adm-tab-' + t); if(el) el.style.display = t === tab ? 'block' : 'none';
     });
     document.querySelectorAll('.adm-tab').forEach(function(btn, i) {
-      btn.classList.toggle('active', ['reservas','evento','grupos'][i] === tab);
+      btn.classList.toggle('active', ['reservas','evento','grupos','times','votos'][i] === tab);
     });
     if (tab === 'evento') admLoadEvento();
     if (tab === 'grupos') admLoadGrupos();
+    if (tab === 'times') admLoadTimes();
+    if (tab === 'votos') renderVoteResults();
   }
 
   // ── EVENTO EDITOR ─────────────────────────────────────────────────────────
@@ -911,6 +1047,240 @@
     // confirmed list is fully dynamic via updateConfirmedList()
   }
 
+
+  // ── VER MAIS ──────────────────────────────────────────────────────────────
+  function toggleVerMais() {
+    var more = document.getElementById('info-more');
+    var btn  = document.getElementById('btn-ver-mais');
+    var open = more.style.display !== 'none';
+    more.style.display = open ? 'none' : 'block';
+    btn.textContent = open ? '▸ VER MAIS INFORMAÇÕES' : '▴ VER MENOS';
+  }
+
+  // ── FAQ ───────────────────────────────────────────────────────────────────
+  function toggleFaq(btn) {
+    var a = btn.nextElementSibling;
+    var open = a.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-a').forEach(function(el){ el.classList.remove('open'); });
+    document.querySelectorAll('.faq-q').forEach(function(el){ el.classList.remove('open'); });
+    if (!open) { a.classList.add('open'); btn.classList.add('open'); }
+  }
+  function closeFaq() { document.getElementById('faq-modal').classList.remove('open'); }
+
+  // ── MINHA RESERVA ─────────────────────────────────────────────────────────
+  function closeReservaModal() { document.getElementById('reserva-modal').classList.remove('open'); }
+
+  function searchReserva() {
+    var name = document.getElementById('reserva-search').value.trim().toLowerCase();
+    var result = document.getElementById('reserva-result');
+    if (name.length < 2) { result.innerHTML = ''; return; }
+
+    var found = null;
+    var foundPc = null;
+    Object.entries(reserved).forEach(function(e) {
+      if (e[1].name && e[1].name.toLowerCase().indexOf(name) !== -1) {
+        found = e[1]; foundPc = e[0];
+      }
+    });
+
+    if (!found) {
+      result.innerHTML = '<div class="reserva-not-found">Nenhuma reserva encontrada para este nome.</div>';
+      return;
+    }
+
+    var cat = found.category || 'epro';
+    var status = found.owner ? 'confirmed' :
+                 found.pending ? 'pending' : 'confirmed';
+    var statusText = found.owner ? 'RESERVADO' :
+                     found.pending ? 'AGUARDANDO PAGAMENTO' : 'CONFIRMADO ✓';
+
+    // Build map with dot
+    var mapSrc = document.querySelector('#pc-map-wrap img') ?
+                 document.querySelector('#pc-map-wrap img').src : '';
+    var pos = PC_POSITIONS[foundPc];
+    var dotStyle = '';
+    if (pos) {
+      dotStyle = 'position:absolute;left:'+pos.x+'%;top:'+pos.y+'%;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);animation:dotpulse 1s infinite;';
+      var colors = {extreme:'var(--extreme)',eplus:'var(--eplus)',epro:'var(--epro)'};
+      var c = colors[cat] || 'var(--epro)';
+      dotStyle += 'background:'+c+';box-shadow:0 0 8px 3px '+c+';';
+    }
+
+    result.innerHTML =
+      '<div class="reserva-card">' +
+      '<div class="reserva-name">' + found.name + '</div>' +
+      '<div class="reserva-pc-num ' + cat + '">PC ' + foundPc + '</div>' +
+      '<div class="reserva-cat">' + (CATEGORIES[cat] ? CATEGORIES[cat].label : cat.toUpperCase()) + ' — R$ ' + (CATEGORIES[cat] ? CATEGORIES[cat].price : '?') + ',00</div>' +
+      (mapSrc ? '<div class="reserva-map-wrap"><img src="'+mapSrc+'" />' + (pos ? '<div style="'+dotStyle+'"></div>' : '') + '</div>' : '') +
+      '<div><span class="reserva-status '+status+'">' + statusText + '</span></div>' +
+      '</div>';
+  }
+
+  // ── PARTICLES ─────────────────────────────────────────────────────────────
+  var canvas, ctx;
+  var particles = [];
+  var particlesActive = false;
+  var pulseActive = false;
+  var pulseColor = '160,160,160';
+  var pulseAlpha = 0;
+  var pulseDir = 1;
+
+  function initCanvas() {
+    canvas = document.createElement('canvas');
+    canvas.id = 'particles-canvas';
+    document.body.insertBefore(canvas, document.body.firstChild);
+    ctx = canvas.getContext('2d');
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    animateParticles();
+  }
+
+  function resizeCanvas() {
+    if (!canvas) return;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  var CAT_COLORS = {
+    extreme: { pulse:'160,160,160', particle:'#a0a0a0' },
+    eplus:   { pulse:'59,158,255',  particle:'#3b9eff' },
+    epro:    { pulse:'255,59,59',   particle:'#ff3b3b' }
+  };
+
+  function startPulse(cat) {
+    pulseActive = true;
+    particlesActive = false;
+    particles = [];
+    pulseColor = CAT_COLORS[cat] ? CAT_COLORS[cat].pulse : '160,160,160';
+  }
+
+  function startParticles(cat) {
+    pulseActive = true;
+    particlesActive = true;
+    pulseColor = CAT_COLORS[cat] ? CAT_COLORS[cat].pulse : '160,160,160';
+    var color = CAT_COLORS[cat] ? CAT_COLORS[cat].particle : '#a0a0a0';
+    particles = [];
+    for (var i = 0; i < 40; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: -Math.random() * 0.8 - 0.2,
+        r: Math.random() * 2.5 + 1,
+        alpha: Math.random() * 0.5 + 0.2,
+        color: color
+      });
+    }
+  }
+
+  function stopEffects() {
+    pulseActive = false;
+    particlesActive = false;
+    particles = [];
+    pulseAlpha = 0;
+  }
+
+  function animateParticles() {
+    requestAnimationFrame(animateParticles);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Pulse glow
+    if (pulseActive) {
+      pulseAlpha += 0.015 * pulseDir;
+      if (pulseAlpha >= 0.28) pulseDir = -1;
+      if (pulseAlpha <= 0)    { pulseAlpha = 0; pulseDir = 1; }
+      var cx = canvas.width / 2, cy = canvas.height * 1.2;
+      var grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, canvas.width * 0.95);
+      grad.addColorStop(0,   'rgba('+pulseColor+','+pulseAlpha+')');
+      grad.addColorStop(0.4, 'rgba('+pulseColor+','+(pulseAlpha*0.5)+')');
+      grad.addColorStop(1,   'rgba('+pulseColor+',0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // Particles
+    if (particlesActive) {
+      particles.forEach(function(p) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
+        ctx.save();
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+    }
+  }
+  // ── TIMES GERADOR ─────────────────────────────────────────────────────────
+  var timesEnabled = {};
+
+  function admLoadTimes() {
+    var container = document.getElementById('adm-times-players');
+    container.innerHTML = '';
+    // Get all confirmed names from reserved
+    var names = ['Danilo'];
+    Object.entries(reserved)
+      .filter(function(e){ return !e[1].owner && !e[1].pending; })
+      .sort(function(a,b){ return a[0]-b[0]; })
+      .forEach(function(e){ if(e[1].name && names.indexOf(e[1].name)===-1) names.push(e[1].name); });
+
+    // Init enabled state
+    names.forEach(function(n) {
+      if (timesEnabled[n] === undefined) timesEnabled[n] = true;
+    });
+
+    names.forEach(function(n) {
+      var btn = document.createElement('button');
+      btn.className = 'times-player-toggle' + (timesEnabled[n] ? '' : ' off');
+      btn.textContent = n;
+      btn.onclick = function() {
+        timesEnabled[n] = !timesEnabled[n];
+        btn.classList.toggle('off', !timesEnabled[n]);
+      };
+      container.appendChild(btn);
+    });
+  }
+
+  function sortearTimes() {
+    var enabled = Object.keys(timesEnabled).filter(function(n){ return timesEnabled[n]; });
+    if (enabled.length < 4) { showToast('⚠ Mínimo 4 jogadores'); return; }
+
+    // Shuffle
+    var shuffled = enabled.slice().sort(function(){ return Math.random()-0.5; });
+
+    // Distribute into 4 groups of up to 5
+    var grupos = [[],[],[],[]];
+    shuffled.forEach(function(n, i){ grupos[i % 4].push(n); });
+
+    var result = document.getElementById('adm-times-result');
+    result.innerHTML = grupos.map(function(g, i) {
+      return '<div class="times-result-group">' +
+        '<div class="times-result-title">GRUPO ' + (i+1) + '</div>' +
+        g.map(function(n){ return '<div class="times-result-player">▸ ' + n + '</div>'; }).join('') +
+        '</div>';
+    }).join('');
+
+    document.getElementById('adm-times-save').style.display = 'block';
+    window._sorteioResult = grupos;
+  }
+
+  function salvarTimesSorteados() {
+    if (!window._sorteioResult) return;
+    var labels = ['GRUPO 1','GRUPO 2','GRUPO 3','GRUPO 4'];
+    gruposData = window._sorteioResult.map(function(g, i) {
+      var players = g.slice();
+      while (players.length < 5) players.push('');
+      return { title: labels[i], players: players };
+    });
+    db.ref('gruposData').set(gruposData);
+    updateGruposDisplay();
+    showToast('✓ Times salvos!');
+    document.getElementById('adm-times-save').style.display = 'none';
+  }
+
   function init() {
     initReserved();
     initMapDots();
@@ -920,6 +1290,9 @@
     document.getElementById('input-name').addEventListener('input', function() {
       document.getElementById('err-name').classList.remove('visible');
       if (selectedPC) showSummary();
+    });
+    document.getElementById('input-phone').addEventListener('input', function() {
+      document.getElementById('err-phone').classList.remove('visible');
     });
   }
 
@@ -958,47 +1331,65 @@
 
   function selectCategory(cat) {
     selectedCategory = cat;
-    selectedPC = null;
     document.getElementById('err-category').classList.remove('visible');
-    document.getElementById('confirm-section').style.display = 'none';
-    buildPCGrid(cat);
-    document.getElementById('pc-card').style.display = 'block';
-    document.getElementById('pc-card').scrollIntoView({ behavior:'smooth', block:'nearest' });
+    startPulse(cat);
   }
 
-  function buildPCGrid(cat) {
+  function buildAllGrids() {
     var grid = document.getElementById('pc-grid');
     grid.innerHTML = '';
-    CATEGORIES[cat].pcs.forEach(function(num) {
-      var btn = document.createElement('button');
-      btn.className = 'pc-btn';
-      var numSpan = document.createElement('span');
-      numSpan.textContent = num;
-      btn.appendChild(numSpan);
-      if (reserved[num]) {
-        btn.classList.add(reserved[num].pending ? 'pending' : 'taken');
-        btn.disabled = true;
-        var nameSpan = document.createElement('span');
-        nameSpan.className = 'pc-reserved-name';
-        var rName = reserved[num].name || '';
-        nameSpan.textContent = rName.split(' ')[0];
-        btn.appendChild(nameSpan);
-      } else {
-        (function(n, b, c) {
-          b.onclick = function() { selectPC(n, b, c); };
-        })(num, btn, cat);
-      }
-      grid.appendChild(btn);
+    ['extreme','eplus','epro'].forEach(function(cat) {
+      var sep = document.createElement('div');
+      sep.className = 'grid-cat-sep ' + cat;
+      sep.textContent = CATEGORIES[cat].label + ' — R$ ' + CATEGORIES[cat].price;
+      grid.appendChild(sep);
+      CATEGORIES[cat].pcs.forEach(function(num) {
+        var btn = document.createElement('button');
+        btn.className = 'pc-btn';
+        var numSpan = document.createElement('span');
+        numSpan.textContent = num;
+        btn.appendChild(numSpan);
+        if (reserved[num]) {
+          btn.classList.add(reserved[num].pending ? 'pending' : 'taken');
+          btn.disabled = true;
+          var nameSpan = document.createElement('span');
+          nameSpan.className = 'pc-reserved-name';
+          var rName = reserved[num].name || '';
+          nameSpan.textContent = rName.split(' ')[0];
+          btn.appendChild(nameSpan);
+        } else {
+          (function(n, b, c) {
+            b.onclick = function() { selectPC(n, b, c); };
+          })(num, btn, cat);
+        }
+        grid.appendChild(btn);
+      });
     });
   }
+  function buildPCGrid(cat) { buildAllGrids(); }
 
   function selectPC(num, btn, cat) {
+    // Deselect se clicar no mesmo PC
+    if (selectedPC === num) {
+      btn.classList.remove('selected', 'extreme', 'eplus', 'epro');
+      selectedPC = null;
+      updateMapDot(null, null);
+      document.getElementById('confirm-section').style.display = 'none';
+      startPulse(cat);
+      return;
+    }
+    // Auto-seleciona a categoria do PC clicado
+    selectedCategory = cat;
+    var radio = document.querySelector('input[name="category"][value="'+cat+'"]');
+    if (radio) radio.checked = true;
+    document.getElementById('err-category').classList.remove('visible');
     document.querySelectorAll('.pc-btn').forEach(function(b) {
       b.classList.remove('selected','extreme','eplus','epro');
     });
     btn.classList.add('selected', cat);
     selectedPC = num;
     document.getElementById('err-pc').classList.remove('visible');
+    startParticles(cat);
     updateMapDot(num, cat);
     showSummary();
   }
@@ -1015,30 +1406,47 @@
     document.getElementById('confirm-section').scrollIntoView({ behavior:'smooth', block:'nearest' });
   }
 
+  function generateCode() {
+    var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    var code = '';
+    for (var i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
+    return code;
+  }
+
   function handlePay() {
-    var name = document.getElementById('input-name').value.trim();
+    var name  = document.getElementById('input-name').value.trim();
+    var phone = document.getElementById('input-phone').value.trim();
     var valid = true;
-    if (!name) { document.getElementById('err-name').classList.add('visible'); valid = false; }
+    if (!name)  { document.getElementById('err-name').classList.add('visible');  valid = false; }
+    if (!phone) { document.getElementById('err-phone').classList.add('visible'); valid = false; }
     if (!selectedCategory) { document.getElementById('err-category').classList.add('visible'); valid = false; }
     if (!selectedPC) { document.getElementById('err-pc').classList.add('visible'); valid = false; }
     if (!valid) return;
     if (reserved[selectedPC]) {
       showToast('⚠ Este PC acabou de ser reservado!');
-      buildPCGrid(selectedCategory);
+      buildAllGrids();
       updateCounts();
       selectedPC = null;
       document.getElementById('confirm-section').style.display = 'none';
       return;
     }
-    var pcToReserve = selectedPC;
+    var pcToReserve  = selectedPC;
     var catToReserve = selectedCategory;
+    var code = generateCode();
     var link = CATEGORIES[catToReserve].mpLink;
-    // Mark as PENDING (aguardando pagamento) — ADM confirms after payment
-    reserved[pcToReserve] = { name:name, category:catToReserve, ts:Date.now(), pending:true };
+    reserved[pcToReserve] = { name:name, phone:phone, category:catToReserve, code:code, ts:Date.now(), pending:true };
     db.ref('reserved/' + pcToReserve).set(reserved[pcToReserve]).then(function() {
-      // Open MP in new tab
+      // Notifica admin via WhatsApp
+      var adminMsg = encodeURIComponent(
+        '🎮 Nova reserva Quest LAN House!\n' +
+        '👤 ' + name + '\n' +
+        '📱 ' + phone + '\n' +
+        '💻 PC ' + pcToReserve + ' — ' + CATEGORIES[catToReserve].label + '\n' +
+        '💰 R$ ' + CATEGORIES[catToReserve].price + ',00\n' +
+        '⏳ Aguardando confirmação de pagamento'
+      );
+      window.open('https://wa.me/5511930291427?text=' + adminMsg, '_blank');
       window.open(link, '_blank');
-      // Show pending message on page
       document.getElementById('confirm-section').innerHTML =
         '<div class="summary" style="border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.05)">' +
         '<div style="text-align:center;padding:12px 0">' +
@@ -1093,14 +1501,20 @@
       var item = document.createElement('div');
       item.className = 'adm-item';
       if (data.pending) item.classList.add('pending-item');
+      var phoneInfo = data.phone ? '<div style="font-size:10px;color:var(--text-dim);margin-top:1px">📱 '+data.phone+'</div>' : '';
+      var codeInfo  = data.code  ? '<div style="font-size:10px;color:#ffd700;margin-top:1px">🔑 '+data.code+'</div>' : '';
+      var waBtn = (data.phone && data.code) ?
+        '<a href="https://wa.me/55'+data.phone.replace(/\D/g,'')+
+        '?text='+encodeURIComponent('✅ Sua reserva na Quest LAN House foi confirmada!\n💻 PC '+pc+'\n🔑 Código de votação: '+data.code+'\nVote no site!')+
+        '" target="_blank" style="display:block;margin-top:4px;font-family:Orbitron,monospace;font-size:8px;letter-spacing:1px;color:#25d366;border:1px solid #25d366;border-radius:3px;padding:3px 8px;text-decoration:none;text-align:center">▸ AVISAR VIA WPP</a>' : '';
       var actionBtns = data.owner ? '' :
         (data.pending
           ? '<div style="display:flex;gap:6px;flex-direction:column;align-items:flex-end">' +
             '<button class="adm-confirm-btn" onclick="admConfirm('+pc+')">✓ CONFIRMAR</button>' +
             '<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button></div>'
-          : '<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button>');
+          : '<div style="display:flex;gap:6px;flex-direction:column;align-items:flex-end">'+waBtn+'<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button></div>');
       var statusBadge = data.pending ? ' <span class="pending-badge">AGUARDANDO</span>' : '';
-      item.innerHTML = '<div class="adm-item-left"><div class="adm-pc-badge '+cat+'">PC'+pc+'</div><div><div class="adm-item-name">'+data.name+statusBadge+'</div><div class="adm-item-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+'</div></div></div>'+actionBtns;
+      item.innerHTML = '<div class="adm-item-left"><div class="adm-pc-badge '+cat+'">PC'+pc+'</div><div><div class="adm-item-name">'+data.name+statusBadge+'</div><div class="adm-item-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+'</div>'+phoneInfo+codeInfo+'</div></div>'+actionBtns;
       list.appendChild(item);
     });
     updateAdmPcSelect();
@@ -1108,10 +1522,11 @@
 
   function admConfirm(pc) {
     if (!reserved[pc]) return;
+    if (!reserved[pc].code) reserved[pc].code = generateCode();
     reserved[pc].pending = false;
     db.ref('reserved/' + pc).set(reserved[pc]).then(function() {
       renderAdmList();
-      showToast('✓ PC ' + pc + ' confirmado como pago!');
+      showToast('✓ PC ' + pc + ' confirmado! Código: ' + reserved[pc].code);
     });
   }
 
@@ -1122,7 +1537,7 @@
     updateCounts();
     updateCategoryDisabled();
     renderAdmList();
-    if (selectedCategory) buildPCGrid(selectedCategory);
+    buildAllGrids();
     showToast('✓ PC ' + pc + ' liberado');
   }
 
@@ -1141,18 +1556,20 @@
   }
 
   function admAdd() {
-    var name = document.getElementById('adm-add-name').value.trim();
-    var cat  = document.getElementById('adm-add-cat').value;
-    var pc   = parseInt(document.getElementById('adm-add-pc').value);
+    var name  = document.getElementById('adm-add-name').value.trim();
+    var phone = document.getElementById('adm-add-phone').value.trim();
+    var cat   = document.getElementById('adm-add-cat').value;
+    var pc    = parseInt(document.getElementById('adm-add-pc').value);
     if (!name || !cat || !pc) { showToast('⚠ Preencha todos os campos'); return; }
     if (reserved[pc]) { showToast('⚠ PC já reservado'); return; }
-    reserved[pc] = { name:name, category:cat, ts:Date.now() };
+    reserved[pc] = { name:name, phone:phone||'', category:cat, code:generateCode(), ts:Date.now() };
     saveReserved();
     updateCounts();
     updateCategoryDisabled();
     renderAdmList();
-    if (selectedCategory) buildPCGrid(selectedCategory);
+    buildAllGrids();
     document.getElementById('adm-add-name').value = '';
+    document.getElementById('adm-add-phone').value = '';
     document.getElementById('adm-add-cat').value = '';
     document.getElementById('adm-add-pc').innerHTML = '<option value="">PC Nº...</option>';
     showToast('✓ ' + name + ' adicionado ao PC ' + pc);
@@ -1172,6 +1589,68 @@
     showToast('✓ Todas as reservas resetadas');
   }
 
+  // ── VOTAÇÃO ───────────────────────────────────────────────────────────────
+  function handleVote() {
+    var code   = document.getElementById('vote-code').value.trim().toUpperCase();
+    var choice = document.querySelector('input[name="voto"]:checked');
+    var errEl  = document.getElementById('err-vote');
+    errEl.style.display = 'none';
+    if (!code || !choice) {
+      errEl.textContent = 'Preencha o código e escolha um jogo.';
+      errEl.style.display = 'block'; return;
+    }
+    // Verifica se código existe nas reservas confirmadas
+    var validCode = Object.values(reserved).some(function(r) { return r.code === code && !r.pending; });
+    if (!validCode) {
+      errEl.textContent = 'Código não encontrado ou reserva ainda não confirmada.';
+      errEl.style.display = 'block'; return;
+    }
+    db.ref('votes/' + code).once('value').then(function(snap) {
+      if (snap.exists()) {
+        errEl.textContent = 'Este código já foi utilizado para votar.';
+        errEl.style.display = 'block'; return;
+      }
+      db.ref('votes/' + code).set({ choice: choice.value, ts: Date.now() }).then(function() {
+        document.getElementById('vote-success').style.display = 'block';
+        document.getElementById('vote-code').disabled = true;
+        document.querySelectorAll('input[name="voto"]').forEach(function(r) { r.disabled = true; });
+        document.querySelector('#vote-card .btn-pay').style.display = 'none';
+      });
+    });
+  }
+
+  function renderVoteResults() {
+    db.ref('votes').once('value').then(function(snap) {
+      var data = snap.val() || {};
+      var counts = {};
+      Object.values(data).forEach(function(v) {
+        counts[v.choice] = (counts[v.choice] || 0) + 1;
+      });
+      var total = Object.values(counts).reduce(function(a,b){ return a+b; }, 0);
+      var options = [
+        { val:'cs2',      label:'CS2' },
+        { val:'valorant', label:'Valorant' },
+        { val:'r6',       label:'R6 Siege' },
+        { val:'fortnite', label:'Fortnite' },
+        { val:'bo2',      label:'Black Ops 2' }
+      ];
+      var html = '<div style="font-size:11px;color:var(--text-dim);margin-bottom:12px">Total de votos: <b style="color:#fff">'+total+'</b></div>';
+      options.sort(function(a,b){ return (counts[b.val]||0)-(counts[a.val]||0); });
+      options.forEach(function(opt) {
+        var count = counts[opt.val] || 0;
+        var pct   = total > 0 ? Math.round(count / total * 100) : 0;
+        html += '<div style="margin-bottom:12px">' +
+          '<div style="display:flex;justify-content:space-between;margin-bottom:4px">' +
+          '<span style="color:#fff">'+opt.label+'</span>' +
+          '<span style="color:#ff6b35;font-family:Orbitron,monospace;font-size:11px">'+count+' ('+pct+'%)</span></div>' +
+          '<div style="height:5px;background:var(--border);border-radius:3px">' +
+          '<div style="height:100%;width:'+pct+'%;background:#ff6b35;border-radius:3px;transition:width 0.4s"></div></div></div>';
+      });
+      if (total === 0) html = '<div class="adm-empty">Nenhum voto ainda.</div>';
+      document.getElementById('adm-votos-result').innerHTML = html;
+    });
+  }
+
   function showToast(msg) {
     var t = document.getElementById('toast');
     t.textContent = msg;
@@ -1180,10 +1659,117 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
+    initCanvas();
     loadFirebase(function() {
       init();
     });
   });
 </script>
+
+  <!-- FAQ MODAL -->
+  <div class="modal-overlay" id="faq-modal" onclick="if(event.target===this)closeFaq()">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="modal-title">📘 REGULAMENTO</span>
+        <button class="modal-close" onclick="closeFaq()">✕</button>
+      </div>
+      <div class="modal-body">
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">🎮 Formatos de Jogo <span class="faq-arrow">▾</span></button>
+          <div class="faq-a">
+            <div class="faq-format-row"><span class="faq-fmt-badge">5×5</span><span>CS2 · R6<span class="gtag-free">FREE</span> · Valorant · Fortnite · Black Ops 2 MP (Plutonium) · Chivalry 2</span></div>
+            <div class="faq-format-row"><span class="faq-fmt-badge">3×3</span><span>Rocket League · Left 4 Dead 2 · Garry's Mod (Prop Hunt) · Fortnite · Black Ops 2 MP</span></div>
+            <div class="faq-format-row"><span class="faq-fmt-badge">2×2</span><span>Gang Beasts · Minecraft · Transformice · Worms · Castle Crashers · BattleBlock Theater</span></div>
+            <div class="faq-format-row"><span class="faq-fmt-badge">SOLO</span><span>Among Us · Minecraft PvP · Clone Hero · MK 10/11 · Fortnite · BO2 FFA · Chivalry 2 FFA</span></div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">🏗️ Estrutura dos Jogos <span class="faq-arrow">▾</span></button>
+          <div class="faq-a">
+            <p>A ordem evita que algum grupo fique parado:</p>
+            <ol>
+              <li>Primeiro os embates <b>5×5</b></li>
+              <li>Em seguida, <b>3×3 e 2×2 simultâneos</b> — todos jogando ao mesmo tempo</li>
+              <li>O <b>individual</b> acontece sempre entre os jogadores do grupo parado</li>
+            </ol>
+            <p style="margin-top:10px">Cada embate entre dois times é composto por <b>2 jogos</b>:</p>
+            <ul>
+              <li>Um escolhido pelo Time A</li>
+              <li>Um escolhido pelo Time B</li>
+              <li>Alternativa: 2 partidas do mesmo jogo (se ambos concordarem)</li>
+              <li>Em caso de 1×1 → desempate em jogo neutro</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">🏆 Sistema de Pontuação <span class="faq-arrow">▾</span></button>
+          <div class="faq-a">
+            <div class="faq-score-row"><span class="score-badge win">+1</span> Cada vitória</div>
+            <div class="faq-score-row"><span class="score-badge sweep">+3</span> Vitória nos dois jogos do embate</div>
+            <div class="faq-score-row"><span class="score-badge tie">1×1</span> Empate → desempate, vencedor leva 2 pontos no total</div>
+            <p style="margin-top:10px;color:var(--text-dim);font-size:12px">Pontuação separada por formato: 5×5, 3×3, 2×2 e Individual têm rankings próprios.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">📋 Rodadas — 4 Grupos <span class="faq-arrow">▾</span></button>
+          <div class="faq-a">
+            <div class="faq-round"><span class="round-badge r5x5">5×5</span><b>Rodada 1:</b> A vs B · C vs D</div>
+            <div class="faq-round"><span class="round-badge r3x3">3+2</span><b>Rodada 2:</b> A×C (3×3) · A×B (2×2) · B×D (3×3) · D×C (2×2)</div>
+            <div class="faq-round"><span class="round-badge r5x5">5×5</span><b>Rodada 3:</b> A vs D · B vs C</div>
+            <div class="faq-round"><span class="round-badge r3x3">3+2</span><b>Rodada 4:</b> A×B (3×3) · C×D (2×2) · A×D (2×2) · B×C (3×3)</div>
+            <div class="faq-round"><span class="round-badge r5x5">5×5</span><b>Rodada 5:</b> C vs A · D vs B</div>
+            <div class="faq-round"><span class="round-badge r3x3">3+2</span><b>Rodada 6:</b> A×D (3×3) · B×C (2×2) · A×C (2×2) · B×D (3×3)</div>
+            <div class="faq-round"><span class="round-badge rind">SOLO</span><b>Rodada 7:</b> Individual interno de cada grupo</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">🥇 Finais <span class="faq-arrow">▾</span></button>
+          <div class="faq-a">
+            <div class="faq-final-row"><b>5×5:</b> CS2, R6 ou Valorant</div>
+            <div class="faq-final-row"><b>3×3:</b> Rocket League, L4D2 ou Garry's Mod</div>
+            <div class="faq-final-row"><b>2×2:</b> Gang Beasts, Castle Crashers ou BattleBlock Theater</div>
+            <div class="faq-final-row" style="color:#ffd700"><b>🏆 MVP:</b> Clone Hero, MK10/11 ou Fortnite — melhor jogador individual</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">ℹ️ Regras Gerais <span class="faq-arrow">▾</span></button>
+          <div class="faq-a">
+            <ul>
+              <li>Todos precisam ter o jogo comprado para jogar <b>(exceto Minecraft)</b></li>
+              <li>Comida e bebida individual — nada de farofada 🍔🥤</li>
+              <li>Horário: <b>Corujão — 22h às 06h</b></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- RESERVA MODAL -->
+  <div class="modal-overlay" id="reserva-modal" onclick="if(event.target===this)closeReservaModal()">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="modal-title">🔍 MINHA RESERVA</span>
+        <button class="modal-close" onclick="closeReservaModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom:16px">
+          <div class="field-label" style="font-size:11px;margin-bottom:8px">Seu Nome</div>
+          <div style="display:flex;gap:8px">
+            <input type="text" id="reserva-search" placeholder="Digite seu nome..." autocomplete="off" oninput="searchReserva()" />
+          </div>
+        </div>
+        <div id="reserva-result"></div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
