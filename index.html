@@ -6,17 +6,11 @@
 <title>Reserva — Quest Lan House</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg:#080c10; --surface:#0d1117; --surface2:#131920;
-    --border:#1e2d3d; --accent:#00d4ff; --accent3:#7fff00;
-    --text:#c9d1d9; --text-dim:#586069;
-    --extreme:#a0a0a0; --eplus:#3b9eff; --epro:#ff3b3b;
-  }
+  :root{--bg:#080c10;--surface:#0d1117;--surface2:#131920;--border:#1e2d3d;--accent:#00d4ff;--accent3:#7fff00;--text:#c9d1d9;--text-dim:#586069;--extreme:#a0a0a0;--eplus:#3b9eff;--epro:#ff3b3b;}
   *{margin:0;padding:0;box-sizing:border-box;}
   body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden;}
   body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
   .container{max-width:520px;margin:0 auto;padding:40px 20px 60px;position:relative;z-index:1;}
-
   .header{text-align:center;margin-bottom:40px;}
   .header-tag{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:4px;margin-bottom:12px;animation:rainbow 3s linear infinite;animation-delay:0.3s;}
   .header h1{font-family:'Orbitron',monospace;font-size:28px;font-weight:900;color:#fff;letter-spacing:2px;margin-bottom:8px;}
@@ -25,7 +19,6 @@
   .divider{width:60px;height:2px;margin:16px auto;animation:rainbow-bg 3s linear infinite;}
   @keyframes rainbow{0%{color:#ff0000;text-shadow:0 0 20px #ff000088;}15%{color:#ff8800;text-shadow:0 0 20px #ff880088;}30%{color:#ffff00;text-shadow:0 0 20px #ffff0088;}45%{color:#00ff00;text-shadow:0 0 20px #00ff0088;}60%{color:#00d4ff;text-shadow:0 0 20px #00d4ff88;}75%{color:#8800ff;text-shadow:0 0 20px #8800ff88;}90%{color:#ff00cc;text-shadow:0 0 20px #ff00cc88;}100%{color:#ff0000;text-shadow:0 0 20px #ff000088;}}
   @keyframes rainbow-bg{0%{background:linear-gradient(90deg,#ff0000,transparent);}15%{background:linear-gradient(90deg,#ff8800,transparent);}30%{background:linear-gradient(90deg,#ffff00,transparent);}45%{background:linear-gradient(90deg,#00ff00,transparent);}60%{background:linear-gradient(90deg,#00d4ff,transparent);}75%{background:linear-gradient(90deg,#8800ff,transparent);}90%{background:linear-gradient(90deg,#ff00cc,transparent);}100%{background:linear-gradient(90deg,#ff0000,transparent);}}
-
   .specs-section{margin-bottom:28px;}
   .specs-title{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:var(--accent);margin-bottom:10px;opacity:0.7;text-align:center;}
   .specs-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
@@ -41,7 +34,6 @@
   .spec-item{font-size:10px;color:var(--text-dim);letter-spacing:0.3px;padding:2px 0;line-height:1.4;}
   .spec-item b{color:var(--text);}
   .spec-price{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#fff;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);}
-
   .availability-bar{display:flex;gap:8px;margin-bottom:32px;justify-content:center;flex-wrap:wrap;}
   .avail-badge{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:4px;border:1px solid;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:1px;}
   .avail-badge.extreme{border-color:var(--extreme);background:rgba(160,160,160,0.08);}
@@ -56,15 +48,13 @@
   .eplus .avail-count{color:var(--eplus);}
   .epro .avail-count{color:var(--epro);}
   @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
-
   .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:28px;margin-bottom:16px;position:relative;overflow:hidden;}
   .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);}
   .step-label{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:var(--accent);margin-bottom:6px;opacity:0.7;}
   .field-label{font-size:13px;font-weight:600;letter-spacing:2px;color:#fff;text-transform:uppercase;margin-bottom:10px;}
-  input[type="text"],input[type="password"]{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:12px 16px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:16px;letter-spacing:1px;outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
+  input[type="text"],input[type="password"],input[type="email"]{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:12px 16px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:16px;letter-spacing:1px;outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
   input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,212,255,0.1);}
   input::placeholder{color:var(--text-dim);}
-
   .categories{display:flex;flex-direction:column;gap:10px;}
   .cat-option{position:relative;cursor:pointer;}
   .cat-option input[type="radio"]{position:absolute;opacity:0;pointer-events:none;}
@@ -88,8 +78,6 @@
   .cat-slots{font-size:11px;color:var(--text-dim);margin-top:2px;letter-spacing:1px;}
   .cat-slots.soldout{color:#ff4444;}
   .cat-option.disabled .cat-card{opacity:0.4;cursor:not-allowed;filter:grayscale(0.5);}
-
-  /* PC STEP */
   .pc-step-wrap{display:flex;gap:10px;align-items:flex-start;margin-bottom:16px;}
   .pc-grid-card{flex:1;min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px;position:relative;overflow:hidden;}
   .pc-grid-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);}
@@ -105,7 +93,6 @@
   @keyframes dotpulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1;}50%{transform:translate(-50%,-50%) scale(1.6);opacity:0.6;}}
   @media(min-width:480px){.pc-map-panel{width:160px;}}
   @media(max-width:479px){.pc-step-wrap{flex-direction:column;}.pc-map-panel{width:100%;}}
-
   .pc-grid-label{font-size:12px;color:var(--text-dim);margin-bottom:12px;letter-spacing:1px;}
   .pc-grid{display:flex;flex-wrap:wrap;gap:8px;}
   .pc-btn{width:52px;height:52px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);font-family:'Orbitron',monospace;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;padding:4px;}
@@ -119,7 +106,6 @@
   .legend{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;}
   .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-dim);letter-spacing:1px;}
   .legend-box{width:14px;height:14px;border-radius:3px;border:1px solid;flex-shrink:0;}
-
   .summary{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:16px;margin-bottom:20px;}
   .summary-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:14px;letter-spacing:1px;}
   .summary-row:not(:last-child){border-bottom:1px solid var(--border);}
@@ -129,18 +115,11 @@
   .summary-row.total .value{font-family:'Orbitron',monospace;font-size:18px;color:var(--accent3);}
   .btn-pay{width:100%;padding:16px;background:linear-gradient(135deg,#00b4d8,#00d4ff);border:none;border-radius:6px;color:#000;font-family:'Orbitron',monospace;font-size:14px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all 0.2s;}
   .btn-pay:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,212,255,0.3);}
-
   .interest-section{margin-top:8px;margin-bottom:8px;}
   .btn-interest{width:100%;padding:13px 16px;background:rgba(127,255,0,0.06);border:1px dashed rgba(127,255,0,0.3);border-radius:6px;color:rgba(127,255,0,0.7);font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all 0.2s;text-align:center;}
   .btn-interest:hover{background:rgba(127,255,0,0.1);border-color:var(--accent3);color:var(--accent3);}
-  .interest-form{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
-  .interest-form input{flex:1;min-width:140px;}
-  .interest-submit{padding:12px 16px;background:rgba(127,255,0,0.15);border:1px solid rgba(127,255,0,0.4);border-radius:4px;color:var(--accent3);font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
-  .interest-submit:hover{background:rgba(127,255,0,0.25);}
   .error-msg{color:#ff6b6b;font-size:12px;letter-spacing:1px;margin-top:6px;display:none;}
   .error-msg.visible{display:block;}
-
-  /* ADMIN */
   .adm-trigger{text-align:center;margin-top:32px;margin-bottom:8px;}
   .adm-trigger-btn{background:none;border:1px solid #ff6b35;border-radius:4px;color:#ff6b35;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;padding:6px 14px;cursor:pointer;transition:all 0.2s;}
   .adm-trigger-btn:hover{background:rgba(255,107,53,0.15);}
@@ -156,19 +135,19 @@
   .adm-close-btn{background:none;border:1px solid #ff6b35;border-radius:4px;color:#ff6b35;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;padding:4px 10px;cursor:pointer;}
   .adm-section-title{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);margin-bottom:10px;margin-top:16px;padding-bottom:6px;border-bottom:1px solid var(--border);}
   .adm-list{display:flex;flex-direction:column;gap:6px;margin-bottom:8px;}
-  .adm-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;}
+  .adm-item{display:flex;align-items:flex-start;justify-content:space-between;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;gap:8px;}
   .adm-item-left{display:flex;align-items:center;gap:10px;}
-  .adm-pc-badge{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;width:40px;height:36px;border-radius:4px;display:flex;align-items:center;justify-content:center;}
+  .adm-pc-badge{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;width:40px;height:36px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
   .adm-pc-badge.extreme{background:rgba(160,160,160,0.15);color:var(--extreme);border:1px solid var(--extreme);}
   .adm-pc-badge.eplus{background:rgba(59,158,255,0.15);color:var(--eplus);border:1px solid var(--eplus);}
   .adm-pc-badge.epro{background:rgba(255,59,59,0.12);color:var(--epro);border:1px solid var(--epro);}
   .adm-item-name{font-size:14px;font-weight:600;color:#fff;}
   .adm-item-cat{font-size:10px;color:var(--text-dim);letter-spacing:1px;margin-top:1px;}
-  .adm-confirm-btn{background:none;border:1px solid rgba(127,255,0,0.4);border-radius:4px;color:var(--accent3);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;padding:5px 8px;cursor:pointer;transition:all 0.2s;}
+  .adm-confirm-btn{background:none;border:1px solid rgba(127,255,0,0.4);border-radius:4px;color:var(--accent3);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;padding:5px 8px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
   .adm-confirm-btn:hover{background:rgba(127,255,0,0.15);border-color:var(--accent3);}
   .adm-item.pending-item{border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.04);}
   .pending-badge{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:#ffd700;padding:2px 6px;border:1px solid rgba(255,215,0,0.4);border-radius:3px;}
-  .adm-remove-btn{background:none;border:1px solid #3a2020;border-radius:4px;color:#663333;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;padding:5px 10px;cursor:pointer;transition:all 0.2s;}
+  .adm-remove-btn{background:none;border:1px solid #3a2020;border-radius:4px;color:#663333;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;padding:5px 10px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
   .adm-remove-btn:hover{border-color:#ff4444;color:#ff4444;background:rgba(255,68,68,0.1);}
   .adm-add-form{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:16px;margin-top:8px;}
   .adm-add-row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
@@ -184,8 +163,9 @@
   .adm-edit-form{display:flex;flex-direction:column;gap:6px;}
   .adm-edit-label{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--text-dim);margin-top:4px;}
   .adm-empty{font-size:12px;color:var(--text-dim);letter-spacing:1px;padding:10px 0;text-align:center;}
-
-  /* GRUPOS */
+  .adm-email-row{display:flex;gap:4px;margin-top:6px;}
+  .adm-email-row input{flex:1;padding:5px 8px;font-size:11px;background:var(--surface);border:1px dashed var(--border);border-radius:4px;color:#fff;outline:none;}
+  .adm-email-row button{padding:5px 8px;background:rgba(0,212,255,0.1);border:1px solid var(--accent);border-radius:4px;color:var(--accent);font-size:10px;cursor:pointer;font-family:'Orbitron',monospace;white-space:nowrap;}
   .grupos-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
   @media(max-width:400px){.grupos-wrap{grid-template-columns:1fr;}}
   .grupo-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;}
@@ -193,17 +173,15 @@
   .grupo-slots{display:flex;flex-direction:column;gap:6px;}
   .grupo-slot{display:flex;align-items:center;gap:6px;}
   .slot-num{font-family:'Orbitron',monospace;font-size:9px;color:var(--text-dim);width:14px;flex-shrink:0;}
-  .slot-player{flex:1;padding:8px 10px;border-radius:4px;font-size:12px;font-weight:600;letter-spacing:0.5px;border:1px solid var(--border);background:var(--surface);color:var(--text-dim);cursor:pointer;transition:all 0.2s;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Rajdhani',sans-serif;min-height:36px;}
+  .slot-player{flex:1;padding:8px 10px;border-radius:4px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--surface);color:var(--text-dim);cursor:pointer;transition:all 0.2s;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Rajdhani',sans-serif;min-height:36px;}
   .slot-player.filled{background:rgba(0,212,255,0.06);border-color:rgba(0,212,255,0.25);color:var(--accent);}
   .slot-player.selected{background:rgba(0,212,255,0.18);border-color:var(--accent);color:#fff;box-shadow:0 0 8px rgba(0,212,255,0.3);}
   .slot-player:hover{border-color:var(--accent);color:var(--accent);}
   .slot-remove{background:none;border:none;color:#663333;font-size:16px;cursor:pointer;padding:4px 6px;line-height:1;flex-shrink:0;transition:color 0.2s;}
   .slot-remove:hover{color:#ff4444;}
   .slot-select{width:100%;padding:8px 10px;border-radius:4px;font-size:12px;background:var(--surface);border:1px dashed rgba(0,212,255,0.3);color:var(--text-dim);cursor:pointer;outline:none;font-family:'Rajdhani',sans-serif;min-height:36px;}
-  .slot-select:focus{border-color:var(--accent);}
-
   .sortear-wrap{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
-  .sortear-info{font-size:12px;color:var(--text-dim);letter-spacing:0.5px;margin-bottom:10px;}
+  .sortear-info{font-size:12px;color:var(--text-dim);margin-bottom:10px;}
   .sortear-info b{color:var(--accent3);}
   .sortear-preview{margin-top:10px;display:flex;flex-direction:column;gap:6px;}
   .sortear-preview-group{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;}
@@ -211,8 +189,6 @@
   .sortear-preview-player{font-size:12px;padding:1px 0;}
   .sortear-preview-player.novo{color:var(--accent3);}
   .sortear-preview-player.existente{color:var(--text-dim);}
-
-  /* INFO CARDS */
   .info-section{margin-bottom:32px;display:flex;flex-direction:column;gap:12px;}
   .info-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;position:relative;overflow:hidden;}
   .info-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);}
@@ -222,7 +198,7 @@
   .info-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
   .info-label{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--text-dim);margin-bottom:2px;}
   .info-val{font-size:14px;color:#fff;font-weight:600;letter-spacing:0.5px;}
-  .info-obs{font-size:12px;color:var(--text-dim);margin-top:14px;padding-top:12px;border-top:1px solid var(--border);line-height:1.6;letter-spacing:0.3px;}
+  .info-obs{font-size:12px;color:var(--text-dim);margin-top:14px;padding-top:12px;border-top:1px solid var(--border);line-height:1.6;}
   .player-grid{display:flex;flex-wrap:wrap;gap:6px;}
   .player-chip{font-size:12px;padding:5px 10px;border-radius:4px;letter-spacing:0.5px;font-weight:600;}
   .player-chip.confirmed{background:rgba(127,255,0,0.08);border:1px solid rgba(127,255,0,0.3);color:var(--accent3);}
@@ -230,7 +206,7 @@
   .groups-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
   .group-box{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:12px;}
   .group-title{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--accent);margin-bottom:8px;}
-  .group-player{font-size:12px;color:var(--text);padding:2px 0;letter-spacing:0.3px;}
+  .group-player{font-size:12px;color:var(--text);padding:2px 0;}
   .group-player.empty{color:var(--text-dim);opacity:0.4;}
   .games-list{display:flex;flex-direction:column;gap:12px;}
   .games-format{border-bottom:1px solid var(--border);padding-bottom:12px;}
@@ -249,20 +225,19 @@
   .round-badge.r5x5{background:rgba(255,59,59,0.12);border:1px solid var(--epro);color:var(--epro);}
   .round-badge.r3x3{background:rgba(59,158,255,0.1);border:1px solid var(--eplus);color:var(--eplus);}
   .round-badge.rind{background:rgba(127,255,0,0.08);border:1px solid rgba(127,255,0,0.4);color:var(--accent3);}
-  .round-desc{font-size:12px;color:var(--text);line-height:1.6;letter-spacing:0.3px;}
+  .round-desc{font-size:12px;color:var(--text);line-height:1.6;}
   .round-desc b{color:#fff;}
   .finals-list{display:flex;flex-direction:column;gap:8px;}
   .final-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;}
   .final-fmt{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;padding:4px 8px;border-radius:3px;background:rgba(0,212,255,0.08);border:1px solid var(--accent);color:var(--accent);min-width:40px;text-align:center;flex-shrink:0;}
   .final-fmt.mvp{background:rgba(255,215,0,0.1);border-color:#ffd700;color:#ffd700;}
-  .final-game{font-size:12px;color:var(--text);letter-spacing:0.3px;}
+  .final-game{font-size:12px;color:var(--text);}
   .final-mvp{border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.04);}
   .btn-ver-mais{width:100%;padding:11px;background:rgba(0,212,255,0.06);border:1px dashed rgba(0,212,255,0.3);border-radius:6px;color:var(--accent);font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;transition:all 0.2s;margin-bottom:4px;}
   .btn-ver-mais:hover{background:rgba(0,212,255,0.12);}
   .extra-btns{display:flex;gap:8px;margin-top:8px;margin-bottom:8px;}
   .btn-extra{flex:1;padding:11px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.2);border-radius:6px;color:var(--accent);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;}
   .btn-extra:hover{background:rgba(0,212,255,0.12);border-color:var(--accent);}
-
   .location-card{display:flex;align-items:flex-start;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;margin-top:24px;margin-bottom:8px;}
   .location-icon{font-size:22px;margin-top:2px;flex-shrink:0;}
   .location-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#fff;letter-spacing:1px;margin-bottom:4px;}
@@ -272,7 +247,6 @@
   .footer{text-align:center;margin-top:40px;font-size:11px;color:var(--text-dim);letter-spacing:2px;font-family:'Orbitron',monospace;opacity:0.4;}
   .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:#1a2a1a;border:1px solid var(--accent3);border-radius:6px;padding:12px 24px;color:var(--accent3);font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);z-index:999;white-space:nowrap;}
   .toast.show{transform:translateX(-50%) translateY(0);}
-
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;align-items:center;justify-content:center;padding:16px;}
   .modal-overlay.open{display:flex;}
   .modal-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;width:100%;max-width:500px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;}
@@ -296,7 +270,7 @@
   .faq-score-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;}
   .faq-round{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;font-size:12px;color:var(--text);}
   .faq-final-row{font-size:13px;margin-bottom:8px;color:var(--text);}
-  a.gtag{text-decoration:none;display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 8px;background:var(--surface2);border:1px solid var(--border);border-radius:3px;color:var(--text);letter-spacing:0.3px;transition:all 0.2s;}
+  a.gtag{text-decoration:none;display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 8px;background:var(--surface2);border:1px solid var(--border);border-radius:3px;color:var(--text);transition:all 0.2s;}
   a.gtag:hover{border-color:var(--accent);color:var(--accent);}
   .gtag-free{font-family:'Orbitron',monospace;font-size:7px;letter-spacing:1px;color:var(--accent3);border:1px solid rgba(127,255,0,0.4);border-radius:2px;padding:1px 3px;}
   .reserva-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:18px;text-align:center;}
@@ -311,13 +285,12 @@
   .reserva-status.pending{background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.4);color:#ffd700;}
   .reserva-map-wrap{position:relative;display:inline-block;width:140px;margin-top:14px;}
   .reserva-map-wrap img{width:100%;display:block;border-radius:6px;border:1px solid var(--border);}
-  .reserva-not-found{text-align:center;padding:20px;color:var(--text-dim);font-size:13px;letter-spacing:0.5px;}
+  .reserva-not-found{text-align:center;padding:20px;color:var(--text-dim);font-size:13px;}
   #particles-canvas{position:fixed;inset:0;pointer-events:none;z-index:0;}
 </style>
 </head>
 <body>
 <div class="container">
-
   <div class="header">
     <div class="header-tag">▸ Sistema de Reservas</div>
     <h1>LAN <span>HOUSE</span></h1>
@@ -384,11 +357,11 @@
         <div class="info-card-title">📋 RODADAS (4 GRUPOS)</div>
         <div class="rounds-list">
           <div class="round-item"><div class="round-badge r5x5">5×5</div><div class="round-desc"><b>Rodada 1:</b> A vs B · C vs D</div></div>
-          <div class="round-item"><div class="round-badge r3x3">3+2</div><div class="round-desc"><b>Rodada 2:</b> A×C (3×3) · A×B (2×2) · B×D (3×3) · D×C (2×2)</div></div>
+          <div class="round-item"><div class="round-badge r3x3">3+2</div><div class="round-desc"><b>Rodada 2:</b> A×C · A×B · B×D · D×C</div></div>
           <div class="round-item"><div class="round-badge r5x5">5×5</div><div class="round-desc"><b>Rodada 3:</b> A vs D · B vs C</div></div>
-          <div class="round-item"><div class="round-badge r3x3">3+2</div><div class="round-desc"><b>Rodada 4:</b> A×B (3×3) · C×D (2×2) · A×D (2×2) · B×C (3×3)</div></div>
+          <div class="round-item"><div class="round-badge r3x3">3+2</div><div class="round-desc"><b>Rodada 4:</b> A×B · C×D · A×D · B×C</div></div>
           <div class="round-item"><div class="round-badge r5x5">5×5</div><div class="round-desc"><b>Rodada 5:</b> C vs A · D vs B</div></div>
-          <div class="round-item"><div class="round-badge r3x3">3+2</div><div class="round-desc"><b>Rodada 6:</b> A×D (3×3) · B×C (2×2) · A×C (2×2) · B×D (3×3)</div></div>
+          <div class="round-item"><div class="round-badge r3x3">3+2</div><div class="round-desc"><b>Rodada 6:</b> A×D · B×C · A×C · B×D</div></div>
           <div class="round-item"><div class="round-badge rind">SOLO</div><div class="round-desc"><b>Rodada 7:</b> Individual interno de cada grupo</div></div>
         </div>
       </div>
@@ -414,7 +387,7 @@
   <div class="card">
     <div class="step-label">▸ PASSO 01</div>
     <div class="field-label">Seus Dados</div>
-    <input type="text" id="input-name" placeholder="Digite seu nome completo..." autocomplete="off" style="margin-bottom:10px" />
+    <input type="text" id="input-name" placeholder="Nome completo..." autocomplete="off" style="margin-bottom:10px" />
     <div class="error-msg" id="err-name">Por favor, insira seu nome.</div>
     <input type="email" id="input-email" placeholder="Seu email (para receber confirmação)..." autocomplete="off" />
     <div class="error-msg" id="err-email">Por favor, insira um email válido.</div>
@@ -506,7 +479,6 @@
       <button class="adm-tab" onclick="admTab('evento')">EVENTO</button>
       <button class="adm-tab" onclick="admTab('grupos')">GRUPOS</button>
     </div>
-
     <div id="adm-tab-reservas">
       <div class="adm-section-title">▸ RESERVAS ATUAIS</div>
       <div class="adm-list" id="adm-list"></div>
@@ -526,7 +498,6 @@
       </div>
       <button class="adm-reset-btn" onclick="admReset()">⚠ RESETAR TODAS AS RESERVAS</button>
     </div>
-
     <div id="adm-tab-evento" style="display:none">
       <div class="adm-section-title">▸ INFORMAÇÕES DO EVENTO</div>
       <div class="adm-edit-form">
@@ -541,15 +512,13 @@
       <div class="adm-section-title" style="margin-top:16px">▸ LISTA DE INTERESSE</div>
       <div id="adm-interest-list"></div>
       <div class="adm-section-title" style="margin-top:16px;border-color:rgba(0,212,255,0.3)">▸ DISPARO DE EMAILS</div>
-      <div style="font-size:12px;color:var(--text-dim);margin-bottom:10px;letter-spacing:0.5px">Envia o link de pagamento para todos da pré-reserva e avisa os interessados. Use apenas no dia 25/07.</div>
+      <div style="font-size:12px;color:var(--text-dim);margin-bottom:10px">Envia link de pagamento para pré-reservas e vagas disponíveis para interessados.</div>
       <button class="adm-add-btn" style="background:rgba(0,212,255,0.1);border-color:var(--accent);color:var(--accent)" onclick="admDispararEmails()">📧 DISPARAR EMAILS — ABRIR RESERVAS</button>
     </div>
-
     <div id="adm-tab-grupos" style="display:none">
-      <div class="adm-section-title">▸ GRUPOS <span style="font-size:8px;color:var(--text-dim);letter-spacing:1px;font-family:'Rajdhani',sans-serif;font-weight:400;text-transform:none"> — clique num nome para selecionar, depois clique em outro slot para trocar</span></div>
+      <div class="adm-section-title">▸ GRUPOS <span style="font-size:8px;color:var(--text-dim);font-family:'Rajdhani',sans-serif;font-weight:400;text-transform:none">— clique num nome para selecionar, depois clique em outro para trocar</span></div>
       <div class="grupos-wrap" id="grupos-wrap"></div>
       <button class="adm-add-btn" style="margin-top:12px" onclick="admSaveGrupos()">▸ SALVAR GRUPOS</button>
-
       <div class="sortear-wrap">
         <div class="adm-section-title" style="margin-top:0;margin-bottom:8px">▸ SORTEAR TIMES</div>
         <div class="sortear-info">Confirmados sem grupo: <b id="sortear-count">0</b></div>
@@ -565,16 +534,22 @@
 <div class="toast" id="toast"></div>
 
 <script>
+// ── CONFIG ──
 var ADM_PASS = null;
 var mpLinks = {extreme:'https://mpago.la/2R63UJ2',eplus:'https://mpago.la/2C8ifNR',epro:'https://mpago.la/2w6Webg'};
+var EMAILJS_SERVICE = 'service_fr2lnkr';
+var EMAILJS_TPL_PRE = 'template_jrfu9oz';
+var EMAILJS_TPL_INT = 'template_3p82ucu';
+var EMAILJS_KEY     = 'pAKGU1Wi0CxKIZ6cN';
+var OPEN_DATE       = new Date('2026-07-25T00:00:00');
+
+var CATEGORIES = {
+  extreme:{label:'PC EXTREME',price:90, pcs:[1,2,3,4,5]},
+  eplus:  {label:'PC EPLUS',  price:100,pcs:[20]},
+  epro:   {label:'PC EPRO',   price:110,pcs:[6,7,8,9,10,11,12,13,14,15,16,17,18,19]}
+};
 
 // ── EMAILJS ──
-var EMAILJS_SERVICE   = 'service_fr2lnkr';
-var EMAILJS_TPL_PRE   = 'template_jrfu9oz'; // pré-reserva
-var EMAILJS_TPL_INT   = 'template_3p82ucu'; // lista de interesse
-var EMAILJS_KEY       = 'pAKGU1Wi0CxKIZ6cN';
-var OPEN_DATE         = new Date('2026-07-25T00:00:00');
-
 function loadEmailJS(cb){
   if(window.emailjs){cb();return;}
   var s=document.createElement('script');
@@ -582,123 +557,65 @@ function loadEmailJS(cb){
   s.onload=function(){emailjs.init(EMAILJS_KEY);cb();};
   document.head.appendChild(s);
 }
-
-function isBeforeOpenDate(){
-  return new Date() < OPEN_DATE;
-}
-
-function sendEmail(templateId, params, cb){
+function isBeforeOpenDate(){ return new Date() < OPEN_DATE; }
+function sendEmail(tpl,params,cb){
   loadEmailJS(function(){
-    emailjs.send(EMAILJS_SERVICE, templateId, params)
+    emailjs.send(EMAILJS_SERVICE,tpl,params)
       .then(function(){if(cb)cb(true);})
-      .catch(function(e){console.error('EmailJS error:',e);if(cb)cb(false);});
+      .catch(function(e){console.error('EmailJS:',e);if(cb)cb(false);});
   });
 }
-
-// Envia email individual para uma pré-reserva
 function sendEmailPreReserva(pc){
-  var data=reserved[pc];
-  if(!data||!data.email){showToast('⚠ Sem email cadastrado para PC '+pc);return;}
-  var params={
-    to_name:data.name,
-    to_email:data.email,
+  var d=reserved[pc];
+  if(!d||!d.email){showToast('⚠ Sem email para PC '+pc);return;}
+  sendEmail(EMAILJS_TPL_PRE,{
+    to_name:d.name, to_email:d.email,
     pc_info:'PC '+pc,
-    category_label:CATEGORIES[data.category]?CATEGORIES[data.category].label:data.category,
-    payment_link:mpLinks[data.category]||'#',
-    price:CATEGORIES[data.category]?CATEGORIES[data.category].price:'?',
+    category_label:CATEGORIES[d.category]?CATEGORIES[d.category].label:d.category,
+    payment_link:mpLinks[d.category]||'#',
+    price:CATEGORIES[d.category]?CATEGORIES[d.category].price:'?',
     deadline:'01/08/2026'
-  };
-  sendEmail(EMAILJS_TPL_PRE,params,function(ok){
-    showToast(ok?'📧 Email enviado para '+data.name:'⚠ Erro ao enviar — verifique o console');
-  });
+  },function(ok){showToast(ok?'📧 Email enviado para '+d.name:'⚠ Erro ao enviar email');});
 }
-
-// Adiciona email manualmente a uma reserva existente
 function admAddEmail(pc){
-  var input=document.getElementById('email-pc-'+pc);
-  if(!input)return;
-  var email=input.value.trim();
+  var inp=document.getElementById('email-pc-'+pc);if(!inp)return;
+  var email=inp.value.trim();
   if(!email||!email.includes('@')){showToast('⚠ Email inválido');return;}
   reserved[pc].email=email;
-  db.ref('reserved/'+pc+'/email').set(email).then(function(){
-    renderAdmList();showToast('✓ Email salvo para PC '+pc);
-  });
+  db.ref('reserved/'+pc+'/email').set(email).then(function(){renderAdmList();showToast('✓ Email salvo para PC '+pc);});
 }
-  var params = {
-    to_name: name,
-    to_email: email,
-    pc_info: 'PC ' + pcNum,
-    category_label: CATEGORIES[cat] ? CATEGORIES[cat].label : cat,
-    payment_link: 'Disponível a partir de 25/07/2026',
-    price: price,
-    deadline: '01/08/2026'
-  };
-  sendEmail(EMAILJS_TPL_PRE, params);
-}
-
-// Envia email de interesse imediato (confirmação)
-function sendInteresseConfirm(name, email){
-  var vagasLivres = calcVagasLivres();
-  var params = {
-    to_name: name,
-    to_email: email,
-    vagas: vagasLivres,
-    site_link: 'https://danonearanha.github.io/Lanhouse/'
-  };
-  sendEmail(EMAILJS_TPL_INT, params);
-}
-
-// Disparo em massa — chamado pelo botão ADM no dia 25/07
-function dispararEmailsMassa(){
-  var vagasLivres = calcVagasLivres();
-  var enviados = 0;
-
-  // Pré-reservas
-  Object.entries(reserved).forEach(function(e){
-    var data = e[1];
-    if(data.owner || !data.email) return;
-    var params = {
-      to_name: data.name,
-      to_email: data.email,
-      pc_info: 'PC ' + e[0],
-      category_label: CATEGORIES[data.category] ? CATEGORIES[data.category].label : data.category,
-      payment_link: mpLinks[data.category] || '#',
-      price: CATEGORIES[data.category] ? CATEGORIES[data.category].price : '?',
-      deadline: '01/08/2025'
-    };
-    setTimeout(function(p){ sendEmail(EMAILJS_TPL_PRE, p); }, enviados * 300, params);
-    enviados++;
-  });
-
-  // Lista de interesse
-  interestList.forEach(function(item){
-    var name = typeof item === 'object' ? item.name : item;
-    var email = typeof item === 'object' ? item.email : null;
-    if(!email) return;
-    var params = {
-      to_name: name,
-      to_email: email,
-      vagas: vagasLivres,
-      site_link: 'https://danonearanha.github.io/Lanhouse/'
-    };
-    setTimeout(function(p){ sendEmail(EMAILJS_TPL_INT, p); }, enviados * 300, params);
-    enviados++;
-  });
-
-  return enviados;
-}
-
 function calcVagasLivres(){
-  var total = 19; // 20 PCs - PC13 (Danilo)
-  var taken = Object.keys(reserved).filter(function(k){ return k != 13; }).length;
-  return Math.max(0, total - taken);
+  var taken=Object.keys(reserved).filter(function(k){return k!=13;}).length;
+  return Math.max(0,19-taken);
 }
-var CATEGORIES = {
-  extreme:{label:'PC EXTREME',price:90,pcs:[1,2,3,4,5]},
-  eplus:  {label:'PC EPLUS',  price:100,pcs:[20]},
-  epro:   {label:'PC EPRO',   price:110,pcs:[6,7,8,9,10,11,12,13,14,15,16,17,18,19]}
-};
+function admDispararEmails(){
+  if(!confirm('Disparar emails para todos?'))return;
+  var n=0;
+  Object.entries(reserved).forEach(function(e){
+    var pc=e[0],d=e[1];
+    if(d.owner||!d.email)return;
+    setTimeout(function(){
+      sendEmail(EMAILJS_TPL_PRE,{
+        to_name:d.name,to_email:d.email,pc_info:'PC '+pc,
+        category_label:CATEGORIES[d.category]?CATEGORIES[d.category].label:d.category,
+        payment_link:mpLinks[d.category]||'#',
+        price:CATEGORIES[d.category]?CATEGORIES[d.category].price:'?',
+        deadline:'01/08/2026'
+      });
+    },n*400); n++;
+  });
+  interestList.forEach(function(item){
+    var name=typeof item==='object'?item.name:item;
+    var email=typeof item==='object'?item.email:null;
+    if(!email)return;
+    setTimeout(function(){
+      sendEmail(EMAILJS_TPL_INT,{to_name:name,to_email:email,vagas:calcVagasLivres(),site_link:'https://danonearanha.github.io/Lanhouse/'});
+    },n*400); n++;
+  });
+  showToast('📧 Disparando emails para '+n+' pessoas...');
+}
 
+// ── FIREBASE ──
 var db;
 function loadFirebase(cb){
   var s1=document.createElement('script');
@@ -708,20 +625,18 @@ function loadFirebase(cb){
     s2.src='https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js';
     s2.onload=function(){
       firebase.initializeApp({databaseURL:'https://lanhouse-30903-default-rtdb.firebaseio.com'});
-      db=firebase.database();
-      cb();
+      db=firebase.database(); cb();
     };
     document.head.appendChild(s2);
   };
   document.head.appendChild(s1);
 }
-
 function loadConfig(){
   db.ref('admPass').once('value',function(s){ADM_PASS=s.val();});
   db.ref('mpLinks').once('value',function(s){if(s.val())mpLinks=Object.assign(mpLinks,s.val());});
 }
 
-var reserved={}, interestList=[], selectedCategory=null, selectedPC=null;
+var reserved={},interestList=[],selectedCategory=null,selectedPC=null;
 
 function initReserved(){
   db.ref('reserved').on('value',function(snap){
@@ -731,9 +646,7 @@ function initReserved(){
     var av=document.querySelector('.availability-bar');if(av)av.style.display='flex';
     updateCounts();updateCategoryDisabled();
     if(selectedCategory)buildPCGrid(selectedCategory);
-    updateConfirmedList();renderInterestList();
-    // Atualiza contador do sorteio se aba grupos estiver aberta
-    updateSortearInfo();
+    updateConfirmedList();renderInterestList();updateSortearInfo();
   });
   db.ref('interestList').on('value',function(snap){interestList=snap.val()||[];renderInterestList();});
   db.ref('eventoData').once('value',function(snap){if(snap.val()){eventoData=snap.val();updateEventoDisplay();}});
@@ -741,7 +654,7 @@ function initReserved(){
 }
 function saveReserved(){db.ref('reserved').set(reserved);}
 
-/* MAPA — posições calibradas */
+// ── MAPA ──
 var PC_POSITIONS={
   20:{x:22,y:21},19:{x:38,y:21},18:{x:54,y:21},
   15:{x:22,y:29},16:{x:38,y:29},17:{x:54,y:29},
@@ -768,30 +681,18 @@ function updateMapDot(pcNum,cat){
   if(dot)dot.classList.add('active',cat);
 }
 
-/* INTEREST */
+// ── INTEREST ──
 function saveInterestList(){db.ref('interestList').set(interestList);}
-function toggleInterestForm(){
-  var f=document.getElementById('interest-form'),on=f.style.display!=='none';
-  f.style.display=on?'none':'flex';
-  if(!on)document.getElementById('interest-name').focus();
-}
 function submitInterest(){
-  // Usa nome e email do passo 01
   var name=document.getElementById('input-name').value.trim();
   var email=document.getElementById('input-email').value.trim();
   if(!name){showToast('⚠ Preencha seu nome no Passo 01');document.getElementById('input-name').focus();return;}
   if(!email||!email.includes('@')){showToast('⚠ Preencha seu email no Passo 01');document.getElementById('input-email').focus();return;}
-  if(Object.values(reserved).some(function(v){return v.name&&v.name.toLowerCase()===name.toLowerCase();})){
-    showToast('✓ '+name+' já tem uma reserva!');return;
-  }
-  if(interestList.some(function(n){
-    var nm=typeof n==='object'?n.name:n;
-    return nm.toLowerCase()===name.toLowerCase();
-  })){showToast('⚠ '+name+' já está na lista!');return;}
-  interestList.push({name:name,email:email});saveInterestList();
-  sendInteresseConfirm(name,email);
-  renderInterestList();
-  showToast('✓ '+name+' entrou na lista! Confira seu email 📧');
+  if(Object.values(reserved).some(function(v){return v.name&&v.name.toLowerCase()===name.toLowerCase();})){showToast('✓ '+name+' já tem uma reserva!');return;}
+  if(interestList.some(function(n){var nm=typeof n==='object'?n.name:n;return nm.toLowerCase()===name.toLowerCase();})){showToast('⚠ '+name+' já está na lista!');return;}
+  interestList.push({name:name,email:email});
+  saveInterestList();renderInterestList();
+  showToast('✓ '+name+' entrou na lista de interesse!');
 }
 function renderInterestList(){
   var grid=document.getElementById('pre-confirm-grid'),card=document.getElementById('pre-confirm-card');if(!grid)return;
@@ -810,29 +711,23 @@ function renderInterestList(){
 function updateConfirmedList(){
   var grid=document.getElementById('confirmed-grid');if(!grid)return;
   var seen={'danilo':true},entries=[{name:'Danilo',pc:13}];
-  Object.entries(reserved)
-    .filter(function(e){return !e[1].owner&&!e[1].pending;})
-    .sort(function(a,b){return Number(a[0])-Number(b[0]);})
-    .forEach(function(e){
-      var n=e[1].name||'';
-      if(n&&!seen[n.toLowerCase()]){seen[n.toLowerCase()]=true;entries.push({name:n,pc:Number(e[0])});}
-    });
+  Object.entries(reserved).filter(function(e){return !e[1].owner&&!e[1].pending;}).sort(function(a,b){return Number(a[0])-Number(b[0]);}).forEach(function(e){
+    var n=e[1].name||'';if(n&&!seen[n.toLowerCase()]){seen[n.toLowerCase()]=true;entries.push({name:n,pc:Number(e[0])});}
+  });
   grid.innerHTML=entries.map(function(e,i){return'<div class="player-chip confirmed">'+(i+1)+'. '+e.name+' — PC '+e.pc+'</div>';}).join('');
 }
 
-/* ADM TABS */
+// ── ADM TABS ──
 function admTab(tab){
   ['reservas','evento','grupos'].forEach(function(t){
     var el=document.getElementById('adm-tab-'+t);if(el)el.style.display=t===tab?'block':'none';
   });
-  document.querySelectorAll('.adm-tab').forEach(function(btn,i){
-    btn.classList.toggle('active',['reservas','evento','grupos'][i]===tab);
-  });
+  document.querySelectorAll('.adm-tab').forEach(function(btn,i){btn.classList.toggle('active',['reservas','evento','grupos'][i]===tab);});
   if(tab==='evento')admLoadEvento();
   if(tab==='grupos'){admLoadGrupos();updateSortearInfo();}
 }
 
-/* EVENTO */
+// ── EVENTO ──
 var eventoData={data:'Entre 20/Nov e 20/Dez',hora:'Corujão — 22h às 06h',valor:'R$ 90 a R$ 110 por pessoa',obs:'⚠️ Todos precisam ter o jogo comprado (exceto Minecraft). Comida e bebida individual.'};
 function admLoadEvento(){
   document.getElementById('evt-data').value=eventoData.data;
@@ -843,12 +738,26 @@ function admLoadEvento(){
   var names=Object.entries(reserved).filter(function(e){return !e[1].owner;}).sort(function(a,b){return a[0]-b[0];}).map(function(e,i){return(i+1)+'. '+e[1].name+' (PC '+e[0]+')';});
   list.innerHTML=names.length?names.join('<br>'):'<span style="opacity:0.4">Nenhuma reserva ainda.</span>';
   var ilist=document.getElementById('adm-interest-list');
-  if(ilist)ilist.innerHTML=interestList.length===0?'<div class="adm-empty">Nenhum interesse.</div>':
-    '<div class="adm-list">'+interestList.map(function(n,i){
-      return'<div class="adm-item"><div class="adm-item-left"><div style="font-size:14px;color:#fff;font-weight:600;">'+n+'</div></div><button class="adm-remove-btn" onclick="admRemoveInterest('+i+')">REMOVER</button></div>';
-    }).join('')+'</div>';
+  if(!ilist)return;
+  if(interestList.length===0){ilist.innerHTML='<div class="adm-empty">Nenhum interesse.</div>';return;}
+  ilist.innerHTML='<div class="adm-list">'+interestList.map(function(item,i){
+    var name=typeof item==='object'?item.name:item;
+    var email=typeof item==='object'?item.email:null;
+    var emailHtml=email
+      ?'<div style="font-size:10px;color:var(--accent);margin-top:2px">📧 '+email+'</div>'
+      :'<div class="adm-email-row"><input type="email" id="email-int-'+i+'" placeholder="Adicionar email..." /><button onclick="admAddInterestEmail('+i+')">+ EMAIL</button></div>';
+    return'<div class="adm-item"><div style="flex:1"><div class="adm-item-name">'+name+'</div>'+emailHtml+'</div><button class="adm-remove-btn" onclick="admRemoveInterest('+i+')" style="align-self:flex-start">REMOVER</button></div>';
+  }).join('')+'</div>';
 }
 function admRemoveInterest(idx){interestList.splice(idx,1);saveInterestList();renderInterestList();admLoadEvento();showToast('✓ Removido');}
+function admAddInterestEmail(idx){
+  var inp=document.getElementById('email-int-'+idx);if(!inp)return;
+  var email=inp.value.trim();
+  if(!email||!email.includes('@')){showToast('⚠ Email inválido');return;}
+  if(typeof interestList[idx]==='string')interestList[idx]={name:interestList[idx],email:email};
+  else interestList[idx].email=email;
+  saveInterestList();admLoadEvento();showToast('✓ Email salvo!');
+}
 function admSaveEvento(){
   eventoData.data=document.getElementById('evt-data').value.trim()||eventoData.data;
   eventoData.hora=document.getElementById('evt-hora').value.trim()||eventoData.hora;
@@ -864,7 +773,7 @@ function updateEventoDisplay(){
   var obs=document.querySelectorAll('.info-obs');if(obs[0])obs[0].textContent=eventoData.obs;
 }
 
-/* GRUPOS */
+// ── GRUPOS ──
 var gruposData=[
   {title:'GRUPO 1',players:['Danilo','Ronny','Gabriel Mamadura','','']},
   {title:'GRUPO 2',players:['Bruno','Bonafin Boquetti','Giano','','']},
@@ -872,28 +781,20 @@ var gruposData=[
   {title:'GRUPO 4',players:['Gabriel','Ricardo','Kadu','','']}
 ];
 var selectedSlot=null;
-
 function getConfirmedNames(){
   var names=['Danilo'];
-  Object.entries(reserved)
-    .filter(function(e){return !e[1].owner&&!e[1].pending;})
-    .sort(function(a,b){return Number(a[0])-Number(b[0]);})
-    .forEach(function(e){var n=e[1].name||'';if(n&&names.indexOf(n)===-1)names.push(n);});
+  Object.entries(reserved).filter(function(e){return !e[1].owner&&!e[1].pending;}).sort(function(a,b){return Number(a[0])-Number(b[0]);}).forEach(function(e){var n=e[1].name||'';if(n&&names.indexOf(n)===-1)names.push(n);});
   return names;
 }
-
 function getPlayersInGroups(){
   var used=[];
   gruposData.forEach(function(g){g.players.forEach(function(p){if(p)used.push(p.toLowerCase());});});
   return used;
 }
-
 function admLoadGrupos(){
   selectedSlot=null;
   var wrap=document.getElementById('grupos-wrap');wrap.innerHTML='';
-  var all=getConfirmedNames();
-  var used=getPlayersInGroups();
-
+  var all=getConfirmedNames(),used=getPlayersInGroups();
   gruposData.forEach(function(grupo,gi){
     var card=document.createElement('div');card.className='grupo-card';
     var html='<div class="grupo-card-title">'+grupo.title+'</div><div class="grupo-slots">';
@@ -903,7 +804,6 @@ function admLoadGrupos(){
         html+='<button class="slot-player filled" id="slot-'+gi+'-'+pi+'" onclick="slotClick('+gi+','+pi+')">'+p+'</button>';
         html+='<button class="slot-remove" onclick="slotRemove('+gi+','+pi+')" title="Remover">×</button>';
       } else {
-        // Dropdown só com quem não está em nenhum grupo
         var opts='<option value="">+ add</option>';
         all.forEach(function(n){if(!used.includes(n.toLowerCase())){opts+='<option value="'+n+'">'+n+'</option>';}});
         html+='<select class="slot-select" onchange="slotAdd('+gi+','+pi+',this.value)">'+opts+'</select>';
@@ -911,120 +811,64 @@ function admLoadGrupos(){
       html+='</div>';
     });
     html+='</div>';
-    card.innerHTML=html;
-    wrap.appendChild(card);
+    card.innerHTML=html;wrap.appendChild(card);
   });
 }
-
 function slotClick(gi,pi){
-  // Se clicar no mesmo slot selecionado → deseleciona
   if(selectedSlot&&selectedSlot.gi===gi&&selectedSlot.pi===pi){
-    selectedSlot=null;
-    document.querySelectorAll('.slot-player').forEach(function(b){b.classList.remove('selected');});
-    return;
+    selectedSlot=null;document.querySelectorAll('.slot-player').forEach(function(b){b.classList.remove('selected');});return;
   }
   if(selectedSlot!==null){
-    // Troca os dois jogadores
     var a=gruposData[selectedSlot.gi].players[selectedSlot.pi];
     var b=gruposData[gi].players[pi];
     gruposData[selectedSlot.gi].players[selectedSlot.pi]=b;
     gruposData[gi].players[pi]=a;
-    selectedSlot=null;
-    admLoadGrupos();
-    showToast('✓ Jogadores trocados!');
-    return;
+    selectedSlot=null;admLoadGrupos();showToast('✓ Jogadores trocados!');return;
   }
-  // Primeiro clique → seleciona
   selectedSlot={gi:gi,pi:pi};
   document.querySelectorAll('.slot-player').forEach(function(b){b.classList.remove('selected');});
   var btn=document.getElementById('slot-'+gi+'-'+pi);
   if(btn)btn.classList.add('selected');
   showToast('▸ Clique em outro slot para trocar');
 }
-
-function slotRemove(gi,pi){
-  gruposData[gi].players[pi]='';
-  selectedSlot=null;
-  admLoadGrupos();
-  updateSortearInfo();
-}
-
-function slotAdd(gi,pi,name){
-  if(!name)return;
-  gruposData[gi].players[pi]=name;
-  selectedSlot=null;
-  admLoadGrupos();
-  updateSortearInfo();
-}
-
-function admSaveGrupos(){
-  db.ref('gruposData').set(gruposData);
-  updateGruposDisplay();
-  showToast('✓ Grupos salvos');
-}
-
+function slotRemove(gi,pi){gruposData[gi].players[pi]='';selectedSlot=null;admLoadGrupos();updateSortearInfo();}
+function slotAdd(gi,pi,name){if(!name)return;gruposData[gi].players[pi]=name;selectedSlot=null;admLoadGrupos();updateSortearInfo();}
+function admSaveGrupos(){db.ref('gruposData').set(gruposData);updateGruposDisplay();showToast('✓ Grupos salvos');}
 function updateGruposDisplay(){
   var boxes=document.querySelectorAll('.group-box');
   gruposData.forEach(function(grupo,gi){
     if(!boxes[gi])return;
     var players=boxes[gi].querySelectorAll('.group-player');
-    grupo.players.forEach(function(name,pi){
-      if(!players[pi])return;
-      players[pi].textContent='▸ '+(name||'—');
-      players[pi].classList.toggle('empty',!name);
-    });
+    grupo.players.forEach(function(name,pi){if(!players[pi])return;players[pi].textContent='▸ '+(name||'—');players[pi].classList.toggle('empty',!name);});
   });
 }
 
-/* SORTEIO — 100% aleatório */
-function shuffle(arr){
-  var a=arr.slice();
-  for(var i=a.length-1;i>0;i--){
-    var j=Math.floor(Math.random()*(i+1));
-    var tmp=a[i];a[i]=a[j];a[j]=tmp;
-  }
-  return a;
-}
-
+// ── SORTEIO ──
+function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function updateSortearInfo(){
   var used=getPlayersInGroups();
   var sem=getConfirmedNames().filter(function(n){return !used.includes(n.toLowerCase());});
-  var el=document.getElementById('sortear-count');
-  if(el)el.textContent=sem.length;
+  var el=document.getElementById('sortear-count');if(el)el.textContent=sem.length;
 }
-
 function sortearTimes(){
   var used=getPlayersInGroups();
   var sem=getConfirmedNames().filter(function(n){return !used.includes(n.toLowerCase());});
   if(sem.length===0){showToast('⚠ Todos já estão em grupos');return;}
-
-  // Embaralha jogadores
   var jogadores=shuffle(sem);
-
-  // Cria cópia dos grupos
   var temp=gruposData.map(function(g){return{title:g.title,players:g.players.slice()};});
-
-  // Embaralha também a ordem dos grupos para distribuição ser 100% aleatória
-  var gruposOrdem=shuffle([0,1,2,3]);
-
-  // Distribui round-robin pelos grupos em ordem aleatória
+  var ordem=shuffle([0,1,2,3]);
   var idx=0;
   while(idx<jogadores.length){
     var alocado=false;
-    for(var gi=0;gi<gruposOrdem.length;gi++){
+    for(var gi=0;gi<ordem.length;gi++){
       if(idx>=jogadores.length)break;
-      var g=temp[gruposOrdem[gi]];
+      var g=temp[ordem[gi]];
       for(var pi=0;pi<g.players.length;pi++){
-        if(!g.players[pi]){
-          g.players[pi]=jogadores[idx];
-          idx++;alocado=true;break;
-        }
+        if(!g.players[pi]){g.players[pi]=jogadores[idx];idx++;alocado=true;break;}
       }
     }
-    if(!alocado)break; // grupos cheios
+    if(!alocado)break;
   }
-
-  // Preview
   var preview=document.getElementById('sortear-preview');
   preview.innerHTML=temp.map(function(g,gi){
     var orig=gruposData[gi].players;
@@ -1034,35 +878,27 @@ function sortearTimes(){
       var isNovo=!orig[pi]||orig[pi]!==p;
       html+='<div class="sortear-preview-player '+(isNovo?'novo':'existente')+'">▸ '+p+(isNovo?' ✦':'')+'</div>';
     });
-    html+='</div>';
-    return html;
+    return html+'</div>';
   }).join('');
-
   window._sorteioTemp=temp;
   document.getElementById('sortear-save-btn').style.display='block';
 }
-
 function salvarSorteio(){
   if(!window._sorteioTemp)return;
   gruposData=window._sorteioTemp;
-  db.ref('gruposData').set(gruposData);
-  updateGruposDisplay();
-  admLoadGrupos();
+  db.ref('gruposData').set(gruposData);updateGruposDisplay();admLoadGrupos();
   document.getElementById('sortear-preview').innerHTML='';
   document.getElementById('sortear-save-btn').style.display='none';
-  window._sorteioTemp=null;
-  showToast('✓ Times aplicados!');
+  window._sorteioTemp=null;showToast('✓ Times aplicados!');
 }
 
-/* VER MAIS */
+// ── VER MAIS / FAQ ──
 function toggleVerMais(){
   var more=document.getElementById('info-more'),btn=document.getElementById('btn-ver-mais');
   var open=more.style.display!=='none';
   more.style.display=open?'none':'block';
   btn.textContent=open?'▸ VER MAIS INFORMAÇÕES':'▴ VER MENOS';
 }
-
-/* FAQ */
 function toggleFaq(btn){
   var a=btn.nextElementSibling,open=a.classList.contains('open');
   document.querySelectorAll('.faq-a').forEach(function(el){el.classList.remove('open');});
@@ -1072,43 +908,27 @@ function toggleFaq(btn){
 function closeFaq(){document.getElementById('faq-modal').classList.remove('open');}
 function closeReservaModal(){document.getElementById('reserva-modal').classList.remove('open');}
 
-/* MINHA RESERVA */
+// ── MINHA RESERVA ──
 function searchReserva(){
   var name=document.getElementById('reserva-search').value.trim().toLowerCase();
   var result=document.getElementById('reserva-result');
   if(name.length<2){result.innerHTML='';return;}
   var found=null,foundPc=null;
-  Object.entries(reserved).forEach(function(e){
-    if(e[1].name&&e[1].name.toLowerCase().indexOf(name)!==-1){found=e[1];foundPc=e[0];}
-  });
+  Object.entries(reserved).forEach(function(e){if(e[1].name&&e[1].name.toLowerCase().indexOf(name)!==-1){found=e[1];foundPc=e[0];}});
   if(!found){result.innerHTML='<div class="reserva-not-found">Nenhuma reserva encontrada.</div>';return;}
   var cat=found.category||'epro';
   var status=found.owner?'confirmed':found.pending?'pending':'confirmed';
   var statusText=found.owner?'RESERVADO':found.pending?'AGUARDANDO PAGAMENTO':'CONFIRMADO ✓';
   var mapSrc=document.querySelector('#pc-map-wrap img')?document.querySelector('#pc-map-wrap img').src:'';
   var pos=PC_POSITIONS[foundPc],dotStyle='';
-  if(pos){
-    var c={extreme:'var(--extreme)',eplus:'var(--eplus)',epro:'var(--epro)'}[cat]||'var(--epro)';
-    dotStyle='position:absolute;left:'+pos.x+'%;top:'+pos.y+'%;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);animation:dotpulse 1s infinite;background:'+c+';box-shadow:0 0 8px 3px '+c+';';
-  }
-  result.innerHTML='<div class="reserva-card">'
-    +'<div class="reserva-name">'+found.name+'</div>'
-    +'<div class="reserva-pc-num '+cat+'">PC '+foundPc+'</div>'
-    +'<div class="reserva-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+' — R$ '+(CATEGORIES[cat]?CATEGORIES[cat].price:'?')+',00</div>'
-    +(mapSrc?'<div class="reserva-map-wrap"><img src="'+mapSrc+'" />'+(pos?'<div style="'+dotStyle+'"></div>':'')+'</div>':'')
-    +'<div><span class="reserva-status '+status+'">'+statusText+'</span></div>'
-    +'</div>';
+  if(pos){var c={extreme:'var(--extreme)',eplus:'var(--eplus)',epro:'var(--epro)'}[cat]||'var(--epro)';dotStyle='position:absolute;left:'+pos.x+'%;top:'+pos.y+'%;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);animation:dotpulse 1s infinite;background:'+c+';box-shadow:0 0 8px 3px '+c+';';}
+  result.innerHTML='<div class="reserva-card"><div class="reserva-name">'+found.name+'</div><div class="reserva-pc-num '+cat+'">PC '+foundPc+'</div><div class="reserva-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+' — R$ '+(CATEGORIES[cat]?CATEGORIES[cat].price:'?')+',00</div>'+(mapSrc?'<div class="reserva-map-wrap"><img src="'+mapSrc+'" />'+(pos?'<div style="'+dotStyle+'"></div>':'')+'</div>':'')+'<div><span class="reserva-status '+status+'">'+statusText+'</span></div></div>';
 }
 
-/* PARTICLES */
+// ── PARTICLES ──
 var canvas,ctx,particles=[],particlesActive=false,pulseActive=false,pulseColor='160,160,160',pulseAlpha=0,pulseDir=1;
 var CAT_COLORS={extreme:{pulse:'160,160,160',particle:'#a0a0a0'},eplus:{pulse:'59,158,255',particle:'#3b9eff'},epro:{pulse:'255,59,59',particle:'#ff3b3b'}};
-function initCanvas(){
-  canvas=document.createElement('canvas');canvas.id='particles-canvas';
-  document.body.insertBefore(canvas,document.body.firstChild);
-  ctx=canvas.getContext('2d');resizeCanvas();
-  window.addEventListener('resize',resizeCanvas);animateParticles();
-}
+function initCanvas(){canvas=document.createElement('canvas');canvas.id='particles-canvas';document.body.insertBefore(canvas,document.body.firstChild);ctx=canvas.getContext('2d');resizeCanvas();window.addEventListener('resize',resizeCanvas);animateParticles();}
 function resizeCanvas(){if(!canvas)return;canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
 function startPulse(cat){pulseActive=true;particlesActive=false;particles=[];pulseColor=CAT_COLORS[cat]?CAT_COLORS[cat].pulse:'160,160,160';}
 function startParticles(cat){
@@ -1131,7 +951,7 @@ function animateParticles(){
   });
 }
 
-/* RESERVA */
+// ── RESERVA ──
 function updateCounts(){
   ['extreme','eplus','epro'].forEach(function(cat){
     var total=CATEGORIES[cat].pcs.length,taken=CATEGORIES[cat].pcs.filter(function(p){return !!reserved[p];}).length;
@@ -1173,8 +993,7 @@ function buildPCGrid(cat){
     var ns=document.createElement('span');ns.textContent=num;btn.appendChild(ns);
     if(reserved[num]){
       btn.classList.add(reserved[num].pending?'pending':'taken');btn.disabled=true;
-      var s=document.createElement('span');s.className='pc-reserved-name';
-      s.textContent=(reserved[num].name||'').split(' ')[0];btn.appendChild(s);
+      var s=document.createElement('span');s.className='pc-reserved-name';s.textContent=(reserved[num].name||'').split(' ')[0];btn.appendChild(s);
     } else {
       (function(n,b,c){b.onclick=function(){selectPC(n,b,c);};})(num,btn,cat);
     }
@@ -1182,11 +1001,7 @@ function buildPCGrid(cat){
   });
 }
 function selectPC(num,btn,cat){
-  if(selectedPC===num){
-    btn.classList.remove('selected','extreme','eplus','epro');selectedPC=null;
-    document.getElementById('confirm-section').style.display='none';
-    updateMapDot(null,null);stopEffects();startPulse(cat);return;
-  }
+  if(selectedPC===num){btn.classList.remove('selected','extreme','eplus','epro');selectedPC=null;document.getElementById('confirm-section').style.display='none';updateMapDot(null,null);stopEffects();startPulse(cat);return;}
   document.querySelectorAll('.pc-btn').forEach(function(b){b.classList.remove('selected','extreme','eplus','epro');});
   btn.classList.add('selected',cat);selectedPC=num;
   document.getElementById('err-pc').classList.remove('visible');
@@ -1200,56 +1015,9 @@ function showSummary(){
   document.getElementById('s-pc').textContent='PC '+selectedPC;
   document.getElementById('s-price').textContent='R$ '+CATEGORIES[selectedCategory].price+',00';
   document.getElementById('confirm-section').style.display='block';
-  updatePayBtn(); // atualiza texto do botão toda vez que o resumo aparece
+  updatePayBtn();
   document.getElementById('confirm-section').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-function handlePay(){
-  var name=document.getElementById('input-name').value.trim();
-  var email=document.getElementById('input-email').value.trim();
-  var valid=true;
-  if(!name){document.getElementById('err-name').classList.add('visible');valid=false;}
-  if(!email||!email.includes('@')){document.getElementById('err-email').classList.add('visible');valid=false;}
-  if(!selectedCategory){document.getElementById('err-category').classList.add('visible');valid=false;}
-  if(!selectedPC){document.getElementById('err-pc').classList.add('visible');valid=false;}
-  if(!valid)return;
-  if(reserved[selectedPC]){
-    showToast('⚠ Este PC acabou de ser reservado!');
-    buildPCGrid(selectedCategory);updateCounts();selectedPC=null;
-    document.getElementById('confirm-section').style.display='none';return;
-  }
-  var pcToReserve=selectedPC,catToReserve=selectedCategory;
-  var price=CATEGORIES[catToReserve].price;
-  var before=isBeforeOpenDate();
-
-  reserved[pcToReserve]={name:name,email:email,category:catToReserve,ts:Date.now(),pending:true};
-  db.ref('reserved/'+pcToReserve).set(reserved[pcToReserve]).then(function(){
-    if(before){
-      // Pré-reserva — envia confirmação imediata, sem link de pagamento
-      sendPreReservaConfirm(name,email,pcToReserve,catToReserve,price);
-      document.getElementById('confirm-section').innerHTML=
-        '<div class="summary" style="border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.05)">'
-        +'<div style="text-align:center;padding:12px 0">'
-        +'<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:8px">✓ PRÉ-RESERVA CONFIRMADA</div>'
-        +'<div style="font-size:13px;color:var(--text-dim);line-height:1.7">PC <b style="color:#fff">'+pcToReserve+'</b> reservado para <b style="color:#fff">'+name+'</b>.<br>'
-        +'No dia <b style="color:var(--accent)">25/07</b> você receberá o link de pagamento por email.<br>'
-        +'<span style="color:var(--text-dim);font-size:11px">Verifique também a caixa de spam 📧</span></div>'
-        +'</div></div>';
-    } else {
-      // Reserva normal — abre link de pagamento
-      var link=mpLinks[catToReserve];
-      window.open(link,'_blank');
-      document.getElementById('confirm-section').innerHTML=
-        '<div class="summary" style="border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.05)">'
-        +'<div style="text-align:center;padding:12px 0">'
-        +'<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#ffd700;margin-bottom:8px">⏳ AGUARDANDO PAGAMENTO</div>'
-        +'<div style="font-size:13px;color:var(--text-dim);line-height:1.7">O link do Mercado Pago foi aberto.<br>Após o pagamento, aguarde a confirmação.<br>'
-        +'<span style="color:#ffd700;font-size:11px">PC '+pcToReserve+' — '+name+'</span></div>'
-        +'</div></div>';
-    }
-    selectedPC=null;selectedCategory=null;
-  });
-}
-
 function updatePayBtn(){
   var btn=document.getElementById('btn-pay');if(!btn)return;
   if(isBeforeOpenDate()){
@@ -1260,12 +1028,40 @@ function updatePayBtn(){
     btn.style.background='linear-gradient(135deg,#00b4d8,#00d4ff)';
   }
 }
-
-/* ADMIN */
-function toggleAdmLogin(){
-  var l=document.getElementById('adm-login');l.classList.toggle('visible');
-  if(l.classList.contains('visible'))document.getElementById('adm-pass').focus();
+function handlePay(){
+  var name=document.getElementById('input-name').value.trim();
+  var email=document.getElementById('input-email').value.trim();
+  var valid=true;
+  if(!name){document.getElementById('err-name').classList.add('visible');valid=false;}
+  if(!email||!email.includes('@')){document.getElementById('err-email').classList.add('visible');valid=false;}
+  if(!selectedCategory){document.getElementById('err-category').classList.add('visible');valid=false;}
+  if(!selectedPC){document.getElementById('err-pc').classList.add('visible');valid=false;}
+  if(!valid)return;
+  if(reserved[selectedPC]){showToast('⚠ Este PC acabou de ser reservado!');buildPCGrid(selectedCategory);updateCounts();selectedPC=null;document.getElementById('confirm-section').style.display='none';return;}
+  var pcToReserve=selectedPC,catToReserve=selectedCategory,price=CATEGORIES[catToReserve].price,before=isBeforeOpenDate();
+  reserved[pcToReserve]={name:name,email:email,category:catToReserve,ts:Date.now(),pending:true};
+  db.ref('reserved/'+pcToReserve).set(reserved[pcToReserve]).then(function(){
+    if(before){
+      document.getElementById('confirm-section').innerHTML=
+        '<div class="summary" style="border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.05)"><div style="text-align:center;padding:12px 0">'
+        +'<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:8px">✓ PRÉ-RESERVA CONFIRMADA</div>'
+        +'<div style="font-size:13px;color:var(--text-dim);line-height:1.7">PC <b style="color:#fff">'+pcToReserve+'</b> reservado para <b style="color:#fff">'+name+'</b>.<br>'
+        +'No dia <b style="color:var(--accent)">25/07</b> você receberá o link de pagamento por email.<br>'
+        +'<span style="font-size:11px">Verifique também a caixa de spam 📧</span></div></div></div>';
+    } else {
+      window.open(mpLinks[catToReserve],'_blank');
+      document.getElementById('confirm-section').innerHTML=
+        '<div class="summary" style="border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.05)"><div style="text-align:center;padding:12px 0">'
+        +'<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#ffd700;margin-bottom:8px">⏳ AGUARDANDO PAGAMENTO</div>'
+        +'<div style="font-size:13px;color:var(--text-dim);line-height:1.7">O link do Mercado Pago foi aberto.<br>Após o pagamento, aguarde a confirmação.<br>'
+        +'<span style="color:#ffd700;font-size:11px">PC '+pcToReserve+' — '+name+'</span></div></div></div>';
+    }
+    selectedPC=null;selectedCategory=null;
+  });
 }
+
+// ── ADMIN ──
+function toggleAdmLogin(){var l=document.getElementById('adm-login');l.classList.toggle('visible');if(l.classList.contains('visible'))document.getElementById('adm-pass').focus();}
 function admLogin(){
   var pass=document.getElementById('adm-pass').value;
   if(pass===ADM_PASS){
@@ -1274,10 +1070,7 @@ function admLogin(){
     document.getElementById('err-adm').classList.remove('visible');
     document.getElementById('adm-panel').classList.add('visible');
     renderAdmList();document.getElementById('adm-panel').scrollIntoView({behavior:'smooth'});
-  } else {
-    document.getElementById('err-adm').classList.add('visible');
-    document.getElementById('adm-pass').value='';
-  }
+  } else {document.getElementById('err-adm').classList.add('visible');document.getElementById('adm-pass').value='';}
 }
 function admLogout(){document.getElementById('adm-panel').classList.remove('visible');}
 function renderAdmList(){
@@ -1286,43 +1079,30 @@ function renderAdmList(){
   entries.sort(function(a,b){return a[0]-b[0];});
   if(entries.length===0){list.innerHTML='<div class="adm-empty">Nenhuma reserva ainda.</div>';updateAdmPcSelect();return;}
   entries.forEach(function(entry){
-    var pc=entry[0],data=entry[1],cat=data.category||'epro';
-    var item=document.createElement('div');item.className='adm-item';if(data.pending)item.classList.add('pending-item');
-    var ab=data.owner?'':(data.pending
+    var pc=entry[0],d=entry[1],cat=d.category||'epro';
+    var item=document.createElement('div');item.className='adm-item';if(d.pending)item.classList.add('pending-item');
+    var emailHtml=d.email
+      ?'<div style="font-size:10px;color:var(--accent);margin-top:2px">📧 '+d.email+'</div>'
+      :'<div class="adm-email-row"><input type="email" id="email-pc-'+pc+'" placeholder="Adicionar email..." /><button onclick="admAddEmail('+pc+')">+ EMAIL</button></div>';
+    var sb=d.pending?' <span class="pending-badge">AGUARDANDO</span>':'';
+    var btns=d.owner?'':(d.pending
       ?'<div style="display:flex;gap:6px;flex-direction:column;align-items:flex-end">'
         +'<button class="adm-confirm-btn" onclick="admConfirm('+pc+')">✓ CONFIRMAR</button>'
-        +(data.email?'<button class="adm-confirm-btn" style="border-color:var(--accent);color:var(--accent)" onclick="sendEmailPreReserva('+pc+')">📧 EMAIL</button>':'')
-        +'<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button>'
-        +'</div>'
+        +(d.email?'<button class="adm-confirm-btn" style="border-color:var(--accent);color:var(--accent)" onclick="sendEmailPreReserva('+pc+')">📧 EMAIL</button>':'')
+        +'<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button></div>'
       :'<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button>');
-    var sb=data.pending?' <span class="pending-badge">AGUARDANDO</span>':'';
-    var emailInfo = data.email
-      ? '<div style="font-size:10px;color:var(--accent);margin-top:2px;letter-spacing:0.5px">📧 '+data.email+'</div>'
-      : '<div style="display:flex;gap:4px;margin-top:6px">'
-          +'<input type="email" id="email-pc-'+pc+'" placeholder="Adicionar email..." style="flex:1;padding:5px 8px;font-size:11px;background:var(--surface);border:1px dashed var(--border);border-radius:4px;color:#fff;outline:none;" />'
-          +'<button onclick="admAddEmail('+pc+')" style="padding:5px 8px;background:rgba(0,212,255,0.1);border:1px solid var(--accent);border-radius:4px;color:var(--accent);font-size:10px;cursor:pointer;font-family:Orbitron,monospace;white-space:nowrap;">+ EMAIL</button>'
-        +'</div>';
-
-    item.innerHTML='<div style="flex:1"><div class="adm-item-left"><div class="adm-pc-badge '+cat+'">PC'+pc+'</div><div><div class="adm-item-name">'+data.name+sb+'</div><div class="adm-item-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+'</div>'+emailInfo+'</div></div></div>'+ab;
+    item.innerHTML='<div style="flex:1"><div class="adm-item-left"><div class="adm-pc-badge '+cat+'">PC'+pc+'</div>'
+      +'<div><div class="adm-item-name">'+d.name+sb+'</div><div class="adm-item-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+'</div>'+emailHtml+'</div></div></div>'+btns;
     list.appendChild(item);
   });
   updateAdmPcSelect();
 }
-function admConfirm(pc){
-  if(!reserved[pc])return;reserved[pc].pending=false;
-  db.ref('reserved/'+pc).set(reserved[pc]).then(function(){renderAdmList();showToast('✓ PC '+pc+' confirmado!');});
-}
-function admRemove(pc){
-  if(!confirm('Remover reserva do PC '+pc+'?'))return;
-  delete reserved[pc];saveReserved();updateCounts();updateCategoryDisabled();
-  renderAdmList();if(selectedCategory)buildPCGrid(selectedCategory);showToast('✓ PC '+pc+' liberado');
-}
+function admConfirm(pc){if(!reserved[pc])return;reserved[pc].pending=false;db.ref('reserved/'+pc).set(reserved[pc]).then(function(){renderAdmList();showToast('✓ PC '+pc+' confirmado!');});}
+function admRemove(pc){if(!confirm('Remover PC '+pc+'?'))return;delete reserved[pc];saveReserved();updateCounts();updateCategoryDisabled();renderAdmList();if(selectedCategory)buildPCGrid(selectedCategory);showToast('✓ PC '+pc+' liberado');}
 function updateAdmPcSelect(){
   var cat=document.getElementById('adm-add-cat').value,sel=document.getElementById('adm-add-pc');
   sel.innerHTML='<option value="">PC Nº...</option>';if(!cat)return;
-  CATEGORIES[cat].pcs.forEach(function(num){
-    if(!reserved[num]){var o=document.createElement('option');o.value=num;o.textContent='PC '+num;sel.appendChild(o);}
-  });
+  CATEGORIES[cat].pcs.forEach(function(num){if(!reserved[num]){var o=document.createElement('option');o.value=num;o.textContent='PC '+num;sel.appendChild(o);}});
 }
 function admAdd(){
   var name=document.getElementById('adm-add-name').value.trim(),cat=document.getElementById('adm-add-cat').value,pc=parseInt(document.getElementById('adm-add-pc').value);
@@ -1341,29 +1121,14 @@ function admReset(){
   selectedPC=null;document.getElementById('confirm-section').style.display='none';
   renderAdmList();showToast('✓ Reservas resetadas');
 }
-
-function showToast(msg){
-  var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
-  setTimeout(function(){t.classList.remove('show');},3000);
-}
-
-function admDispararEmails(){
-  if(!confirm('Disparar emails para todos da pré-lista e interessados?'))return;
-  var total=dispararEmailsMassa();
-  showToast('📧 Disparando '+total+' emails...');
-}
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3000);}
 
 function init(){
   loadConfig();initReserved();initMapDots();
   updateEventoDisplay();updateGruposDisplay();renderInterestList();updateConfirmedList();
-  updateCounts();updateCategoryDisabled();
-  updatePayBtn();
-  document.getElementById('input-name').addEventListener('input',function(){
-    document.getElementById('err-name').classList.remove('visible');
-    if(selectedPC)showSummary();
-  });
+  updateCounts();updateCategoryDisabled();updatePayBtn();
+  document.getElementById('input-name').addEventListener('input',function(){document.getElementById('err-name').classList.remove('visible');if(selectedPC)showSummary();});
 }
-
 document.addEventListener('DOMContentLoaded',function(){initCanvas();loadFirebase(function(){init();});});
 </script>
 
@@ -1395,6 +1160,5 @@ document.addEventListener('DOMContentLoaded',function(){initCanvas();loadFirebas
     </div>
   </div>
 </div>
-
 </body>
 </html>
