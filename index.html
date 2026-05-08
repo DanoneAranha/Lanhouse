@@ -573,7 +573,7 @@ var EMAILJS_SERVICE   = 'service_fr2lnkr';
 var EMAILJS_TPL_PRE   = 'template_jrfu9oz'; // pré-reserva
 var EMAILJS_TPL_INT   = 'template_3p82ucu'; // lista de interesse
 var EMAILJS_KEY       = 'pAKGU1Wi0CxKIZ6cN';
-var OPEN_DATE         = new Date('2025-07-25T00:00:00');
+var OPEN_DATE         = new Date('2026-07-25T00:00:00');
 
 function loadEmailJS(cb){
   if(window.emailjs){cb();return;}
@@ -595,8 +595,35 @@ function sendEmail(templateId, params, cb){
   });
 }
 
-// Envia email de pré-reserva imediato (confirmação)
-function sendPreReservaConfirm(name, email, pcNum, cat, price){
+// Envia email individual para uma pré-reserva
+function sendEmailPreReserva(pc){
+  var data=reserved[pc];
+  if(!data||!data.email){showToast('⚠ Sem email cadastrado para PC '+pc);return;}
+  var params={
+    to_name:data.name,
+    to_email:data.email,
+    pc_info:'PC '+pc,
+    category_label:CATEGORIES[data.category]?CATEGORIES[data.category].label:data.category,
+    payment_link:mpLinks[data.category]||'#',
+    price:CATEGORIES[data.category]?CATEGORIES[data.category].price:'?',
+    deadline:'01/08/2026'
+  };
+  sendEmail(EMAILJS_TPL_PRE,params,function(ok){
+    showToast(ok?'📧 Email enviado para '+data.name:'⚠ Erro ao enviar — verifique o console');
+  });
+}
+
+// Adiciona email manualmente a uma reserva existente
+function admAddEmail(pc){
+  var input=document.getElementById('email-pc-'+pc);
+  if(!input)return;
+  var email=input.value.trim();
+  if(!email||!email.includes('@')){showToast('⚠ Email inválido');return;}
+  reserved[pc].email=email;
+  db.ref('reserved/'+pc+'/email').set(email).then(function(){
+    renderAdmList();showToast('✓ Email salvo para PC '+pc);
+  });
+}
   var params = {
     to_name: name,
     to_email: email,
@@ -769,10 +796,16 @@ function submitInterest(){
 function renderInterestList(){
   var grid=document.getElementById('pre-confirm-grid'),card=document.getElementById('pre-confirm-card');if(!grid)return;
   var rn=Object.values(reserved).filter(function(v){return !v.owner;}).map(function(v){return(v.name||'').toLowerCase();});
-  var f=interestList.filter(function(n){return !rn.includes(n.toLowerCase());});
-  if(f.length===0){card.style.display='none';return;}
+  var filtered=interestList.filter(function(item){
+    var nm=typeof item==='object'?item.name:item;
+    return !rn.includes(nm.toLowerCase());
+  });
+  if(filtered.length===0){card.style.display='none';return;}
   card.style.display='block';
-  grid.innerHTML=f.map(function(n){return'<div class="player-chip pending">'+n+'</div>';}).join('');
+  grid.innerHTML=filtered.map(function(item){
+    var nm=typeof item==='object'?item.name:item;
+    return'<div class="player-chip pending">'+nm+'</div>';
+  }).join('');
 }
 function updateConfirmedList(){
   var grid=document.getElementById('confirmed-grid');if(!grid)return;
