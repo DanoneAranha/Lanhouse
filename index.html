@@ -1263,7 +1263,14 @@ function renderAdmList(){
         +'</div>'
       :'<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button>');
     var sb=data.pending?' <span class="pending-badge">AGUARDANDO</span>':'';
-    item.innerHTML='<div class="adm-item-left"><div class="adm-pc-badge '+cat+'">PC'+pc+'</div><div><div class="adm-item-name">'+data.name+sb+'</div><div class="adm-item-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+'</div></div></div>'+ab;
+    var emailInfo = data.email
+      ? '<div style="font-size:10px;color:var(--accent);margin-top:2px;letter-spacing:0.5px">📧 '+data.email+'</div>'
+      : '<div style="display:flex;gap:4px;margin-top:6px">'
+          +'<input type="email" id="email-pc-'+pc+'" placeholder="Adicionar email..." style="flex:1;padding:5px 8px;font-size:11px;background:var(--surface);border:1px dashed var(--border);border-radius:4px;color:#fff;outline:none;" />'
+          +'<button onclick="admAddEmail('+pc+')" style="padding:5px 8px;background:rgba(0,212,255,0.1);border:1px solid var(--accent);border-radius:4px;color:var(--accent);font-size:10px;cursor:pointer;font-family:Orbitron,monospace;white-space:nowrap;">+ EMAIL</button>'
+        +'</div>';
+
+    item.innerHTML='<div style="flex:1"><div class="adm-item-left"><div class="adm-pc-badge '+cat+'">PC'+pc+'</div><div><div class="adm-item-name">'+data.name+sb+'</div><div class="adm-item-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+'</div>'+emailInfo+'</div></div></div>'+ab;
     list.appendChild(item);
   });
   updateAdmPcSelect();
