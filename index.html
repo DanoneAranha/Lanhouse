@@ -413,9 +413,11 @@
 
   <div class="card">
     <div class="step-label">▸ PASSO 01</div>
-    <div class="field-label">Seu Nome</div>
-    <input type="text" id="input-name" placeholder="Digite seu nome completo..." autocomplete="off" />
+    <div class="field-label">Seus Dados</div>
+    <input type="text" id="input-name" placeholder="Digite seu nome completo..." autocomplete="off" style="margin-bottom:10px" />
     <div class="error-msg" id="err-name">Por favor, insira seu nome.</div>
+    <input type="email" id="input-email" placeholder="Seu email (para receber confirmação)..." autocomplete="off" />
+    <div class="error-msg" id="err-email">Por favor, insira um email válido.</div>
   </div>
 
   <div class="card">
@@ -567,6 +569,107 @@
 <script>
 var ADM_PASS = null;
 var mpLinks = {extreme:'https://mpago.la/2R63UJ2',eplus:'https://mpago.la/2C8ifNR',epro:'https://mpago.la/2w6Webg'};
+
+// ── EMAILJS ──
+var EMAILJS_SERVICE   = 'service_fr2lnkr';
+var EMAILJS_TPL_PRE   = 'template_jrfu9oz'; // pré-reserva
+var EMAILJS_TPL_INT   = 'template_3p82ucu'; // lista de interesse
+var EMAILJS_KEY       = 'pAKGU1Wi0CxKIZ6cN';
+var OPEN_DATE         = new Date('2025-07-25T00:00:00');
+
+function loadEmailJS(cb){
+  if(window.emailjs){cb();return;}
+  var s=document.createElement('script');
+  s.src='https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+  s.onload=function(){emailjs.init(EMAILJS_KEY);cb();};
+  document.head.appendChild(s);
+}
+
+function isBeforeOpenDate(){
+  return new Date() < OPEN_DATE;
+}
+
+function sendEmail(templateId, params, cb){
+  loadEmailJS(function(){
+    emailjs.send(EMAILJS_SERVICE, templateId, params)
+      .then(function(){if(cb)cb(true);})
+      .catch(function(e){console.error('EmailJS error:',e);if(cb)cb(false);});
+  });
+}
+
+// Envia email de pré-reserva imediato (confirmação)
+function sendPreReservaConfirm(name, email, pcNum, cat, price){
+  var params = {
+    to_name: name,
+    to_email: email,
+    pc_info: 'PC ' + pcNum,
+    category_label: CATEGORIES[cat] ? CATEGORIES[cat].label : cat,
+    payment_link: '#',
+    price: price,
+    deadline: '01/08/2025',
+    // Sobrescreve mensagem para confirmação imediata (antes da data)
+    message_type: 'confirmacao'
+  };
+  sendEmail(EMAILJS_TPL_PRE, params);
+}
+
+// Envia email de interesse imediato (confirmação)
+function sendInteresseConfirm(name, email){
+  var vagasLivres = calcVagasLivres();
+  var params = {
+    to_name: name,
+    to_email: email,
+    vagas: vagasLivres,
+    site_link: 'https://danonearanha.github.io/Lanhouse/'
+  };
+  sendEmail(EMAILJS_TPL_INT, params);
+}
+
+// Disparo em massa — chamado pelo botão ADM no dia 25/07
+function dispararEmailsMassa(){
+  var vagasLivres = calcVagasLivres();
+  var enviados = 0;
+
+  // Pré-reservas
+  Object.entries(reserved).forEach(function(e){
+    var data = e[1];
+    if(data.owner || !data.email) return;
+    var params = {
+      to_name: data.name,
+      to_email: data.email,
+      pc_info: 'PC ' + e[0],
+      category_label: CATEGORIES[data.category] ? CATEGORIES[data.category].label : data.category,
+      payment_link: mpLinks[data.category] || '#',
+      price: CATEGORIES[data.category] ? CATEGORIES[data.category].price : '?',
+      deadline: '01/08/2025'
+    };
+    setTimeout(function(p){ sendEmail(EMAILJS_TPL_PRE, p); }, enviados * 300, params);
+    enviados++;
+  });
+
+  // Lista de interesse
+  interestList.forEach(function(item){
+    var name = typeof item === 'object' ? item.name : item;
+    var email = typeof item === 'object' ? item.email : null;
+    if(!email) return;
+    var params = {
+      to_name: name,
+      to_email: email,
+      vagas: vagasLivres,
+      site_link: 'https://danonearanha.github.io/Lanhouse/'
+    };
+    setTimeout(function(p){ sendEmail(EMAILJS_TPL_INT, p); }, enviados * 300, params);
+    enviados++;
+  });
+
+  return enviados;
+}
+
+function calcVagasLivres(){
+  var total = 19; // 20 PCs - PC13 (Danilo)
+  var taken = Object.keys(reserved).filter(function(k){ return k != 13; }).length;
+  return Math.max(0, total - taken);
+}
 var CATEGORIES = {
   extreme:{label:'PC EXTREME',price:90,pcs:[1,2,3,4,5]},
   eplus:  {label:'PC EPLUS',  price:100,pcs:[20]},
@@ -651,18 +754,26 @@ function toggleInterestForm(){
 }
 function submitInterest(){
   var name=document.getElementById('interest-name').value.trim();
+  var email=document.getElementById('interest-email').value.trim();
   if(!name){document.getElementById('err-interest').classList.add('visible');return;}
+  if(!email||!email.includes('@')){document.getElementById('err-interest-email').classList.add('visible');return;}
   document.getElementById('err-interest').classList.remove('visible');
+  document.getElementById('err-interest-email').classList.remove('visible');
   if(Object.values(reserved).some(function(v){return v.name&&v.name.toLowerCase()===name.toLowerCase();})){
     showToast('✓ '+name+' já está confirmado!');
-    document.getElementById('interest-name').value='';document.getElementById('interest-form').style.display='none';return;
+    document.getElementById('interest-name').value='';document.getElementById('interest-email').value='';
+    document.getElementById('interest-form').style.display='none';return;
   }
-  if(interestList.some(function(n){return n.toLowerCase()===name.toLowerCase();})){
-    showToast('⚠ '+name+' já está na lista!');document.getElementById('interest-name').value='';return;
-  }
-  interestList.push(name);saveInterestList();
-  document.getElementById('interest-name').value='';document.getElementById('interest-form').style.display='none';
-  renderInterestList();showToast('✓ '+name+' entrou na pré-lista!');
+  if(interestList.some(function(n){
+    var nm=typeof n==='object'?n.name:n;
+    return nm.toLowerCase()===name.toLowerCase();
+  })){showToast('⚠ '+name+' já está na lista!');document.getElementById('interest-name').value='';return;}
+  interestList.push({name:name,email:email});saveInterestList();
+  // Envia confirmação imediata
+  sendInteresseConfirm(name,email);
+  document.getElementById('interest-name').value='';document.getElementById('interest-email').value='';
+  document.getElementById('interest-form').style.display='none';
+  renderInterestList();showToast('✓ '+name+' entrou na pré-lista! Confira seu email 📧');
 }
 function renderInterestList(){
   var grid=document.getElementById('pre-confirm-grid'),card=document.getElementById('pre-confirm-card');if(!grid)return;
@@ -1068,8 +1179,11 @@ function showSummary(){
   document.getElementById('confirm-section').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 function handlePay(){
-  var name=document.getElementById('input-name').value.trim(),valid=true;
+  var name=document.getElementById('input-name').value.trim();
+  var email=document.getElementById('input-email').value.trim();
+  var valid=true;
   if(!name){document.getElementById('err-name').classList.add('visible');valid=false;}
+  if(!email||!email.includes('@')){document.getElementById('err-email').classList.add('visible');valid=false;}
   if(!selectedCategory){document.getElementById('err-category').classList.add('visible');valid=false;}
   if(!selectedPC){document.getElementById('err-pc').classList.add('visible');valid=false;}
   if(!valid)return;
@@ -1078,19 +1192,48 @@ function handlePay(){
     buildPCGrid(selectedCategory);updateCounts();selectedPC=null;
     document.getElementById('confirm-section').style.display='none';return;
   }
-  var pcToReserve=selectedPC,catToReserve=selectedCategory,link=mpLinks[catToReserve];
-  reserved[pcToReserve]={name:name,category:catToReserve,ts:Date.now(),pending:true};
+  var pcToReserve=selectedPC,catToReserve=selectedCategory;
+  var price=CATEGORIES[catToReserve].price;
+  var before=isBeforeOpenDate();
+
+  reserved[pcToReserve]={name:name,email:email,category:catToReserve,ts:Date.now(),pending:true};
   db.ref('reserved/'+pcToReserve).set(reserved[pcToReserve]).then(function(){
-    window.open(link,'_blank');
-    document.getElementById('confirm-section').innerHTML=
-      '<div class="summary" style="border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.05)">'
-      +'<div style="text-align:center;padding:12px 0">'
-      +'<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#ffd700;margin-bottom:8px">⏳ AGUARDANDO PAGAMENTO</div>'
-      +'<div style="font-size:13px;color:var(--text-dim);line-height:1.7">O link do Mercado Pago foi aberto.<br>Após o pagamento, aguarde a confirmação.<br>'
-      +'<span style="color:#ffd700;font-size:11px">PC '+pcToReserve+' — '+name+'</span></div>'
-      +'</div></div>';
+    if(before){
+      // Pré-reserva — envia confirmação imediata, sem link de pagamento
+      sendPreReservaConfirm(name,email,pcToReserve,catToReserve,price);
+      document.getElementById('confirm-section').innerHTML=
+        '<div class="summary" style="border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.05)">'
+        +'<div style="text-align:center;padding:12px 0">'
+        +'<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:8px">✓ PRÉ-RESERVA CONFIRMADA</div>'
+        +'<div style="font-size:13px;color:var(--text-dim);line-height:1.7">PC <b style="color:#fff">'+pcToReserve+'</b> reservado para <b style="color:#fff">'+name+'</b>.<br>'
+        +'No dia <b style="color:var(--accent)">25/07</b> você receberá o link de pagamento por email.<br>'
+        +'<span style="color:var(--text-dim);font-size:11px">Verifique também a caixa de spam 📧</span></div>'
+        +'</div></div>';
+    } else {
+      // Reserva normal — abre link de pagamento
+      var link=mpLinks[catToReserve];
+      window.open(link,'_blank');
+      document.getElementById('confirm-section').innerHTML=
+        '<div class="summary" style="border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.05)">'
+        +'<div style="text-align:center;padding:12px 0">'
+        +'<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#ffd700;margin-bottom:8px">⏳ AGUARDANDO PAGAMENTO</div>'
+        +'<div style="font-size:13px;color:var(--text-dim);line-height:1.7">O link do Mercado Pago foi aberto.<br>Após o pagamento, aguarde a confirmação.<br>'
+        +'<span style="color:#ffd700;font-size:11px">PC '+pcToReserve+' — '+name+'</span></div>'
+        +'</div></div>';
+    }
     selectedPC=null;selectedCategory=null;
   });
+}
+
+function updatePayBtn(){
+  var btn=document.querySelector('.btn-pay');if(!btn)return;
+  if(isBeforeOpenDate()){
+    btn.textContent='▸ PRÉ-RESERVAR — GARANTA SUA VAGA';
+    btn.style.background='linear-gradient(135deg,#0077aa,#00d4ff)';
+  } else {
+    btn.textContent='▸ CONFIRMAR E PAGAR';
+    btn.style.background='linear-gradient(135deg,#00b4d8,#00d4ff)';
+  }
 }
 
 /* ADMIN */
