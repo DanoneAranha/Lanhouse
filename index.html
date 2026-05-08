@@ -426,7 +426,7 @@
     <div class="categories">
       <label class="cat-option" id="opt-extreme"><input type="radio" name="category" value="extreme" onclick="selectCategory('extreme')"><div class="cat-card extreme"><div class="cat-left"><div class="cat-icon">🔥</div><div><div class="cat-name">PC EXTREME</div><div class="cat-sub">PCs 1·2·3·4·5</div></div></div><div class="cat-right"><div class="cat-price">R$ 90</div><div class="cat-slots" id="slots-extreme">5 vagas</div></div></div></label>
       <label class="cat-option" id="opt-eplus"><input type="radio" name="category" value="eplus" onclick="selectCategory('eplus')"><div class="cat-card eplus"><div class="cat-left"><div class="cat-icon">⭐</div><div><div class="cat-name">PC EPLUS</div><div class="cat-sub">PC 20</div></div></div><div class="cat-right"><div class="cat-price">R$ 100</div><div class="cat-slots" id="slots-eplus">1 vaga</div></div></div></label>
-      <label class="cat-option" id="opt-epro"><input type="radio" name="category" value="epro" onclick="selectCategory('epro')"><div class="cat-card epro"><div class="cat-left"><div class="cat-icon">💎</div><div><div class="cat-name">PC EPRO</div><div class="cat-sub">PCs 6–19</div></div></div><div class="cat-right"><div class="cat-price">R$ 110</div><div class="cat-slots" id="slots-epro">13 vagas</div></div></div></label>
+      <label class="cat-option" id="opt-epro"><input type="radio" name="category" value="epro" onclick="selectCategory('epro')"><div class="cat-card epro"><div class="cat-left"><div class="cat-icon">💎</div><div><div class="cat-name">PC EPRO</div><div class="cat-sub">PCs 6–19 (exceto 13)</div></div></div><div class="cat-right"><div class="cat-price">R$ 110</div><div class="cat-slots" id="slots-epro">13 vagas</div></div></div></label>
     </div>
     <div class="error-msg" id="err-category">Por favor, selecione uma categoria.</div>
   </div>
@@ -560,7 +560,7 @@
     </div>
   </div>
 
-  <div class="footer">RESERVAS · QUEST LAN HOUSE · 2026</div>
+  <div class="footer">RESERVAS · QUEST LAN HOUSE · 2025</div>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -664,7 +664,7 @@ function dispararEmailsMassa(){
       category_label: CATEGORIES[data.category] ? CATEGORIES[data.category].label : data.category,
       payment_link: mpLinks[data.category] || '#',
       price: CATEGORIES[data.category] ? CATEGORIES[data.category].price : '?',
-      deadline: '01/08/2026'
+      deadline: '01/08/2025'
     };
     setTimeout(function(p){ sendEmail(EMAILJS_TPL_PRE, p); }, enviados * 300, params);
     enviados++;
