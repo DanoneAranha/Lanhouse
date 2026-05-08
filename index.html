@@ -287,6 +287,8 @@
   .reserva-map-wrap img{width:100%;display:block;border-radius:6px;border:1px solid var(--border);}
   .reserva-not-found{text-align:center;padding:20px;color:var(--text-dim);font-size:13px;}
   #particles-canvas{position:fixed;inset:0;pointer-events:none;z-index:0;}
+  #music-btn{position:fixed;bottom:30px;right:20px;z-index:998;background:rgba(0,0,0,0.7);border:1px solid var(--border);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all 0.2s;backdrop-filter:blur(6px);}
+  #music-btn:hover{border-color:var(--accent);box-shadow:0 0 12px rgba(0,212,255,0.3);}
 </style>
 </head>
 <body>
@@ -532,6 +534,9 @@
   <div class="footer">RESERVAS · QUEST LAN HOUSE · 2025</div>
 </div>
 <div class="toast" id="toast"></div>
+
+<audio id="bg-music" src="https://raw.githubusercontent.com/DanoneAranha/Lanhouse/main/Michael%20Jackson%20-%20Billie%20Jean%20(Official%20Video).mp3" loop></audio>
+<button id="music-btn" onclick="toggleMusic()" title="Música">🎵</button>
 
 <script>
 // ── CONFIG ──
@@ -1122,6 +1127,20 @@ function admReset(){
   renderAdmList();showToast('✓ Reservas resetadas');
 }
 function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3000);}
+
+var musicPlaying=false;
+function toggleMusic(){
+  var audio=document.getElementById('bg-music');
+  var btn=document.getElementById('music-btn');
+  if(musicPlaying){audio.pause();btn.textContent='🎵';musicPlaying=false;}
+  else{audio.play();btn.textContent='🔇';musicPlaying=true;}
+}
+// Toca assim que o usuário interagir com a página
+document.addEventListener('click',function startMusic(){
+  var audio=document.getElementById('bg-music');
+  if(!musicPlaying){audio.play().then(function(){document.getElementById('music-btn').textContent='🔇';musicPlaying=true;}).catch(function(){});}
+  document.removeEventListener('click',startMusic);
+},{once:true});
 
 function init(){
   loadConfig();initReserved();initMapDots();
