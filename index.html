@@ -562,7 +562,7 @@
     </div>
   </div>
 
-  <div class="footer">RESERVAS · QUEST LAN HOUSE · 2025</div>
+  <div class="footer">RESERVAS · QUEST LAN HOUSE · 2026</div>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -575,7 +575,7 @@ var EMAILJS_SERVICE   = 'service_fr2lnkr';
 var EMAILJS_TPL_PRE   = 'template_jrfu9oz'; // pré-reserva
 var EMAILJS_TPL_INT   = 'template_3p82ucu'; // lista de interesse
 var EMAILJS_KEY       = 'pAKGU1Wi0CxKIZ6cN';
-var OPEN_DATE         = new Date('2025-07-25T00:00:00');
+var OPEN_DATE         = new Date('2026-07-25T00:00:00');
 
 function loadEmailJS(cb){
   if(window.emailjs){cb();return;}
@@ -606,7 +606,7 @@ function sendPreReservaConfirm(name, email, pcNum, cat, price){
     category_label: CATEGORIES[cat] ? CATEGORIES[cat].label : cat,
     payment_link: '#',
     price: price,
-    deadline: '01/08/2025',
+    deadline: '01/08/2026',
     // Sobrescreve mensagem para confirmação imediata (antes da data)
     message_type: 'confirmacao'
   };
@@ -641,7 +641,7 @@ function dispararEmailsMassa(){
       category_label: CATEGORIES[data.category] ? CATEGORIES[data.category].label : data.category,
       payment_link: mpLinks[data.category] || '#',
       price: CATEGORIES[data.category] ? CATEGORIES[data.category].price : '?',
-      deadline: '01/08/2025'
+      deadline: '01/08/2026'
     };
     setTimeout(function(p){ sendEmail(EMAILJS_TPL_PRE, p); }, enviados * 300, params);
     enviados++;
