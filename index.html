@@ -461,16 +461,11 @@
       <div class="summary-row"><span class="label">PC Nº</span><span class="value" id="s-pc">—</span></div>
       <div class="summary-row total"><span class="label">TOTAL</span><span class="value" id="s-price">—</span></div>
     </div>
-    <button class="btn-pay" onclick="handlePay()">▸ CONFIRMAR E PAGAR</button>
+    <button class="btn-pay" id="btn-pay" onclick="handlePay()">▸ CONFIRMAR E PAGAR</button>
   </div>
 
   <div class="interest-section">
-    <button class="btn-interest" onclick="toggleInterestForm()">✋ TENHO INTERESSE — mas ainda não vou reservar</button>
-    <div class="interest-form" id="interest-form" style="display:none">
-      <input type="text" id="interest-name" placeholder="Digite seu nome..." autocomplete="off" />
-      <button class="interest-submit" onclick="submitInterest()">▸ ENTRAR NA PRÉ-LISTA</button>
-      <div class="error-msg" id="err-interest">Por favor, insira seu nome.</div>
-    </div>
+    <button class="btn-interest" onclick="submitInterest()">✋ TENHO INTERESSE — mas ainda não vou reservar</button>
   </div>
 
   <div class="info-card" id="pre-confirm-card" style="display:none;margin-bottom:16px;">
@@ -545,6 +540,9 @@
       <div id="adm-confirmados-list" style="font-size:12px;color:var(--text-dim);padding:8px 0;letter-spacing:0.5px;line-height:2"></div>
       <div class="adm-section-title" style="margin-top:16px">▸ LISTA DE INTERESSE</div>
       <div id="adm-interest-list"></div>
+      <div class="adm-section-title" style="margin-top:16px;border-color:rgba(0,212,255,0.3)">▸ DISPARO DE EMAILS</div>
+      <div style="font-size:12px;color:var(--text-dim);margin-bottom:10px;letter-spacing:0.5px">Envia o link de pagamento para todos da pré-reserva e avisa os interessados. Use apenas no dia 25/07.</div>
+      <button class="adm-add-btn" style="background:rgba(0,212,255,0.1);border-color:var(--accent);color:var(--accent)" onclick="admDispararEmails()">📧 DISPARAR EMAILS — ABRIR RESERVAS</button>
     </div>
 
     <div id="adm-tab-grupos" style="display:none">
@@ -562,7 +560,7 @@
     </div>
   </div>
 
-  <div class="footer">RESERVAS · QUEST LAN HOUSE · 2026</div>
+  <div class="footer">RESERVAS · QUEST LAN HOUSE · 2025</div>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -575,7 +573,7 @@ var EMAILJS_SERVICE   = 'service_fr2lnkr';
 var EMAILJS_TPL_PRE   = 'template_jrfu9oz'; // pré-reserva
 var EMAILJS_TPL_INT   = 'template_3p82ucu'; // lista de interesse
 var EMAILJS_KEY       = 'pAKGU1Wi0CxKIZ6cN';
-var OPEN_DATE         = new Date('2026-07-25T00:00:00');
+var OPEN_DATE         = new Date('2025-07-25T00:00:00');
 
 function loadEmailJS(cb){
   if(window.emailjs){cb();return;}
@@ -604,11 +602,9 @@ function sendPreReservaConfirm(name, email, pcNum, cat, price){
     to_email: email,
     pc_info: 'PC ' + pcNum,
     category_label: CATEGORIES[cat] ? CATEGORIES[cat].label : cat,
-    payment_link: '#',
+    payment_link: 'Disponível a partir de 25/07/2026',
     price: price,
-    deadline: '01/08/2026',
-    // Sobrescreve mensagem para confirmação imediata (antes da data)
-    message_type: 'confirmacao'
+    deadline: '01/08/2026'
   };
   sendEmail(EMAILJS_TPL_PRE, params);
 }
@@ -641,7 +637,7 @@ function dispararEmailsMassa(){
       category_label: CATEGORIES[data.category] ? CATEGORIES[data.category].label : data.category,
       payment_link: mpLinks[data.category] || '#',
       price: CATEGORIES[data.category] ? CATEGORIES[data.category].price : '?',
-      deadline: '01/08/2026'
+      deadline: '01/08/2025'
     };
     setTimeout(function(p){ sendEmail(EMAILJS_TPL_PRE, p); }, enviados * 300, params);
     enviados++;
@@ -753,27 +749,22 @@ function toggleInterestForm(){
   if(!on)document.getElementById('interest-name').focus();
 }
 function submitInterest(){
-  var name=document.getElementById('interest-name').value.trim();
-  var email=document.getElementById('interest-email').value.trim();
-  if(!name){document.getElementById('err-interest').classList.add('visible');return;}
-  if(!email||!email.includes('@')){document.getElementById('err-interest-email').classList.add('visible');return;}
-  document.getElementById('err-interest').classList.remove('visible');
-  document.getElementById('err-interest-email').classList.remove('visible');
+  // Usa nome e email do passo 01
+  var name=document.getElementById('input-name').value.trim();
+  var email=document.getElementById('input-email').value.trim();
+  if(!name){showToast('⚠ Preencha seu nome no Passo 01');document.getElementById('input-name').focus();return;}
+  if(!email||!email.includes('@')){showToast('⚠ Preencha seu email no Passo 01');document.getElementById('input-email').focus();return;}
   if(Object.values(reserved).some(function(v){return v.name&&v.name.toLowerCase()===name.toLowerCase();})){
-    showToast('✓ '+name+' já está confirmado!');
-    document.getElementById('interest-name').value='';document.getElementById('interest-email').value='';
-    document.getElementById('interest-form').style.display='none';return;
+    showToast('✓ '+name+' já tem uma reserva!');return;
   }
   if(interestList.some(function(n){
     var nm=typeof n==='object'?n.name:n;
     return nm.toLowerCase()===name.toLowerCase();
-  })){showToast('⚠ '+name+' já está na lista!');document.getElementById('interest-name').value='';return;}
+  })){showToast('⚠ '+name+' já está na lista!');return;}
   interestList.push({name:name,email:email});saveInterestList();
-  // Envia confirmação imediata
   sendInteresseConfirm(name,email);
-  document.getElementById('interest-name').value='';document.getElementById('interest-email').value='';
-  document.getElementById('interest-form').style.display='none';
-  renderInterestList();showToast('✓ '+name+' entrou na pré-lista! Confira seu email 📧');
+  renderInterestList();
+  showToast('✓ '+name+' entrou na lista! Confira seu email 📧');
 }
 function renderInterestList(){
   var grid=document.getElementById('pre-confirm-grid'),card=document.getElementById('pre-confirm-card');if(!grid)return;
@@ -1176,6 +1167,7 @@ function showSummary(){
   document.getElementById('s-pc').textContent='PC '+selectedPC;
   document.getElementById('s-price').textContent='R$ '+CATEGORIES[selectedCategory].price+',00';
   document.getElementById('confirm-section').style.display='block';
+  updatePayBtn(); // atualiza texto do botão toda vez que o resumo aparece
   document.getElementById('confirm-section').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 function handlePay(){
@@ -1226,7 +1218,7 @@ function handlePay(){
 }
 
 function updatePayBtn(){
-  var btn=document.querySelector('.btn-pay');if(!btn)return;
+  var btn=document.getElementById('btn-pay');if(!btn)return;
   if(isBeforeOpenDate()){
     btn.textContent='▸ PRÉ-RESERVAR — GARANTA SUA VAGA';
     btn.style.background='linear-gradient(135deg,#0077aa,#00d4ff)';
@@ -1264,7 +1256,11 @@ function renderAdmList(){
     var pc=entry[0],data=entry[1],cat=data.category||'epro';
     var item=document.createElement('div');item.className='adm-item';if(data.pending)item.classList.add('pending-item');
     var ab=data.owner?'':(data.pending
-      ?'<div style="display:flex;gap:6px;flex-direction:column;align-items:flex-end"><button class="adm-confirm-btn" onclick="admConfirm('+pc+')">✓ CONFIRMAR</button><button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button></div>'
+      ?'<div style="display:flex;gap:6px;flex-direction:column;align-items:flex-end">'
+        +'<button class="adm-confirm-btn" onclick="admConfirm('+pc+')">✓ CONFIRMAR</button>'
+        +(data.email?'<button class="adm-confirm-btn" style="border-color:var(--accent);color:var(--accent)" onclick="sendEmailPreReserva('+pc+')">📧 EMAIL</button>':'')
+        +'<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button>'
+        +'</div>'
       :'<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button>');
     var sb=data.pending?' <span class="pending-badge">AGUARDANDO</span>':'';
     item.innerHTML='<div class="adm-item-left"><div class="adm-pc-badge '+cat+'">PC'+pc+'</div><div><div class="adm-item-name">'+data.name+sb+'</div><div class="adm-item-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+'</div></div></div>'+ab;
@@ -1311,10 +1307,17 @@ function showToast(msg){
   setTimeout(function(){t.classList.remove('show');},3000);
 }
 
+function admDispararEmails(){
+  if(!confirm('Disparar emails para todos da pré-lista e interessados?'))return;
+  var total=dispararEmailsMassa();
+  showToast('📧 Disparando '+total+' emails...');
+}
+
 function init(){
   loadConfig();initReserved();initMapDots();
   updateEventoDisplay();updateGruposDisplay();renderInterestList();updateConfirmedList();
   updateCounts();updateCategoryDisabled();
+  updatePayBtn();
   document.getElementById('input-name').addEventListener('input',function(){
     document.getElementById('err-name').classList.remove('visible');
     if(selectedPC)showSummary();
