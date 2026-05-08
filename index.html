@@ -17,7 +17,6 @@
   body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
   .container{max-width:520px;margin:0 auto;padding:40px 20px 60px;position:relative;z-index:1;}
 
-  /* ── HEADER ── */
   .header{text-align:center;margin-bottom:40px;}
   .header-tag{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:4px;margin-bottom:12px;animation:rainbow 3s linear infinite;animation-delay:0.3s;}
   .header h1{font-family:'Orbitron',monospace;font-size:28px;font-weight:900;color:#fff;letter-spacing:2px;margin-bottom:8px;}
@@ -27,7 +26,6 @@
   @keyframes rainbow{0%{color:#ff0000;text-shadow:0 0 20px #ff000088;}15%{color:#ff8800;text-shadow:0 0 20px #ff880088;}30%{color:#ffff00;text-shadow:0 0 20px #ffff0088;}45%{color:#00ff00;text-shadow:0 0 20px #00ff0088;}60%{color:#00d4ff;text-shadow:0 0 20px #00d4ff88;}75%{color:#8800ff;text-shadow:0 0 20px #8800ff88;}90%{color:#ff00cc;text-shadow:0 0 20px #ff00cc88;}100%{color:#ff0000;text-shadow:0 0 20px #ff000088;}}
   @keyframes rainbow-bg{0%{background:linear-gradient(90deg,#ff0000,transparent);}15%{background:linear-gradient(90deg,#ff8800,transparent);}30%{background:linear-gradient(90deg,#ffff00,transparent);}45%{background:linear-gradient(90deg,#00ff00,transparent);}60%{background:linear-gradient(90deg,#00d4ff,transparent);}75%{background:linear-gradient(90deg,#8800ff,transparent);}90%{background:linear-gradient(90deg,#ff00cc,transparent);}100%{background:linear-gradient(90deg,#ff0000,transparent);}}
 
-  /* ── SPECS ── */
   .specs-section{margin-bottom:28px;}
   .specs-title{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:var(--accent);margin-bottom:10px;opacity:0.7;text-align:center;}
   .specs-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
@@ -44,7 +42,6 @@
   .spec-item b{color:var(--text);}
   .spec-price{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#fff;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);}
 
-  /* ── AVAILABILITY ── */
   .availability-bar{display:flex;gap:8px;margin-bottom:32px;justify-content:center;flex-wrap:wrap;}
   .avail-badge{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:4px;border:1px solid;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:1px;}
   .avail-badge.extreme{border-color:var(--extreme);background:rgba(160,160,160,0.08);}
@@ -60,7 +57,6 @@
   .epro .avail-count{color:var(--epro);}
   @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
 
-  /* ── CARDS ── */
   .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:28px;margin-bottom:16px;position:relative;overflow:hidden;}
   .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);}
   .step-label{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:var(--accent);margin-bottom:6px;opacity:0.7;}
@@ -69,7 +65,6 @@
   input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,212,255,0.1);}
   input::placeholder{color:var(--text-dim);}
 
-  /* ── CATEGORIES ── */
   .categories{display:flex;flex-direction:column;gap:10px;}
   .cat-option{position:relative;cursor:pointer;}
   .cat-option input[type="radio"]{position:absolute;opacity:0;pointer-events:none;}
@@ -94,13 +89,13 @@
   .cat-slots.soldout{color:#ff4444;}
   .cat-option.disabled .cat-card{opacity:0.4;cursor:not-allowed;filter:grayscale(0.5);}
 
-  /* ── PC GRID + MAP ── */
+  /* PC STEP */
   .pc-step-wrap{display:flex;gap:10px;align-items:flex-start;margin-bottom:16px;}
   .pc-grid-card{flex:1;min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px;position:relative;overflow:hidden;}
   .pc-grid-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);}
   .pc-map-panel{flex-shrink:0;}
   .pc-map-label{font-family:'Orbitron',monospace;font-size:7px;letter-spacing:2px;color:var(--accent);margin-bottom:6px;opacity:0.7;}
-  .pc-map-wrap{position:relative;display:inline-block;width:100%;}
+  .pc-map-wrap{position:relative;display:block;width:100%;}
   .pc-map-wrap img{width:100%;display:block;border-radius:6px;border:1px solid var(--border);}
   .pc-dot{position:absolute;width:12px;height:12px;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;transition:all 0.3s;opacity:0;}
   .pc-dot.active{opacity:1;animation:dotpulse 1s infinite;}
@@ -108,16 +103,8 @@
   .pc-dot.eplus{background:var(--eplus);box-shadow:0 0 8px 3px var(--eplus);}
   .pc-dot.epro{background:var(--epro);box-shadow:0 0 8px 3px var(--epro);}
   @keyframes dotpulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1;}50%{transform:translate(-50%,-50%) scale(1.6);opacity:0.6;}}
-
-  /* Desktop: mapa ao lado 160px */
-  @media (min-width:480px){
-    .pc-map-panel{width:160px;}
-  }
-  /* Mobile: mapa embaixo, full width */
-  @media (max-width:479px){
-    .pc-step-wrap{flex-direction:column;}
-    .pc-map-panel{width:100%;}
-  }
+  @media(min-width:480px){.pc-map-panel{width:160px;}}
+  @media(max-width:479px){.pc-step-wrap{flex-direction:column;}.pc-map-panel{width:100%;}}
 
   .pc-grid-label{font-size:12px;color:var(--text-dim);margin-bottom:12px;letter-spacing:1px;}
   .pc-grid{display:flex;flex-wrap:wrap;gap:8px;}
@@ -129,11 +116,10 @@
   .pc-btn.taken{border-color:#1a2030;background:#0a0e14;color:#4a6070;cursor:not-allowed;}
   .pc-btn.pending{border-color:#b8860b;background:rgba(184,134,11,0.12);color:#ffd700;cursor:not-allowed;}
   .pc-reserved-name{font-family:'Rajdhani',sans-serif;font-size:7px;color:#3a5060;max-width:48px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;line-height:1;}
-  .legend{display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;}
+  .legend{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;}
   .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-dim);letter-spacing:1px;}
-  .legend-box{width:14px;height:14px;border-radius:3px;border:1px solid;}
+  .legend-box{width:14px;height:14px;border-radius:3px;border:1px solid;flex-shrink:0;}
 
-  /* ── SUMMARY ── */
   .summary{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:16px;margin-bottom:20px;}
   .summary-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:14px;letter-spacing:1px;}
   .summary-row:not(:last-child){border-bottom:1px solid var(--border);}
@@ -144,7 +130,6 @@
   .btn-pay{width:100%;padding:16px;background:linear-gradient(135deg,#00b4d8,#00d4ff);border:none;border-radius:6px;color:#000;font-family:'Orbitron',monospace;font-size:14px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all 0.2s;}
   .btn-pay:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,212,255,0.3);}
 
-  /* ── INTEREST ── */
   .interest-section{margin-top:8px;margin-bottom:8px;}
   .btn-interest{width:100%;padding:13px 16px;background:rgba(127,255,0,0.06);border:1px dashed rgba(127,255,0,0.3);border-radius:6px;color:rgba(127,255,0,0.7);font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all 0.2s;text-align:center;}
   .btn-interest:hover{background:rgba(127,255,0,0.1);border-color:var(--accent3);color:var(--accent3);}
@@ -155,7 +140,7 @@
   .error-msg{color:#ff6b6b;font-size:12px;letter-spacing:1px;margin-top:6px;display:none;}
   .error-msg.visible{display:block;}
 
-  /* ── ADMIN ── */
+  /* ADMIN */
   .adm-trigger{text-align:center;margin-top:32px;margin-bottom:8px;}
   .adm-trigger-btn{background:none;border:1px solid #ff6b35;border-radius:4px;color:#ff6b35;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;padding:6px 14px;cursor:pointer;transition:all 0.2s;}
   .adm-trigger-btn:hover{background:rgba(255,107,53,0.15);}
@@ -194,41 +179,40 @@
   .adm-reset-btn{width:100%;margin-top:20px;padding:12px;background:rgba(255,30,30,0.1);border:1px solid #551111;border-radius:4px;color:#993333;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;transition:all 0.2s;}
   .adm-reset-btn:hover{border-color:#ff2222;color:#ff4444;background:rgba(255,30,30,0.2);}
   .adm-tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
-  .adm-tab{flex:1;min-width:60px;padding:8px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;color:var(--text-dim);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;cursor:pointer;transition:all 0.2s;}
+  .adm-tab{flex:1;min-width:60px;padding:8px 4px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;color:var(--text-dim);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;text-align:center;}
   .adm-tab.active{border-color:#ff6b35;color:#ff6b35;background:rgba(255,107,53,0.1);}
   .adm-edit-form{display:flex;flex-direction:column;gap:6px;}
   .adm-edit-label{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--text-dim);margin-top:4px;}
   .adm-empty{font-size:12px;color:var(--text-dim);letter-spacing:1px;padding:10px 0;text-align:center;}
 
-  /* ── GRUPOS EDITOR NOVO ── */
+  /* GRUPOS */
   .grupos-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
   @media(max-width:400px){.grupos-wrap{grid-template-columns:1fr;}}
   .grupo-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;}
   .grupo-card-title{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--accent);margin-bottom:10px;}
   .grupo-slots{display:flex;flex-direction:column;gap:6px;}
-  .grupo-slot{display:flex;align-items:center;gap:6px;min-height:36px;}
+  .grupo-slot{display:flex;align-items:center;gap:6px;}
   .slot-num{font-family:'Orbitron',monospace;font-size:9px;color:var(--text-dim);width:14px;flex-shrink:0;}
-  .slot-player{
-    flex:1;padding:6px 10px;border-radius:4px;font-size:12px;font-weight:600;letter-spacing:0.5px;
-    border:1px solid var(--border);background:var(--surface);color:var(--text-dim);
-    cursor:pointer;transition:all 0.2s;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    font-family:'Rajdhani',sans-serif;
-  }
-  .slot-player.filled{background:rgba(0,212,255,0.06);border-color:rgba(0,212,255,0.2);color:var(--accent);}
-  .slot-player.selected{background:rgba(0,212,255,0.15);border-color:var(--accent);color:#fff;box-shadow:0 0 8px rgba(0,212,255,0.3);}
+  .slot-player{flex:1;padding:8px 10px;border-radius:4px;font-size:12px;font-weight:600;letter-spacing:0.5px;border:1px solid var(--border);background:var(--surface);color:var(--text-dim);cursor:pointer;transition:all 0.2s;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Rajdhani',sans-serif;min-height:36px;}
+  .slot-player.filled{background:rgba(0,212,255,0.06);border-color:rgba(0,212,255,0.25);color:var(--accent);}
+  .slot-player.selected{background:rgba(0,212,255,0.18);border-color:var(--accent);color:#fff;box-shadow:0 0 8px rgba(0,212,255,0.3);}
   .slot-player:hover{border-color:var(--accent);color:var(--accent);}
-  .slot-remove{background:none;border:none;color:#663333;font-size:14px;cursor:pointer;padding:2px 4px;line-height:1;flex-shrink:0;transition:color 0.2s;}
+  .slot-remove{background:none;border:none;color:#663333;font-size:16px;cursor:pointer;padding:4px 6px;line-height:1;flex-shrink:0;transition:color 0.2s;}
   .slot-remove:hover{color:#ff4444;}
-  .slot-dropdown{position:relative;flex:1;}
-  .slot-select{width:100%;padding:6px 10px;border-radius:4px;font-size:12px;background:var(--surface);border:1px dashed rgba(0,212,255,0.3);color:var(--text-dim);cursor:pointer;outline:none;font-family:'Rajdhani',sans-serif;}
+  .slot-select{width:100%;padding:8px 10px;border-radius:4px;font-size:12px;background:var(--surface);border:1px dashed rgba(0,212,255,0.3);color:var(--text-dim);cursor:pointer;outline:none;font-family:'Rajdhani',sans-serif;min-height:36px;}
   .slot-select:focus{border-color:var(--accent);}
 
-  /* sorteio dentro de grupos */
   .sortear-wrap{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
-  .sortear-info{font-size:11px;color:var(--text-dim);letter-spacing:0.5px;margin-bottom:8px;}
-  .sortear-info b{color:var(--accent);}
+  .sortear-info{font-size:12px;color:var(--text-dim);letter-spacing:0.5px;margin-bottom:10px;}
+  .sortear-info b{color:var(--accent3);}
+  .sortear-preview{margin-top:10px;display:flex;flex-direction:column;gap:6px;}
+  .sortear-preview-group{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;}
+  .sortear-preview-title{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--accent);margin-bottom:6px;}
+  .sortear-preview-player{font-size:12px;padding:1px 0;}
+  .sortear-preview-player.novo{color:var(--accent3);}
+  .sortear-preview-player.existente{color:var(--text-dim);}
 
-  /* ── EVENT INFO ── */
+  /* INFO CARDS */
   .info-section{margin-bottom:32px;display:flex;flex-direction:column;gap:12px;}
   .info-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;position:relative;overflow:hidden;}
   .info-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);}
@@ -279,7 +263,6 @@
   .btn-extra{flex:1;padding:11px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.2);border-radius:6px;color:var(--accent);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;}
   .btn-extra:hover{background:rgba(0,212,255,0.12);border-color:var(--accent);}
 
-  /* ── LOCATION ── */
   .location-card{display:flex;align-items:flex-start;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;margin-top:24px;margin-bottom:8px;}
   .location-icon{font-size:22px;margin-top:2px;flex-shrink:0;}
   .location-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#fff;letter-spacing:1px;margin-bottom:4px;}
@@ -290,7 +273,6 @@
   .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:#1a2a1a;border:1px solid var(--accent3);border-radius:6px;padding:12px 24px;color:var(--accent3);font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);z-index:999;white-space:nowrap;}
   .toast.show{transform:translateX(-50%) translateY(0);}
 
-  /* ── MODAL ── */
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;align-items:center;justify-content:center;padding:16px;}
   .modal-overlay.open{display:flex;}
   .modal-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;width:100%;max-width:500px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;}
@@ -343,7 +325,6 @@
     <p>Escolha seu PC • Garanta sua vaga</p>
   </div>
 
-  <!-- SPECS -->
   <div class="specs-section">
     <div class="specs-title">▸ NOSSAS CONFIGURAÇÕES</div>
     <div class="specs-grid">
@@ -353,7 +334,6 @@
     </div>
   </div>
 
-  <!-- EVENTO -->
   <div class="info-section">
     <div class="info-always">
       <div class="info-card">
@@ -372,7 +352,7 @@
       </div>
     </div>
     <button class="btn-ver-mais" id="btn-ver-mais" onclick="toggleVerMais()">▸ VER MAIS INFORMAÇÕES</button>
-    <div class="info-more" id="info-more" style="display:none">
+    <div id="info-more" style="display:none">
       <div class="info-card">
         <div class="info-card-title">🎲 GRUPOS SORTEADOS</div>
         <div class="groups-grid">
@@ -442,14 +422,13 @@
     <div class="step-label">▸ PASSO 02</div>
     <div class="field-label">Categoria do PC</div>
     <div class="categories">
-      <label class="cat-option" id="opt-extreme"><input type="radio" name="category" value="extreme" onclick="selectCategory('extreme')"><div class="cat-card extreme"><div class="cat-left"><div class="cat-icon">🔥</div><div><div class="cat-name">PC EXTREME</div><div class="cat-sub">PCs 1 · 2 · 3 · 4 · 5</div></div></div><div class="cat-right"><div class="cat-price">R$ 90</div><div class="cat-slots" id="slots-extreme">5 vagas disponíveis</div></div></div></label>
-      <label class="cat-option" id="opt-eplus"><input type="radio" name="category" value="eplus" onclick="selectCategory('eplus')"><div class="cat-card eplus"><div class="cat-left"><div class="cat-icon">⭐</div><div><div class="cat-name">PC EPLUS</div><div class="cat-sub">PC 20</div></div></div><div class="cat-right"><div class="cat-price">R$ 100</div><div class="cat-slots" id="slots-eplus">1 vaga disponível</div></div></div></label>
-      <label class="cat-option" id="opt-epro"><input type="radio" name="category" value="epro" onclick="selectCategory('epro')"><div class="cat-card epro"><div class="cat-left"><div class="cat-icon">💎</div><div><div class="cat-name">PC EPRO</div><div class="cat-sub">PCs 6–19 (exceto 13)</div></div></div><div class="cat-right"><div class="cat-price">R$ 110</div><div class="cat-slots" id="slots-epro">13 vagas disponíveis</div></div></div></label>
+      <label class="cat-option" id="opt-extreme"><input type="radio" name="category" value="extreme" onclick="selectCategory('extreme')"><div class="cat-card extreme"><div class="cat-left"><div class="cat-icon">🔥</div><div><div class="cat-name">PC EXTREME</div><div class="cat-sub">PCs 1·2·3·4·5</div></div></div><div class="cat-right"><div class="cat-price">R$ 90</div><div class="cat-slots" id="slots-extreme">5 vagas</div></div></div></label>
+      <label class="cat-option" id="opt-eplus"><input type="radio" name="category" value="eplus" onclick="selectCategory('eplus')"><div class="cat-card eplus"><div class="cat-left"><div class="cat-icon">⭐</div><div><div class="cat-name">PC EPLUS</div><div class="cat-sub">PC 20</div></div></div><div class="cat-right"><div class="cat-price">R$ 100</div><div class="cat-slots" id="slots-eplus">1 vaga</div></div></div></label>
+      <label class="cat-option" id="opt-epro"><input type="radio" name="category" value="epro" onclick="selectCategory('epro')"><div class="cat-card epro"><div class="cat-left"><div class="cat-icon">💎</div><div><div class="cat-name">PC EPRO</div><div class="cat-sub">PCs 6–19 (exceto 13)</div></div></div><div class="cat-right"><div class="cat-price">R$ 110</div><div class="cat-slots" id="slots-epro">13 vagas</div></div></div></label>
     </div>
     <div class="error-msg" id="err-category">Por favor, selecione uma categoria.</div>
   </div>
 
-  <!-- PASSO 03: grid + mapa responsivo -->
   <div id="pc-card" style="display:none">
     <div class="pc-step-wrap">
       <div class="pc-grid-card">
@@ -460,9 +439,9 @@
         <div class="legend" style="margin-top:10px">
           <div class="legend-item"><div class="legend-box" style="border-color:#555;background:#131920"></div>Disponível</div>
           <div class="legend-item"><div class="legend-box" style="border-color:#1a2030;background:#0a0e14"></div>Reservado</div>
-          <div class="legend-item"><div class="legend-box" style="border-color:#b8860b;background:rgba(184,134,11,0.12)"></div>Aguardando pag.</div>
+          <div class="legend-item"><div class="legend-box" style="border-color:#b8860b;background:rgba(184,134,11,0.12)"></div>Aguardando</div>
         </div>
-        <div class="error-msg" id="err-pc">Por favor, selecione um número de PC.</div>
+        <div class="error-msg" id="err-pc">Por favor, selecione um PC.</div>
       </div>
       <div class="pc-map-panel">
         <div class="pc-map-label">▸ MAPA</div>
@@ -504,7 +483,7 @@
 
   <div class="location-card">
     <div class="location-icon">📍</div>
-    <div class="location-info">
+    <div>
       <div class="location-name">Quest Lan House Gamer</div>
       <div class="location-address">R. Voluntários da Pátria, 3116 · Santana, São Paulo - SP</div>
       <a class="location-link" href="https://maps.google.com/?q=R.+Voluntários+da+Pátria,+3116,+Santana,+São+Paulo,+SP" target="_blank" rel="noopener">▸ Abrir no Google Maps</a>
@@ -554,11 +533,11 @@
     <div id="adm-tab-evento" style="display:none">
       <div class="adm-section-title">▸ INFORMAÇÕES DO EVENTO</div>
       <div class="adm-edit-form">
-        <div class="adm-edit-label">Data</div><input type="text" id="evt-data" placeholder="Entre 20/Nov e 20/Dez" />
-        <div class="adm-edit-label">Horário</div><input type="text" id="evt-hora" placeholder="Corujão — 22h às 06h" />
-        <div class="adm-edit-label">Valor</div><input type="text" id="evt-valor" placeholder="R$ 90 a R$ 110" />
-        <div class="adm-edit-label">Observação</div><input type="text" id="evt-obs" placeholder="Observações..." />
-        <button class="adm-add-btn" style="margin-top:10px" onclick="admSaveEvento()">▸ SALVAR EVENTO</button>
+        <div class="adm-edit-label">Data</div><input type="text" id="evt-data" />
+        <div class="adm-edit-label">Horário</div><input type="text" id="evt-hora" />
+        <div class="adm-edit-label">Valor</div><input type="text" id="evt-valor" />
+        <div class="adm-edit-label">Observação</div><input type="text" id="evt-obs" />
+        <button class="adm-add-btn" style="margin-top:10px" onclick="admSaveEvento()">▸ SALVAR</button>
       </div>
       <div class="adm-section-title" style="margin-top:16px">▸ CONFIRMADOS</div>
       <div id="adm-confirmados-list" style="font-size:12px;color:var(--text-dim);padding:8px 0;letter-spacing:0.5px;line-height:2"></div>
@@ -566,19 +545,17 @@
       <div id="adm-interest-list"></div>
     </div>
 
-    <!-- GRUPOS + SORTEIO unificado -->
     <div id="adm-tab-grupos" style="display:none">
-      <div class="adm-section-title">▸ GRUPOS</div>
+      <div class="adm-section-title">▸ GRUPOS <span style="font-size:8px;color:var(--text-dim);letter-spacing:1px;font-family:'Rajdhani',sans-serif;font-weight:400;text-transform:none"> — clique num nome para selecionar, depois clique em outro slot para trocar</span></div>
       <div class="grupos-wrap" id="grupos-wrap"></div>
       <button class="adm-add-btn" style="margin-top:12px" onclick="admSaveGrupos()">▸ SALVAR GRUPOS</button>
 
-      <!-- SORTEIO -->
       <div class="sortear-wrap">
-        <div class="adm-section-title" style="margin-top:0">▸ SORTEAR TIMES</div>
-        <div class="sortear-info" id="sortear-info">Confirmados sem grupo: <b id="sortear-count">0</b></div>
-        <button class="adm-add-btn" onclick="sortearTimes()">🎲 SORTEAR</button>
-        <div style="margin-top:10px" id="sortear-preview"></div>
-        <button class="adm-add-btn" id="sortear-save-btn" style="display:none;margin-top:8px" onclick="salvarSorteio()">▸ APLICAR NOS GRUPOS</button>
+        <div class="adm-section-title" style="margin-top:0;margin-bottom:8px">▸ SORTEAR TIMES</div>
+        <div class="sortear-info">Confirmados sem grupo: <b id="sortear-count">0</b></div>
+        <button class="adm-add-btn" onclick="sortearTimes()">🎲 SORTEAR ALEATORIAMENTE</button>
+        <div class="sortear-preview" id="sortear-preview"></div>
+        <button class="adm-add-btn" id="sortear-save-btn" style="display:none;margin-top:8px;background:rgba(127,255,0,0.15);border-color:var(--accent3);color:var(--accent3)" onclick="salvarSorteio()">✓ APLICAR NOS GRUPOS</button>
       </div>
     </div>
   </div>
@@ -589,8 +566,7 @@
 
 <script>
 var ADM_PASS = null;
-var mpLinks = { extreme:'https://mpago.la/2R63UJ2', eplus:'https://mpago.la/2C8ifNR', epro:'https://mpago.la/2w6Webg' };
-
+var mpLinks = {extreme:'https://mpago.la/2R63UJ2',eplus:'https://mpago.la/2C8ifNR',epro:'https://mpago.la/2w6Webg'};
 var CATEGORIES = {
   extreme:{label:'PC EXTREME',price:90,pcs:[1,2,3,4,5]},
   eplus:  {label:'PC EPLUS',  price:100,pcs:[20]},
@@ -606,7 +582,8 @@ function loadFirebase(cb){
     s2.src='https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js';
     s2.onload=function(){
       firebase.initializeApp({databaseURL:'https://lanhouse-30903-default-rtdb.firebaseio.com'});
-      db=firebase.database(); cb();
+      db=firebase.database();
+      cb();
     };
     document.head.appendChild(s2);
   };
@@ -629,6 +606,8 @@ function initReserved(){
     updateCounts();updateCategoryDisabled();
     if(selectedCategory)buildPCGrid(selectedCategory);
     updateConfirmedList();renderInterestList();
+    // Atualiza contador do sorteio se aba grupos estiver aberta
+    updateSortearInfo();
   });
   db.ref('interestList').on('value',function(snap){interestList=snap.val()||[];renderInterestList();});
   db.ref('eventoData').once('value',function(snap){if(snap.val()){eventoData=snap.val();updateEventoDisplay();}});
@@ -636,18 +615,16 @@ function initReserved(){
 }
 function saveReserved(){db.ref('reserved').set(reserved);}
 
-/* ── MAPA ── */
-/* Posições calibradas com base na imagem real do mapa */
-var PC_POSITIONS = {
-  20:{x:22,y:21}, 19:{x:38,y:21}, 18:{x:54,y:21},
-  15:{x:22,y:29}, 16:{x:38,y:29}, 17:{x:54,y:29},
-  14:{x:22,y:39}, 13:{x:38,y:39}, 12:{x:54,y:39},
-   9:{x:22,y:47}, 10:{x:38,y:47}, 11:{x:54,y:47},
-   8:{x:22,y:57},  7:{x:38,y:57},  6:{x:54,y:57},
-   3:{x:22,y:66},  4:{x:38,y:66},  5:{x:54,y:66},
-   2:{x:22,y:75},  1:{x:38,y:75}
+/* MAPA — posições calibradas */
+var PC_POSITIONS={
+  20:{x:22,y:21},19:{x:38,y:21},18:{x:54,y:21},
+  15:{x:22,y:29},16:{x:38,y:29},17:{x:54,y:29},
+  14:{x:22,y:39},13:{x:38,y:39},12:{x:54,y:39},
+   9:{x:22,y:47},10:{x:38,y:47},11:{x:54,y:47},
+   8:{x:22,y:57}, 7:{x:38,y:57}, 6:{x:54,y:57},
+   3:{x:22,y:66}, 4:{x:38,y:66}, 5:{x:54,y:66},
+   2:{x:22,y:75}, 1:{x:38,y:75}
 };
-
 function initMapDots(){
   var wrap=document.getElementById('pc-map-wrap');if(!wrap)return;
   wrap.querySelectorAll('.pc-dot').forEach(function(d){d.remove();});
@@ -665,19 +642,24 @@ function updateMapDot(pcNum,cat){
   if(dot)dot.classList.add('active',cat);
 }
 
-/* ── INTEREST ── */
+/* INTEREST */
 function saveInterestList(){db.ref('interestList').set(interestList);}
 function toggleInterestForm(){
-  var f=document.getElementById('interest-form'),showing=f.style.display!=='none';
-  f.style.display=showing?'none':'flex';
-  if(!showing)document.getElementById('interest-name').focus();
+  var f=document.getElementById('interest-form'),on=f.style.display!=='none';
+  f.style.display=on?'none':'flex';
+  if(!on)document.getElementById('interest-name').focus();
 }
 function submitInterest(){
   var name=document.getElementById('interest-name').value.trim();
   if(!name){document.getElementById('err-interest').classList.add('visible');return;}
   document.getElementById('err-interest').classList.remove('visible');
-  if(Object.values(reserved).some(function(v){return v.name&&v.name.toLowerCase()===name.toLowerCase();})){showToast('✓ '+name+' já está confirmado!');document.getElementById('interest-name').value='';document.getElementById('interest-form').style.display='none';return;}
-  if(interestList.some(function(n){return n.toLowerCase()===name.toLowerCase();})){showToast('⚠ '+name+' já está na lista!');document.getElementById('interest-name').value='';return;}
+  if(Object.values(reserved).some(function(v){return v.name&&v.name.toLowerCase()===name.toLowerCase();})){
+    showToast('✓ '+name+' já está confirmado!');
+    document.getElementById('interest-name').value='';document.getElementById('interest-form').style.display='none';return;
+  }
+  if(interestList.some(function(n){return n.toLowerCase()===name.toLowerCase();})){
+    showToast('⚠ '+name+' já está na lista!');document.getElementById('interest-name').value='';return;
+  }
   interestList.push(name);saveInterestList();
   document.getElementById('interest-name').value='';document.getElementById('interest-form').style.display='none';
   renderInterestList();showToast('✓ '+name+' entrou na pré-lista!');
@@ -693,23 +675,29 @@ function renderInterestList(){
 function updateConfirmedList(){
   var grid=document.getElementById('confirmed-grid');if(!grid)return;
   var seen={'danilo':true},entries=[{name:'Danilo',pc:13}];
-  Object.entries(reserved).filter(function(e){return !e[1].owner&&!e[1].pending;}).sort(function(a,b){return Number(a[0])-Number(b[0]);}).forEach(function(e){
-    var n=e[1].name||'';if(n&&!seen[n.toLowerCase()]){seen[n.toLowerCase()]=true;entries.push({name:n,pc:Number(e[0])});}
-  });
+  Object.entries(reserved)
+    .filter(function(e){return !e[1].owner&&!e[1].pending;})
+    .sort(function(a,b){return Number(a[0])-Number(b[0]);})
+    .forEach(function(e){
+      var n=e[1].name||'';
+      if(n&&!seen[n.toLowerCase()]){seen[n.toLowerCase()]=true;entries.push({name:n,pc:Number(e[0])});}
+    });
   grid.innerHTML=entries.map(function(e,i){return'<div class="player-chip confirmed">'+(i+1)+'. '+e.name+' — PC '+e.pc+'</div>';}).join('');
 }
 
-/* ── ADM TABS ── */
+/* ADM TABS */
 function admTab(tab){
   ['reservas','evento','grupos'].forEach(function(t){
     var el=document.getElementById('adm-tab-'+t);if(el)el.style.display=t===tab?'block':'none';
   });
-  document.querySelectorAll('.adm-tab').forEach(function(btn,i){btn.classList.toggle('active',['reservas','evento','grupos'][i]===tab);});
+  document.querySelectorAll('.adm-tab').forEach(function(btn,i){
+    btn.classList.toggle('active',['reservas','evento','grupos'][i]===tab);
+  });
   if(tab==='evento')admLoadEvento();
-  if(tab==='grupos')admLoadGrupos();
+  if(tab==='grupos'){admLoadGrupos();updateSortearInfo();}
 }
 
-/* ── EVENTO ── */
+/* EVENTO */
 var eventoData={data:'Entre 20/Nov e 20/Dez',hora:'Corujão — 22h às 06h',valor:'R$ 90 a R$ 110 por pessoa',obs:'⚠️ Todos precisam ter o jogo comprado (exceto Minecraft). Comida e bebida individual.'};
 function admLoadEvento(){
   document.getElementById('evt-data').value=eventoData.data;
@@ -720,7 +708,10 @@ function admLoadEvento(){
   var names=Object.entries(reserved).filter(function(e){return !e[1].owner;}).sort(function(a,b){return a[0]-b[0];}).map(function(e,i){return(i+1)+'. '+e[1].name+' (PC '+e[0]+')';});
   list.innerHTML=names.length?names.join('<br>'):'<span style="opacity:0.4">Nenhuma reserva ainda.</span>';
   var ilist=document.getElementById('adm-interest-list');
-  if(ilist)ilist.innerHTML=interestList.length===0?'<div class="adm-empty">Nenhum interesse.</div>':'<div class="adm-list">'+interestList.map(function(n,i){return'<div class="adm-item"><div class="adm-item-left"><div style="font-size:14px;color:#fff;font-weight:600;">'+n+'</div></div><button class="adm-remove-btn" onclick="admRemoveInterest('+i+')">REMOVER</button></div>';}).join('')+'</div>';
+  if(ilist)ilist.innerHTML=interestList.length===0?'<div class="adm-empty">Nenhum interesse.</div>':
+    '<div class="adm-list">'+interestList.map(function(n,i){
+      return'<div class="adm-item"><div class="adm-item-left"><div style="font-size:14px;color:#fff;font-weight:600;">'+n+'</div></div><button class="adm-remove-btn" onclick="admRemoveInterest('+i+')">REMOVER</button></div>';
+    }).join('')+'</div>';
 }
 function admRemoveInterest(idx){interestList.splice(idx,1);saveInterestList();renderInterestList();admLoadEvento();showToast('✓ Removido');}
 function admSaveEvento(){
@@ -738,20 +729,21 @@ function updateEventoDisplay(){
   var obs=document.querySelectorAll('.info-obs');if(obs[0])obs[0].textContent=eventoData.obs;
 }
 
-/* ── GRUPOS (novo sistema) ── */
+/* GRUPOS */
 var gruposData=[
   {title:'GRUPO 1',players:['Danilo','Ronny','Gabriel Mamadura','','']},
   {title:'GRUPO 2',players:['Bruno','Bonafin Boquetti','Giano','','']},
   {title:'GRUPO 3',players:['Laporta','Nan','Harry','','']},
   {title:'GRUPO 4',players:['Gabriel','Ricardo','Kadu','','']}
 ];
-var selectedSlot=null; // {gi, pi}
+var selectedSlot=null;
 
 function getConfirmedNames(){
   var names=['Danilo'];
-  Object.entries(reserved).filter(function(e){return !e[1].owner&&!e[1].pending;}).sort(function(a,b){return Number(a[0])-Number(b[0]);}).forEach(function(e){
-    var n=e[1].name||'';if(n&&names.indexOf(n)===-1)names.push(n);
-  });
+  Object.entries(reserved)
+    .filter(function(e){return !e[1].owner&&!e[1].pending;})
+    .sort(function(a,b){return Number(a[0])-Number(b[0]);})
+    .forEach(function(e){var n=e[1].name||'';if(n&&names.indexOf(n)===-1)names.push(n);});
   return names;
 }
 
@@ -761,29 +753,25 @@ function getPlayersInGroups(){
   return used;
 }
 
-function getAvailableForSlot(){
-  var used=getPlayersInGroups();
-  // Remove quem está no slot selecionado (para não excluir ele mesmo)
-  if(selectedSlot!==null){
-    var cur=gruposData[selectedSlot.gi].players[selectedSlot.pi];
-    if(cur){var idx=used.indexOf(cur.toLowerCase());if(idx!==-1)used.splice(idx,1);}
-  }
-  return getConfirmedNames().filter(function(n){return !used.includes(n.toLowerCase());});
-}
-
 function admLoadGrupos(){
   selectedSlot=null;
   var wrap=document.getElementById('grupos-wrap');wrap.innerHTML='';
+  var all=getConfirmedNames();
+  var used=getPlayersInGroups();
+
   gruposData.forEach(function(grupo,gi){
     var card=document.createElement('div');card.className='grupo-card';
     var html='<div class="grupo-card-title">'+grupo.title+'</div><div class="grupo-slots">';
     grupo.players.forEach(function(p,pi){
-      html+='<div class="grupo-slot"><span class="slot-num">'+(pi+1)+'.</span>';
+      html+='<div class="grupo-slot"><span class="slot-num">'+(pi+1)+'</span>';
       if(p){
-        html+='<button class="slot-player filled" id="slot-'+gi+'-'+pi+'" onclick="slotClick('+gi+','+pi+')" title="Clique para selecionar/trocar">'+p+'</button>';
+        html+='<button class="slot-player filled" id="slot-'+gi+'-'+pi+'" onclick="slotClick('+gi+','+pi+')">'+p+'</button>';
         html+='<button class="slot-remove" onclick="slotRemove('+gi+','+pi+')" title="Remover">×</button>';
       } else {
-        html+='<div class="slot-dropdown"><select class="slot-select" onchange="slotAdd('+gi+','+pi+',this.value)"><option value="">+ Adicionar...</option></select></div>';
+        // Dropdown só com quem não está em nenhum grupo
+        var opts='<option value="">+ add</option>';
+        all.forEach(function(n){if(!used.includes(n.toLowerCase())){opts+='<option value="'+n+'">'+n+'</option>';}});
+        html+='<select class="slot-select" onchange="slotAdd('+gi+','+pi+',this.value)">'+opts+'</select>';
       }
       html+='</div>';
     });
@@ -791,47 +779,30 @@ function admLoadGrupos(){
     card.innerHTML=html;
     wrap.appendChild(card);
   });
-  // Preenche os dropdowns com disponíveis
-  refreshDropdowns();
-  // Atualiza contador do sorteio
-  updateSortearInfo();
-}
-
-function refreshDropdowns(){
-  var used=getPlayersInGroups();
-  var all=getConfirmedNames();
-  document.querySelectorAll('.slot-select').forEach(function(sel){
-    var cur=sel.dataset.cur||'';
-    sel.innerHTML='<option value="">+ Adicionar...</option>';
-    all.forEach(function(n){
-      if(!used.includes(n.toLowerCase())||n.toLowerCase()===cur.toLowerCase()){
-        var opt=document.createElement('option');opt.value=n;opt.textContent=n;sel.appendChild(opt);
-      }
-    });
-  });
 }
 
 function slotClick(gi,pi){
-  var btn=document.getElementById('slot-'+gi+'-'+pi);
+  // Se clicar no mesmo slot selecionado → deseleciona
   if(selectedSlot&&selectedSlot.gi===gi&&selectedSlot.pi===pi){
-    // Deselect
     selectedSlot=null;
     document.querySelectorAll('.slot-player').forEach(function(b){b.classList.remove('selected');});
     return;
   }
   if(selectedSlot!==null){
-    // Troca
+    // Troca os dois jogadores
     var a=gruposData[selectedSlot.gi].players[selectedSlot.pi];
     var b=gruposData[gi].players[pi];
     gruposData[selectedSlot.gi].players[selectedSlot.pi]=b;
     gruposData[gi].players[pi]=a;
     selectedSlot=null;
     admLoadGrupos();
+    showToast('✓ Jogadores trocados!');
     return;
   }
-  // Seleciona
+  // Primeiro clique → seleciona
   selectedSlot={gi:gi,pi:pi};
   document.querySelectorAll('.slot-player').forEach(function(b){b.classList.remove('selected');});
+  var btn=document.getElementById('slot-'+gi+'-'+pi);
   if(btn)btn.classList.add('selected');
   showToast('▸ Clique em outro slot para trocar');
 }
@@ -840,6 +811,7 @@ function slotRemove(gi,pi){
   gruposData[gi].players[pi]='';
   selectedSlot=null;
   admLoadGrupos();
+  updateSortearInfo();
 }
 
 function slotAdd(gi,pi,name){
@@ -847,10 +819,13 @@ function slotAdd(gi,pi,name){
   gruposData[gi].players[pi]=name;
   selectedSlot=null;
   admLoadGrupos();
+  updateSortearInfo();
 }
 
 function admSaveGrupos(){
-  db.ref('gruposData').set(gruposData);updateGruposDisplay();showToast('✓ Grupos salvos');
+  db.ref('gruposData').set(gruposData);
+  updateGruposDisplay();
+  showToast('✓ Grupos salvos');
 }
 
 function updateGruposDisplay(){
@@ -866,38 +841,66 @@ function updateGruposDisplay(){
   });
 }
 
-/* ── SORTEIO ── */
+/* SORTEIO — 100% aleatório */
+function shuffle(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){
+    var j=Math.floor(Math.random()*(i+1));
+    var tmp=a[i];a[i]=a[j];a[j]=tmp;
+  }
+  return a;
+}
+
 function updateSortearInfo(){
   var used=getPlayersInGroups();
-  var all=getConfirmedNames();
-  var sem=all.filter(function(n){return !used.includes(n.toLowerCase());});
-  document.getElementById('sortear-count').textContent=sem.length;
+  var sem=getConfirmedNames().filter(function(n){return !used.includes(n.toLowerCase());});
+  var el=document.getElementById('sortear-count');
+  if(el)el.textContent=sem.length;
 }
 
 function sortearTimes(){
   var used=getPlayersInGroups();
-  var all=getConfirmedNames();
-  var sem=all.filter(function(n){return !used.includes(n.toLowerCase());});
+  var sem=getConfirmedNames().filter(function(n){return !used.includes(n.toLowerCase());});
   if(sem.length===0){showToast('⚠ Todos já estão em grupos');return;}
 
-  // Distribui entre os 4 grupos, preenchendo slots vazios
-  var shuffled=sem.slice().sort(function(){return Math.random()-0.5;});
-  // Monta uma cópia temporária
+  // Embaralha jogadores
+  var jogadores=shuffle(sem);
+
+  // Cria cópia dos grupos
   var temp=gruposData.map(function(g){return{title:g.title,players:g.players.slice()};});
-  shuffled.forEach(function(name){
-    // Encontra primeiro slot vazio
-    for(var gi=0;gi<temp.length;gi++){
-      for(var pi=0;pi<temp[gi].players.length;pi++){
-        if(!temp[gi].players[pi]){temp[gi].players[pi]=name;return;}
+
+  // Embaralha também a ordem dos grupos para distribuição ser 100% aleatória
+  var gruposOrdem=shuffle([0,1,2,3]);
+
+  // Distribui round-robin pelos grupos em ordem aleatória
+  var idx=0;
+  while(idx<jogadores.length){
+    var alocado=false;
+    for(var gi=0;gi<gruposOrdem.length;gi++){
+      if(idx>=jogadores.length)break;
+      var g=temp[gruposOrdem[gi]];
+      for(var pi=0;pi<g.players.length;pi++){
+        if(!g.players[pi]){
+          g.players[pi]=jogadores[idx];
+          idx++;alocado=true;break;
+        }
       }
     }
-  });
+    if(!alocado)break; // grupos cheios
+  }
 
-  // Mostra preview
+  // Preview
   var preview=document.getElementById('sortear-preview');
-  preview.innerHTML=temp.map(function(g){
-    var novos=g.players.filter(function(p,pi){return p&&!gruposData[g===temp[0]?0:g===temp[1]?1:g===temp[2]?2:3].players[pi];});
-    return '<div style="font-size:11px;color:var(--text-dim);margin-bottom:4px"><span style="color:var(--accent);font-family:Orbitron,monospace;font-size:9px">'+g.title+'</span> '+g.players.filter(Boolean).map(function(p,pi){var isNew=!gruposData.find(function(og){return og.title===g.title;}).players[pi];return isNew?'<b style="color:var(--accent3)">'+p+'</b>':p;}).join(', ')+'</div>';
+  preview.innerHTML=temp.map(function(g,gi){
+    var orig=gruposData[gi].players;
+    var html='<div class="sortear-preview-group"><div class="sortear-preview-title">'+g.title+'</div>';
+    g.players.forEach(function(p,pi){
+      if(!p)return;
+      var isNovo=!orig[pi]||orig[pi]!==p;
+      html+='<div class="sortear-preview-player '+(isNovo?'novo':'existente')+'">▸ '+p+(isNovo?' ✦':'')+'</div>';
+    });
+    html+='</div>';
+    return html;
   }).join('');
 
   window._sorteioTemp=temp;
@@ -912,10 +915,11 @@ function salvarSorteio(){
   admLoadGrupos();
   document.getElementById('sortear-preview').innerHTML='';
   document.getElementById('sortear-save-btn').style.display='none';
-  showToast('✓ Times aplicados nos grupos!');
+  window._sorteioTemp=null;
+  showToast('✓ Times aplicados!');
 }
 
-/* ── VER MAIS ── */
+/* VER MAIS */
 function toggleVerMais(){
   var more=document.getElementById('info-more'),btn=document.getElementById('btn-ver-mais');
   var open=more.style.display!=='none';
@@ -923,7 +927,7 @@ function toggleVerMais(){
   btn.textContent=open?'▸ VER MAIS INFORMAÇÕES':'▴ VER MENOS';
 }
 
-/* ── FAQ ── */
+/* FAQ */
 function toggleFaq(btn){
   var a=btn.nextElementSibling,open=a.classList.contains('open');
   document.querySelectorAll('.faq-a').forEach(function(el){el.classList.remove('open');});
@@ -933,27 +937,43 @@ function toggleFaq(btn){
 function closeFaq(){document.getElementById('faq-modal').classList.remove('open');}
 function closeReservaModal(){document.getElementById('reserva-modal').classList.remove('open');}
 
-/* ── MINHA RESERVA ── */
+/* MINHA RESERVA */
 function searchReserva(){
   var name=document.getElementById('reserva-search').value.trim().toLowerCase();
   var result=document.getElementById('reserva-result');
   if(name.length<2){result.innerHTML='';return;}
   var found=null,foundPc=null;
-  Object.entries(reserved).forEach(function(e){if(e[1].name&&e[1].name.toLowerCase().indexOf(name)!==-1){found=e[1];foundPc=e[0];}});
+  Object.entries(reserved).forEach(function(e){
+    if(e[1].name&&e[1].name.toLowerCase().indexOf(name)!==-1){found=e[1];foundPc=e[0];}
+  });
   if(!found){result.innerHTML='<div class="reserva-not-found">Nenhuma reserva encontrada.</div>';return;}
   var cat=found.category||'epro';
   var status=found.owner?'confirmed':found.pending?'pending':'confirmed';
   var statusText=found.owner?'RESERVADO':found.pending?'AGUARDANDO PAGAMENTO':'CONFIRMADO ✓';
   var mapSrc=document.querySelector('#pc-map-wrap img')?document.querySelector('#pc-map-wrap img').src:'';
   var pos=PC_POSITIONS[foundPc],dotStyle='';
-  if(pos){var colors={extreme:'var(--extreme)',eplus:'var(--eplus)',epro:'var(--epro)'},c=colors[cat]||'var(--epro)';dotStyle='position:absolute;left:'+pos.x+'%;top:'+pos.y+'%;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);animation:dotpulse 1s infinite;background:'+c+';box-shadow:0 0 8px 3px '+c+';';}
-  result.innerHTML='<div class="reserva-card"><div class="reserva-name">'+found.name+'</div><div class="reserva-pc-num '+cat+'">PC '+foundPc+'</div><div class="reserva-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+' — R$ '+(CATEGORIES[cat]?CATEGORIES[cat].price:'?')+',00</div>'+(mapSrc?'<div class="reserva-map-wrap"><img src="'+mapSrc+'" />'+(pos?'<div style="'+dotStyle+'"></div>':'')+'</div>':'')+'<div><span class="reserva-status '+status+'">'+statusText+'</span></div></div>';
+  if(pos){
+    var c={extreme:'var(--extreme)',eplus:'var(--eplus)',epro:'var(--epro)'}[cat]||'var(--epro)';
+    dotStyle='position:absolute;left:'+pos.x+'%;top:'+pos.y+'%;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);animation:dotpulse 1s infinite;background:'+c+';box-shadow:0 0 8px 3px '+c+';';
+  }
+  result.innerHTML='<div class="reserva-card">'
+    +'<div class="reserva-name">'+found.name+'</div>'
+    +'<div class="reserva-pc-num '+cat+'">PC '+foundPc+'</div>'
+    +'<div class="reserva-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+' — R$ '+(CATEGORIES[cat]?CATEGORIES[cat].price:'?')+',00</div>'
+    +(mapSrc?'<div class="reserva-map-wrap"><img src="'+mapSrc+'" />'+(pos?'<div style="'+dotStyle+'"></div>':'')+'</div>':'')
+    +'<div><span class="reserva-status '+status+'">'+statusText+'</span></div>'
+    +'</div>';
 }
 
-/* ── PARTICLES ── */
+/* PARTICLES */
 var canvas,ctx,particles=[],particlesActive=false,pulseActive=false,pulseColor='160,160,160',pulseAlpha=0,pulseDir=1;
 var CAT_COLORS={extreme:{pulse:'160,160,160',particle:'#a0a0a0'},eplus:{pulse:'59,158,255',particle:'#3b9eff'},epro:{pulse:'255,59,59',particle:'#ff3b3b'}};
-function initCanvas(){canvas=document.createElement('canvas');canvas.id='particles-canvas';document.body.insertBefore(canvas,document.body.firstChild);ctx=canvas.getContext('2d');resizeCanvas();window.addEventListener('resize',resizeCanvas);animateParticles();}
+function initCanvas(){
+  canvas=document.createElement('canvas');canvas.id='particles-canvas';
+  document.body.insertBefore(canvas,document.body.firstChild);
+  ctx=canvas.getContext('2d');resizeCanvas();
+  window.addEventListener('resize',resizeCanvas);animateParticles();
+}
 function resizeCanvas(){if(!canvas)return;canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
 function startPulse(cat){pulseActive=true;particlesActive=false;particles=[];pulseColor=CAT_COLORS[cat]?CAT_COLORS[cat].pulse:'160,160,160';}
 function startParticles(cat){
@@ -976,7 +996,7 @@ function animateParticles(){
   });
 }
 
-/* ── RESERVA ── */
+/* RESERVA */
 function updateCounts(){
   ['extreme','eplus','epro'].forEach(function(cat){
     var total=CATEGORIES[cat].pcs.length,taken=CATEGORIES[cat].pcs.filter(function(p){return !!reserved[p];}).length;
@@ -984,7 +1004,7 @@ function updateCounts(){
     var el=document.getElementById('slots-'+cat),cnt=document.getElementById('count-'+cat);
     cnt.textContent=avail>0?avail:'0';el.classList.remove('soldout');
     if(avail<=0){el.classList.add('soldout');el.textContent='Esgotado';}
-    else el.textContent=avail===1?'1 vaga disponível':avail+' vagas disponíveis';
+    else el.textContent=avail===1?'1 vaga':avail+' vagas';
   });
 }
 function updateCategoryDisabled(){
@@ -1008,7 +1028,8 @@ function selectCategory(cat){
   document.getElementById('confirm-section').style.display='none';
   buildPCGrid(cat);
   document.getElementById('pc-card').style.display='block';
-  document.getElementById('pc-card').scrollIntoView({behavior:'smooth',block:'nearest'});startPulse(cat);
+  document.getElementById('pc-card').scrollIntoView({behavior:'smooth',block:'nearest'});
+  startPulse(cat);
 }
 function buildPCGrid(cat){
   var grid=document.getElementById('pc-grid');grid.innerHTML='';
@@ -1017,7 +1038,8 @@ function buildPCGrid(cat){
     var ns=document.createElement('span');ns.textContent=num;btn.appendChild(ns);
     if(reserved[num]){
       btn.classList.add(reserved[num].pending?'pending':'taken');btn.disabled=true;
-      var s=document.createElement('span');s.className='pc-reserved-name';s.textContent=(reserved[num].name||'').split(' ')[0];btn.appendChild(s);
+      var s=document.createElement('span');s.className='pc-reserved-name';
+      s.textContent=(reserved[num].name||'').split(' ')[0];btn.appendChild(s);
     } else {
       (function(n,b,c){b.onclick=function(){selectPC(n,b,c);};})(num,btn,cat);
     }
@@ -1025,7 +1047,11 @@ function buildPCGrid(cat){
   });
 }
 function selectPC(num,btn,cat){
-  if(selectedPC===num){btn.classList.remove('selected','extreme','eplus','epro');selectedPC=null;document.getElementById('confirm-section').style.display='none';updateMapDot(null,null);stopEffects();startPulse(cat);return;}
+  if(selectedPC===num){
+    btn.classList.remove('selected','extreme','eplus','epro');selectedPC=null;
+    document.getElementById('confirm-section').style.display='none';
+    updateMapDot(null,null);stopEffects();startPulse(cat);return;
+  }
   document.querySelectorAll('.pc-btn').forEach(function(b){b.classList.remove('selected','extreme','eplus','epro');});
   btn.classList.add('selected',cat);selectedPC=num;
   document.getElementById('err-pc').classList.remove('visible');
@@ -1034,11 +1060,10 @@ function selectPC(num,btn,cat){
 function showSummary(){
   var name=document.getElementById('input-name').value.trim();
   if(!selectedCategory||!selectedPC)return;
-  var price=CATEGORIES[selectedCategory].price;
   document.getElementById('s-name').textContent=name||'(preencha seu nome)';
   document.getElementById('s-cat').textContent=CATEGORIES[selectedCategory].label;
   document.getElementById('s-pc').textContent='PC '+selectedPC;
-  document.getElementById('s-price').textContent='R$ '+price+',00';
+  document.getElementById('s-price').textContent='R$ '+CATEGORIES[selectedCategory].price+',00';
   document.getElementById('confirm-section').style.display='block';
   document.getElementById('confirm-section').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
@@ -1048,18 +1073,31 @@ function handlePay(){
   if(!selectedCategory){document.getElementById('err-category').classList.add('visible');valid=false;}
   if(!selectedPC){document.getElementById('err-pc').classList.add('visible');valid=false;}
   if(!valid)return;
-  if(reserved[selectedPC]){showToast('⚠ Este PC acabou de ser reservado!');buildPCGrid(selectedCategory);updateCounts();selectedPC=null;document.getElementById('confirm-section').style.display='none';return;}
+  if(reserved[selectedPC]){
+    showToast('⚠ Este PC acabou de ser reservado!');
+    buildPCGrid(selectedCategory);updateCounts();selectedPC=null;
+    document.getElementById('confirm-section').style.display='none';return;
+  }
   var pcToReserve=selectedPC,catToReserve=selectedCategory,link=mpLinks[catToReserve];
   reserved[pcToReserve]={name:name,category:catToReserve,ts:Date.now(),pending:true};
   db.ref('reserved/'+pcToReserve).set(reserved[pcToReserve]).then(function(){
     window.open(link,'_blank');
-    document.getElementById('confirm-section').innerHTML='<div class="summary" style="border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.05)"><div style="text-align:center;padding:12px 0"><div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#ffd700;margin-bottom:8px">⏳ AGUARDANDO PAGAMENTO</div><div style="font-size:13px;color:var(--text-dim);line-height:1.7">O link do Mercado Pago foi aberto.<br>Após o pagamento, aguarde a confirmação.<br><span style="color:#ffd700;font-size:11px">PC '+pcToReserve+' — '+name+'</span></div></div></div>';
+    document.getElementById('confirm-section').innerHTML=
+      '<div class="summary" style="border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.05)">'
+      +'<div style="text-align:center;padding:12px 0">'
+      +'<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#ffd700;margin-bottom:8px">⏳ AGUARDANDO PAGAMENTO</div>'
+      +'<div style="font-size:13px;color:var(--text-dim);line-height:1.7">O link do Mercado Pago foi aberto.<br>Após o pagamento, aguarde a confirmação.<br>'
+      +'<span style="color:#ffd700;font-size:11px">PC '+pcToReserve+' — '+name+'</span></div>'
+      +'</div></div>';
     selectedPC=null;selectedCategory=null;
   });
 }
 
-/* ── ADMIN AUTH ── */
-function toggleAdmLogin(){var l=document.getElementById('adm-login');l.classList.toggle('visible');if(l.classList.contains('visible'))document.getElementById('adm-pass').focus();}
+/* ADMIN */
+function toggleAdmLogin(){
+  var l=document.getElementById('adm-login');l.classList.toggle('visible');
+  if(l.classList.contains('visible'))document.getElementById('adm-pass').focus();
+}
 function admLogin(){
   var pass=document.getElementById('adm-pass').value;
   if(pass===ADM_PASS){
@@ -1068,10 +1106,12 @@ function admLogin(){
     document.getElementById('err-adm').classList.remove('visible');
     document.getElementById('adm-panel').classList.add('visible');
     renderAdmList();document.getElementById('adm-panel').scrollIntoView({behavior:'smooth'});
-  } else {document.getElementById('err-adm').classList.add('visible');document.getElementById('adm-pass').value='';}
+  } else {
+    document.getElementById('err-adm').classList.add('visible');
+    document.getElementById('adm-pass').value='';
+  }
 }
 function admLogout(){document.getElementById('adm-panel').classList.remove('visible');}
-
 function renderAdmList(){
   var list=document.getElementById('adm-list');list.innerHTML='';
   var entries=Object.keys(reserved).map(function(k){return[parseInt(k),reserved[k]];});
@@ -1080,19 +1120,30 @@ function renderAdmList(){
   entries.forEach(function(entry){
     var pc=entry[0],data=entry[1],cat=data.category||'epro';
     var item=document.createElement('div');item.className='adm-item';if(data.pending)item.classList.add('pending-item');
-    var ab=data.owner?'':(data.pending?'<div style="display:flex;gap:6px;flex-direction:column;align-items:flex-end"><button class="adm-confirm-btn" onclick="admConfirm('+pc+')">✓ CONFIRMAR</button><button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button></div>':'<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button>');
+    var ab=data.owner?'':(data.pending
+      ?'<div style="display:flex;gap:6px;flex-direction:column;align-items:flex-end"><button class="adm-confirm-btn" onclick="admConfirm('+pc+')">✓ CONFIRMAR</button><button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button></div>'
+      :'<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button>');
     var sb=data.pending?' <span class="pending-badge">AGUARDANDO</span>':'';
     item.innerHTML='<div class="adm-item-left"><div class="adm-pc-badge '+cat+'">PC'+pc+'</div><div><div class="adm-item-name">'+data.name+sb+'</div><div class="adm-item-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+'</div></div></div>'+ab;
     list.appendChild(item);
   });
   updateAdmPcSelect();
 }
-function admConfirm(pc){if(!reserved[pc])return;reserved[pc].pending=false;db.ref('reserved/'+pc).set(reserved[pc]).then(function(){renderAdmList();showToast('✓ PC '+pc+' confirmado!');});}
-function admRemove(pc){if(!confirm('Remover reserva do PC '+pc+'?'))return;delete reserved[pc];saveReserved();updateCounts();updateCategoryDisabled();renderAdmList();if(selectedCategory)buildPCGrid(selectedCategory);showToast('✓ PC '+pc+' liberado');}
+function admConfirm(pc){
+  if(!reserved[pc])return;reserved[pc].pending=false;
+  db.ref('reserved/'+pc).set(reserved[pc]).then(function(){renderAdmList();showToast('✓ PC '+pc+' confirmado!');});
+}
+function admRemove(pc){
+  if(!confirm('Remover reserva do PC '+pc+'?'))return;
+  delete reserved[pc];saveReserved();updateCounts();updateCategoryDisabled();
+  renderAdmList();if(selectedCategory)buildPCGrid(selectedCategory);showToast('✓ PC '+pc+' liberado');
+}
 function updateAdmPcSelect(){
   var cat=document.getElementById('adm-add-cat').value,sel=document.getElementById('adm-add-pc');
   sel.innerHTML='<option value="">PC Nº...</option>';if(!cat)return;
-  CATEGORIES[cat].pcs.forEach(function(num){if(!reserved[num]){var o=document.createElement('option');o.value=num;o.textContent='PC '+num;sel.appendChild(o);}});
+  CATEGORIES[cat].pcs.forEach(function(num){
+    if(!reserved[num]){var o=document.createElement('option');o.value=num;o.textContent='PC '+num;sel.appendChild(o);}
+  });
 }
 function admAdd(){
   var name=document.getElementById('adm-add-name').value.trim(),cat=document.getElementById('adm-add-cat').value,pc=parseInt(document.getElementById('adm-add-pc').value);
@@ -1112,13 +1163,19 @@ function admReset(){
   renderAdmList();showToast('✓ Reservas resetadas');
 }
 
-function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3000);}
+function showToast(msg){
+  var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show');},3000);
+}
 
 function init(){
   loadConfig();initReserved();initMapDots();
   updateEventoDisplay();updateGruposDisplay();renderInterestList();updateConfirmedList();
   updateCounts();updateCategoryDisabled();
-  document.getElementById('input-name').addEventListener('input',function(){document.getElementById('err-name').classList.remove('visible');if(selectedPC)showSummary();});
+  document.getElementById('input-name').addEventListener('input',function(){
+    document.getElementById('err-name').classList.remove('visible');
+    if(selectedPC)showSummary();
+  });
 }
 
 document.addEventListener('DOMContentLoaded',function(){initCanvas();loadFirebase(function(){init();});});
@@ -1131,8 +1188,8 @@ document.addEventListener('DOMContentLoaded',function(){initCanvas();loadFirebas
     <div class="modal-body">
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🎮 Formatos de Jogo <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-format-row"><span class="faq-fmt-badge">5×5</span><span>CS2 · R6 · Valorant · Fortnite · Black Ops 2 MP · Chivalry 2</span></div><div class="faq-format-row"><span class="faq-fmt-badge">3×3</span><span>Rocket League · Left 4 Dead 2 · Garry's Mod · Fortnite · Black Ops 2 MP</span></div><div class="faq-format-row"><span class="faq-fmt-badge">2×2</span><span>Gang Beasts · Minecraft · Transformice · Worms · Castle Crashers · BattleBlock Theater</span></div><div class="faq-format-row"><span class="faq-fmt-badge">SOLO</span><span>Among Us · Minecraft PvP · Clone Hero · MK 10/11 · Fortnite · BO2 FFA · Chivalry 2 FFA</span></div></div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🏗️ Estrutura dos Jogos <span class="faq-arrow">▾</span></button><div class="faq-a"><p>A ordem evita que algum grupo fique parado:</p><ol><li>Primeiro os embates <b>5×5</b></li><li>Em seguida, <b>3×3 e 2×2 simultâneos</b></li><li>O <b>individual</b> acontece entre os jogadores do grupo parado</li></ol><p style="margin-top:10px">Cada embate é composto por <b>2 jogos</b> — um de cada time. Em caso de 1×1 → desempate em jogo neutro.</p></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🏆 Sistema de Pontuação <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-score-row"><span class="score-badge win">+1</span> Cada vitória</div><div class="faq-score-row"><span class="score-badge sweep">+3</span> Vitória nos dois jogos do embate</div><div class="faq-score-row"><span class="score-badge tie">1×1</span> Empate → vencedor leva 2 pontos</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">📋 Rodadas — 4 Grupos <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-round"><span class="round-badge r5x5">5×5</span><b>Rodada 1:</b> A vs B · C vs D</div><div class="faq-round"><span class="round-badge r3x3">3+2</span><b>Rodada 2:</b> A×C (3×3) · A×B (2×2) · B×D (3×3) · D×C (2×2)</div><div class="faq-round"><span class="round-badge r5x5">5×5</span><b>Rodada 3:</b> A vs D · B vs C</div><div class="faq-round"><span class="round-badge r3x3">3+2</span><b>Rodada 4:</b> A×B (3×3) · C×D (2×2) · A×D (2×2) · B×C (3×3)</div><div class="faq-round"><span class="round-badge r5x5">5×5</span><b>Rodada 5:</b> C vs A · D vs B</div><div class="faq-round"><span class="round-badge r3x3">3+2</span><b>Rodada 6:</b> A×D (3×3) · B×C (2×2) · A×C (2×2) · B×D (3×3)</div><div class="faq-round"><span class="round-badge rind">SOLO</span><b>Rodada 7:</b> Individual interno de cada grupo</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🏆 Sistema de Pontuação <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-score-row"><span class="score-badge win">+1</span> Cada vitória</div><div class="faq-score-row"><span class="score-badge sweep">+3</span> Vitória nos dois jogos</div><div class="faq-score-row"><span class="score-badge tie">1×1</span> Empate → vencedor leva 2 pontos</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">📋 Rodadas — 4 Grupos <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-round"><span class="round-badge r5x5">5×5</span><b>Rodada 1:</b> A vs B · C vs D</div><div class="faq-round"><span class="round-badge r3x3">3+2</span><b>Rodada 2:</b> A×C · A×B · B×D · D×C</div><div class="faq-round"><span class="round-badge r5x5">5×5</span><b>Rodada 3:</b> A vs D · B vs C</div><div class="faq-round"><span class="round-badge r3x3">3+2</span><b>Rodada 4:</b> A×B · C×D · A×D · B×C</div><div class="faq-round"><span class="round-badge r5x5">5×5</span><b>Rodada 5:</b> C vs A · D vs B</div><div class="faq-round"><span class="round-badge r3x3">3+2</span><b>Rodada 6:</b> A×D · B×C · A×C · B×D</div><div class="faq-round"><span class="round-badge rind">SOLO</span><b>Rodada 7:</b> Individual interno de cada grupo</div></div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🥇 Finais <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-final-row"><b>5×5:</b> CS2, R6 ou Valorant</div><div class="faq-final-row"><b>3×3:</b> Rocket League, L4D2 ou Garry's Mod</div><div class="faq-final-row"><b>2×2:</b> Gang Beasts, Castle Crashers ou BattleBlock Theater</div><div class="faq-final-row" style="color:#ffd700"><b>🏆 MVP:</b> Clone Hero, MK10/11 ou Fortnite</div></div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">ℹ️ Regras Gerais <span class="faq-arrow">▾</span></button><div class="faq-a"><ul><li>Todos precisam ter o jogo comprado <b>(exceto Minecraft)</b></li><li>Comida e bebida individual 🍔🥤</li><li>Horário: <b>Corujão — 22h às 06h</b></li></ul></div></div>
     </div>
