@@ -532,7 +532,7 @@
       </div>
 
       <div class="extra-btns">
-        <button class="btn-extra" onclick="document.getElementById('faq-modal').classList.add('open')">📘 REGULAMENTO</button>
+        <a class="btn-extra" href="https://docs.google.com/document/d/1QQVpbIm5UYMrQ57mu6sBU7OrAT6N4gcIez95XjtkHZM/edit?usp=drivesdk" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;justify-content:center;">📘 REGULAMENTO</a>
         <button class="btn-extra" onclick="document.getElementById('reserva-modal').classList.add('open')">🔍 MINHA RESERVA</button>
       </div>
     </div>
@@ -1009,25 +1009,6 @@ function init(){
 }
 document.addEventListener('DOMContentLoaded',function(){initCanvas();loadFirebase(function(){init();});});
 </script>
-
-<!-- FAQ -->
-<div class="modal-overlay" id="faq-modal" onclick="if(event.target===this)closeFaq()">
-  <div class="modal-box">
-    <div class="modal-header"><span class="modal-title">📘 REGULAMENTO</span><button class="modal-close" onclick="closeFaq()">✕</button></div>
-    <div class="modal-body">
-     <div class="faq-a" id="faq-formatos-content">
-  <div class="faq-format-row"><span class="faq-fmt-badge">5×5</span><div id="faq-tags-5x5"></div></div>
-  <div class="faq-format-row"><span class="faq-fmt-badge">3×3</span><div id="faq-tags-3x3"></div></div>
-  <div class="faq-format-row"><span class="faq-fmt-badge">2×2</span><div id="faq-tags-2x2"></div></div>
-  <div class="faq-format-row"><span class="faq-fmt-badge">SOLO</span><div id="faq-tags-individual"></div></div>
-</div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🏗️ Estrutura dos Jogos <span class="faq-arrow">▾</span></button><div class="faq-a"><p>A ordem evita que algum grupo fique parado:</p><ol><li>Primeiro os embates <b>5×5</b></li><li>Em seguida, <b>3×3 e 2×2 simultâneos</b></li><li>O <b>individual</b> acontece entre os jogadores do grupo parado</li></ol><p style="margin-top:10px">Cada embate é composto por <b>2 jogos</b> — um de cada time. Em caso de 1×1 → desempate em jogo neutro.</p></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🏆 Sistema de Pontuação <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-score-row"><span class="score-badge win">+1</span> Cada vitória</div><div class="faq-score-row"><span class="score-badge sweep">+3</span> Vitória nos dois jogos</div><div class="faq-score-row"><span class="score-badge tie">1×1</span> Empate → vencedor leva 2 pontos</div></div></div>
-      <div class="faq-a" id="faq-rodadas-content"></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">ℹ️ Regras Gerais <span class="faq-arrow">▾</span></button><div class="faq-a"><ul><li>Todos precisam ter o jogo comprado <b>(exceto Minecraft)</b></li><li>Comida e bebida individual 🍔🥤</li><li>Horário: <b>Corujão — 22h às 06h</b></li></ul></div></div>
-    </div>
-  </div>
-</div>
 
 <!-- MINHA RESERVA -->
 <div class="modal-overlay" id="reserva-modal" onclick="if(event.target===this)closeReservaModal()">
