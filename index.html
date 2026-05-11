@@ -328,6 +328,40 @@
   .reserva-map-wrap{position:relative;display:inline-block;width:140px;margin-top:14px;}
   .reserva-map-wrap img{width:100%;display:block;border-radius:6px;border:1px solid var(--border);}
   .reserva-not-found{text-align:center;padding:20px;color:var(--text-dim);font-size:13px;}
+  /* ── JOGOS ADM ── */
+.jogos-formato{margin-bottom:20px;}
+.jogos-formato-title{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:10px;}
+.jogo-slot{display:flex;gap:6px;align-items:center;margin-bottom:6px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;}
+.jogo-slot input{flex:2;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:7px 10px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:13px;outline:none;}
+.jogo-slot input:focus{border-color:var(--accent);}
+.jogo-slot input.link{flex:3;}
+.jogo-free-btn{padding:6px 10px;border-radius:4px;font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text-dim);transition:all 0.2s;white-space:nowrap;}
+.jogo-free-btn.active{border-color:var(--accent3);background:rgba(127,255,0,0.1);color:var(--accent3);}
+.jogo-remove-btn{padding:6px 8px;border-radius:4px;background:none;border:1px solid #3a2020;color:#663333;font-size:12px;cursor:pointer;transition:all 0.2s;flex-shrink:0;}
+.jogo-remove-btn:hover{border-color:#ff4444;color:#ff4444;}
+.jogos-add-btn{width:100%;padding:8px;background:rgba(0,212,255,0.06);border:1px dashed rgba(0,212,255,0.3);border-radius:4px;color:var(--accent);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;margin-top:4px;}
+.jogos-add-btn:hover{background:rgba(0,212,255,0.12);}
+/* ── RODADAS ADM ── */
+.rodada-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px;}
+.rodada-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.rodada-title{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:#fff;}
+.rodada-remove-btn{padding:4px 10px;border-radius:4px;background:none;border:1px solid #3a2020;color:#663333;font-family:'Orbitron',monospace;font-size:8px;cursor:pointer;transition:all 0.2s;}
+.rodada-remove-btn:hover{border-color:#ff4444;color:#ff4444;}
+.partida-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:12px;margin-bottom:8px;}
+.partida-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.partida-title{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;color:var(--accent);}
+.partida-remove-btn{padding:3px 8px;border-radius:3px;background:none;border:1px solid #3a2020;color:#663333;font-family:'Orbitron',monospace;font-size:8px;cursor:pointer;transition:all 0.2s;}
+.partida-remove-btn:hover{border-color:#ff4444;color:#ff4444;}
+.partida-select{width:100%;padding:8px 10px;border-radius:4px;font-size:12px;background:var(--surface2);border:1px solid var(--border);color:#fff;outline:none;font-family:'Rajdhani',sans-serif;margin-bottom:8px;cursor:pointer;}
+.partida-select:focus{border-color:var(--accent);}
+.partida-times{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
+.partida-jogos{display:flex;flex-direction:column;gap:6px;}
+.partida-jogo-row{display:flex;align-items:center;gap:6px;}
+.partida-jogo-label{font-family:'Orbitron',monospace;font-size:8px;color:var(--text-dim);width:60px;flex-shrink:0;}
+.rodadas-add-btn{width:100%;padding:10px;background:rgba(127,255,0,0.06);border:1px dashed rgba(127,255,0,0.3);border-radius:6px;color:var(--accent3);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;margin-top:8px;}
+.rodadas-add-btn:hover{background:rgba(127,255,0,0.12);}
+.partidas-add-btn{width:100%;padding:7px;background:rgba(0,212,255,0.04);border:1px dashed rgba(0,212,255,0.2);border-radius:4px;color:var(--accent);font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;margin-top:4px;}
+.partidas-add-btn:hover{background:rgba(0,212,255,0.1);}
 </style>
 </head>
 <body>
@@ -546,6 +580,8 @@
       <button class="adm-tab active" onclick="admTab('reservas')">RESERVAS</button>
       <button class="adm-tab" onclick="admTab('evento')">EVENTO</button>
       <button class="adm-tab" onclick="admTab('grupos')">GRUPOS</button>
+      <button class="adm-tab" onclick="admTab('jogos')">JOGOS</button>
+      <button class="adm-tab" onclick="admTab('rodadas')">RODADAS</button>
     </div>
     <div id="adm-tab-reservas">
       <div class="adm-section-title">▸ RESERVAS ATUAIS</div>
@@ -595,8 +631,22 @@
         <button class="adm-add-btn" id="sortear-save-btn" style="display:none;margin-top:8px;background:rgba(127,255,0,0.15);border-color:var(--accent3);color:var(--accent3)" onclick="salvarSorteio()">✓ APLICAR NOS GRUPOS</button>
       </div>
     </div>
-  </div>
 
+    <!-- ABA JOGOS -->
+    <div id="adm-tab-jogos" style="display:none">
+      <div class="adm-section-title">▸ JOGOS POR FORMATO</div>
+      <div id="jogos-editor"></div>
+      <button class="adm-add-btn" style="margin-top:12px" onclick="admSaveJogos()">▸ SALVAR JOGOS</button>
+    </div>
+    <!-- ABA RODADAS -->
+    <div id="adm-tab-rodadas" style="display:none">
+      <div class="adm-section-title">▸ RODADAS</div>
+      <div id="rodadas-editor"></div>
+      <button class="rodadas-add-btn" onclick="admAddRodada()">+ ADICIONAR RODADA</button>
+      <button class="adm-add-btn" style="margin-top:10px" onclick="admSaveRodadas()">▸ SALVAR RODADAS</button>
+    </div>
+  </div>
+  
   <div class="footer">RESERVAS · QUEST LAN HOUSE · 2026</div>
 </div>
 
@@ -653,6 +703,8 @@ function initReserved(){
   db.ref('interestList').on('value',function(snap){interestList=snap.val()||[];renderInterestList();});
   db.ref('eventoData').once('value',function(snap){if(snap.val()){eventoData=snap.val();updateEventoDisplay();}});
   db.ref('gruposData').once('value',function(snap){if(snap.val()){gruposData=snap.val();updateGruposDisplay();}});
+  db.ref('jogosData').once('value',function(snap){if(snap.val()){jogosData=snap.val();}});
+  db.ref('rodadasData').once('value',function(snap){if(snap.val())rodadasData=snap.val();});
 }
 function saveReserved(){db.ref('reserved').set(reserved);}
 
@@ -685,10 +737,12 @@ function updateConfirmedList(){
 }
 
 function admTab(tab){
-  ['reservas','evento','grupos'].forEach(function(t){var el=document.getElementById('adm-tab-'+t);if(el)el.style.display=t===tab?'block':'none';});
-  document.querySelectorAll('.adm-tab').forEach(function(btn,i){btn.classList.toggle('active',['reservas','evento','grupos'][i]===tab);});
+  ['reservas','evento','grupos','jogos','rodadas'].forEach(function(t){var el=document.getElementById('adm-tab-'+t);if(el)el.style.display=t===tab?'block':'none';});
+  document.querySelectorAll('.adm-tab').forEach(function(btn,i){btn.classList.toggle('active',['reservas','evento','grupos','jogos','rodadas'][i]===tab);});
   if(tab==='evento')admLoadEvento();
   if(tab==='grupos'){admLoadGrupos();updateSortearInfo();}
+  if(tab==='jogos')admLoadJogos();
+  if(tab==='rodadas')admLoadRodadas();
 }
 
 var eventoData={data:'Entre 20/Nov e 20/Dez',hora:'Corujão — 22h às 06h',valor:'R$ 90 a R$ 110 por pessoa',obs:'⚠️ Todos precisam ter o jogo comprado (exceto Minecraft). Comida e bebida individual.'};
@@ -752,7 +806,85 @@ function sortearTimes(){
   window._sorteioTemp=temp;document.getElementById('sortear-save-btn').style.display='block';
 }
 function salvarSorteio(){if(!window._sorteioTemp)return;gruposData=window._sorteioTemp;db.ref('gruposData').set(gruposData);updateGruposDisplay();admLoadGrupos();document.getElementById('sortear-preview').innerHTML='';document.getElementById('sortear-save-btn').style.display='none';window._sorteioTemp=null;showToast('✓ Times aplicados!');}
+// ── JOGOS ──
+var FORMATOS_ORDER=['5x5','3x3','2x2','individual'];
+var FORMATOS_LABEL={'5x5':'5×5','3x3':'3×3','2x2':'2×2','individual':'INDIVIDUAL'};
+var jogosData={
+  '5x5':[{nome:'CS2',link:'https://store.steampowered.com/app/730/',free:true},{nome:'R6',link:'https://store.steampowered.com/app/359550/',free:true},{nome:'Valorant',link:'https://playvalorant.com',free:true},{nome:'Fortnite',link:'https://www.fortnite.com',free:true},{nome:'Black Ops 2 MP',link:'https://store.steampowered.com/app/202990/',free:false},{nome:'Chivalry 2',link:'https://store.steampowered.com/app/1824220/',free:false}],
+  '3x3':[{nome:'Rocket League',link:'https://store.steampowered.com/app/252950/',free:true},{nome:'Left 4 Dead 2',link:'https://store.steampowered.com/app/550/',free:false},{nome:"Garry's Mod",link:'https://store.steampowered.com/app/4000/',free:false},{nome:'Fortnite',link:'https://www.fortnite.com',free:true},{nome:'Black Ops 2 MP',link:'https://store.steampowered.com/app/202990/',free:false}],
+  '2x2':[{nome:'Gang Beasts',link:'https://store.steampowered.com/app/285900/',free:false},{nome:'Minecraft',link:'https://www.minecraft.net',free:false},{nome:'Transformice',link:'https://store.steampowered.com/app/270170/',free:true},{nome:'Worms',link:'https://store.steampowered.com/app/323220/',free:false},{nome:'Castle Crashers',link:'https://store.steampowered.com/app/204360/',free:false},{nome:'BattleBlock Theater',link:'https://store.steampowered.com/app/238460/',free:false}],
+  'individual':[{nome:'Among Us',link:'https://store.steampowered.com/app/945360/',free:false},{nome:'Minecraft PvP',link:'https://www.minecraft.net',free:false},{nome:'Clone Hero',link:'https://clonehero.net',free:true},{nome:'MK 10/11',link:'https://store.steampowered.com/app/976310/',free:false},{nome:'Fortnite',link:'https://www.fortnite.com',free:true},{nome:'BO2 FFA',link:'https://store.steampowered.com/app/202990/',free:false},{nome:'Chivalry 2 FFA',link:'https://store.steampowered.com/app/1824220/',free:false}]
+};
+function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function admLoadJogos(){db.ref('jogosData').once('value',function(snap){if(snap.val())jogosData=snap.val();renderJogosEditor();});}
+function renderJogosEditor(){
+  var wrap=document.getElementById('jogos-editor');wrap.innerHTML='';
+  FORMATOS_ORDER.forEach(function(fmt){
+    var jogos=jogosData[fmt]||[];
+    var div=document.createElement('div');div.className='jogos-formato';
+    var html='<div class="jogos-formato-title">'+FORMATOS_LABEL[fmt]+'</div>';
+    jogos.forEach(function(j,ji){
+      html+='<div class="jogo-slot" id="jslot-'+fmt+'-'+ji+'">'
+        +'<input type="text" placeholder="Nome..." value="'+escHtml(j.nome)+'" onchange="jogosData[\''+fmt+'\']['+ji+'].nome=this.value" />'
+        +'<input type="text" class="link" placeholder="Link..." value="'+escHtml(j.link)+'" onchange="jogosData[\''+fmt+'\']['+ji+'].link=this.value" />'
+        +'<button class="jogo-free-btn'+(j.free?' active':'')+'" onclick="toggleJogoFree(\''+fmt+'\','+ji+',this)">'+(j.free?'FREE ✓':'FREE')+'</button>'
+        +'<button class="jogo-remove-btn" onclick="removeJogo(\''+fmt+'\','+ji+')">✕</button>'
+        +'</div>';
+    });
+    html+='<button class="jogos-add-btn" onclick="addJogo(\''+fmt+'\')">+ ADICIONAR JOGO</button>';
+    div.innerHTML=html;wrap.appendChild(div);
+  });
+}
+function toggleJogoFree(fmt,ji,btn){jogosData[fmt][ji].free=!jogosData[fmt][ji].free;btn.classList.toggle('active',jogosData[fmt][ji].free);btn.textContent=jogosData[fmt][ji].free?'FREE ✓':'FREE';}
+function addJogo(fmt){if(!jogosData[fmt])jogosData[fmt]=[];jogosData[fmt].push({nome:'',link:'',free:false});renderJogosEditor();}
+function removeJogo(fmt,ji){jogosData[fmt].splice(ji,1);renderJogosEditor();}
+function admSaveJogos(){
+  FORMATOS_ORDER.forEach(function(fmt){(jogosData[fmt]||[]).forEach(function(j,ji){var slot=document.getElementById('jslot-'+fmt+'-'+ji);if(!slot)return;var inp=slot.querySelectorAll('input');if(inp[0])j.nome=inp[0].value.trim();if(inp[1])j.link=inp[1].value.trim();});});
+  db.ref('jogosData').set(jogosData).then(function(){showToast('✓ Jogos salvos!');});
+}
 
+// ── RODADAS ──
+var rodadasData=[];
+var BADGE_CLASS={'5x5':'r5x5','3x3':'r3x3','2x2':'r3x3','individual':'rind'};
+function admLoadRodadas(){db.ref('rodadasData').once('value',function(snap){if(snap.val())rodadasData=snap.val();renderRodadasEditor();});}
+function renderRodadasEditor(){
+  var wrap=document.getElementById('rodadas-editor');wrap.innerHTML='';
+  rodadasData.forEach(function(rodada,ri){
+    var div=document.createElement('div');div.className='rodada-card';
+    var html='<div class="rodada-header"><span class="rodada-title">RODADA '+(ri+1)+'</span><button class="rodada-remove-btn" onclick="removeRodada('+ri+')">REMOVER</button></div><div id="partidas-wrap-'+ri+'">';
+    (rodada.partidas||[]).forEach(function(p,pi){html+=buildPartidaHTML(ri,pi,p);});
+    html+='</div><button class="partidas-add-btn" onclick="addPartida('+ri+')">+ ADICIONAR PARTIDA</button>';
+    div.innerHTML=html;wrap.appendChild(div);
+  });
+}
+function buildPartidaHTML(ri,pi,p){
+  var fmt=p.formato||'';
+  var grupos=gruposData.map(function(g){return g.title;});
+  var jogosOpts=fmt?(jogosData[fmt]||[]).map(function(j){return j.nome;}).filter(Boolean):[];
+  var fmtOpts='<option value="">— Formato —</option>'+FORMATOS_ORDER.map(function(f){return'<option value="'+f+'"'+(fmt===f?' selected':'')+'>'+FORMATOS_LABEL[f]+'</option>';}).join('');
+  var gOptsA='<option value="">— Time A —</option>'+grupos.map(function(g){return'<option value="'+escHtml(g)+'"'+(p.timeA===g?' selected':'')+'>'+escHtml(g)+'</option>';}).join('');
+  var gOptsB='<option value="">— Time B —</option>'+grupos.map(function(g){return'<option value="'+escHtml(g)+'"'+(p.timeB===g?' selected':'')+'>'+escHtml(g)+'</option>';}).join('');
+  var jOpts=function(val){return'<option value="">— Jogo —</option>'+jogosOpts.map(function(j){return'<option value="'+escHtml(j)+'"'+(val===j?' selected':'')+'>'+escHtml(j)+'</option>';}).join('');};
+  return'<div class="partida-card" id="partida-'+ri+'-'+pi+'">'
+    +'<div class="partida-header"><span class="partida-title">PARTIDA '+(pi+1)+'</span><button class="partida-remove-btn" onclick="removePartida('+ri+','+pi+')">✕</button></div>'
+    +'<select class="partida-select" onchange="setPartidaFormato('+ri+','+pi+',this.value)">'+fmtOpts+'</select>'
+    +(fmt
+      ?'<div class="partida-times"><select class="partida-select" onchange="rodadasData['+ri+'].partidas['+pi+'].timeA=this.value">'+gOptsA+'</select><select class="partida-select" onchange="rodadasData['+ri+'].partidas['+pi+'].timeB=this.value">'+gOptsB+'</select></div>'
+       +'<div class="partida-jogos">'
+       +'<div class="partida-jogo-row"><span class="partida-jogo-label">JOGO A:</span><select class="partida-select" style="margin-bottom:0" onchange="rodadasData['+ri+'].partidas['+pi+'].jogoA=this.value">'+jOpts(p.jogoA)+'</select></div>'
+       +'<div class="partida-jogo-row"><span class="partida-jogo-label">JOGO B:</span><select class="partida-select" style="margin-bottom:0" onchange="rodadasData['+ri+'].partidas['+pi+'].jogoB=this.value">'+jOpts(p.jogoB)+'</select></div>'
+       +'<div class="partida-jogo-row"><span class="partida-jogo-label">DESEMP:</span><select class="partida-select" style="margin-bottom:0" onchange="rodadasData['+ri+'].partidas['+pi+'].jogoD=this.value">'+jOpts(p.jogoD)+'</select></div>'
+       +'</div>'
+      :'')
+    +'</div>';
+}
+function setPartidaFormato(ri,pi,fmt){rodadasData[ri].partidas[pi]={formato:fmt,timeA:'',timeB:'',jogoA:'',jogoB:'',jogoD:''};var el=document.getElementById('partida-'+ri+'-'+pi);if(el)el.outerHTML=buildPartidaHTML(ri,pi,rodadasData[ri].partidas[pi]);}
+function addPartida(ri){if(!rodadasData[ri].partidas)rodadasData[ri].partidas=[];rodadasData[ri].partidas.push({formato:'',timeA:'',timeB:'',jogoA:'',jogoB:'',jogoD:''});renderRodadasEditor();}
+function removePartida(ri,pi){rodadasData[ri].partidas.splice(pi,1);renderRodadasEditor();}
+function admAddRodada(){rodadasData.push({partidas:[]});renderRodadasEditor();}
+function removeRodada(ri){rodadasData.splice(ri,1);renderRodadasEditor();}
+function admSaveRodadas(){db.ref('rodadasData').set(rodadasData).then(function(){showToast('✓ Rodadas salvas!');});}
+  
 function toggleVerMais(){
   var more=document.getElementById('info-more'),btn=document.getElementById('btn-ver-mais');
   var open=more.style.display!=='none'&&more.style.display!=='';
