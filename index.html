@@ -838,22 +838,18 @@ function removeJogo(fmt,ji){jogosData[fmt].splice(ji,1);renderJogosEditor();}
   });
 }
 function updateRodadasDisplay(){
-  var wrap=document.getElementById('rounds-list-display');
-  var faqWrap=document.getElementById('faq-rodadas-content');
-  if(!rodadasData||rodadasData.length===0)return;
-  var html=rodadasData.map(function(rodada,ri){
+  var wrap=document.getElementById('rounds-list-display');if(!wrap)return;
+  if(!rodadasData||rodadasData.length===0){
+    wrap.innerHTML='<div style="font-size:13px;color:var(--text-dim);letter-spacing:1px;padding:8px 0;">A definir</div>';
+    return;
+  }
+  wrap.innerHTML=rodadasData.map(function(rodada,ri){
     return(rodada.partidas||[]).map(function(p){
       var fmt=p.formato||'',bc=BADGE_CLASS[fmt]||'r5x5',lb=FORMATOS_LABEL[fmt]||fmt;
       var desc='<b>Rodada '+(ri+1)+':</b> '+(p.timeA||'?')+' vs '+(p.timeB||'?');
       return'<div class="round-item"><div class="round-badge '+bc+'">'+lb+'</div><div class="round-desc">'+desc+'</div></div>';
     }).join('');
   }).join('');
-  if(wrap)wrap.innerHTML=html;
-  if(faqWrap)faqWrap.innerHTML=html;
-}
-function admSaveJogos(){
-  FORMATOS_ORDER.forEach(function(fmt){(jogosData[fmt]||[]).forEach(function(j,ji){var slot=document.getElementById('jslot-'+fmt+'-'+ji);if(!slot)return;var inp=slot.querySelectorAll('input');if(inp[0])j.nome=inp[0].value.trim();if(inp[1])j.link=inp[1].value.trim();});});
-  db.ref('jogosData').set(jogosData).then(function(){updateJogosDisplay();showToast('✓ Jogos salvos!');});
 }
 
 // ── RODADAS ──
