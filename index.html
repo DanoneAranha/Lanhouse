@@ -830,23 +830,26 @@ function addJogo(fmt){if(!jogosData[fmt])jogosData[fmt]=[];jogosData[fmt].push({
 function removeJogo(fmt,ji){jogosData[fmt].splice(ji,1);renderJogosEditor();}
   function updateJogosDisplay(){
   var ids={'5x5':'games-tags-5x5','3x3':'games-tags-3x3','2x2':'games-tags-2x2','individual':'games-tags-individual'};
+  var faqIds={'5x5':'faq-tags-5x5','3x3':'faq-tags-3x3','2x2':'faq-tags-2x2','individual':'faq-tags-individual'};
   FORMATOS_ORDER.forEach(function(fmt){
-    var el=document.getElementById(ids[fmt]);if(!el)return;
-    el.innerHTML=(jogosData[fmt]||[]).filter(function(j){return j.nome;}).map(function(j){
-      return'<a class="gtag" href="'+escHtml(j.link||'#')+'" target="_blank" rel="noopener">'+escHtml(j.nome)+(j.free?'<span class="gtag-free">FREE</span>':'')+'</a>';
-    }).join('');
+    var tags=(jogosData[fmt]||[]).filter(function(j){return j.nome;}).map(function(j){return escHtml(j.nome);}).join(' · ');
+    var el=document.getElementById(ids[fmt]);if(el)el.innerHTML=(jogosData[fmt]||[]).filter(function(j){return j.nome;}).map(function(j){return'<a class="gtag" href="'+escHtml(j.link||'#')+'" target="_blank" rel="noopener">'+escHtml(j.nome)+(j.free?'<span class="gtag-free">FREE</span>':'')+'</a>';}).join('');
+    var faq=document.getElementById(faqIds[fmt]);if(faq)faq.textContent=tags;
   });
 }
 function updateRodadasDisplay(){
-  var wrap=document.getElementById('rounds-list-display');if(!wrap)return;
+  var wrap=document.getElementById('rounds-list-display');
+  var faqWrap=document.getElementById('faq-rodadas-content');
   if(!rodadasData||rodadasData.length===0)return;
-  wrap.innerHTML=rodadasData.map(function(rodada,ri){
+  var html=rodadasData.map(function(rodada,ri){
     return(rodada.partidas||[]).map(function(p){
       var fmt=p.formato||'',bc=BADGE_CLASS[fmt]||'r5x5',lb=FORMATOS_LABEL[fmt]||fmt;
       var desc='<b>Rodada '+(ri+1)+':</b> '+(p.timeA||'?')+' vs '+(p.timeB||'?');
       return'<div class="round-item"><div class="round-badge '+bc+'">'+lb+'</div><div class="round-desc">'+desc+'</div></div>';
     }).join('');
   }).join('');
+  if(wrap)wrap.innerHTML=html;
+  if(faqWrap)faqWrap.innerHTML=html;
 }
 function admSaveJogos(){
   FORMATOS_ORDER.forEach(function(fmt){(jogosData[fmt]||[]).forEach(function(j,ji){var slot=document.getElementById('jslot-'+fmt+'-'+ji);if(!slot)return;var inp=slot.querySelectorAll('input');if(inp[0])j.nome=inp[0].value.trim();if(inp[1])j.link=inp[1].value.trim();});});
@@ -1012,10 +1015,15 @@ document.addEventListener('DOMContentLoaded',function(){initCanvas();loadFirebas
   <div class="modal-box">
     <div class="modal-header"><span class="modal-title">📘 REGULAMENTO</span><button class="modal-close" onclick="closeFaq()">✕</button></div>
     <div class="modal-body">
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🎮 Formatos de Jogo <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-format-row"><span class="faq-fmt-badge">5×5</span><span>CS2 · R6 · Valorant · Fortnite · Black Ops 2 MP · Chivalry 2</span></div><div class="faq-format-row"><span class="faq-fmt-badge">3×3</span><span>Rocket League · Left 4 Dead 2 · Garry's Mod · Fortnite · Black Ops 2 MP</span></div><div class="faq-format-row"><span class="faq-fmt-badge">2×2</span><span>Gang Beasts · Minecraft · Transformice · Worms · Castle Crashers · BattleBlock Theater</span></div><div class="faq-format-row"><span class="faq-fmt-badge">SOLO</span><span>Among Us · Minecraft PvP · Clone Hero · MK 10/11 · Fortnite · BO2 FFA · Chivalry 2 FFA</span></div></div></div>
+     <div class="faq-a" id="faq-formatos-content">
+  <div class="faq-format-row"><span class="faq-fmt-badge">5×5</span><div id="faq-tags-5x5"></div></div>
+  <div class="faq-format-row"><span class="faq-fmt-badge">3×3</span><div id="faq-tags-3x3"></div></div>
+  <div class="faq-format-row"><span class="faq-fmt-badge">2×2</span><div id="faq-tags-2x2"></div></div>
+  <div class="faq-format-row"><span class="faq-fmt-badge">SOLO</span><div id="faq-tags-individual"></div></div>
+</div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🏗️ Estrutura dos Jogos <span class="faq-arrow">▾</span></button><div class="faq-a"><p>A ordem evita que algum grupo fique parado:</p><ol><li>Primeiro os embates <b>5×5</b></li><li>Em seguida, <b>3×3 e 2×2 simultâneos</b></li><li>O <b>individual</b> acontece entre os jogadores do grupo parado</li></ol><p style="margin-top:10px">Cada embate é composto por <b>2 jogos</b> — um de cada time. Em caso de 1×1 → desempate em jogo neutro.</p></div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🏆 Sistema de Pontuação <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-score-row"><span class="score-badge win">+1</span> Cada vitória</div><div class="faq-score-row"><span class="score-badge sweep">+3</span> Vitória nos dois jogos</div><div class="faq-score-row"><span class="score-badge tie">1×1</span> Empate → vencedor leva 2 pontos</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">📋 Rodadas — 4 Grupos <span class="faq-arrow">▾</span></button><div class="faq-a"><div class="faq-round"><span class="round-badge r5x5">5×5</span><b>Rodada 1:</b> A vs B · C vs D</div><div class="faq-round"><span class="round-badge r3x3">3+2</span><b>Rodada 2:</b> A×C · A×B · B×D · D×C</div><div class="faq-round"><span class="round-badge r5x5">5×5</span><b>Rodada 3:</b> A vs D · B vs C</div><div class="faq-round"><span class="round-badge r3x3">3+2</span><b>Rodada 4:</b> A×B · C×D · A×D · B×C</div><div class="faq-round"><span class="round-badge r5x5">5×5</span><b>Rodada 5:</b> C vs A · D vs B</div><div class="faq-round"><span class="round-badge r3x3">3+2</span><b>Rodada 6:</b> A×D · B×C · A×C · B×D</div><div class="faq-round"><span class="round-badge rind">SOLO</span><b>Rodada 7:</b> Individual interno de cada grupo</div></div></div>
+      <div class="faq-a" id="faq-rodadas-content"></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">ℹ️ Regras Gerais <span class="faq-arrow">▾</span></button><div class="faq-a"><ul><li>Todos precisam ter o jogo comprado <b>(exceto Minecraft)</b></li><li>Comida e bebida individual 🍔🥤</li><li>Horário: <b>Corujão — 22h às 06h</b></li></ul></div></div>
     </div>
   </div>
