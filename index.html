@@ -6,258 +6,383 @@
 <title>Reserva — Quest Lan House</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#080c10;--surface:#0d1117;--surface2:#131920;--border:#1e2d3d;--accent:#00d4ff;--accent3:#7fff00;--text:#c9d1d9;--text-dim:#586069;--extreme:#a0a0a0;--eplus:#3b9eff;--epro:#ff3b3b;}
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden;}
-  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
-
-  /* ── LAYOUT ── */
-  .page-wrap{max-width:1100px;margin:0 auto;padding:40px 24px 60px;position:relative;z-index:1;}
-  .page-header{text-align:center;margin-bottom:40px;}
-
-  /* Desktop: 2 colunas */
-  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
-  .col-left{}
-  .col-right{}
-
-  /* Mobile: 1 coluna */
-  @media(max-width:768px){
-    .two-col{grid-template-columns:1fr;}
-    .col-right{order:-1;} /* formulário primeiro no mobile */
+  :root{
+    --bg:#060a0e;--surface:#0d1117;--surface2:#111820;--surface3:#161f28;
+    --border:#1a2a3a;--border2:#243040;
+    --accent:#00d4ff;--accent2:#0099bb;--accent3:#7fff00;
+    --text:#c9d1d9;--text-dim:#4a5568;--text-mid:#7a8fa0;
+    --extreme:#b0b0b0;--eplus:#3b9eff;--epro:#ff3b3b;
+    --gold:#ffd700;
   }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden;}
+
+  /* GRID BG */
+  body::before{content:'';position:fixed;inset:0;
+    background-image:linear-gradient(rgba(0,212,255,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,212,255,0.025) 1px,transparent 1px);
+    background-size:50px 50px;pointer-events:none;z-index:0;}
+
+  /* SCAN LINE EFFECT */
+  body::after{content:'';position:fixed;inset:0;
+    background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
+    pointer-events:none;z-index:0;}
+
+  /* ── ADMIN FIXO ── */
+  #adm-fixed-btn{
+    position:fixed;top:16px;right:16px;z-index:999;
+    background:rgba(255,107,53,0.12);border:1px solid #ff6b35;
+    border-radius:6px;color:#ff6b35;font-family:'Orbitron',monospace;
+    font-size:9px;letter-spacing:2px;padding:8px 14px;cursor:pointer;
+    transition:all 0.2s;backdrop-filter:blur(10px);
+  }
+  #adm-fixed-btn:hover{background:rgba(255,107,53,0.25);}
+
+  /* ── WRAPPER ── */
+  .page-wrap{max-width:860px;margin:0 auto;padding:0 20px 60px;position:relative;z-index:1;}
 
   /* ── HEADER ── */
-  .header-tag{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:4px;margin-bottom:12px;animation:rainbow 3s linear infinite;animation-delay:0.3s;}
-  .page-header h1{font-family:'Orbitron',monospace;font-size:32px;font-weight:900;color:#fff;letter-spacing:2px;margin-bottom:8px;}
-  .page-header h1 span{animation:rainbow 3s linear infinite;}
-  .page-header p{font-size:14px;letter-spacing:1px;animation:rainbow 3s linear infinite;animation-delay:0.5s;}
-  .divider{width:60px;height:2px;margin:16px auto;animation:rainbow-bg 3s linear infinite;}
-  @keyframes rainbow{0%{color:#ff0000;text-shadow:0 0 20px #ff000088;}15%{color:#ff8800;text-shadow:0 0 20px #ff880088;}30%{color:#ffff00;text-shadow:0 0 20px #ffff0088;}45%{color:#00ff00;text-shadow:0 0 20px #00ff0088;}60%{color:#00d4ff;text-shadow:0 0 20px #00d4ff88;}75%{color:#8800ff;text-shadow:0 0 20px #8800ff88;}90%{color:#ff00cc;text-shadow:0 0 20px #ff00cc88;}100%{color:#ff0000;text-shadow:0 0 20px #ff000088;}}
-  @keyframes rainbow-bg{0%{background:linear-gradient(90deg,#ff0000,transparent);}15%{background:linear-gradient(90deg,#ff8800,transparent);}30%{background:linear-gradient(90deg,#ffff00,transparent);}45%{background:linear-gradient(90deg,#00ff00,transparent);}60%{background:linear-gradient(90deg,#00d4ff,transparent);}75%{background:linear-gradient(90deg,#8800ff,transparent);}90%{background:linear-gradient(90deg,#ff00cc,transparent);}100%{background:linear-gradient(90deg,#ff0000,transparent);}}
+  .site-header{
+    text-align:center;padding:60px 0 40px;
+    border-bottom:1px solid var(--border);margin-bottom:0;
+  }
+  .header-tag{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;
+    color:var(--accent);margin-bottom:14px;opacity:0.7;animation:fadein 1s ease;}
+  .site-header h1{font-family:'Orbitron',monospace;font-size:42px;font-weight:900;
+    color:#fff;letter-spacing:3px;margin-bottom:8px;animation:fadein 0.8s ease;}
+  .site-header h1 span{
+    background:linear-gradient(90deg,var(--accent),#7b2fff);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    animation:gradshift 4s linear infinite;}
+  @keyframes gradshift{0%{filter:hue-rotate(0deg);}100%{filter:hue-rotate(360deg);}}
+  .site-header p{font-size:13px;letter-spacing:2px;color:var(--text-mid);animation:fadein 1.2s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
 
-  /* ── SPECS ── */
-  .specs-section{margin-bottom:20px;}
-  .specs-title{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:var(--accent);margin-bottom:10px;opacity:0.7;}
-  .specs-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
-  .spec-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 10px;position:relative;overflow:hidden;}
-  .spec-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-  .spec-card.extreme::before{background:var(--extreme);}
-  .spec-card.eplus::before{background:var(--eplus);}
-  .spec-card.epro::before{background:var(--epro);}
-  .spec-name{font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1px;margin-bottom:8px;}
-  .spec-card.extreme .spec-name{color:var(--extreme);}
-  .spec-card.eplus .spec-name{color:var(--eplus);}
-  .spec-card.epro .spec-name{color:var(--epro);}
-  .spec-item{font-size:10px;color:var(--text-dim);padding:2px 0;line-height:1.4;}
-  .spec-item b{color:var(--text);}
-  .spec-price{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#fff;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);}
+  /* ── EVENTO BANNER ── */
+  .evento-banner{
+    background:linear-gradient(135deg,rgba(0,212,255,0.06),rgba(0,80,120,0.12));
+    border:1px solid rgba(0,212,255,0.2);border-radius:12px;
+    padding:28px 32px;margin:28px 0;position:relative;overflow:hidden;
+  }
+  .evento-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--accent),transparent);}
+  .evento-banner-title{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:3px;
+    color:var(--accent);margin-bottom:18px;opacity:0.8;}
+  .evento-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .evento-stat{text-align:center;padding:14px 8px;background:rgba(0,0,0,0.3);
+    border-radius:8px;border:1px solid var(--border);}
+  .evento-stat-icon{font-size:18px;margin-bottom:6px;}
+  .evento-stat-label{font-family:'Orbitron',monospace;font-size:7px;letter-spacing:2px;
+    color:var(--text-dim);margin-bottom:4px;}
+  .evento-stat-val{font-size:13px;font-weight:700;color:#fff;line-height:1.3;}
+  .evento-obs{font-size:11px;color:var(--text-dim);margin-top:16px;padding-top:14px;
+    border-top:1px solid var(--border);line-height:1.7;}
+  @media(max-width:580px){.evento-stats{grid-template-columns:1fr 1fr;}}
 
-  /* ── AVAILABILITY ── */
-  .availability-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
-  .avail-badge{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:4px;border:1px solid;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:1px;}
-  .avail-badge.extreme{border-color:var(--extreme);background:rgba(160,160,160,0.08);}
-  .avail-badge.eplus{border-color:var(--eplus);background:rgba(59,158,255,0.08);}
-  .avail-badge.epro{border-color:var(--epro);background:rgba(255,59,59,0.08);}
-  .avail-dot{width:8px;height:8px;border-radius:50%;animation:pulse 2s infinite;}
+  /* ── VAGAS BAR ── */
+  .vagas-bar{
+    display:flex;gap:10px;margin:0 0 28px;flex-wrap:wrap;
+    padding:16px 20px;background:var(--surface);border-radius:10px;
+    border:1px solid var(--border);
+  }
+  .vagas-bar-title{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;
+    color:var(--text-dim);width:100%;margin-bottom:4px;}
+  .avail-badge{display:flex;align-items:center;gap:8px;padding:8px 16px;
+    border-radius:6px;border:1px solid;font-family:'Orbitron',monospace;
+    font-size:10px;letter-spacing:1px;flex:1;min-width:100px;}
+  .avail-badge.extreme{border-color:var(--extreme);background:rgba(176,176,176,0.06);}
+  .avail-badge.eplus{border-color:var(--eplus);background:rgba(59,158,255,0.06);}
+  .avail-badge.epro{border-color:var(--epro);background:rgba(255,59,59,0.06);}
+  .avail-dot{width:7px;height:7px;border-radius:50%;animation:pulse 2s infinite;flex-shrink:0;}
   .extreme .avail-dot{background:var(--extreme);box-shadow:0 0 6px var(--extreme);}
   .eplus .avail-dot{background:var(--eplus);box-shadow:0 0 6px var(--eplus);}
   .epro .avail-dot{background:var(--epro);box-shadow:0 0 6px var(--epro);}
-  .avail-count{font-weight:700;font-size:14px;}
+  .avail-label{flex:1;font-size:9px;color:var(--text-mid);}
+  .avail-count{font-weight:900;font-size:16px;}
   .extreme .avail-count{color:var(--extreme);}
   .eplus .avail-count{color:var(--eplus);}
   .epro .avail-count{color:var(--epro);}
-  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
 
-  /* ── CARDS ── */
-  .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:24px;margin-bottom:16px;position:relative;overflow:hidden;}
-  .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);}
-  .step-label{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:var(--accent);margin-bottom:6px;opacity:0.7;}
-  .field-label{font-size:13px;font-weight:600;letter-spacing:2px;color:#fff;text-transform:uppercase;margin-bottom:10px;}
-  input[type="text"],input[type="password"],input[type="email"]{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:12px 16px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:16px;letter-spacing:1px;outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
-  input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,212,255,0.1);}
+  /* ── SECTION LABELS ── */
+  .section-label{
+    font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;
+    color:var(--accent);opacity:0.6;margin-bottom:6px;display:block;
+  }
+
+  /* ── FORM CARD ── */
+  .form-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:12px;padding:28px;margin-bottom:16px;position:relative;overflow:hidden;
+  }
+  .form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--accent),transparent);}
+  .form-card-title{font-size:14px;font-weight:700;letter-spacing:2px;
+    color:#fff;text-transform:uppercase;margin-bottom:18px;}
+  .form-card-step{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;
+    color:var(--accent);opacity:0.7;margin-bottom:5px;}
+
+  input[type="text"],input[type="password"],input[type="email"]{
+    width:100%;background:var(--surface2);border:1px solid var(--border2);
+    border-radius:6px;padding:13px 16px;color:#fff;
+    font-family:'Rajdhani',sans-serif;font-size:15px;letter-spacing:1px;
+    outline:none;transition:border-color 0.2s,box-shadow 0.2s;
+  }
+  input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,212,255,0.08);}
   input::placeholder{color:var(--text-dim);}
+  .input-group{display:flex;flex-direction:column;gap:10px;}
 
-  /* ── CATEGORIES ── */
+  /* ── CATEGORIAS ── */
   .categories{display:flex;flex-direction:column;gap:10px;}
   .cat-option{position:relative;cursor:pointer;}
   .cat-option input[type="radio"]{position:absolute;opacity:0;pointer-events:none;}
-  .cat-card{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);transition:all 0.2s;cursor:pointer;}
-  .cat-card:hover{border-color:#2a3f52;}
-  .cat-option input:checked+.cat-card.extreme{border-color:var(--extreme);background:rgba(160,160,160,0.1);box-shadow:0 0 12px rgba(160,160,160,0.15);}
-  .cat-option input:checked+.cat-card.eplus{border-color:var(--eplus);background:rgba(59,158,255,0.1);box-shadow:0 0 12px rgba(59,158,255,0.15);}
-  .cat-option input:checked+.cat-card.epro{border-color:var(--epro);background:rgba(255,59,59,0.1);box-shadow:0 0 12px rgba(255,59,59,0.15);}
-  .cat-left{display:flex;align-items:center;gap:12px;}
-  .cat-icon{width:36px;height:36px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:16px;}
-  .cat-card.extreme .cat-icon{background:rgba(160,160,160,0.15);}
-  .cat-card.eplus .cat-icon{background:rgba(59,158,255,0.15);}
-  .cat-card.epro .cat-icon{background:rgba(255,59,59,0.12);}
+  .cat-card{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 20px;border:1px solid var(--border2);border-radius:8px;
+    background:var(--surface2);transition:all 0.2s;cursor:pointer;
+  }
+  .cat-card:hover{border-color:var(--border);background:var(--surface3);}
+  .cat-option input:checked+.cat-card.extreme{border-color:var(--extreme);background:rgba(176,176,176,0.08);box-shadow:0 0 16px rgba(176,176,176,0.1);}
+  .cat-option input:checked+.cat-card.eplus{border-color:var(--eplus);background:rgba(59,158,255,0.08);box-shadow:0 0 16px rgba(59,158,255,0.1);}
+  .cat-option input:checked+.cat-card.epro{border-color:var(--epro);background:rgba(255,59,59,0.08);box-shadow:0 0 16px rgba(255,59,59,0.1);}
+  .cat-left{display:flex;align-items:center;gap:14px;}
+  .cat-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+  .cat-card.extreme .cat-icon{background:rgba(176,176,176,0.1);}
+  .cat-card.eplus .cat-icon{background:rgba(59,158,255,0.1);}
+  .cat-card.epro .cat-icon{background:rgba(255,59,59,0.08);}
   .cat-name{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:1px;}
   .cat-card.extreme .cat-name{color:var(--extreme);}
   .cat-card.eplus .cat-name{color:var(--eplus);}
   .cat-card.epro .cat-name{color:var(--epro);}
   .cat-sub{font-size:11px;color:var(--text-dim);margin-top:2px;letter-spacing:1px;}
   .cat-right{text-align:right;}
-  .cat-price{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:#fff;}
-  .cat-slots{font-size:11px;color:var(--text-dim);margin-top:2px;letter-spacing:1px;}
+  .cat-price{font-family:'Orbitron',monospace;font-size:17px;font-weight:700;color:#fff;}
+  .cat-slots{font-size:11px;color:var(--text-dim);margin-top:3px;letter-spacing:1px;}
   .cat-slots.soldout{color:#ff4444;}
-  .cat-option.disabled .cat-card{opacity:0.4;cursor:not-allowed;filter:grayscale(0.5);}
+  .cat-option.disabled .cat-card{opacity:0.35;cursor:not-allowed;filter:grayscale(0.6);}
 
-  /* ── PC GRID + MAP ── */
-  .pc-step-wrap{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;}
-  .pc-grid-card{flex:1;min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px;position:relative;overflow:hidden;}
-  .pc-grid-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);}
-  .pc-map-panel{flex-shrink:0;width:140px;}
-  .pc-map-label{font-family:'Orbitron',monospace;font-size:7px;letter-spacing:2px;color:var(--accent);margin-bottom:6px;opacity:0.7;}
+  /* ── PC STEP ── */
+  .pc-step-wrap{display:flex;gap:16px;align-items:flex-start;}
+  .pc-grid-card{
+    flex:1;min-width:0;background:var(--surface);border:1px solid var(--border);
+    border-radius:12px;padding:20px;position:relative;overflow:hidden;
+  }
+  .pc-grid-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--accent),transparent);}
+  .pc-map-panel{flex-shrink:0;width:150px;}
+  .pc-map-label{font-family:'Orbitron',monospace;font-size:7px;letter-spacing:2px;
+    color:var(--accent);margin-bottom:8px;opacity:0.7;}
   .pc-map-wrap{position:relative;display:block;width:100%;}
-  .pc-map-wrap img{width:100%;display:block;border-radius:6px;border:1px solid var(--border);}
-  .pc-dot{position:absolute;width:12px;height:12px;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;transition:all 0.3s;opacity:0;}
+  .pc-map-wrap img{width:100%;display:block;border-radius:8px;border:1px solid var(--border);}
+  .pc-dot{position:absolute;width:12px;height:12px;border-radius:50%;
+    transform:translate(-50%,-50%);pointer-events:none;transition:all 0.3s;opacity:0;}
   .pc-dot.active{opacity:1;animation:dotpulse 1s infinite;}
   .pc-dot.extreme{background:var(--extreme);box-shadow:0 0 8px 3px var(--extreme);}
   .pc-dot.eplus{background:var(--eplus);box-shadow:0 0 8px 3px var(--eplus);}
   .pc-dot.epro{background:var(--epro);box-shadow:0 0 8px 3px var(--epro);}
-  @keyframes dotpulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1;}50%{transform:translate(-50%,-50%) scale(1.6);opacity:0.6;}}
-  @media(max-width:479px){.pc-step-wrap{flex-direction:column;}.pc-map-panel{width:100%;}}
+  @keyframes dotpulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1;}50%{transform:translate(-50%,-50%) scale(1.7);opacity:0.5;}}
+  @media(max-width:480px){.pc-step-wrap{flex-direction:column;}.pc-map-panel{width:100%;}}
 
-  .pc-grid-label{font-size:12px;color:var(--text-dim);margin-bottom:12px;letter-spacing:1px;}
+  .pc-grid-label{font-size:12px;color:var(--text-dim);margin-bottom:14px;letter-spacing:1px;}
   .pc-grid{display:flex;flex-wrap:wrap;gap:8px;}
-  .pc-btn{width:52px;height:52px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);font-family:'Orbitron',monospace;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;padding:4px;}
-  .pc-btn:hover:not(.taken):not(.pending){border-color:var(--accent);color:var(--accent);}
-  .pc-btn.selected.extreme{border-color:var(--extreme);background:rgba(160,160,160,0.2);color:var(--extreme);box-shadow:0 0 10px rgba(160,160,160,0.3);}
-  .pc-btn.selected.eplus{border-color:var(--eplus);background:rgba(59,158,255,0.2);color:var(--eplus);box-shadow:0 0 10px rgba(59,158,255,0.3);}
-  .pc-btn.selected.epro{border-color:var(--epro);background:rgba(255,59,59,0.2);color:var(--epro);box-shadow:0 0 10px rgba(255,59,59,0.3);}
-  .pc-btn.taken{border-color:#1a2030;background:#0a0e14;color:#4a6070;cursor:not-allowed;}
-  .pc-btn.pending{border-color:#b8860b;background:rgba(184,134,11,0.12);color:#ffd700;cursor:not-allowed;}
-  .pc-reserved-name{font-family:'Rajdhani',sans-serif;font-size:7px;color:#3a5060;max-width:48px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;line-height:1;}
-  .legend{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;}
-  .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-dim);letter-spacing:1px;}
+  .pc-btn{
+    width:54px;height:54px;border:1px solid var(--border2);border-radius:8px;
+    background:var(--surface2);color:var(--text);font-family:'Orbitron',monospace;
+    font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;
+    display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;padding:4px;
+  }
+  .pc-btn:hover:not(.taken):not(.pending){border-color:var(--accent);color:var(--accent);background:rgba(0,212,255,0.06);}
+  .pc-btn.selected.extreme{border-color:var(--extreme);background:rgba(176,176,176,0.18);color:var(--extreme);box-shadow:0 0 12px rgba(176,176,176,0.25);}
+  .pc-btn.selected.eplus{border-color:var(--eplus);background:rgba(59,158,255,0.18);color:var(--eplus);box-shadow:0 0 12px rgba(59,158,255,0.25);}
+  .pc-btn.selected.epro{border-color:var(--epro);background:rgba(255,59,59,0.18);color:var(--epro);box-shadow:0 0 12px rgba(255,59,59,0.25);}
+  .pc-btn.taken{border-color:rgba(26,40,50,0.8);background:rgba(6,10,14,0.9);color:#2a3a45;cursor:not-allowed;}
+  .pc-btn.pending{border-color:rgba(184,134,11,0.5);background:rgba(184,134,11,0.08);color:#ffd700;cursor:not-allowed;}
+  .pc-reserved-name{font-family:'Rajdhani',sans-serif;font-size:7px;color:#2a4050;max-width:50px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;line-height:1;}
+  .legend{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap;}
+  .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-dim);letter-spacing:0.5px;}
   .legend-box{width:14px;height:14px;border-radius:3px;border:1px solid;flex-shrink:0;}
 
   /* ── SUMMARY ── */
-  .summary{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:16px;margin-bottom:16px;}
-  .summary-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:14px;letter-spacing:1px;}
-  .summary-row:not(:last-child){border-bottom:1px solid var(--border);}
-  .summary-row .label{color:var(--text-dim);}
+  .summary{
+    background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.15);
+    border-radius:10px;padding:20px;margin-bottom:16px;
+  }
+  .summary-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:14px;letter-spacing:1px;}
+  .summary-row:not(:last-child){border-bottom:1px solid rgba(0,212,255,0.08);}
+  .summary-row .label{color:var(--text-mid);}
   .summary-row .value{color:#fff;font-weight:600;}
-  .summary-row.total .label{color:#fff;font-family:'Orbitron',monospace;font-size:12px;}
-  .summary-row.total .value{font-family:'Orbitron',monospace;font-size:18px;color:var(--accent3);}
-  .btn-pay{width:100%;padding:16px;background:linear-gradient(135deg,#00b4d8,#00d4ff);border:none;border-radius:6px;color:#000;font-family:'Orbitron',monospace;font-size:14px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all 0.2s;}
-  .btn-pay:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,212,255,0.3);}
+  .summary-row.total .label{color:#fff;font-family:'Orbitron',monospace;font-size:11px;}
+  .summary-row.total .value{font-family:'Orbitron',monospace;font-size:20px;color:var(--accent3);}
 
-  /* ── INTEREST ── */
-  .interest-section{margin-top:8px;margin-bottom:8px;}
-  .btn-interest{width:100%;padding:13px 16px;background:rgba(127,255,0,0.06);border:1px dashed rgba(127,255,0,0.3);border-radius:6px;color:rgba(127,255,0,0.7);font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all 0.2s;text-align:center;}
-  .btn-interest:hover{background:rgba(127,255,0,0.1);border-color:var(--accent3);color:var(--accent3);}
+  .btn-pay{
+    width:100%;padding:17px;background:linear-gradient(135deg,#007fa8,var(--accent));
+    border:none;border-radius:8px;color:#000;font-family:'Orbitron',monospace;
+    font-size:13px;font-weight:900;letter-spacing:3px;cursor:pointer;transition:all 0.2s;
+  }
+  .btn-pay:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,212,255,0.25);}
+
+  /* ── INTERESSE ── */
+  .btn-interest{
+    width:100%;padding:14px 16px;background:rgba(127,255,0,0.05);
+    border:1px dashed rgba(127,255,0,0.25);border-radius:8px;
+    color:rgba(127,255,0,0.6);font-family:'Orbitron',monospace;font-size:10px;
+    font-weight:700;letter-spacing:1px;cursor:pointer;transition:all 0.2s;text-align:center;
+    margin-bottom:12px;
+  }
+  .btn-interest:hover{background:rgba(127,255,0,0.09);border-color:var(--accent3);color:var(--accent3);}
+
   .error-msg{color:#ff6b6b;font-size:12px;letter-spacing:1px;margin-top:6px;display:none;}
   .error-msg.visible{display:block;}
 
-  /* ── INFO CARDS ── */
-  .info-section{display:flex;flex-direction:column;gap:12px;margin-bottom:16px;}
-  .info-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;position:relative;overflow:hidden;}
+  /* ── BOTÕES EXTRAS ── */
+  .extra-btns{display:flex;gap:10px;margin-bottom:20px;}
+  .btn-extra{
+    flex:1;padding:12px;background:rgba(0,212,255,0.05);
+    border:1px solid rgba(0,212,255,0.15);border-radius:8px;
+    color:var(--accent);font-family:'Orbitron',monospace;font-size:9px;
+    letter-spacing:1px;cursor:pointer;transition:all 0.2s;text-align:center;
+    text-decoration:none;display:flex;align-items:center;justify-content:center;
+  }
+  .btn-extra:hover{background:rgba(0,212,255,0.1);border-color:var(--accent);}
+
+  /* ── SPECS ── */
+  .specs-section{margin-bottom:24px;}
+  .specs-title{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:var(--accent);margin-bottom:12px;opacity:0.6;}
+  .specs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .spec-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 12px;position:relative;overflow:hidden;}
+  .spec-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+  .spec-card.extreme::before{background:var(--extreme);}
+  .spec-card.eplus::before{background:var(--eplus);}
+  .spec-card.epro::before{background:var(--epro);}
+  .spec-name{font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1px;margin-bottom:10px;}
+  .spec-card.extreme .spec-name{color:var(--extreme);}
+  .spec-card.eplus .spec-name{color:var(--eplus);}
+  .spec-card.epro .spec-name{color:var(--epro);}
+  .spec-item{font-size:10px;color:var(--text-dim);padding:2px 0;line-height:1.5;}
+  .spec-item b{color:var(--text);}
+  .spec-price{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:#fff;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);}
+  @media(max-width:480px){.specs-grid{grid-template-columns:1fr;}}
+
+  /* ── INFO SECTION ── */
+  .info-section{display:flex;flex-direction:column;gap:14px;margin-bottom:24px;}
+  .info-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:22px;position:relative;overflow:hidden;}
   .info-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);}
-  .info-card-title{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--accent);margin-bottom:14px;}
-  .info-grid{display:flex;flex-direction:column;gap:10px;}
-  .info-item{display:flex;align-items:flex-start;gap:10px;}
-  .info-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
-  .info-label{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--text-dim);margin-bottom:2px;}
-  .info-val{font-size:14px;color:#fff;font-weight:600;letter-spacing:0.5px;}
-  .info-obs{font-size:12px;color:var(--text-dim);margin-top:14px;padding-top:12px;border-top:1px solid var(--border);line-height:1.6;}
-  .player-grid{display:flex;flex-wrap:wrap;gap:6px;}
-  .player-chip{font-size:12px;padding:5px 10px;border-radius:4px;letter-spacing:0.5px;font-weight:600;}
-  .player-chip.confirmed{background:rgba(127,255,0,0.08);border:1px solid rgba(127,255,0,0.3);color:var(--accent3);}
-  .player-chip.pending{background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.2);color:var(--text-dim);}
-  .groups-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-  .group-box{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:12px;}
-  .group-title{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--accent);margin-bottom:8px;}
+  .info-card-title{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:3px;color:var(--accent);margin-bottom:16px;}
+
+  /* Confirmados */
+  .player-grid{display:flex;flex-wrap:wrap;gap:7px;}
+  .player-chip{font-size:12px;padding:5px 11px;border-radius:5px;letter-spacing:0.5px;font-weight:600;}
+  .player-chip.confirmed{background:rgba(127,255,0,0.07);border:1px solid rgba(127,255,0,0.25);color:var(--accent3);}
+  .player-chip.pending{background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);color:var(--text-dim);}
+
+  /* Grupos */
+  .groups-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .group-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px;}
+  .group-title{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--accent);margin-bottom:10px;}
   .group-player{font-size:12px;color:var(--text);padding:2px 0;}
-  .group-player.empty{color:var(--text-dim);opacity:0.4;}
-  .games-list{display:flex;flex-direction:column;gap:12px;}
-  .games-format{border-bottom:1px solid var(--border);padding-bottom:12px;}
+  .group-player.empty{color:var(--text-dim);opacity:0.3;}
+
+  /* Jogos */
+  .games-list{display:flex;flex-direction:column;gap:14px;}
+  .games-format{border-bottom:1px solid var(--border);padding-bottom:14px;}
   .games-format:last-child{border-bottom:none;padding-bottom:0;}
-  .games-format-title{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:#fff;margin-bottom:8px;}
-  .games-tags{display:flex;flex-wrap:wrap;gap:5px;}
-  .score-list{display:flex;flex-direction:column;gap:8px;}
-  .score-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text);}
-  .score-badge{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;padding:4px 8px;border-radius:4px;min-width:36px;text-align:center;flex-shrink:0;}
-  .score-badge.win{background:rgba(127,255,0,0.1);border:1px solid rgba(127,255,0,0.4);color:var(--accent3);}
-  .score-badge.sweep{background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.4);color:#ffd700;}
-  .score-badge.tie{background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.3);color:var(--accent);}
+  .games-format-title{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:#fff;margin-bottom:10px;}
+  .games-tags{display:flex;flex-wrap:wrap;gap:6px;}
+  a.gtag{text-decoration:none;display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:4px 10px;background:var(--surface2);border:1px solid var(--border2);border-radius:4px;color:var(--text);transition:all 0.2s;}
+  a.gtag:hover{border-color:var(--accent);color:var(--accent);}
+  .gtag-free{font-family:'Orbitron',monospace;font-size:7px;letter-spacing:1px;color:var(--accent3);border:1px solid rgba(127,255,0,0.35);border-radius:2px;padding:1px 3px;}
+
+  /* Pontuação */
+  .score-list{display:flex;flex-direction:column;gap:10px;}
+  .score-item{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--text);}
+  .score-badge{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;padding:5px 9px;border-radius:5px;min-width:38px;text-align:center;flex-shrink:0;}
+  .score-badge.win{background:rgba(127,255,0,0.08);border:1px solid rgba(127,255,0,0.35);color:var(--accent3);}
+  .score-badge.sweep{background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.35);color:var(--gold);}
+  .score-badge.tie{background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.25);color:var(--accent);}
+  .info-obs{font-size:11px;color:var(--text-dim);margin-top:14px;padding-top:12px;border-top:1px solid var(--border);line-height:1.7;}
+
+  /* Rodadas */
   .rounds-list{display:flex;flex-direction:column;gap:8px;}
-  .round-item{display:flex;align-items:flex-start;gap:10px;padding:8px;background:var(--surface2);border-radius:6px;border:1px solid var(--border);}
-  .round-badge{font-family:'Orbitron',monospace;font-size:8px;font-weight:700;letter-spacing:1px;padding:4px 6px;border-radius:3px;text-align:center;flex-shrink:0;min-width:44px;}
-  .round-badge.r5x5{background:rgba(255,59,59,0.12);border:1px solid var(--epro);color:var(--epro);}
-  .round-badge.r3x3{background:rgba(59,158,255,0.1);border:1px solid var(--eplus);color:var(--eplus);}
-  .round-badge.rind{background:rgba(127,255,0,0.08);border:1px solid rgba(127,255,0,0.4);color:var(--accent3);}
+  .round-item{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);}
+  .round-badge{font-family:'Orbitron',monospace;font-size:8px;font-weight:700;letter-spacing:1px;padding:4px 7px;border-radius:4px;text-align:center;flex-shrink:0;min-width:46px;}
+  .round-badge.r5x5{background:rgba(255,59,59,0.1);border:1px solid var(--epro);color:var(--epro);}
+  .round-badge.r3x3{background:rgba(59,158,255,0.08);border:1px solid var(--eplus);color:var(--eplus);}
+  .round-badge.rind{background:rgba(127,255,0,0.06);border:1px solid rgba(127,255,0,0.35);color:var(--accent3);}
   .round-desc{font-size:12px;color:var(--text);line-height:1.6;}
   .round-desc b{color:#fff;}
-  .finals-list{display:flex;flex-direction:column;gap:8px;}
-  .final-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;}
-  .final-fmt{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;padding:4px 8px;border-radius:3px;background:rgba(0,212,255,0.08);border:1px solid var(--accent);color:var(--accent);min-width:40px;text-align:center;flex-shrink:0;}
-  .final-fmt.mvp{background:rgba(255,215,0,0.1);border-color:#ffd700;color:#ffd700;}
-  .final-game{font-size:12px;color:var(--text);}
-  .final-mvp{border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.04);}
-  .btn-ver-mais{width:100%;padding:11px;background:rgba(0,212,255,0.06);border:1px dashed rgba(0,212,255,0.3);border-radius:6px;color:var(--accent);font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;transition:all 0.2s;margin-bottom:4px;}
-  .btn-ver-mais:hover{background:rgba(0,212,255,0.12);}
 
-  /* ── BOTTOM ROW ── */
-  .bottom-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;}
-  @media(max-width:768px){.bottom-row{grid-template-columns:1fr;}}
-  .extra-btns{display:flex;gap:8px;margin-bottom:12px;}
-  .btn-extra{flex:1;padding:11px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.2);border-radius:6px;color:var(--accent);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;}
-  .btn-extra:hover{background:rgba(0,212,255,0.12);border-color:var(--accent);}
-  .location-card{display:flex;align-items:flex-start;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;}
-  .location-icon{font-size:22px;margin-top:2px;flex-shrink:0;}
-  .location-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#fff;letter-spacing:1px;margin-bottom:4px;}
-  .location-address{font-size:13px;color:var(--text-dim);letter-spacing:0.5px;margin-bottom:10px;}
-  .location-link{display:inline-block;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-decoration:none;border:1px solid var(--accent);padding:6px 12px;border-radius:4px;transition:all 0.2s;}
+  /* ── VER MAIS ── */
+  .btn-ver-mais{
+    width:100%;padding:12px;background:rgba(0,212,255,0.04);
+    border:1px dashed rgba(0,212,255,0.2);border-radius:8px;
+    color:var(--accent);font-family:'Orbitron',monospace;font-size:10px;
+    letter-spacing:2px;cursor:pointer;transition:all 0.2s;margin-bottom:4px;
+  }
+  .btn-ver-mais:hover{background:rgba(0,212,255,0.1);}
+
+  /* ── LISTA INTERESSE ── */
+  .interest-card{
+    background:var(--surface);border:1px solid rgba(0,212,255,0.12);
+    border-radius:10px;padding:18px;margin-bottom:14px;display:none;
+  }
+  .interest-card-title{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:3px;color:var(--accent);margin-bottom:12px;}
+
+  /* ── LOCALIZAÇÃO ── */
+  .location-card{
+    display:flex;align-items:flex-start;gap:16px;background:var(--surface);
+    border:1px solid var(--border);border-radius:10px;padding:22px;margin-bottom:24px;
+  }
+  .location-icon{font-size:24px;margin-top:2px;flex-shrink:0;}
+  .location-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#fff;letter-spacing:1px;margin-bottom:5px;}
+  .location-address{font-size:13px;color:var(--text-dim);letter-spacing:0.5px;margin-bottom:12px;}
+  .location-link{display:inline-block;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-decoration:none;border:1px solid var(--accent);padding:7px 14px;border-radius:5px;transition:all 0.2s;}
   .location-link:hover{background:rgba(0,212,255,0.1);}
 
   /* ── ADMIN ── */
-  .adm-trigger{text-align:center;margin-top:24px;margin-bottom:8px;}
-  .adm-trigger-btn{background:none;border:1px solid #ff6b35;border-radius:4px;color:#ff6b35;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;padding:6px 14px;cursor:pointer;transition:all 0.2s;}
-  .adm-trigger-btn:hover{background:rgba(255,107,53,0.15);}
-  .adm-login{background:var(--surface);border:1px solid #ff6b35;border-radius:8px;padding:20px;margin-bottom:16px;display:none;}
+  .adm-login{background:var(--surface);border:1px solid #ff6b35;border-radius:10px;padding:22px;margin-bottom:16px;display:none;}
   .adm-login.visible{display:block;}
-  .adm-login-title{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:3px;color:#ff6b35;margin-bottom:12px;}
+  .adm-login-title{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:3px;color:#ff6b35;margin-bottom:14px;}
   .adm-login-row{display:flex;gap:8px;}
   .adm-login-row input{flex:1;}
-  .adm-login-row button{padding:12px 16px;background:#ff6b35;border:none;border-radius:4px;color:#000;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;}
-  .adm-panel{background:var(--surface);border:1px solid #ff6b35;border-radius:8px;padding:24px;margin-bottom:16px;display:none;}
+  .adm-login-row button{padding:12px 18px;background:#ff6b35;border:none;border-radius:6px;color:#000;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;}
+  .adm-panel{background:var(--surface);border:1px solid #ff6b35;border-radius:10px;padding:26px;margin-bottom:16px;display:none;}
   .adm-panel.visible{display:block;}
-  .adm-panel-title{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:3px;color:#ff6b35;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;}
-  .adm-close-btn{background:none;border:1px solid #ff6b35;border-radius:4px;color:#ff6b35;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;padding:4px 10px;cursor:pointer;}
-  .adm-section-title{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);margin-bottom:10px;margin-top:16px;padding-bottom:6px;border-bottom:1px solid var(--border);}
-  .adm-list{display:flex;flex-direction:column;gap:6px;margin-bottom:8px;}
-  .adm-item{display:flex;align-items:flex-start;justify-content:space-between;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;gap:8px;}
-  .adm-item-left{display:flex;align-items:center;gap:10px;}
-  .adm-pc-badge{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;width:40px;height:36px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .adm-pc-badge.extreme{background:rgba(160,160,160,0.15);color:var(--extreme);border:1px solid var(--extreme);}
-  .adm-pc-badge.eplus{background:rgba(59,158,255,0.15);color:var(--eplus);border:1px solid var(--eplus);}
-  .adm-pc-badge.epro{background:rgba(255,59,59,0.12);color:var(--epro);border:1px solid var(--epro);}
+  .adm-panel-title{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:3px;color:#ff6b35;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;}
+  .adm-close-btn{background:none;border:1px solid #ff6b35;border-radius:4px;color:#ff6b35;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;padding:5px 10px;cursor:pointer;}
+  .adm-section-title{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);margin-bottom:10px;margin-top:18px;padding-bottom:7px;border-bottom:1px solid var(--border);}
+  .adm-list{display:flex;flex-direction:column;gap:7px;margin-bottom:8px;}
+  .adm-item{display:flex;align-items:flex-start;justify-content:space-between;padding:11px 15px;background:var(--surface2);border:1px solid var(--border);border-radius:7px;gap:8px;}
+  .adm-item-left{display:flex;align-items:center;gap:12px;}
+  .adm-pc-badge{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;width:42px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .adm-pc-badge.extreme{background:rgba(176,176,176,0.12);color:var(--extreme);border:1px solid var(--extreme);}
+  .adm-pc-badge.eplus{background:rgba(59,158,255,0.12);color:var(--eplus);border:1px solid var(--eplus);}
+  .adm-pc-badge.epro{background:rgba(255,59,59,0.1);color:var(--epro);border:1px solid var(--epro);}
   .adm-item-name{font-size:14px;font-weight:600;color:#fff;}
   .adm-item-cat{font-size:10px;color:var(--text-dim);letter-spacing:1px;margin-top:1px;}
-  .adm-confirm-btn{background:none;border:1px solid rgba(127,255,0,0.4);border-radius:4px;color:var(--accent3);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;padding:5px 8px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
-  .adm-confirm-btn:hover{background:rgba(127,255,0,0.15);}
-  .adm-item.pending-item{border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.04);}
-  .pending-badge{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:#ffd700;padding:2px 6px;border:1px solid rgba(255,215,0,0.4);border-radius:3px;}
-  .adm-remove-btn{background:none;border:1px solid #3a2020;border-radius:4px;color:#663333;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;padding:5px 10px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
-  .adm-remove-btn:hover{border-color:#ff4444;color:#ff4444;background:rgba(255,68,68,0.1);}
-  .adm-add-form{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:16px;margin-top:8px;}
+  .adm-confirm-btn{background:none;border:1px solid rgba(127,255,0,0.35);border-radius:4px;color:var(--accent3);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;padding:5px 9px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+  .adm-confirm-btn:hover{background:rgba(127,255,0,0.12);}
+  .adm-item.pending-item{border-color:rgba(255,215,0,0.25);background:rgba(255,215,0,0.03);}
+  .pending-badge{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:var(--gold);padding:2px 6px;border:1px solid rgba(255,215,0,0.35);border-radius:3px;}
+  .adm-remove-btn{background:none;border:1px solid #2a1a1a;border-radius:4px;color:#553333;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;padding:5px 10px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+  .adm-remove-btn:hover{border-color:#ff4444;color:#ff4444;background:rgba(255,68,68,0.08);}
+  .adm-add-form{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:18px;margin-top:8px;}
   .adm-add-row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
-  .adm-add-row input,.adm-add-row select{flex:1;min-width:100px;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:10px 12px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:14px;outline:none;}
+  .adm-add-row input,.adm-add-row select{flex:1;min-width:100px;background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:10px 12px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:14px;outline:none;}
   .adm-add-row select option{background:var(--surface);}
-  .adm-add-btn{width:100%;padding:12px;background:rgba(255,107,53,0.2);border:1px solid #ff6b35;border-radius:4px;color:#ff6b35;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;transition:all 0.2s;}
-  .adm-add-btn:hover{background:rgba(255,107,53,0.35);}
-  .adm-reset-btn{width:100%;margin-top:20px;padding:12px;background:rgba(255,30,30,0.1);border:1px solid #551111;border-radius:4px;color:#993333;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;transition:all 0.2s;}
-  .adm-reset-btn:hover{border-color:#ff2222;color:#ff4444;background:rgba(255,30,30,0.2);}
-  .adm-tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
-  .adm-tab{flex:1;min-width:60px;padding:8px 4px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;color:var(--text-dim);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;text-align:center;}
-  .adm-tab.active{border-color:#ff6b35;color:#ff6b35;background:rgba(255,107,53,0.1);}
-  .adm-edit-form{display:flex;flex-direction:column;gap:6px;}
+  .adm-add-btn{width:100%;padding:12px;background:rgba(255,107,53,0.18);border:1px solid #ff6b35;border-radius:5px;color:#ff6b35;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;transition:all 0.2s;}
+  .adm-add-btn:hover{background:rgba(255,107,53,0.3);}
+  .adm-reset-btn{width:100%;margin-top:20px;padding:12px;background:rgba(255,30,30,0.08);border:1px solid #441010;border-radius:5px;color:#882222;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;transition:all 0.2s;}
+  .adm-reset-btn:hover{border-color:#ff2222;color:#ff4444;background:rgba(255,30,30,0.18);}
+  .adm-tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap;}
+  .adm-tab{flex:1;min-width:60px;padding:9px 4px;background:var(--surface2);border:1px solid var(--border);border-radius:5px;color:var(--text-dim);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;text-align:center;}
+  .adm-tab.active{border-color:#ff6b35;color:#ff6b35;background:rgba(255,107,53,0.08);}
+  .adm-edit-form{display:flex;flex-direction:column;gap:7px;}
   .adm-edit-label{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:var(--text-dim);margin-top:4px;}
-  .adm-empty{font-size:12px;color:var(--text-dim);letter-spacing:1px;padding:10px 0;text-align:center;}
+  .adm-empty{font-size:12px;color:var(--text-dim);letter-spacing:1px;padding:12px 0;text-align:center;}
   .adm-email-row{display:flex;gap:4px;margin-top:6px;}
   .adm-email-row input{flex:1;padding:5px 8px;font-size:11px;background:var(--surface);border:1px dashed var(--border);border-radius:4px;color:#fff;outline:none;}
-  .adm-email-row button{padding:5px 8px;background:rgba(0,212,255,0.1);border:1px solid var(--accent);border-radius:4px;color:var(--accent);font-size:10px;cursor:pointer;font-family:'Orbitron',monospace;white-space:nowrap;}
+  .adm-email-row button{padding:5px 8px;background:rgba(0,212,255,0.08);border:1px solid var(--accent);border-radius:4px;color:var(--accent);font-size:10px;cursor:pointer;font-family:'Orbitron',monospace;white-space:nowrap;}
   .grupos-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
   @media(max-width:400px){.grupos-wrap{grid-template-columns:1fr;}}
   .grupo-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;}
@@ -265,13 +390,13 @@
   .grupo-slots{display:flex;flex-direction:column;gap:6px;}
   .grupo-slot{display:flex;align-items:center;gap:6px;}
   .slot-num{font-family:'Orbitron',monospace;font-size:9px;color:var(--text-dim);width:14px;flex-shrink:0;}
-  .slot-player{flex:1;padding:8px 10px;border-radius:4px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--surface);color:var(--text-dim);cursor:pointer;transition:all 0.2s;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Rajdhani',sans-serif;min-height:36px;}
-  .slot-player.filled{background:rgba(0,212,255,0.06);border-color:rgba(0,212,255,0.25);color:var(--accent);}
-  .slot-player.selected{background:rgba(0,212,255,0.18);border-color:var(--accent);color:#fff;box-shadow:0 0 8px rgba(0,212,255,0.3);}
+  .slot-player{flex:1;padding:8px 10px;border-radius:5px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--surface);color:var(--text-dim);cursor:pointer;transition:all 0.2s;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Rajdhani',sans-serif;min-height:36px;}
+  .slot-player.filled{background:rgba(0,212,255,0.05);border-color:rgba(0,212,255,0.2);color:var(--accent);}
+  .slot-player.selected{background:rgba(0,212,255,0.15);border-color:var(--accent);color:#fff;box-shadow:0 0 8px rgba(0,212,255,0.25);}
   .slot-player:hover{border-color:var(--accent);color:var(--accent);}
-  .slot-remove{background:none;border:none;color:#663333;font-size:16px;cursor:pointer;padding:4px 6px;line-height:1;flex-shrink:0;transition:color 0.2s;}
+  .slot-remove{background:none;border:none;color:#553333;font-size:16px;cursor:pointer;padding:4px 6px;line-height:1;flex-shrink:0;transition:color 0.2s;}
   .slot-remove:hover{color:#ff4444;}
-  .slot-select{width:100%;padding:8px 10px;border-radius:4px;font-size:12px;background:var(--surface);border:1px dashed rgba(0,212,255,0.3);color:var(--text-dim);cursor:pointer;outline:none;font-family:'Rajdhani',sans-serif;min-height:36px;}
+  .slot-select{width:100%;padding:8px 10px;border-radius:5px;font-size:12px;background:var(--surface);border:1px dashed rgba(0,212,255,0.25);color:var(--text-dim);cursor:pointer;outline:none;font-family:'Rajdhani',sans-serif;min-height:36px;}
   .sortear-wrap{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
   .sortear-info{font-size:12px;color:var(--text-dim);margin-bottom:10px;}
   .sortear-info b{color:var(--accent3);}
@@ -282,288 +407,296 @@
   .sortear-preview-player.novo{color:var(--accent3);}
   .sortear-preview-player.existente{color:var(--text-dim);}
 
-  .footer{text-align:center;margin-top:40px;font-size:11px;color:var(--text-dim);letter-spacing:2px;font-family:'Orbitron',monospace;opacity:0.4;}
-  .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:#1a2a1a;border:1px solid var(--accent3);border-radius:6px;padding:12px 24px;color:var(--accent3);font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);z-index:999;white-space:nowrap;}
-  .toast.show{transform:translateX(-50%) translateY(0);}
-  #particles-canvas{position:fixed;inset:0;pointer-events:none;z-index:0;}
-  #music-btn{position:fixed;bottom:30px;right:20px;z-index:998;background:rgba(0,0,0,0.7);border:1px solid var(--border);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all 0.2s;backdrop-filter:blur(6px);}
-  #music-btn:hover{border-color:var(--accent);box-shadow:0 0 12px rgba(0,212,255,0.3);}
+  /* ── JOGOS ADM ── */
+  .jogos-formato{margin-bottom:20px;}
+  .jogos-formato-title{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:10px;}
+  .jogo-slot{display:flex;gap:6px;align-items:center;margin-bottom:6px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;}
+  .jogo-slot input{flex:2;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:7px 10px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:13px;outline:none;}
+  .jogo-slot input:focus{border-color:var(--accent);}
+  .jogo-slot input.link{flex:3;}
+  .jogo-free-btn{padding:6px 10px;border-radius:4px;font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text-dim);transition:all 0.2s;white-space:nowrap;}
+  .jogo-free-btn.active{border-color:var(--accent3);background:rgba(127,255,0,0.08);color:var(--accent3);}
+  .jogo-remove-btn{padding:6px 8px;border-radius:4px;background:none;border:1px solid #2a1a1a;color:#553333;font-size:12px;cursor:pointer;transition:all 0.2s;flex-shrink:0;}
+  .jogo-remove-btn:hover{border-color:#ff4444;color:#ff4444;}
+  .jogos-add-btn{width:100%;padding:8px;background:rgba(0,212,255,0.05);border:1px dashed rgba(0,212,255,0.25);border-radius:4px;color:var(--accent);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;margin-top:4px;}
+  .jogos-add-btn:hover{background:rgba(0,212,255,0.1);}
+  /* ── RODADAS ADM ── */
+  .rodada-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px;}
+  .rodada-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .rodada-title{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:#fff;}
+  .rodada-remove-btn{padding:4px 10px;border-radius:4px;background:none;border:1px solid #2a1a1a;color:#553333;font-family:'Orbitron',monospace;font-size:8px;cursor:pointer;transition:all 0.2s;}
+  .rodada-remove-btn:hover{border-color:#ff4444;color:#ff4444;}
+  .partida-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:12px;margin-bottom:8px;}
+  .partida-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .partida-title{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;color:var(--accent);}
+  .partida-remove-btn{padding:3px 8px;border-radius:3px;background:none;border:1px solid #2a1a1a;color:#553333;font-family:'Orbitron',monospace;font-size:8px;cursor:pointer;transition:all 0.2s;}
+  .partida-remove-btn:hover{border-color:#ff4444;color:#ff4444;}
+  .partida-select{width:100%;padding:8px 10px;border-radius:4px;font-size:12px;background:var(--surface2);border:1px solid var(--border);color:#fff;outline:none;font-family:'Rajdhani',sans-serif;margin-bottom:8px;cursor:pointer;}
+  .partida-select:focus{border-color:var(--accent);}
+  .partida-times{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
+  .partida-jogos{display:flex;flex-direction:column;gap:6px;}
+  .partida-jogo-row{display:flex;align-items:center;gap:6px;}
+  .partida-jogo-label{font-family:'Orbitron',monospace;font-size:8px;color:var(--text-dim);width:60px;flex-shrink:0;}
+  .rodadas-add-btn{width:100%;padding:10px;background:rgba(127,255,0,0.05);border:1px dashed rgba(127,255,0,0.25);border-radius:6px;color:var(--accent3);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;margin-top:8px;}
+  .rodadas-add-btn:hover{background:rgba(127,255,0,0.1);}
+  .partidas-add-btn{width:100%;padding:7px;background:rgba(0,212,255,0.03);border:1px dashed rgba(0,212,255,0.18);border-radius:4px;color:var(--accent);font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;margin-top:4px;}
+  .partidas-add-btn:hover{background:rgba(0,212,255,0.08);}
 
-  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;align-items:center;justify-content:center;padding:16px;}
+  /* ── DIVIDER ── */
+  .section-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:32px 0;}
+
+  /* ── FOOTER ── */
+  .footer{text-align:center;padding:20px 0;font-size:10px;color:var(--text-dim);letter-spacing:3px;font-family:'Orbitron',monospace;opacity:0.35;}
+
+  /* ── TOAST ── */
+  .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:#0d1a0d;border:1px solid var(--accent3);border-radius:8px;padding:13px 26px;color:var(--accent3);font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);z-index:9999;white-space:nowrap;}
+  .toast.show{transform:translateX(-50%) translateY(0);}
+
+  #particles-canvas{position:fixed;inset:0;pointer-events:none;z-index:0;}
+  #music-btn{position:fixed;bottom:30px;right:20px;z-index:998;background:rgba(0,0,0,0.7);border:1px solid var(--border);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all 0.2s;backdrop-filter:blur(8px);}
+  #music-btn:hover{border-color:var(--accent);box-shadow:0 0 14px rgba(0,212,255,0.25);}
+
+  /* ── MODAL RESERVA ── */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:16px;}
   .modal-overlay.open{display:flex;}
-  .modal-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;width:100%;max-width:560px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;}
-  .modal-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);flex-shrink:0;}
+  .modal-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;width:100%;max-width:520px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;}
+  .modal-header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--border);flex-shrink:0;}
   .modal-title{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;letter-spacing:2px;color:#fff;}
-  .modal-close{background:none;border:1px solid var(--border);border-radius:4px;color:var(--text-dim);font-size:14px;width:28px;height:28px;cursor:pointer;transition:all 0.2s;}
+  .modal-close{background:none;border:1px solid var(--border);border-radius:4px;color:var(--text-dim);font-size:14px;width:30px;height:30px;cursor:pointer;transition:all 0.2s;}
   .modal-close:hover{border-color:#ff4444;color:#ff4444;}
-  .modal-body{overflow-y:auto;padding:16px 20px;flex:1;}
-  .faq-item{border-bottom:1px solid var(--border);}
-  .faq-item:last-child{border-bottom:none;}
-  .faq-q{width:100%;background:none;border:none;padding:14px 0;color:#fff;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;text-align:left;}
-  .faq-q:hover{color:var(--accent);}
-  .faq-arrow{font-size:16px;transition:transform 0.2s;color:var(--accent);}
-  .faq-q.open .faq-arrow{transform:rotate(180deg);}
-  .faq-a{display:none;padding:0 0 14px 0;font-size:13px;color:var(--text);line-height:1.7;}
-  .faq-a.open{display:block;}
-  .faq-a ol,.faq-a ul{padding-left:18px;margin-top:6px;}
-  .faq-a li{margin-bottom:4px;}
-  .faq-format-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;font-size:12px;}
-  .faq-fmt-badge{font-family:'Orbitron',monospace;font-size:8px;font-weight:700;padding:3px 7px;border-radius:3px;background:rgba(0,212,255,0.1);border:1px solid var(--accent);color:var(--accent);flex-shrink:0;margin-top:1px;}
-  .faq-score-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;}
-  .faq-round{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;font-size:12px;color:var(--text);}
-  .faq-final-row{font-size:13px;margin-bottom:8px;color:var(--text);}
-  a.gtag{text-decoration:none;display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 8px;background:var(--surface2);border:1px solid var(--border);border-radius:3px;color:var(--text);transition:all 0.2s;}
-  a.gtag:hover{border-color:var(--accent);color:var(--accent);}
-  .gtag-free{font-family:'Orbitron',monospace;font-size:7px;letter-spacing:1px;color:var(--accent3);border:1px solid rgba(127,255,0,0.4);border-radius:2px;padding:1px 3px;}
-  .reserva-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:18px;text-align:center;}
-  .reserva-pc-num{font-family:'Orbitron',monospace;font-size:36px;font-weight:900;margin-bottom:4px;}
+  .modal-body{overflow-y:auto;padding:18px 22px;flex:1;}
+  .reserva-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center;}
+  .reserva-pc-num{font-family:'Orbitron',monospace;font-size:40px;font-weight:900;margin-bottom:5px;}
   .reserva-pc-num.extreme{color:var(--extreme);}
   .reserva-pc-num.eplus{color:var(--eplus);}
   .reserva-pc-num.epro{color:var(--epro);}
-  .reserva-cat{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;margin-bottom:14px;}
-  .reserva-name{font-size:18px;font-weight:700;color:#fff;margin-bottom:6px;}
-  .reserva-status{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;padding:6px 12px;border-radius:4px;display:inline-block;margin-top:8px;}
-  .reserva-status.confirmed{background:rgba(127,255,0,0.1);border:1px solid rgba(127,255,0,0.4);color:var(--accent3);}
-  .reserva-status.pending{background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.4);color:#ffd700;}
-  .reserva-map-wrap{position:relative;display:inline-block;width:140px;margin-top:14px;}
-  .reserva-map-wrap img{width:100%;display:block;border-radius:6px;border:1px solid var(--border);}
-  .reserva-not-found{text-align:center;padding:20px;color:var(--text-dim);font-size:13px;}
-  /* ── JOGOS ADM ── */
-.jogos-formato{margin-bottom:20px;}
-.jogos-formato-title{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:10px;}
-.jogo-slot{display:flex;gap:6px;align-items:center;margin-bottom:6px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;}
-.jogo-slot input{flex:2;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:7px 10px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:13px;outline:none;}
-.jogo-slot input:focus{border-color:var(--accent);}
-.jogo-slot input.link{flex:3;}
-.jogo-free-btn{padding:6px 10px;border-radius:4px;font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text-dim);transition:all 0.2s;white-space:nowrap;}
-.jogo-free-btn.active{border-color:var(--accent3);background:rgba(127,255,0,0.1);color:var(--accent3);}
-.jogo-remove-btn{padding:6px 8px;border-radius:4px;background:none;border:1px solid #3a2020;color:#663333;font-size:12px;cursor:pointer;transition:all 0.2s;flex-shrink:0;}
-.jogo-remove-btn:hover{border-color:#ff4444;color:#ff4444;}
-.jogos-add-btn{width:100%;padding:8px;background:rgba(0,212,255,0.06);border:1px dashed rgba(0,212,255,0.3);border-radius:4px;color:var(--accent);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;margin-top:4px;}
-.jogos-add-btn:hover{background:rgba(0,212,255,0.12);}
-/* ── RODADAS ADM ── */
-.rodada-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px;}
-.rodada-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.rodada-title{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:#fff;}
-.rodada-remove-btn{padding:4px 10px;border-radius:4px;background:none;border:1px solid #3a2020;color:#663333;font-family:'Orbitron',monospace;font-size:8px;cursor:pointer;transition:all 0.2s;}
-.rodada-remove-btn:hover{border-color:#ff4444;color:#ff4444;}
-.partida-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:12px;margin-bottom:8px;}
-.partida-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.partida-title{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;color:var(--accent);}
-.partida-remove-btn{padding:3px 8px;border-radius:3px;background:none;border:1px solid #3a2020;color:#663333;font-family:'Orbitron',monospace;font-size:8px;cursor:pointer;transition:all 0.2s;}
-.partida-remove-btn:hover{border-color:#ff4444;color:#ff4444;}
-.partida-select{width:100%;padding:8px 10px;border-radius:4px;font-size:12px;background:var(--surface2);border:1px solid var(--border);color:#fff;outline:none;font-family:'Rajdhani',sans-serif;margin-bottom:8px;cursor:pointer;}
-.partida-select:focus{border-color:var(--accent);}
-.partida-times{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
-.partida-jogos{display:flex;flex-direction:column;gap:6px;}
-.partida-jogo-row{display:flex;align-items:center;gap:6px;}
-.partida-jogo-label{font-family:'Orbitron',monospace;font-size:8px;color:var(--text-dim);width:60px;flex-shrink:0;}
-.rodadas-add-btn{width:100%;padding:10px;background:rgba(127,255,0,0.06);border:1px dashed rgba(127,255,0,0.3);border-radius:6px;color:var(--accent3);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;margin-top:8px;}
-.rodadas-add-btn:hover{background:rgba(127,255,0,0.12);}
-.partidas-add-btn{width:100%;padding:7px;background:rgba(0,212,255,0.04);border:1px dashed rgba(0,212,255,0.2);border-radius:4px;color:var(--accent);font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;margin-top:4px;}
-.partidas-add-btn:hover{background:rgba(0,212,255,0.1);}
+  .reserva-cat{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;margin-bottom:16px;}
+  .reserva-name{font-size:20px;font-weight:700;color:#fff;margin-bottom:6px;}
+  .reserva-status{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;padding:7px 14px;border-radius:5px;display:inline-block;margin-top:8px;}
+  .reserva-status.confirmed{background:rgba(127,255,0,0.08);border:1px solid rgba(127,255,0,0.35);color:var(--accent3);}
+  .reserva-status.pending{background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.35);color:var(--gold);}
+  .reserva-map-wrap{position:relative;display:inline-block;width:150px;margin-top:16px;}
+  .reserva-map-wrap img{width:100%;display:block;border-radius:8px;border:1px solid var(--border);}
+  .reserva-not-found{text-align:center;padding:24px;color:var(--text-dim);font-size:13px;}
+  .field-label{font-size:13px;font-weight:600;letter-spacing:2px;color:#fff;text-transform:uppercase;margin-bottom:10px;}
 </style>
 </head>
 <body>
+
+<!-- ADMIN FIXO TOPO DIREITO -->
+<button id="adm-fixed-btn" onclick="toggleAdmLogin()">⚙ ADMIN</button>
+
 <div class="page-wrap">
 
   <!-- HEADER -->
-  <div class="page-header">
+  <div class="site-header">
     <div class="header-tag">▸ Sistema de Reservas</div>
     <h1>LAN <span>HOUSE</span></h1>
-    <div class="divider"></div>
-    <p>Escolha seu PC • Garanta sua vaga</p>
+    <p>Quest Lan House · Santana, São Paulo</p>
   </div>
 
   <!-- LOADING -->
-  <div id="fb-loading" style="text-align:center;padding:12px;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);opacity:0.7;">⟳ CONECTANDO...</div>
+  <div id="fb-loading" style="text-align:center;padding:16px;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);opacity:0.7;">⟳ CONECTANDO...</div>
 
-  <!-- 2 COLUNAS -->
-  <div class="two-col">
-
-    <!-- COLUNA ESQUERDA: info + grupos -->
-    <div class="col-left">
-
-      <!-- Specs -->
-      <div class="specs-section">
-        <div class="specs-title">▸ NOSSAS CONFIGURAÇÕES</div>
-        <div class="specs-grid">
-          <div class="spec-card extreme"><div class="spec-name">🔥 EXTREME</div><div class="spec-item"><b>Monitor</b> 360Hz</div><div class="spec-item"><b>GPU</b> RTX 3080</div><div class="spec-item"><b>CPU</b> i7 13700</div><div class="spec-item"><b>RAM</b> HyperX 32GB</div><div class="spec-item"><b>SSD</b> M.2 2TB</div><div class="spec-item"><b>PCs</b> 1·2·3·4·5</div><div class="spec-price">R$ 90</div></div>
-          <div class="spec-card eplus"><div class="spec-name">⭐ E·PLUS</div><div class="spec-item"><b>Monitor</b> 360Hz</div><div class="spec-item"><b>GPU</b> RTX 4070Ti</div><div class="spec-item"><b>CPU</b> i9 13900</div><div class="spec-item"><b>RAM</b> HyperX 32GB</div><div class="spec-item"><b>SSD</b> M.2 2TB</div><div class="spec-item"><b>PC</b> 20</div><div class="spec-price">R$ 100</div></div>
-          <div class="spec-card epro"><div class="spec-name">💎 E·PRO</div><div class="spec-item"><b>Monitor</b> 500Hz</div><div class="spec-item"><b>GPU</b> RTX 4070Ti S</div><div class="spec-item"><b>CPU</b> i9 13900</div><div class="spec-item"><b>RAM</b> HyperX 32GB</div><div class="spec-item"><b>SSD</b> M.2 2TB</div><div class="spec-item"><b>PCs</b> 6–19</div><div class="spec-price">R$ 110</div></div>
-        </div>
+  <!-- EVENTO BANNER -->
+  <div class="evento-banner">
+    <div class="evento-banner-title">▸ LAN FINAL DE ANO</div>
+    <div class="evento-stats">
+      <div class="evento-stat">
+        <div class="evento-stat-icon">📅</div>
+        <div class="evento-stat-label">DATA</div>
+        <div class="evento-stat-val" id="evt-disp-data">Entre 20/Nov e 20/Dez</div>
       </div>
+      <div class="evento-stat">
+        <div class="evento-stat-icon">⏰</div>
+        <div class="evento-stat-label">HORÁRIO</div>
+        <div class="evento-stat-val" id="evt-disp-hora">Corujão — 22h às 06h</div>
+      </div>
+      <div class="evento-stat">
+        <div class="evento-stat-icon">💰</div>
+        <div class="evento-stat-label">VALOR</div>
+        <div class="evento-stat-val" id="evt-disp-valor">R$ 90 a R$ 110</div>
+      </div>
+      <div class="evento-stat">
+        <div class="evento-stat-icon">👥</div>
+        <div class="evento-stat-label">VAGAS</div>
+        <div class="evento-stat-val">até 20 pessoas</div>
+      </div>
+    </div>
+    <div class="evento-obs" id="evt-disp-obs">⚠️ Todos precisam ter o jogo comprado (exceto Minecraft). Comida e bebida individual — nada de farofada 🍔🥤</div>
+  </div>
 
-      <!-- Info -->
-      <div class="info-section">
-        <div class="info-card">
-          <div class="info-card-title">🌟 LAN FINAL DE ANO</div>
-          <div class="info-grid">
-            <div class="info-item"><span class="info-icon">📍</span><div><div class="info-label">LOCAL</div><div class="info-val">Quest Lan House (até 20 pessoas)</div></div></div>
-            <div class="info-item"><span class="info-icon">📅</span><div><div class="info-label">DATA</div><div class="info-val">Entre 20/Nov e 20/Dez</div></div></div>
-            <div class="info-item"><span class="info-icon">⏰</span><div><div class="info-label">HORÁRIO</div><div class="info-val">Corujão — 22h às 06h</div></div></div>
-            <div class="info-item"><span class="info-icon">💰</span><div><div class="info-label">VALOR</div><div class="info-val">R$ 90 a R$ 110 por pessoa</div></div></div>
-          </div>
-          <div class="info-obs">⚠️ Todos precisam ter o jogo comprado (exceto Minecraft). Comida e bebida individual — nada de farofada 🍔🥤</div>
-        </div>
-        <div class="info-card">
-          <div class="info-card-title">✅ CONFIRMADOS</div>
-          <div class="player-grid" id="confirmed-grid"><div class="player-chip confirmed">1. Danilo — PC 13</div></div>
-        </div>
-        <button class="btn-ver-mais" id="btn-ver-mais" onclick="toggleVerMais()">▸ VER MAIS INFORMAÇÕES</button>
-        <div id="info-more" style="display:none;display:flex;flex-direction:column;gap:12px">
-          <div class="info-card">
-            <div class="info-card-title">🎲 GRUPOS SORTEADOS</div>
-            <div class="groups-grid">
-              <div class="group-box"><div class="group-title">GRUPO 1</div><div class="group-player">▸ Danilo</div><div class="group-player">▸ Ronny</div><div class="group-player">▸ Gabriel Mamadura</div><div class="group-player empty">▸ —</div><div class="group-player empty">▸ —</div></div>
-              <div class="group-box"><div class="group-title">GRUPO 2</div><div class="group-player">▸ Bruno</div><div class="group-player">▸ Bonafin Boquetti</div><div class="group-player">▸ Giano</div><div class="group-player empty">▸ —</div><div class="group-player empty">▸ —</div></div>
-              <div class="group-box"><div class="group-title">GRUPO 3</div><div class="group-player">▸ Laporta</div><div class="group-player">▸ Nan</div><div class="group-player">▸ Harry</div><div class="group-player empty">▸ —</div><div class="group-player empty">▸ —</div></div>
-              <div class="group-box"><div class="group-title">GRUPO 4</div><div class="group-player">▸ Gabriel</div><div class="group-player">▸ Ricardo</div><div class="group-player">▸ Kadu</div><div class="group-player empty">▸ —</div><div class="group-player empty">▸ —</div></div>
-            </div>
-          </div>
-          <div class="info-card">
-            <div class="info-card-title">🎮 JOGOS POR FORMATO</div>
-            <div class="games-list">
-              <div class="games-format"><div class="games-format-title">5 × 5</div><div class="games-tags" id="games-tags-5x5"><a class="gtag" href="https://store.steampowered.com/app/730/" target="_blank" rel="noopener">CS2<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/359550/" target="_blank" rel="noopener">R6<span class="gtag-free">FREE</span></a><a class="gtag" href="https://playvalorant.com" target="_blank" rel="noopener">Valorant<span class="gtag-free">FREE</span></a><a class="gtag" href="https://www.fortnite.com" target="_blank" rel="noopener">Fortnite<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/202990/" target="_blank" rel="noopener">Black Ops 2 MP</a><a class="gtag" href="https://store.steampowered.com/app/1824220/" target="_blank" rel="noopener">Chivalry 2</a></div></div>
-              <div class="games-format"><div class="games-format-title">3 × 3</div><div class="games-tags" id="games-tags-3x3"><a class="gtag" href="https://store.steampowered.com/app/252950/" target="_blank" rel="noopener">Rocket League<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/550/" target="_blank" rel="noopener">Left 4 Dead 2</a><a class="gtag" href="https://store.steampowered.com/app/4000/" target="_blank" rel="noopener">Garry's Mod</a><a class="gtag" href="https://www.fortnite.com" target="_blank" rel="noopener">Fortnite<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/202990/" target="_blank" rel="noopener">Black Ops 2 MP</a></div></div>
-              <div class="games-format"><div class="games-format-title">2 × 2</div><div class="games-tags" id="games-tags-2x2"><a class="gtag" href="https://store.steampowered.com/app/285900/" target="_blank" rel="noopener">Gang Beasts</a><a class="gtag" href="https://www.minecraft.net" target="_blank" rel="noopener">Minecraft</a><a class="gtag" href="https://store.steampowered.com/app/270170/" target="_blank" rel="noopener">Transformice<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/323220/" target="_blank" rel="noopener">Worms</a><a class="gtag" href="https://store.steampowered.com/app/204360/" target="_blank" rel="noopener">Castle Crashers</a><a class="gtag" href="https://store.steampowered.com/app/238460/" target="_blank" rel="noopener">BattleBlock Theater</a></div></div>
-              <div class="games-format"><div class="games-format-title">INDIVIDUAL</div><div class="games-tags" id="games-tags-individual"><a class="gtag" href="https://store.steampowered.com/app/945360/" target="_blank" rel="noopener">Among Us</a><a class="gtag" href="https://www.minecraft.net" target="_blank" rel="noopener">Minecraft PvP</a><a class="gtag" href="https://clonehero.net" target="_blank" rel="noopener">Clone Hero<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/976310/" target="_blank" rel="noopener">MK 10/11</a><a class="gtag" href="https://www.fortnite.com" target="_blank" rel="noopener">Fortnite<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/202990/" target="_blank" rel="noopener">BO2 FFA</a><a class="gtag" href="https://store.steampowered.com/app/1824220/" target="_blank" rel="noopener">Chivalry 2 FFA</a></div></div>
-            </div>
-          </div>
-          <div class="info-card">
-            <div class="info-card-title">🏆 SISTEMA DE PONTUAÇÃO</div>
-            <div class="score-list">
-              <div class="score-item"><span class="score-badge win">+1</span><span>Cada vitória</span></div>
-              <div class="score-item"><span class="score-badge sweep">+3</span><span>Vitória nos dois jogos do embate</span></div>
-              <div class="score-item"><span class="score-badge tie">1×1</span><span>Empate → desempate, vencedor ganha +2</span></div>
-            </div>
-            <div class="info-obs">Pontuação separada por formato: 5×5, 3×3, 2×2 e Individual têm rankings próprios.</div>
-          </div>
-          <div class="info-card">
-            <div class="info-card-title">📋 RODADAS (4 GRUPOS)</div>
-            <div class="rounds-list" id="rounds-list-display">
-              <div class="round-item"><div class="round-badge r5x5">5×5</div><div class="round-desc"><b>Rodada 1:</b> A vs B · C vs D</div></div>
-              <div class="round-item"><div class="round-badge r3x3">3+2</div><div class="round-desc"><b>Rodada 2:</b> A×C · A×B · B×D · D×C</div></div>
-              <div class="round-item"><div class="round-badge r5x5">5×5</div><div class="round-desc"><b>Rodada 3:</b> A vs D · B vs C</div></div>
-              <div class="round-item"><div class="round-badge r3x3">3+2</div><div class="round-desc"><b>Rodada 4:</b> A×B · C×D · A×D · B×C</div></div>
-              <div class="round-item"><div class="round-badge r5x5">5×5</div><div class="round-desc"><b>Rodada 5:</b> C vs A · D vs B</div></div>
-              <div class="round-item"><div class="round-badge r3x3">3+2</div><div class="round-desc"><b>Rodada 6:</b> A×D · B×C · A×C · B×D</div></div>
-              <div class="round-item"><div class="round-badge rind">SOLO</div><div class="round-desc"><b>Rodada 7:</b> Individual interno de cada grupo</div></div>
-            </div>
-          </div>
+  <!-- VAGAS -->
+  <div class="vagas-bar" style="display:none" id="vagas-bar">
+    <div class="vagas-bar-title">▸ VAGAS DISPONÍVEIS</div>
+    <div class="avail-badge extreme"><div class="avail-dot"></div><span class="avail-label">EXTREME</span><span class="avail-count" id="count-extreme">5</span></div>
+    <div class="avail-badge eplus"><div class="avail-dot"></div><span class="avail-label">E·PLUS</span><span class="avail-count" id="count-eplus">1</span></div>
+    <div class="avail-badge epro"><div class="avail-dot"></div><span class="avail-label">E·PRO</span><span class="avail-count" id="count-epro">13</span></div>
+  </div>
+
+  <!-- CONFIRMADOS -->
+  <div class="info-card" style="margin-bottom:16px;">
+    <div class="info-card-title">✅ CONFIRMADOS</div>
+    <div class="player-grid" id="confirmed-grid"><div class="player-chip confirmed">1. Danilo — PC 13</div></div>
+  </div>
+
+  <!-- ═══ FORMULÁRIO DE RESERVA ═══ -->
+  <div class="section-divider"></div>
+  <span class="section-label">▸ FAZER RESERVA</span>
+
+  <!-- PASSO 01 -->
+  <div class="form-card">
+    <div class="form-card-step">▸ PASSO 01</div>
+    <div class="form-card-title">Seus Dados</div>
+    <div class="input-group">
+      <input type="text" id="input-name" placeholder="Nome completo..." autocomplete="off" />
+      <div class="error-msg" id="err-name">Por favor, insira seu nome.</div>
+      <input type="email" id="input-email" placeholder="Seu email (para receber confirmação)..." autocomplete="off" />
+      <div class="error-msg" id="err-email">Por favor, insira um email válido.</div>
+    </div>
+  </div>
+
+  <!-- PASSO 02 -->
+  <div class="form-card">
+    <div class="form-card-step">▸ PASSO 02</div>
+    <div class="form-card-title">Categoria do PC</div>
+
+    <!-- SPECS INLINE -->
+    <div class="specs-section">
+      <div class="specs-title">▸ NOSSAS CONFIGURAÇÕES</div>
+      <div class="specs-grid">
+        <div class="spec-card extreme"><div class="spec-name">🔥 EXTREME</div><div class="spec-item"><b>Monitor</b> 360Hz</div><div class="spec-item"><b>GPU</b> RTX 3080</div><div class="spec-item"><b>CPU</b> i7 13700</div><div class="spec-item"><b>RAM</b> HyperX 32GB</div><div class="spec-item"><b>SSD</b> M.2 2TB</div><div class="spec-item"><b>PCs</b> 1·2·3·4·5</div><div class="spec-price">R$ 90</div></div>
+        <div class="spec-card eplus"><div class="spec-name">⭐ E·PLUS</div><div class="spec-item"><b>Monitor</b> 360Hz</div><div class="spec-item"><b>GPU</b> RTX 4070Ti</div><div class="spec-item"><b>CPU</b> i9 13900</div><div class="spec-item"><b>RAM</b> HyperX 32GB</div><div class="spec-item"><b>SSD</b> M.2 2TB</div><div class="spec-item"><b>PC</b> 20</div><div class="spec-price">R$ 100</div></div>
+        <div class="spec-card epro"><div class="spec-name">💎 E·PRO</div><div class="spec-item"><b>Monitor</b> 500Hz</div><div class="spec-item"><b>GPU</b> RTX 4070Ti S</div><div class="spec-item"><b>CPU</b> i9 13900</div><div class="spec-item"><b>RAM</b> HyperX 32GB</div><div class="spec-item"><b>SSD</b> M.2 2TB</div><div class="spec-item"><b>PCs</b> 6–19</div><div class="spec-price">R$ 110</div></div>
       </div>
     </div>
 
-    <!-- COLUNA DIREITA: formulário -->
-    <div class="col-right">
+    <div class="categories">
+      <label class="cat-option" id="opt-extreme"><input type="radio" name="category" value="extreme" onclick="selectCategory('extreme')"><div class="cat-card extreme"><div class="cat-left"><div class="cat-icon">🔥</div><div><div class="cat-name">PC EXTREME</div><div class="cat-sub">PCs 1·2·3·4·5</div></div></div><div class="cat-right"><div class="cat-price">R$ 90</div><div class="cat-slots" id="slots-extreme">5 vagas</div></div></div></label>
+      <label class="cat-option" id="opt-eplus"><input type="radio" name="category" value="eplus" onclick="selectCategory('eplus')"><div class="cat-card eplus"><div class="cat-left"><div class="cat-icon">⭐</div><div><div class="cat-name">PC EPLUS</div><div class="cat-sub">PC 20</div></div></div><div class="cat-right"><div class="cat-price">R$ 100</div><div class="cat-slots" id="slots-eplus">1 vaga</div></div></div></label>
+      <label class="cat-option" id="opt-epro"><input type="radio" name="category" value="epro" onclick="selectCategory('epro')"><div class="cat-card epro"><div class="cat-left"><div class="cat-icon">💎</div><div><div class="cat-name">PC EPRO</div><div class="cat-sub">PCs 6–19 (exceto 13)</div></div></div><div class="cat-right"><div class="cat-price">R$ 110</div><div class="cat-slots" id="slots-epro">13 vagas</div></div></div></label>
+    </div>
+    <div class="error-msg" id="err-category">Por favor, selecione uma categoria.</div>
+  </div>
 
-      <!-- Availability -->
-      <div class="availability-bar" style="display:none">
-        <div class="avail-badge extreme"><div class="avail-dot"></div><span>EXTREME</span><span class="avail-count" id="count-extreme">5</span><span style="color:var(--text-dim);font-size:10px">vagas</span></div>
-        <div class="avail-badge eplus"><div class="avail-dot"></div><span>EPLUS</span><span class="avail-count" id="count-eplus">1</span><span style="color:var(--text-dim);font-size:10px">vaga</span></div>
-        <div class="avail-badge epro"><div class="avail-dot"></div><span>EPRO</span><span class="avail-count" id="count-epro">13</span><span style="color:var(--text-dim);font-size:10px">vagas</span></div>
-      </div>
-
-      <!-- Passo 01 -->
-      <div class="card">
-        <div class="step-label">▸ PASSO 01</div>
-        <div class="field-label">Seus Dados</div>
-        <input type="text" id="input-name" placeholder="Nome completo..." autocomplete="off" style="margin-bottom:10px" />
-        <div class="error-msg" id="err-name">Por favor, insira seu nome.</div>
-        <input type="email" id="input-email" placeholder="Seu email (para receber confirmação)..." autocomplete="off" />
-        <div class="error-msg" id="err-email">Por favor, insira um email válido.</div>
-      </div>
-
-      <!-- Passo 02 -->
-      <div class="card">
-        <div class="step-label">▸ PASSO 02</div>
-        <div class="field-label">Categoria do PC</div>
-        <div class="categories">
-          <label class="cat-option" id="opt-extreme"><input type="radio" name="category" value="extreme" onclick="selectCategory('extreme')"><div class="cat-card extreme"><div class="cat-left"><div class="cat-icon">🔥</div><div><div class="cat-name">PC EXTREME</div><div class="cat-sub">PCs 1·2·3·4·5</div></div></div><div class="cat-right"><div class="cat-price">R$ 90</div><div class="cat-slots" id="slots-extreme">5 vagas</div></div></div></label>
-          <label class="cat-option" id="opt-eplus"><input type="radio" name="category" value="eplus" onclick="selectCategory('eplus')"><div class="cat-card eplus"><div class="cat-left"><div class="cat-icon">⭐</div><div><div class="cat-name">PC EPLUS</div><div class="cat-sub">PC 20</div></div></div><div class="cat-right"><div class="cat-price">R$ 100</div><div class="cat-slots" id="slots-eplus">1 vaga</div></div></div></label>
-          <label class="cat-option" id="opt-epro"><input type="radio" name="category" value="epro" onclick="selectCategory('epro')"><div class="cat-card epro"><div class="cat-left"><div class="cat-icon">💎</div><div><div class="cat-name">PC EPRO</div><div class="cat-sub">PCs 6–19 (exceto 13)</div></div></div><div class="cat-right"><div class="cat-price">R$ 110</div><div class="cat-slots" id="slots-epro">13 vagas</div></div></div></label>
+  <!-- PASSO 03 -->
+  <div id="pc-card" style="display:none">
+    <div class="pc-step-wrap">
+      <div class="pc-grid-card">
+        <div class="form-card-step">▸ PASSO 03</div>
+        <div class="form-card-title" style="margin-bottom:6px;">Número do PC</div>
+        <div class="pc-grid-label">Selecione um PC disponível</div>
+        <div class="pc-grid" id="pc-grid"></div>
+        <div class="legend" style="margin-top:14px">
+          <div class="legend-item"><div class="legend-box" style="border-color:#444;background:#111820"></div>Disponível</div>
+          <div class="legend-item"><div class="legend-box" style="border-color:#1a2030;background:#060a0e"></div>Reservado</div>
+          <div class="legend-item"><div class="legend-box" style="border-color:rgba(184,134,11,0.5);background:rgba(184,134,11,0.08)"></div>Aguardando</div>
         </div>
-        <div class="error-msg" id="err-category">Por favor, selecione uma categoria.</div>
+        <div class="error-msg" id="err-pc">Por favor, selecione um PC.</div>
       </div>
-
-      <!-- Passo 03 -->
-      <div id="pc-card" style="display:none">
-        <div class="pc-step-wrap">
-          <div class="pc-grid-card">
-            <div class="step-label">▸ PASSO 03</div>
-            <div class="field-label">Número do PC</div>
-            <div class="pc-grid-label">Selecione um PC disponível</div>
-            <div class="pc-grid" id="pc-grid"></div>
-            <div class="legend" style="margin-top:10px">
-              <div class="legend-item"><div class="legend-box" style="border-color:#555;background:#131920"></div>Disponível</div>
-              <div class="legend-item"><div class="legend-box" style="border-color:#1a2030;background:#0a0e14"></div>Reservado</div>
-              <div class="legend-item"><div class="legend-box" style="border-color:#b8860b;background:rgba(184,134,11,0.12)"></div>Aguardando</div>
-            </div>
-            <div class="error-msg" id="err-pc">Por favor, selecione um PC.</div>
-          </div>
-          <div class="pc-map-panel">
-            <div class="pc-map-label">▸ MAPA</div>
-            <div class="pc-map-wrap" id="pc-map-wrap">
-              <img src="https://raw.githubusercontent.com/DanoneAranha/Lanhouse/main/Mapa.jpg" alt="Mapa" />
-            </div>
-          </div>
+      <div class="pc-map-panel">
+        <div class="pc-map-label">▸ MAPA DA LAN</div>
+        <div class="pc-map-wrap" id="pc-map-wrap">
+          <img src="https://raw.githubusercontent.com/DanoneAranha/Lanhouse/main/Mapa.jpg" alt="Mapa" />
         </div>
-      </div>
-
-      <!-- Confirmar -->
-      <div id="confirm-section" style="display:none">
-        <div class="summary">
-          <div class="summary-row"><span class="label">NOME</span><span class="value" id="s-name">—</span></div>
-          <div class="summary-row"><span class="label">CATEGORIA</span><span class="value" id="s-cat">—</span></div>
-          <div class="summary-row"><span class="label">PC Nº</span><span class="value" id="s-pc">—</span></div>
-          <div class="summary-row total"><span class="label">TOTAL</span><span class="value" id="s-price">—</span></div>
-        </div>
-        <button class="btn-pay" id="btn-pay" onclick="handlePay()">▸ CONFIRMAR E PAGAR</button>
-      </div>
-
-      <!-- Interesse -->
-      <div class="interest-section">
-        <button class="btn-interest" onclick="submitInterest()">✋ TENHO INTERESSE — mas ainda não vou reservar</button>
-      </div>
-
-      <div class="info-card" id="pre-confirm-card" style="display:none;margin-bottom:16px;">
-        <div class="info-card-title">📋 LISTA DE INTERESSE</div>
-        <div class="player-grid" id="pre-confirm-grid"></div>
-      </div>
-
-      <div class="extra-btns">
-        <a class="btn-extra" href="https://docs.google.com/document/d/1QQVpbIm5UYMrQ57mu6sBU7OrAT6N4gcIez95XjtkHZM/edit?usp=drivesdk" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;justify-content:center;">📘 REGULAMENTO</a>
-        <button class="btn-extra" onclick="document.getElementById('reserva-modal').classList.add('open')">🔍 MINHA RESERVA</button>
       </div>
     </div>
   </div>
 
-  <!-- BOTTOM ROW -->
-  <div class="bottom-row">
-    <div class="location-card">
-      <div class="location-icon">📍</div>
-      <div>
-        <div class="location-name">Quest Lan House Gamer</div>
-        <div class="location-address">R. Voluntários da Pátria, 3116 · Santana, São Paulo - SP</div>
-        <a class="location-link" href="https://maps.google.com/?q=R.+Voluntários+da+Pátria,+3116,+Santana,+São+Paulo,+SP" target="_blank" rel="noopener">▸ Abrir no Google Maps</a>
-      </div>
+  <!-- RESUMO + PAGAR -->
+  <div id="confirm-section" style="display:none">
+    <div class="summary">
+      <div class="summary-row"><span class="label">NOME</span><span class="value" id="s-name">—</span></div>
+      <div class="summary-row"><span class="label">CATEGORIA</span><span class="value" id="s-cat">—</span></div>
+      <div class="summary-row"><span class="label">PC Nº</span><span class="value" id="s-pc">—</span></div>
+      <div class="summary-row total"><span class="label">TOTAL</span><span class="value" id="s-price">—</span></div>
     </div>
+    <button class="btn-pay" id="btn-pay" onclick="handlePay()">▸ CONFIRMAR E PAGAR</button>
+  </div>
+
+  <!-- INTERESSE -->
+  <button class="btn-interest" onclick="submitInterest()">✋ TENHO INTERESSE — mas ainda não vou reservar</button>
+
+  <div class="interest-card" id="pre-confirm-card">
+    <div class="interest-card-title">📋 LISTA DE INTERESSE</div>
+    <div class="player-grid" id="pre-confirm-grid"></div>
+  </div>
+
+  <!-- BOTÕES EXTRAS -->
+  <div class="extra-btns">
+    <a class="btn-extra" href="https://docs.google.com/document/d/1QQVpbIm5UYMrQ57mu6sBU7OrAT6N4gcIez95XjtkHZM/edit?usp=drivesdk" target="_blank" rel="noopener">📘 REGULAMENTO</a>
+    <button class="btn-extra" onclick="document.getElementById('reserva-modal').classList.add('open')">🔍 MINHA RESERVA</button>
+  </div>
+
+  <!-- ═══ MAIS INFORMAÇÕES ═══ -->
+  <div class="section-divider"></div>
+  <button class="btn-ver-mais" id="btn-ver-mais" onclick="toggleVerMais()">▸ VER MAIS INFORMAÇÕES</button>
+
+  <div id="info-more" style="display:none">
+    <div class="info-section">
+
+      <div class="info-card">
+        <div class="info-card-title">🎲 GRUPOS SORTEADOS</div>
+        <div class="groups-grid">
+          <div class="group-box"><div class="group-title">GRUPO 1</div><div class="group-player">▸ Danilo</div><div class="group-player">▸ Ronny</div><div class="group-player">▸ Gabriel Mamadura</div><div class="group-player empty">▸ —</div><div class="group-player empty">▸ —</div></div>
+          <div class="group-box"><div class="group-title">GRUPO 2</div><div class="group-player">▸ Bruno</div><div class="group-player">▸ Bonafin Boquetti</div><div class="group-player">▸ Giano</div><div class="group-player empty">▸ —</div><div class="group-player empty">▸ —</div></div>
+          <div class="group-box"><div class="group-title">GRUPO 3</div><div class="group-player">▸ Laporta</div><div class="group-player">▸ Nan</div><div class="group-player">▸ Harry</div><div class="group-player empty">▸ —</div><div class="group-player empty">▸ —</div></div>
+          <div class="group-box"><div class="group-title">GRUPO 4</div><div class="group-player">▸ Gabriel</div><div class="group-player">▸ Ricardo</div><div class="group-player">▸ Kadu</div><div class="group-player empty">▸ —</div><div class="group-player empty">▸ —</div></div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">🎮 JOGOS POR FORMATO</div>
+        <div class="games-list">
+          <div class="games-format"><div class="games-format-title">5 × 5</div><div class="games-tags" id="games-tags-5x5"><a class="gtag" href="https://store.steampowered.com/app/730/" target="_blank" rel="noopener">CS2<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/359550/" target="_blank" rel="noopener">R6<span class="gtag-free">FREE</span></a><a class="gtag" href="https://playvalorant.com" target="_blank" rel="noopener">Valorant<span class="gtag-free">FREE</span></a><a class="gtag" href="https://www.fortnite.com" target="_blank" rel="noopener">Fortnite<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/202990/" target="_blank" rel="noopener">Black Ops 2 MP</a><a class="gtag" href="https://store.steampowered.com/app/1824220/" target="_blank" rel="noopener">Chivalry 2</a></div></div>
+          <div class="games-format"><div class="games-format-title">3 × 3</div><div class="games-tags" id="games-tags-3x3"><a class="gtag" href="https://store.steampowered.com/app/252950/" target="_blank" rel="noopener">Rocket League<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/550/" target="_blank" rel="noopener">Left 4 Dead 2</a><a class="gtag" href="https://store.steampowered.com/app/4000/" target="_blank" rel="noopener">Garry's Mod</a><a class="gtag" href="https://www.fortnite.com" target="_blank" rel="noopener">Fortnite<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/202990/" target="_blank" rel="noopener">Black Ops 2 MP</a></div></div>
+          <div class="games-format"><div class="games-format-title">2 × 2</div><div class="games-tags" id="games-tags-2x2"><a class="gtag" href="https://store.steampowered.com/app/285900/" target="_blank" rel="noopener">Gang Beasts</a><a class="gtag" href="https://www.minecraft.net" target="_blank" rel="noopener">Minecraft</a><a class="gtag" href="https://store.steampowered.com/app/270170/" target="_blank" rel="noopener">Transformice<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/323220/" target="_blank" rel="noopener">Worms</a><a class="gtag" href="https://store.steampowered.com/app/204360/" target="_blank" rel="noopener">Castle Crashers</a><a class="gtag" href="https://store.steampowered.com/app/238460/" target="_blank" rel="noopener">BattleBlock Theater</a></div></div>
+          <div class="games-format"><div class="games-format-title">INDIVIDUAL</div><div class="games-tags" id="games-tags-individual"><a class="gtag" href="https://store.steampowered.com/app/945360/" target="_blank" rel="noopener">Among Us</a><a class="gtag" href="https://www.minecraft.net" target="_blank" rel="noopener">Minecraft PvP</a><a class="gtag" href="https://clonehero.net" target="_blank" rel="noopener">Clone Hero<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/976310/" target="_blank" rel="noopener">MK 10/11</a><a class="gtag" href="https://www.fortnite.com" target="_blank" rel="noopener">Fortnite<span class="gtag-free">FREE</span></a><a class="gtag" href="https://store.steampowered.com/app/202990/" target="_blank" rel="noopener">BO2 FFA</a><a class="gtag" href="https://store.steampowered.com/app/1824220/" target="_blank" rel="noopener">Chivalry 2 FFA</a></div></div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">🏆 SISTEMA DE PONTUAÇÃO</div>
+        <div class="score-list">
+          <div class="score-item"><span class="score-badge win">+1</span><span>Cada vitória</span></div>
+          <div class="score-item"><span class="score-badge sweep">+3</span><span>Vitória nos dois jogos do embate</span></div>
+          <div class="score-item"><span class="score-badge tie">1×1</span><span>Empate → desempate, vencedor ganha +2</span></div>
+        </div>
+        <div class="info-obs">Pontuação separada por formato: 5×5, 3×3, 2×2 e Individual têm rankings próprios.</div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">📋 RODADAS (4 GRUPOS)</div>
+        <div class="rounds-list" id="rounds-list-display">
+          <div style="font-size:13px;color:var(--text-dim);letter-spacing:1px;padding:8px 0;">A definir</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LOCALIZAÇÃO -->
+  <div class="section-divider"></div>
+  <div class="location-card">
+    <div class="location-icon">📍</div>
     <div>
-      <div class="adm-trigger" style="margin-top:0;text-align:left">
-        <button class="adm-trigger-btn" onclick="toggleAdmLogin()">⚙ ADMIN</button>
-      </div>
-      <div class="adm-login" id="adm-login">
-        <div class="adm-login-title">▸ ACESSO ADMINISTRADOR</div>
-        <div class="adm-login-row">
-          <input type="password" id="adm-pass" placeholder="Senha..." onkeydown="if(event.key==='Enter')admLogin()" />
-          <button onclick="admLogin()">ENTRAR</button>
-        </div>
-        <div class="error-msg" id="err-adm" style="margin-top:8px">Senha incorreta.</div>
-      </div>
+      <div class="location-name">Quest Lan House Gamer</div>
+      <div class="location-address">R. Voluntários da Pátria, 3116 · Santana, São Paulo - SP</div>
+      <a class="location-link" href="https://maps.google.com/?q=R.+Voluntários+da+Pátria,+3116,+Santana,+São+Paulo,+SP" target="_blank" rel="noopener">▸ Abrir no Google Maps</a>
     </div>
   </div>
 
-  <!-- PAINEL ADM (full width) -->
+  <!-- LOGIN ADM -->
+  <div class="adm-login" id="adm-login">
+    <div class="adm-login-title">▸ ACESSO ADMINISTRADOR</div>
+    <div class="adm-login-row">
+      <input type="password" id="adm-pass" placeholder="Senha..." onkeydown="if(event.key==='Enter')admLogin()" />
+      <button onclick="admLogin()">ENTRAR</button>
+    </div>
+    <div class="error-msg" id="err-adm" style="margin-top:8px">Senha incorreta.</div>
+  </div>
+
+  <!-- PAINEL ADM -->
   <div class="adm-panel" id="adm-panel">
     <div class="adm-panel-title"><span>⚙ PAINEL ADM</span><button class="adm-close-btn" onclick="admLogout()">SAIR</button></div>
     <div class="adm-tabs">
@@ -605,9 +738,9 @@
       <div id="adm-confirmados-list" style="font-size:12px;color:var(--text-dim);padding:8px 0;letter-spacing:0.5px;line-height:2"></div>
       <div class="adm-section-title" style="margin-top:16px">▸ LISTA DE INTERESSE</div>
       <div id="adm-interest-list"></div>
-      <div class="adm-section-title" style="margin-top:16px;border-color:rgba(0,212,255,0.3)">▸ DISPARO DE EMAILS</div>
+      <div class="adm-section-title" style="margin-top:16px;border-color:rgba(0,212,255,0.25)">▸ DISPARO DE EMAILS</div>
       <div style="font-size:12px;color:var(--text-dim);margin-bottom:10px">Envia link de pagamento para pré-reservas e vagas disponíveis para interessados.</div>
-      <button class="adm-add-btn" style="background:rgba(0,212,255,0.1);border-color:var(--accent);color:var(--accent)" onclick="admDispararEmails()">📧 DISPARAR EMAILS — ABRIR RESERVAS</button>
+      <button class="adm-add-btn" style="background:rgba(0,212,255,0.08);border-color:var(--accent);color:var(--accent)" onclick="admDispararEmails()">📧 DISPARAR EMAILS — ABRIR RESERVAS</button>
     </div>
     <div id="adm-tab-grupos" style="display:none">
       <div class="adm-section-title">▸ GRUPOS <span style="font-size:8px;color:var(--text-dim);font-family:'Rajdhani',sans-serif;font-weight:400;text-transform:none">— clique num nome para selecionar, depois clique em outro para trocar</span></div>
@@ -618,17 +751,14 @@
         <div class="sortear-info">Confirmados sem grupo: <b id="sortear-count">0</b></div>
         <button class="adm-add-btn" onclick="sortearTimes()">🎲 SORTEAR ALEATORIAMENTE</button>
         <div class="sortear-preview" id="sortear-preview"></div>
-        <button class="adm-add-btn" id="sortear-save-btn" style="display:none;margin-top:8px;background:rgba(127,255,0,0.15);border-color:var(--accent3);color:var(--accent3)" onclick="salvarSorteio()">✓ APLICAR NOS GRUPOS</button>
+        <button class="adm-add-btn" id="sortear-save-btn" style="display:none;margin-top:8px;background:rgba(127,255,0,0.12);border-color:var(--accent3);color:var(--accent3)" onclick="salvarSorteio()">✓ APLICAR NOS GRUPOS</button>
       </div>
     </div>
-
-    <!-- ABA JOGOS -->
     <div id="adm-tab-jogos" style="display:none">
       <div class="adm-section-title">▸ JOGOS POR FORMATO</div>
       <div id="jogos-editor"></div>
       <button class="adm-add-btn" style="margin-top:12px" onclick="admSaveJogos()">▸ SALVAR JOGOS</button>
     </div>
-    <!-- ABA RODADAS -->
     <div id="adm-tab-rodadas" style="display:none">
       <div class="adm-section-title">▸ RODADAS</div>
       <div id="rodadas-editor"></div>
@@ -636,7 +766,7 @@
       <button class="adm-add-btn" style="margin-top:10px" onclick="admSaveRodadas()">▸ SALVAR RODADAS</button>
     </div>
   </div>
-  
+
   <div class="footer">RESERVAS · QUEST LAN HOUSE · 2026</div>
 </div>
 
@@ -654,14 +784,10 @@ var CATEGORIES={
   eplus:  {label:'PC EPLUS',  price:100,pcs:[20]},
   epro:   {label:'PC EPRO',   price:110,pcs:[6,7,8,9,10,11,12,13,14,15,16,17,18,19]}
 };
-
 function loadEmailJS(cb){if(window.emailjs){cb();return;}var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';s.onload=function(){emailjs.init(EMAILJS_KEY);cb();};document.head.appendChild(s);}
 function isBeforeOpenDate(){return new Date()<OPEN_DATE;}
 function sendEmail(tpl,params,cb){loadEmailJS(function(){emailjs.send(EMAILJS_SERVICE,tpl,params).then(function(){if(cb)cb(true);}).catch(function(e){console.error('EmailJS:',e);if(cb)cb(false);});});}
-function sendEmailPreReserva(pc){
-  var d=reserved[pc];if(!d||!d.email){showToast('⚠ Sem email para PC '+pc);return;}
-  sendEmail(EMAILJS_TPL_PRE,{to_name:d.name,to_email:d.email,pc_info:'PC '+pc,category_label:CATEGORIES[d.category]?CATEGORIES[d.category].label:d.category,payment_link:mpLinks[d.category]||'#',price:CATEGORIES[d.category]?CATEGORIES[d.category].price:'?',deadline:'01/08/2026'},function(ok){showToast(ok?'📧 Email enviado para '+d.name:'⚠ Erro ao enviar');});
-}
+function sendEmailPreReserva(pc){var d=reserved[pc];if(!d||!d.email){showToast('⚠ Sem email para PC '+pc);return;}sendEmail(EMAILJS_TPL_PRE,{to_name:d.name,to_email:d.email,pc_info:'PC '+pc,category_label:CATEGORIES[d.category]?CATEGORIES[d.category].label:d.category,payment_link:mpLinks[d.category]||'#',price:CATEGORIES[d.category]?CATEGORIES[d.category].price:'?',deadline:'01/08/2026'},function(ok){showToast(ok?'📧 Email enviado para '+d.name:'⚠ Erro ao enviar');});}
 function admAddEmail(pc){var inp=document.getElementById('email-pc-'+pc);if(!inp)return;var email=inp.value.trim();if(!email||!email.includes('@')){showToast('⚠ Email inválido');return;}reserved[pc].email=email;db.ref('reserved/'+pc+'/email').set(email).then(function(){renderAdmList();showToast('✓ Email salvo para PC '+pc);});}
 function calcVagasLivres(){return Math.max(0,19-Object.keys(reserved).filter(function(k){return k!=13;}).length);}
 function admDispararEmails(){
@@ -671,22 +797,16 @@ function admDispararEmails(){
   interestList.forEach(function(item){var name=typeof item==='object'?item.name:item,email=typeof item==='object'?item.email:null;if(!email)return;setTimeout(function(){sendEmail(EMAILJS_TPL_INT,{to_name:name,to_email:email,vagas:calcVagasLivres(),site_link:'https://danonearanha.github.io/Lanhouse/'});},n*400);n++;});
   showToast('📧 Disparando emails para '+n+' pessoas...');
 }
-
 var db;
-function loadFirebase(cb){
-  var s1=document.createElement('script');s1.src='https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js';
-  s1.onload=function(){var s2=document.createElement('script');s2.src='https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js';s2.onload=function(){firebase.initializeApp({databaseURL:'https://lanhouse-30903-default-rtdb.firebaseio.com'});db=firebase.database();cb();};document.head.appendChild(s2);};
-  document.head.appendChild(s1);
-}
+function loadFirebase(cb){var s1=document.createElement('script');s1.src='https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js';s1.onload=function(){var s2=document.createElement('script');s2.src='https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js';s2.onload=function(){firebase.initializeApp({databaseURL:'https://lanhouse-30903-default-rtdb.firebaseio.com'});db=firebase.database();cb();};document.head.appendChild(s2);};document.head.appendChild(s1);}
 function loadConfig(){db.ref('admPass').once('value',function(s){ADM_PASS=s.val();});db.ref('mpLinks').once('value',function(s){if(s.val())mpLinks=Object.assign(mpLinks,s.val());});}
-
 var reserved={},interestList=[],selectedCategory=null,selectedPC=null;
 function initReserved(){
   db.ref('reserved').on('value',function(snap){
     reserved=snap.val()||{};
     if(!reserved[13]){reserved[13]={name:'Danilo',category:'epro',ts:0,owner:true};db.ref('reserved/13').set(reserved[13]);}
     var fl=document.getElementById('fb-loading');if(fl)fl.style.display='none';
-    var av=document.querySelector('.availability-bar');if(av)av.style.display='flex';
+    var vb=document.getElementById('vagas-bar');if(vb)vb.style.display='flex';
     updateCounts();updateCategoryDisabled();if(selectedCategory)buildPCGrid(selectedCategory);
     updateConfirmedList();renderInterestList();updateSortearInfo();
   });
@@ -697,11 +817,9 @@ function initReserved(){
   db.ref('rodadasData').once('value',function(snap){if(snap.val()){rodadasData=snap.val();updateRodadasDisplay();}});
 }
 function saveReserved(){db.ref('reserved').set(reserved);}
-
 var PC_POSITIONS={20:{x:22,y:21},19:{x:38,y:21},18:{x:54,y:21},15:{x:22,y:29},16:{x:38,y:29},17:{x:54,y:29},14:{x:22,y:39},13:{x:38,y:39},12:{x:54,y:39},9:{x:22,y:47},10:{x:38,y:47},11:{x:54,y:47},8:{x:22,y:57},7:{x:38,y:57},6:{x:54,y:57},3:{x:22,y:66},4:{x:38,y:66},5:{x:54,y:66},2:{x:22,y:75},1:{x:38,y:75}};
 function initMapDots(){var wrap=document.getElementById('pc-map-wrap');if(!wrap)return;wrap.querySelectorAll('.pc-dot').forEach(function(d){d.remove();});Object.keys(PC_POSITIONS).forEach(function(num){var pos=PC_POSITIONS[num],dot=document.createElement('div');dot.className='pc-dot';dot.id='dot-'+num;dot.style.left=pos.x+'%';dot.style.top=pos.y+'%';wrap.appendChild(dot);});}
 function updateMapDot(pcNum,cat){document.querySelectorAll('.pc-dot').forEach(function(d){d.classList.remove('active','extreme','eplus','epro');});if(!pcNum||!cat)return;var dot=document.getElementById('dot-'+pcNum);if(dot)dot.classList.add('active',cat);}
-
 function saveInterestList(){db.ref('interestList').set(interestList);}
 function submitInterest(){
   var name=document.getElementById('input-name').value.trim(),email=document.getElementById('input-email').value.trim();
@@ -725,7 +843,6 @@ function updateConfirmedList(){
   Object.entries(reserved).filter(function(e){return !e[1].owner&&!e[1].pending;}).sort(function(a,b){return Number(a[0])-Number(b[0]);}).forEach(function(e){var n=e[1].name||'';if(n&&!seen[n.toLowerCase()]){seen[n.toLowerCase()]=true;entries.push({name:n,pc:Number(e[0])});}});
   grid.innerHTML=entries.map(function(e,i){return'<div class="player-chip confirmed">'+(i+1)+'. '+e.name+' — PC '+e.pc+'</div>';}).join('');
 }
-
 function admTab(tab){
   ['reservas','evento','grupos','jogos','rodadas'].forEach(function(t){var el=document.getElementById('adm-tab-'+t);if(el)el.style.display=t===tab?'block':'none';});
   document.querySelectorAll('.adm-tab').forEach(function(btn,i){btn.classList.toggle('active',['reservas','evento','grupos','jogos','rodadas'][i]===tab);});
@@ -734,7 +851,6 @@ function admTab(tab){
   if(tab==='jogos')admLoadJogos();
   if(tab==='rodadas')admLoadRodadas();
 }
-
 var eventoData={data:'Entre 20/Nov e 20/Dez',hora:'Corujão — 22h às 06h',valor:'R$ 90 a R$ 110 por pessoa',obs:'⚠️ Todos precisam ter o jogo comprado (exceto Minecraft). Comida e bebida individual.'};
 function admLoadEvento(){
   document.getElementById('evt-data').value=eventoData.data;document.getElementById('evt-hora').value=eventoData.hora;document.getElementById('evt-valor').value=eventoData.valor;document.getElementById('evt-obs').value=eventoData.obs;
@@ -743,17 +859,18 @@ function admLoadEvento(){
   list.innerHTML=names.length?names.join('<br>'):'<span style="opacity:0.4">Nenhuma reserva ainda.</span>';
   var ilist=document.getElementById('adm-interest-list');if(!ilist)return;
   if(interestList.length===0){ilist.innerHTML='<div class="adm-empty">Nenhum interesse.</div>';return;}
-  ilist.innerHTML='<div class="adm-list">'+interestList.map(function(item,i){
-    var name=typeof item==='object'?item.name:item,email=typeof item==='object'?item.email:null;
-    var emailHtml=email?'<div style="font-size:10px;color:var(--accent);margin-top:2px">📧 '+email+'</div>':'<div class="adm-email-row"><input type="email" id="email-int-'+i+'" placeholder="Adicionar email..." /><button onclick="admAddInterestEmail('+i+')">+ EMAIL</button></div>';
-    return'<div class="adm-item"><div style="flex:1"><div class="adm-item-name">'+name+'</div>'+emailHtml+'</div><button class="adm-remove-btn" onclick="admRemoveInterest('+i+')" style="align-self:flex-start">REMOVER</button></div>';
-  }).join('')+'</div>';
+  ilist.innerHTML='<div class="adm-list">'+interestList.map(function(item,i){var name=typeof item==='object'?item.name:item,email=typeof item==='object'?item.email:null;var emailHtml=email?'<div style="font-size:10px;color:var(--accent);margin-top:2px">📧 '+email+'</div>':'<div class="adm-email-row"><input type="email" id="email-int-'+i+'" placeholder="Adicionar email..." /><button onclick="admAddInterestEmail('+i+')">+ EMAIL</button></div>';return'<div class="adm-item"><div style="flex:1"><div class="adm-item-name">'+name+'</div>'+emailHtml+'</div><button class="adm-remove-btn" onclick="admRemoveInterest('+i+')" style="align-self:flex-start">REMOVER</button></div>';}).join('')+'</div>';
 }
 function admRemoveInterest(idx){interestList.splice(idx,1);saveInterestList();renderInterestList();admLoadEvento();showToast('✓ Removido');}
 function admAddInterestEmail(idx){var inp=document.getElementById('email-int-'+idx);if(!inp)return;var email=inp.value.trim();if(!email||!email.includes('@')){showToast('⚠ Email inválido');return;}if(typeof interestList[idx]==='string')interestList[idx]={name:interestList[idx],email:email};else interestList[idx].email=email;saveInterestList();admLoadEvento();showToast('✓ Email salvo!');}
 function admSaveEvento(){eventoData.data=document.getElementById('evt-data').value.trim()||eventoData.data;eventoData.hora=document.getElementById('evt-hora').value.trim()||eventoData.hora;eventoData.valor=document.getElementById('evt-valor').value.trim()||eventoData.valor;eventoData.obs=document.getElementById('evt-obs').value.trim()||eventoData.obs;db.ref('eventoData').set(eventoData);updateEventoDisplay();showToast('✓ Evento salvo');}
-function updateEventoDisplay(){var el;el=document.querySelector('.info-item:nth-child(2) .info-val');if(el)el.textContent=eventoData.data;el=document.querySelector('.info-item:nth-child(3) .info-val');if(el)el.textContent=eventoData.hora;el=document.querySelector('.info-item:nth-child(4) .info-val');if(el)el.textContent=eventoData.valor;var obs=document.querySelectorAll('.info-obs');if(obs[0])obs[0].textContent=eventoData.obs;}
-
+function updateEventoDisplay(){
+  var el;
+  el=document.getElementById('evt-disp-data');if(el)el.textContent=eventoData.data;
+  el=document.getElementById('evt-disp-hora');if(el)el.textContent=eventoData.hora;
+  el=document.getElementById('evt-disp-valor');if(el)el.textContent=eventoData.valor;
+  el=document.getElementById('evt-disp-obs');if(el)el.textContent=eventoData.obs;
+}
 var gruposData=[{title:'GRUPO 1',players:['Danilo','Ronny','Gabriel Mamadura','','']},{title:'GRUPO 2',players:['Bruno','Bonafin Boquetti','Giano','','']},{title:'GRUPO 3',players:['Laporta','Nan','Harry','','']},{title:'GRUPO 4',players:['Gabriel','Ricardo','Kadu','','']}];
 var selectedSlot=null;
 function getConfirmedNames(){var names=['Danilo'];Object.entries(reserved).filter(function(e){return !e[1].owner&&!e[1].pending;}).sort(function(a,b){return Number(a[0])-Number(b[0]);}).forEach(function(e){var n=e[1].name||'';if(n&&names.indexOf(n)===-1)names.push(n);});return names;}
@@ -761,147 +878,43 @@ function getPlayersInGroups(){var used=[];gruposData.forEach(function(g){g.playe
 function admLoadGrupos(){
   selectedSlot=null;var wrap=document.getElementById('grupos-wrap');wrap.innerHTML='';
   var all=getConfirmedNames(),used=getPlayersInGroups();
-  gruposData.forEach(function(grupo,gi){
-    var card=document.createElement('div');card.className='grupo-card';
-    var html='<div class="grupo-card-title">'+grupo.title+'</div><div class="grupo-slots">';
-    grupo.players.forEach(function(p,pi){
-      html+='<div class="grupo-slot"><span class="slot-num">'+(pi+1)+'</span>';
-      if(p){html+='<button class="slot-player filled" id="slot-'+gi+'-'+pi+'" onclick="slotClick('+gi+','+pi+')">'+p+'</button><button class="slot-remove" onclick="slotRemove('+gi+','+pi+')" title="Remover">×</button>';}
-      else{var opts='<option value="">+ add</option>';all.forEach(function(n){if(!used.includes(n.toLowerCase())){opts+='<option value="'+n+'">'+n+'</option>';}});html+='<select class="slot-select" onchange="slotAdd('+gi+','+pi+',this.value)">'+opts+'</select>';}
-      html+='</div>';
-    });
-    html+='</div>';card.innerHTML=html;wrap.appendChild(card);
-  });
+  gruposData.forEach(function(grupo,gi){var card=document.createElement('div');card.className='grupo-card';var html='<div class="grupo-card-title">'+grupo.title+'</div><div class="grupo-slots">';grupo.players.forEach(function(p,pi){html+='<div class="grupo-slot"><span class="slot-num">'+(pi+1)+'</span>';if(p){html+='<button class="slot-player filled" id="slot-'+gi+'-'+pi+'" onclick="slotClick('+gi+','+pi+')">'+p+'</button><button class="slot-remove" onclick="slotRemove('+gi+','+pi+')" title="Remover">×</button>';}else{var opts='<option value="">+ add</option>';all.forEach(function(n){if(!used.includes(n.toLowerCase())){opts+='<option value="'+n+'">'+n+'</option>';}});html+='<select class="slot-select" onchange="slotAdd('+gi+','+pi+',this.value)">'+opts+'</select>';}html+='</div>';});html+='</div>';card.innerHTML=html;wrap.appendChild(card);});
 }
-function slotClick(gi,pi){
-  if(selectedSlot&&selectedSlot.gi===gi&&selectedSlot.pi===pi){selectedSlot=null;document.querySelectorAll('.slot-player').forEach(function(b){b.classList.remove('selected');});return;}
-  if(selectedSlot!==null){var a=gruposData[selectedSlot.gi].players[selectedSlot.pi],b=gruposData[gi].players[pi];gruposData[selectedSlot.gi].players[selectedSlot.pi]=b;gruposData[gi].players[pi]=a;selectedSlot=null;admLoadGrupos();showToast('✓ Jogadores trocados!');return;}
-  selectedSlot={gi:gi,pi:pi};document.querySelectorAll('.slot-player').forEach(function(b){b.classList.remove('selected');});var btn=document.getElementById('slot-'+gi+'-'+pi);if(btn)btn.classList.add('selected');showToast('▸ Clique em outro slot para trocar');
-}
+function slotClick(gi,pi){if(selectedSlot&&selectedSlot.gi===gi&&selectedSlot.pi===pi){selectedSlot=null;document.querySelectorAll('.slot-player').forEach(function(b){b.classList.remove('selected');});return;}if(selectedSlot!==null){var a=gruposData[selectedSlot.gi].players[selectedSlot.pi],b=gruposData[gi].players[pi];gruposData[selectedSlot.gi].players[selectedSlot.pi]=b;gruposData[gi].players[pi]=a;selectedSlot=null;admLoadGrupos();showToast('✓ Jogadores trocados!');return;}selectedSlot={gi:gi,pi:pi};document.querySelectorAll('.slot-player').forEach(function(b){b.classList.remove('selected');});var btn=document.getElementById('slot-'+gi+'-'+pi);if(btn)btn.classList.add('selected');showToast('▸ Clique em outro slot para trocar');}
 function slotRemove(gi,pi){gruposData[gi].players[pi]='';selectedSlot=null;admLoadGrupos();updateSortearInfo();}
 function slotAdd(gi,pi,name){if(!name)return;gruposData[gi].players[pi]=name;selectedSlot=null;admLoadGrupos();updateSortearInfo();}
 function admSaveGrupos(){db.ref('gruposData').set(gruposData);updateGruposDisplay();showToast('✓ Grupos salvos');}
 function updateGruposDisplay(){var boxes=document.querySelectorAll('.group-box');gruposData.forEach(function(grupo,gi){if(!boxes[gi])return;var players=boxes[gi].querySelectorAll('.group-player');grupo.players.forEach(function(name,pi){if(!players[pi])return;players[pi].textContent='▸ '+(name||'—');players[pi].classList.toggle('empty',!name);});});}
-
 function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function updateSortearInfo(){var used=getPlayersInGroups();var sem=getConfirmedNames().filter(function(n){return !used.includes(n.toLowerCase());});var el=document.getElementById('sortear-count');if(el)el.textContent=sem.length;}
-function sortearTimes(){
-  var used=getPlayersInGroups(),sem=getConfirmedNames().filter(function(n){return !used.includes(n.toLowerCase());});
-  if(sem.length===0){showToast('⚠ Todos já estão em grupos');return;}
-  var jogadores=shuffle(sem),temp=gruposData.map(function(g){return{title:g.title,players:g.players.slice()};});
-  var ordem=shuffle([0,1,2,3]),idx=0;
-  while(idx<jogadores.length){var alocado=false;for(var gi=0;gi<ordem.length;gi++){if(idx>=jogadores.length)break;var g=temp[ordem[gi]];for(var pi=0;pi<g.players.length;pi++){if(!g.players[pi]){g.players[pi]=jogadores[idx];idx++;alocado=true;break;}}}if(!alocado)break;}
-  var preview=document.getElementById('sortear-preview');
-  preview.innerHTML=temp.map(function(g,gi){var orig=gruposData[gi].players,html='<div class="sortear-preview-group"><div class="sortear-preview-title">'+g.title+'</div>';g.players.forEach(function(p,pi){if(!p)return;var isNovo=!orig[pi]||orig[pi]!==p;html+='<div class="sortear-preview-player '+(isNovo?'novo':'existente')+'">▸ '+p+(isNovo?' ✦':'')+'</div>';});return html+'</div>';}).join('');
-  window._sorteioTemp=temp;document.getElementById('sortear-save-btn').style.display='block';
-}
+function sortearTimes(){var used=getPlayersInGroups(),sem=getConfirmedNames().filter(function(n){return !used.includes(n.toLowerCase());});if(sem.length===0){showToast('⚠ Todos já estão em grupos');return;}var jogadores=shuffle(sem),temp=gruposData.map(function(g){return{title:g.title,players:g.players.slice()};});var ordem=shuffle([0,1,2,3]),idx=0;while(idx<jogadores.length){var alocado=false;for(var gi=0;gi<ordem.length;gi++){if(idx>=jogadores.length)break;var g=temp[ordem[gi]];for(var pi=0;pi<g.players.length;pi++){if(!g.players[pi]){g.players[pi]=jogadores[idx];idx++;alocado=true;break;}}}if(!alocado)break;}var preview=document.getElementById('sortear-preview');preview.innerHTML=temp.map(function(g,gi){var orig=gruposData[gi].players,html='<div class="sortear-preview-group"><div class="sortear-preview-title">'+g.title+'</div>';g.players.forEach(function(p,pi){if(!p)return;var isNovo=!orig[pi]||orig[pi]!==p;html+='<div class="sortear-preview-player '+(isNovo?'novo':'existente')+'">▸ '+p+(isNovo?' ✦':'')+'</div>';});return html+'</div>';}).join('');window._sorteioTemp=temp;document.getElementById('sortear-save-btn').style.display='block';}
 function salvarSorteio(){if(!window._sorteioTemp)return;gruposData=window._sorteioTemp;db.ref('gruposData').set(gruposData);updateGruposDisplay();admLoadGrupos();document.getElementById('sortear-preview').innerHTML='';document.getElementById('sortear-save-btn').style.display='none';window._sorteioTemp=null;showToast('✓ Times aplicados!');}
 // ── JOGOS ──
 var FORMATOS_ORDER=['5x5','3x3','2x2','individual'];
 var FORMATOS_LABEL={'5x5':'5×5','3x3':'3×3','2x2':'2×2','individual':'INDIVIDUAL'};
-var jogosData={
-  '5x5':[{nome:'CS2',link:'https://store.steampowered.com/app/730/',free:true},{nome:'R6',link:'https://store.steampowered.com/app/359550/',free:true},{nome:'Valorant',link:'https://playvalorant.com',free:true},{nome:'Fortnite',link:'https://www.fortnite.com',free:true},{nome:'Black Ops 2 MP',link:'https://store.steampowered.com/app/202990/',free:false},{nome:'Chivalry 2',link:'https://store.steampowered.com/app/1824220/',free:false}],
-  '3x3':[{nome:'Rocket League',link:'https://store.steampowered.com/app/252950/',free:true},{nome:'Left 4 Dead 2',link:'https://store.steampowered.com/app/550/',free:false},{nome:"Garry's Mod",link:'https://store.steampowered.com/app/4000/',free:false},{nome:'Fortnite',link:'https://www.fortnite.com',free:true},{nome:'Black Ops 2 MP',link:'https://store.steampowered.com/app/202990/',free:false}],
-  '2x2':[{nome:'Gang Beasts',link:'https://store.steampowered.com/app/285900/',free:false},{nome:'Minecraft',link:'https://www.minecraft.net',free:false},{nome:'Transformice',link:'https://store.steampowered.com/app/270170/',free:true},{nome:'Worms',link:'https://store.steampowered.com/app/323220/',free:false},{nome:'Castle Crashers',link:'https://store.steampowered.com/app/204360/',free:false},{nome:'BattleBlock Theater',link:'https://store.steampowered.com/app/238460/',free:false}],
-  'individual':[{nome:'Among Us',link:'https://store.steampowered.com/app/945360/',free:false},{nome:'Minecraft PvP',link:'https://www.minecraft.net',free:false},{nome:'Clone Hero',link:'https://clonehero.net',free:true},{nome:'MK 10/11',link:'https://store.steampowered.com/app/976310/',free:false},{nome:'Fortnite',link:'https://www.fortnite.com',free:true},{nome:'BO2 FFA',link:'https://store.steampowered.com/app/202990/',free:false},{nome:'Chivalry 2 FFA',link:'https://store.steampowered.com/app/1824220/',free:false}]
-};
+var jogosData={'5x5':[{nome:'CS2',link:'https://store.steampowered.com/app/730/',free:true},{nome:'R6',link:'https://store.steampowered.com/app/359550/',free:true},{nome:'Valorant',link:'https://playvalorant.com',free:true},{nome:'Fortnite',link:'https://www.fortnite.com',free:true},{nome:'Black Ops 2 MP',link:'https://store.steampowered.com/app/202990/',free:false},{nome:'Chivalry 2',link:'https://store.steampowered.com/app/1824220/',free:false}],'3x3':[{nome:'Rocket League',link:'https://store.steampowered.com/app/252950/',free:true},{nome:'Left 4 Dead 2',link:'https://store.steampowered.com/app/550/',free:false},{nome:"Garry's Mod",link:'https://store.steampowered.com/app/4000/',free:false},{nome:'Fortnite',link:'https://www.fortnite.com',free:true},{nome:'Black Ops 2 MP',link:'https://store.steampowered.com/app/202990/',free:false}],'2x2':[{nome:'Gang Beasts',link:'https://store.steampowered.com/app/285900/',free:false},{nome:'Minecraft',link:'https://www.minecraft.net',free:false},{nome:'Transformice',link:'https://store.steampowered.com/app/270170/',free:true},{nome:'Worms',link:'https://store.steampowered.com/app/323220/',free:false},{nome:'Castle Crashers',link:'https://store.steampowered.com/app/204360/',free:false},{nome:'BattleBlock Theater',link:'https://store.steampowered.com/app/238460/',free:false}],'individual':[{nome:'Among Us',link:'https://store.steampowered.com/app/945360/',free:false},{nome:'Minecraft PvP',link:'https://www.minecraft.net',free:false},{nome:'Clone Hero',link:'https://clonehero.net',free:true},{nome:'MK 10/11',link:'https://store.steampowered.com/app/976310/',free:false},{nome:'Fortnite',link:'https://www.fortnite.com',free:true},{nome:'BO2 FFA',link:'https://store.steampowered.com/app/202990/',free:false},{nome:'Chivalry 2 FFA',link:'https://store.steampowered.com/app/1824220/',free:false}]};
 function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function admLoadJogos(){db.ref('jogosData').once('value',function(snap){if(snap.val())jogosData=snap.val();renderJogosEditor();});}
-function renderJogosEditor(){
-  var wrap=document.getElementById('jogos-editor');wrap.innerHTML='';
-  FORMATOS_ORDER.forEach(function(fmt){
-    var jogos=jogosData[fmt]||[];
-    var div=document.createElement('div');div.className='jogos-formato';
-    var html='<div class="jogos-formato-title">'+FORMATOS_LABEL[fmt]+'</div>';
-    jogos.forEach(function(j,ji){
-      html+='<div class="jogo-slot" id="jslot-'+fmt+'-'+ji+'">'
-        +'<input type="text" placeholder="Nome..." value="'+escHtml(j.nome)+'" onchange="jogosData[\''+fmt+'\']['+ji+'].nome=this.value" />'
-        +'<input type="text" class="link" placeholder="Link..." value="'+escHtml(j.link)+'" onchange="jogosData[\''+fmt+'\']['+ji+'].link=this.value" />'
-        +'<button class="jogo-free-btn'+(j.free?' active':'')+'" onclick="toggleJogoFree(\''+fmt+'\','+ji+',this)">'+(j.free?'FREE ✓':'FREE')+'</button>'
-        +'<button class="jogo-remove-btn" onclick="removeJogo(\''+fmt+'\','+ji+')">✕</button>'
-        +'</div>';
-    });
-    html+='<button class="jogos-add-btn" onclick="addJogo(\''+fmt+'\')">+ ADICIONAR JOGO</button>';
-    div.innerHTML=html;wrap.appendChild(div);
-  });
-}
+function renderJogosEditor(){var wrap=document.getElementById('jogos-editor');wrap.innerHTML='';FORMATOS_ORDER.forEach(function(fmt){var jogos=jogosData[fmt]||[];var div=document.createElement('div');div.className='jogos-formato';var html='<div class="jogos-formato-title">'+FORMATOS_LABEL[fmt]+'</div>';jogos.forEach(function(j,ji){html+='<div class="jogo-slot" id="jslot-'+fmt+'-'+ji+'"><input type="text" placeholder="Nome..." value="'+escHtml(j.nome)+'" onchange="jogosData[\''+fmt+'\']['+ji+'].nome=this.value" /><input type="text" class="link" placeholder="Link..." value="'+escHtml(j.link)+'" onchange="jogosData[\''+fmt+'\']['+ji+'].link=this.value" /><button class="jogo-free-btn'+(j.free?' active':'')+'" onclick="toggleJogoFree(\''+fmt+'\','+ji+',this)">'+(j.free?'FREE ✓':'FREE')+'</button><button class="jogo-remove-btn" onclick="removeJogo(\''+fmt+'\','+ji+')">✕</button></div>';});html+='<button class="jogos-add-btn" onclick="addJogo(\''+fmt+'\')">+ ADICIONAR JOGO</button>';div.innerHTML=html;wrap.appendChild(div);});}
 function toggleJogoFree(fmt,ji,btn){jogosData[fmt][ji].free=!jogosData[fmt][ji].free;btn.classList.toggle('active',jogosData[fmt][ji].free);btn.textContent=jogosData[fmt][ji].free?'FREE ✓':'FREE';}
 function addJogo(fmt){if(!jogosData[fmt])jogosData[fmt]=[];jogosData[fmt].push({nome:'',link:'',free:false});renderJogosEditor();}
 function removeJogo(fmt,ji){jogosData[fmt].splice(ji,1);renderJogosEditor();}
-  function updateJogosDisplay(){
-  var ids={'5x5':'games-tags-5x5','3x3':'games-tags-3x3','2x2':'games-tags-2x2','individual':'games-tags-individual'};
-  var faqIds={'5x5':'faq-tags-5x5','3x3':'faq-tags-3x3','2x2':'faq-tags-2x2','individual':'faq-tags-individual'};
-  FORMATOS_ORDER.forEach(function(fmt){
-    var tags=(jogosData[fmt]||[]).filter(function(j){return j.nome;}).map(function(j){return escHtml(j.nome);}).join(' · ');
-    var el=document.getElementById(ids[fmt]);if(el)el.innerHTML=(jogosData[fmt]||[]).filter(function(j){return j.nome;}).map(function(j){return'<a class="gtag" href="'+escHtml(j.link||'#')+'" target="_blank" rel="noopener">'+escHtml(j.nome)+(j.free?'<span class="gtag-free">FREE</span>':'')+'</a>';}).join('');
-    var faq=document.getElementById(faqIds[fmt]);if(faq)faq.textContent=tags;
-  });
-}
-function updateRodadasDisplay(){
-  var wrap=document.getElementById('rounds-list-display');if(!wrap)return;
-  if(!rodadasData||rodadasData.length===0){
-    wrap.innerHTML='<div style="font-size:13px;color:var(--text-dim);letter-spacing:1px;padding:8px 0;">A definir</div>';
-    return;
-  }
-  wrap.innerHTML=rodadasData.map(function(rodada,ri){
-    return(rodada.partidas||[]).map(function(p){
-      var fmt=p.formato||'',bc=BADGE_CLASS[fmt]||'r5x5',lb=FORMATOS_LABEL[fmt]||fmt;
-      var desc='<b>Rodada '+(ri+1)+':</b> '+(p.timeA||'?')+' vs '+(p.timeB||'?');
-      return'<div class="round-item"><div class="round-badge '+bc+'">'+lb+'</div><div class="round-desc">'+desc+'</div></div>';
-    }).join('');
-  }).join('');
-}
-
+function updateJogosDisplay(){var ids={'5x5':'games-tags-5x5','3x3':'games-tags-3x3','2x2':'games-tags-2x2','individual':'games-tags-individual'};FORMATOS_ORDER.forEach(function(fmt){var el=document.getElementById(ids[fmt]);if(el)el.innerHTML=(jogosData[fmt]||[]).filter(function(j){return j.nome;}).map(function(j){return'<a class="gtag" href="'+escHtml(j.link||'#')+'" target="_blank" rel="noopener">'+escHtml(j.nome)+(j.free?'<span class="gtag-free">FREE</span>':'')+'</a>';}).join('');});}
+function admSaveJogos(){FORMATOS_ORDER.forEach(function(fmt){(jogosData[fmt]||[]).forEach(function(j,ji){var slot=document.getElementById('jslot-'+fmt+'-'+ji);if(!slot)return;var inp=slot.querySelectorAll('input');if(inp[0])j.nome=inp[0].value.trim();if(inp[1])j.link=inp[1].value.trim();});});db.ref('jogosData').set(jogosData).then(function(){updateJogosDisplay();showToast('✓ Jogos salvos!');});}
 // ── RODADAS ──
 var rodadasData=[];
 var BADGE_CLASS={'5x5':'r5x5','3x3':'r3x3','2x2':'r3x3','individual':'rind'};
 function admLoadRodadas(){db.ref('rodadasData').once('value',function(snap){if(snap.val())rodadasData=snap.val();renderRodadasEditor();});}
-function renderRodadasEditor(){
-  var wrap=document.getElementById('rodadas-editor');wrap.innerHTML='';
-  rodadasData.forEach(function(rodada,ri){
-    var div=document.createElement('div');div.className='rodada-card';
-    var html='<div class="rodada-header"><span class="rodada-title">RODADA '+(ri+1)+'</span><button class="rodada-remove-btn" onclick="removeRodada('+ri+')">REMOVER</button></div><div id="partidas-wrap-'+ri+'">';
-    (rodada.partidas||[]).forEach(function(p,pi){html+=buildPartidaHTML(ri,pi,p);});
-    html+='</div><button class="partidas-add-btn" onclick="addPartida('+ri+')">+ ADICIONAR PARTIDA</button>';
-    div.innerHTML=html;wrap.appendChild(div);
-  });
-}
-function buildPartidaHTML(ri,pi,p){
-  var fmt=p.formato||'';
-  var grupos=gruposData.map(function(g){return g.title;});
-  var jogosOpts=fmt?(jogosData[fmt]||[]).map(function(j){return j.nome;}).filter(Boolean):[];
-  var fmtOpts='<option value="">— Formato —</option>'+FORMATOS_ORDER.map(function(f){return'<option value="'+f+'"'+(fmt===f?' selected':'')+'>'+FORMATOS_LABEL[f]+'</option>';}).join('');
-  var gOptsA='<option value="">— Time A —</option>'+grupos.map(function(g){return'<option value="'+escHtml(g)+'"'+(p.timeA===g?' selected':'')+'>'+escHtml(g)+'</option>';}).join('');
-  var gOptsB='<option value="">— Time B —</option>'+grupos.map(function(g){return'<option value="'+escHtml(g)+'"'+(p.timeB===g?' selected':'')+'>'+escHtml(g)+'</option>';}).join('');
-  var jOpts=function(val){return'<option value="">— Jogo —</option>'+jogosOpts.map(function(j){return'<option value="'+escHtml(j)+'"'+(val===j?' selected':'')+'>'+escHtml(j)+'</option>';}).join('');};
-  return'<div class="partida-card" id="partida-'+ri+'-'+pi+'">'
-    +'<div class="partida-header"><span class="partida-title">PARTIDA '+(pi+1)+'</span><button class="partida-remove-btn" onclick="removePartida('+ri+','+pi+')">✕</button></div>'
-    +'<select class="partida-select" onchange="setPartidaFormato('+ri+','+pi+',this.value)">'+fmtOpts+'</select>'
-    +(fmt
-      ?'<div class="partida-times"><select class="partida-select" onchange="rodadasData['+ri+'].partidas['+pi+'].timeA=this.value">'+gOptsA+'</select><select class="partida-select" onchange="rodadasData['+ri+'].partidas['+pi+'].timeB=this.value">'+gOptsB+'</select></div>'
-       +'<div class="partida-jogos">'
-       +'<div class="partida-jogo-row"><span class="partida-jogo-label">JOGO A:</span><select class="partida-select" style="margin-bottom:0" onchange="rodadasData['+ri+'].partidas['+pi+'].jogoA=this.value">'+jOpts(p.jogoA)+'</select></div>'
-       +'<div class="partida-jogo-row"><span class="partida-jogo-label">JOGO B:</span><select class="partida-select" style="margin-bottom:0" onchange="rodadasData['+ri+'].partidas['+pi+'].jogoB=this.value">'+jOpts(p.jogoB)+'</select></div>'
-       +'<div class="partida-jogo-row"><span class="partida-jogo-label">DESEMP:</span><select class="partida-select" style="margin-bottom:0" onchange="rodadasData['+ri+'].partidas['+pi+'].jogoD=this.value">'+jOpts(p.jogoD)+'</select></div>'
-       +'</div>'
-      :'')
-    +'</div>';
-}
+function renderRodadasEditor(){var wrap=document.getElementById('rodadas-editor');wrap.innerHTML='';rodadasData.forEach(function(rodada,ri){var div=document.createElement('div');div.className='rodada-card';var html='<div class="rodada-header"><span class="rodada-title">RODADA '+(ri+1)+'</span><button class="rodada-remove-btn" onclick="removeRodada('+ri+')">REMOVER</button></div><div id="partidas-wrap-'+ri+'">';(rodada.partidas||[]).forEach(function(p,pi){html+=buildPartidaHTML(ri,pi,p);});html+='</div><button class="partidas-add-btn" onclick="addPartida('+ri+')">+ ADICIONAR PARTIDA</button>';div.innerHTML=html;wrap.appendChild(div);});}
+function buildPartidaHTML(ri,pi,p){var fmt=p.formato||'';var grupos=gruposData.map(function(g){return g.title;});var jogosOpts=fmt?(jogosData[fmt]||[]).map(function(j){return j.nome;}).filter(Boolean):[];var fmtOpts='<option value="">— Formato —</option>'+FORMATOS_ORDER.map(function(f){return'<option value="'+f+'"'+(fmt===f?' selected':'')+'>'+FORMATOS_LABEL[f]+'</option>';}).join('');var gOptsA='<option value="">— Time A —</option>'+grupos.map(function(g){return'<option value="'+escHtml(g)+'"'+(p.timeA===g?' selected':'')+'>'+escHtml(g)+'</option>';}).join('');var gOptsB='<option value="">— Time B —</option>'+grupos.map(function(g){return'<option value="'+escHtml(g)+'"'+(p.timeB===g?' selected':'')+'>'+escHtml(g)+'</option>';}).join('');var jOpts=function(val){return'<option value="">— Jogo —</option>'+jogosOpts.map(function(j){return'<option value="'+escHtml(j)+'"'+(val===j?' selected':'')+'>'+escHtml(j)+'</option>';}).join('');};return'<div class="partida-card" id="partida-'+ri+'-'+pi+'"><div class="partida-header"><span class="partida-title">PARTIDA '+(pi+1)+'</span><button class="partida-remove-btn" onclick="removePartida('+ri+','+pi+')">✕</button></div><select class="partida-select" onchange="setPartidaFormato('+ri+','+pi+',this.value)">'+fmtOpts+'</select>'+(fmt?'<div class="partida-times"><select class="partida-select" onchange="rodadasData['+ri+'].partidas['+pi+'].timeA=this.value">'+gOptsA+'</select><select class="partida-select" onchange="rodadasData['+ri+'].partidas['+pi+'].timeB=this.value">'+gOptsB+'</select></div><div class="partida-jogos"><div class="partida-jogo-row"><span class="partida-jogo-label">JOGO A:</span><select class="partida-select" style="margin-bottom:0" onchange="rodadasData['+ri+'].partidas['+pi+'].jogoA=this.value">'+jOpts(p.jogoA)+'</select></div><div class="partida-jogo-row"><span class="partida-jogo-label">JOGO B:</span><select class="partida-select" style="margin-bottom:0" onchange="rodadasData['+ri+'].partidas['+pi+'].jogoB=this.value">'+jOpts(p.jogoB)+'</select></div><div class="partida-jogo-row"><span class="partida-jogo-label">DESEMP:</span><select class="partida-select" style="margin-bottom:0" onchange="rodadasData['+ri+'].partidas['+pi+'].jogoD=this.value">'+jOpts(p.jogoD)+'</select></div></div>':'')+'</div>';}
 function setPartidaFormato(ri,pi,fmt){rodadasData[ri].partidas[pi]={formato:fmt,timeA:'',timeB:'',jogoA:'',jogoB:'',jogoD:''};var el=document.getElementById('partida-'+ri+'-'+pi);if(el)el.outerHTML=buildPartidaHTML(ri,pi,rodadasData[ri].partidas[pi]);}
 function addPartida(ri){if(!rodadasData[ri].partidas)rodadasData[ri].partidas=[];rodadasData[ri].partidas.push({formato:'',timeA:'',timeB:'',jogoA:'',jogoB:'',jogoD:''});renderRodadasEditor();}
 function removePartida(ri,pi){rodadasData[ri].partidas.splice(pi,1);renderRodadasEditor();}
 function admAddRodada(){rodadasData.push({partidas:[]});renderRodadasEditor();}
 function removeRodada(ri){rodadasData.splice(ri,1);renderRodadasEditor();}
+function updateRodadasDisplay(){var wrap=document.getElementById('rounds-list-display');if(!wrap)return;if(!rodadasData||rodadasData.length===0){wrap.innerHTML='<div style="font-size:13px;color:var(--text-dim);letter-spacing:1px;padding:8px 0;">A definir</div>';return;}wrap.innerHTML=rodadasData.map(function(rodada,ri){return(rodada.partidas||[]).map(function(p){var fmt=p.formato||'',bc=BADGE_CLASS[fmt]||'r5x5',lb=FORMATOS_LABEL[fmt]||fmt;var desc='<b>Rodada '+(ri+1)+':</b> '+(p.timeA||'?')+' vs '+(p.timeB||'?');return'<div class="round-item"><div class="round-badge '+bc+'">'+lb+'</div><div class="round-desc">'+desc+'</div></div>';}).join('');}).join('');}
 function admSaveRodadas(){db.ref('rodadasData').set(rodadasData).then(function(){updateRodadasDisplay();showToast('✓ Rodadas salvas!');});}
-  
-function toggleVerMais(){
-  var more=document.getElementById('info-more'),btn=document.getElementById('btn-ver-mais');
-  var open=more.style.display!=='none'&&more.style.display!=='';
-  more.style.display=open?'none':'flex';more.style.flexDirection='column';more.style.gap='12px';
-  btn.textContent=open?'▸ VER MAIS INFORMAÇÕES':'▴ VER MENOS';
-}
-function toggleFaq(btn){var a=btn.nextElementSibling,open=a.classList.contains('open');document.querySelectorAll('.faq-a').forEach(function(el){el.classList.remove('open');});document.querySelectorAll('.faq-q').forEach(function(el){el.classList.remove('open');});if(!open){a.classList.add('open');btn.classList.add('open');}}
-function closeFaq(){document.getElementById('faq-modal').classList.remove('open');}
+function toggleVerMais(){var more=document.getElementById('info-more'),btn=document.getElementById('btn-ver-mais');var open=more.style.display==='block';more.style.display=open?'none':'block';btn.textContent=open?'▸ VER MAIS INFORMAÇÕES':'▴ VER MENOS';}
 function closeReservaModal(){document.getElementById('reserva-modal').classList.remove('open');}
 function searchReserva(){
   var name=document.getElementById('reserva-search').value.trim().toLowerCase(),result=document.getElementById('reserva-result');
@@ -915,7 +928,6 @@ function searchReserva(){
   if(pos){var c={extreme:'var(--extreme)',eplus:'var(--eplus)',epro:'var(--epro)'}[cat]||'var(--epro)';dotStyle='position:absolute;left:'+pos.x+'%;top:'+pos.y+'%;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);animation:dotpulse 1s infinite;background:'+c+';box-shadow:0 0 8px 3px '+c+';';}
   result.innerHTML='<div class="reserva-card"><div class="reserva-name">'+found.name+'</div><div class="reserva-pc-num '+cat+'">PC '+foundPc+'</div><div class="reserva-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+' — R$ '+(CATEGORIES[cat]?CATEGORIES[cat].price:'?')+',00</div>'+(mapSrc?'<div class="reserva-map-wrap"><img src="'+mapSrc+'" />'+(pos?'<div style="'+dotStyle+'"></div>':'')+'</div>':'')+'<div><span class="reserva-status '+status+'">'+statusText+'</span></div></div>';
 }
-
 var canvas,ctx,particles=[],particlesActive=false,pulseActive=false,pulseColor='160,160,160',pulseAlpha=0,pulseDir=1;
 var CAT_COLORS={extreme:{pulse:'160,160,160',particle:'#a0a0a0'},eplus:{pulse:'59,158,255',particle:'#3b9eff'},epro:{pulse:'255,59,59',particle:'#ff3b3b'}};
 function initCanvas(){canvas=document.createElement('canvas');canvas.id='particles-canvas';document.body.insertBefore(canvas,document.body.firstChild);ctx=canvas.getContext('2d');resizeCanvas();window.addEventListener('resize',resizeCanvas);animateParticles();}
@@ -923,86 +935,29 @@ function resizeCanvas(){if(!canvas)return;canvas.width=window.innerWidth;canvas.
 function startPulse(cat){pulseActive=true;particlesActive=false;particles=[];pulseColor=CAT_COLORS[cat]?CAT_COLORS[cat].pulse:'160,160,160';}
 function startParticles(cat){pulseActive=true;particlesActive=true;var color=CAT_COLORS[cat]?CAT_COLORS[cat].particle:'#a0a0a0';particles=[];for(var i=0;i<40;i++)particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-0.5)*0.5,vy:-Math.random()*0.8-0.2,r:Math.random()*2.5+1,alpha:Math.random()*0.5+0.2,color:color});}
 function stopEffects(){pulseActive=false;particlesActive=false;particles=[];pulseAlpha=0;}
-function animateParticles(){
-  requestAnimationFrame(animateParticles);ctx.clearRect(0,0,canvas.width,canvas.height);
-  if(pulseActive){pulseAlpha+=0.015*pulseDir;if(pulseAlpha>=0.07)pulseDir=-1;if(pulseAlpha<=0){pulseAlpha=0;pulseDir=1;}var grad=ctx.createRadialGradient(canvas.width/2,canvas.height/2,0,canvas.width/2,canvas.height/2,canvas.width*0.7);grad.addColorStop(0,'rgba('+pulseColor+','+pulseAlpha+')');grad.addColorStop(1,'rgba('+pulseColor+',0)');ctx.fillStyle=grad;ctx.fillRect(0,0,canvas.width,canvas.height);}
-  if(particlesActive)particles.forEach(function(p){p.x+=p.vx;p.y+=p.vy;if(p.y<-10){p.y=canvas.height+10;p.x=Math.random()*canvas.width;}ctx.save();ctx.globalAlpha=p.alpha*0.6;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();ctx.restore();});
-}
-
+function animateParticles(){requestAnimationFrame(animateParticles);ctx.clearRect(0,0,canvas.width,canvas.height);if(pulseActive){pulseAlpha+=0.015*pulseDir;if(pulseAlpha>=0.07)pulseDir=-1;if(pulseAlpha<=0){pulseAlpha=0;pulseDir=1;}var grad=ctx.createRadialGradient(canvas.width/2,canvas.height/2,0,canvas.width/2,canvas.height/2,canvas.width*0.7);grad.addColorStop(0,'rgba('+pulseColor+','+pulseAlpha+')');grad.addColorStop(1,'rgba('+pulseColor+',0)');ctx.fillStyle=grad;ctx.fillRect(0,0,canvas.width,canvas.height);}if(particlesActive)particles.forEach(function(p){p.x+=p.vx;p.y+=p.vy;if(p.y<-10){p.y=canvas.height+10;p.x=Math.random()*canvas.width;}ctx.save();ctx.globalAlpha=p.alpha*0.6;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();ctx.restore();});}
 function updateCounts(){['extreme','eplus','epro'].forEach(function(cat){var total=CATEGORIES[cat].pcs.length,taken=CATEGORIES[cat].pcs.filter(function(p){return !!reserved[p];}).length;var sellable=cat==='epro'?total-1:total,takenS=cat==='epro'?taken-1:taken,avail=sellable-takenS;var el=document.getElementById('slots-'+cat),cnt=document.getElementById('count-'+cat);cnt.textContent=avail>0?avail:'0';el.classList.remove('soldout');if(avail<=0){el.classList.add('soldout');el.textContent='Esgotado';}else el.textContent=avail===1?'1 vaga':avail+' vagas';});}
 function updateCategoryDisabled(){['extreme','eplus','epro'].forEach(function(cat){var total=CATEGORIES[cat].pcs.length,taken=CATEGORIES[cat].pcs.filter(function(p){return !!reserved[p];}).length;var sellable=cat==='epro'?total-1:total,takenS=cat==='epro'?taken-1:taken;var opt=document.getElementById('opt-'+cat),full=takenS>=sellable;if(full){opt.classList.add('disabled');opt.querySelector('input').disabled=true;}else{opt.classList.remove('disabled');opt.querySelector('input').disabled=false;}});}
-function selectCategory(cat){
-  if(selectedCategory===cat){selectedCategory=null;selectedPC=null;var r=document.querySelector('input[name="category"][value="'+cat+'"]');if(r)r.checked=false;document.getElementById('confirm-section').style.display='none';document.getElementById('pc-card').style.display='none';stopEffects();return;}
-  selectedCategory=cat;selectedPC=null;document.getElementById('err-category').classList.remove('visible');document.getElementById('confirm-section').style.display='none';
-  buildPCGrid(cat);document.getElementById('pc-card').style.display='block';document.getElementById('pc-card').scrollIntoView({behavior:'smooth',block:'nearest'});startPulse(cat);
-}
-function buildPCGrid(cat){
-  var grid=document.getElementById('pc-grid');grid.innerHTML='';
-  CATEGORIES[cat].pcs.forEach(function(num){var btn=document.createElement('button');btn.className='pc-btn';var ns=document.createElement('span');ns.textContent=num;btn.appendChild(ns);if(reserved[num]){btn.classList.add(reserved[num].pending?'pending':'taken');btn.disabled=true;var s=document.createElement('span');s.className='pc-reserved-name';s.textContent=(reserved[num].name||'').split(' ')[0];btn.appendChild(s);}else{(function(n,b,c){b.onclick=function(){selectPC(n,b,c);};})(num,btn,cat);}grid.appendChild(btn);});
-}
-function selectPC(num,btn,cat){
-  if(selectedPC===num){btn.classList.remove('selected','extreme','eplus','epro');selectedPC=null;document.getElementById('confirm-section').style.display='none';updateMapDot(null,null);stopEffects();startPulse(cat);return;}
-  document.querySelectorAll('.pc-btn').forEach(function(b){b.classList.remove('selected','extreme','eplus','epro');});btn.classList.add('selected',cat);selectedPC=num;document.getElementById('err-pc').classList.remove('visible');startParticles(cat);updateMapDot(num,cat);showSummary();
-}
-function showSummary(){
-  var name=document.getElementById('input-name').value.trim();if(!selectedCategory||!selectedPC)return;
-  document.getElementById('s-name').textContent=name||'(preencha seu nome)';document.getElementById('s-cat').textContent=CATEGORIES[selectedCategory].label;document.getElementById('s-pc').textContent='PC '+selectedPC;document.getElementById('s-price').textContent='R$ '+CATEGORIES[selectedCategory].price+',00';
-  document.getElementById('confirm-section').style.display='block';updatePayBtn();document.getElementById('confirm-section').scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-function updatePayBtn(){var btn=document.getElementById('btn-pay');if(!btn)return;if(isBeforeOpenDate()){btn.textContent='▸ PRÉ-RESERVAR — GARANTA SUA VAGA';btn.style.background='linear-gradient(135deg,#0077aa,#00d4ff)';}else{btn.textContent='▸ CONFIRMAR E PAGAR';btn.style.background='linear-gradient(135deg,#00b4d8,#00d4ff)';}}
-function handlePay(){
-  var name=document.getElementById('input-name').value.trim(),email=document.getElementById('input-email').value.trim(),valid=true;
-  if(!name){document.getElementById('err-name').classList.add('visible');valid=false;}
-  if(!email||!email.includes('@')){document.getElementById('err-email').classList.add('visible');valid=false;}
-  if(!selectedCategory){document.getElementById('err-category').classList.add('visible');valid=false;}
-  if(!selectedPC){document.getElementById('err-pc').classList.add('visible');valid=false;}
-  if(!valid)return;
-  if(reserved[selectedPC]){showToast('⚠ Este PC acabou de ser reservado!');buildPCGrid(selectedCategory);updateCounts();selectedPC=null;document.getElementById('confirm-section').style.display='none';return;}
-  var pcToReserve=selectedPC,catToReserve=selectedCategory,price=CATEGORIES[catToReserve].price,before=isBeforeOpenDate();
-  reserved[pcToReserve]={name:name,email:email,category:catToReserve,ts:Date.now(),pending:true};
-  db.ref('reserved/'+pcToReserve).set(reserved[pcToReserve]).then(function(){
-    if(before){document.getElementById('confirm-section').innerHTML='<div class="summary" style="border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.05)"><div style="text-align:center;padding:12px 0"><div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:8px">✓ PRÉ-RESERVA CONFIRMADA</div><div style="font-size:13px;color:var(--text-dim);line-height:1.7">PC <b style="color:#fff">'+pcToReserve+'</b> reservado para <b style="color:#fff">'+name+'</b>.<br>No dia <b style="color:var(--accent)">25/07</b> você receberá o link de pagamento por email.<br><span style="font-size:11px">Verifique também a caixa de spam 📧</span></div></div></div>';}
-    else{window.open(mpLinks[catToReserve],'_blank');document.getElementById('confirm-section').innerHTML='<div class="summary" style="border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.05)"><div style="text-align:center;padding:12px 0"><div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#ffd700;margin-bottom:8px">⏳ AGUARDANDO PAGAMENTO</div><div style="font-size:13px;color:var(--text-dim);line-height:1.7">O link do Mercado Pago foi aberto.<br>Após o pagamento, aguarde a confirmação.<br><span style="color:#ffd700;font-size:11px">PC '+pcToReserve+' — '+name+'</span></div></div></div>';}
-    selectedPC=null;selectedCategory=null;
-  });
-}
-
-function toggleAdmLogin(){var l=document.getElementById('adm-login');l.classList.toggle('visible');if(l.classList.contains('visible'))document.getElementById('adm-pass').focus();}
+function selectCategory(cat){if(selectedCategory===cat){selectedCategory=null;selectedPC=null;var r=document.querySelector('input[name="category"][value="'+cat+'"]');if(r)r.checked=false;document.getElementById('confirm-section').style.display='none';document.getElementById('pc-card').style.display='none';stopEffects();return;}selectedCategory=cat;selectedPC=null;document.getElementById('err-category').classList.remove('visible');document.getElementById('confirm-section').style.display='none';buildPCGrid(cat);document.getElementById('pc-card').style.display='block';document.getElementById('pc-card').scrollIntoView({behavior:'smooth',block:'nearest'});startPulse(cat);}
+function buildPCGrid(cat){var grid=document.getElementById('pc-grid');grid.innerHTML='';CATEGORIES[cat].pcs.forEach(function(num){var btn=document.createElement('button');btn.className='pc-btn';var ns=document.createElement('span');ns.textContent=num;btn.appendChild(ns);if(reserved[num]){btn.classList.add(reserved[num].pending?'pending':'taken');btn.disabled=true;var s=document.createElement('span');s.className='pc-reserved-name';s.textContent=(reserved[num].name||'').split(' ')[0];btn.appendChild(s);}else{(function(n,b,c){b.onclick=function(){selectPC(n,b,c);};})(num,btn,cat);}grid.appendChild(btn);});}
+function selectPC(num,btn,cat){if(selectedPC===num){btn.classList.remove('selected','extreme','eplus','epro');selectedPC=null;document.getElementById('confirm-section').style.display='none';updateMapDot(null,null);stopEffects();startPulse(cat);return;}document.querySelectorAll('.pc-btn').forEach(function(b){b.classList.remove('selected','extreme','eplus','epro');});btn.classList.add('selected',cat);selectedPC=num;document.getElementById('err-pc').classList.remove('visible');startParticles(cat);updateMapDot(num,cat);showSummary();}
+function showSummary(){var name=document.getElementById('input-name').value.trim();if(!selectedCategory||!selectedPC)return;document.getElementById('s-name').textContent=name||'(preencha seu nome)';document.getElementById('s-cat').textContent=CATEGORIES[selectedCategory].label;document.getElementById('s-pc').textContent='PC '+selectedPC;document.getElementById('s-price').textContent='R$ '+CATEGORIES[selectedCategory].price+',00';document.getElementById('confirm-section').style.display='block';updatePayBtn();document.getElementById('confirm-section').scrollIntoView({behavior:'smooth',block:'nearest'});}
+function updatePayBtn(){var btn=document.getElementById('btn-pay');if(!btn)return;if(isBeforeOpenDate()){btn.textContent='▸ PRÉ-RESERVAR — GARANTA SUA VAGA';btn.style.background='linear-gradient(135deg,#005577,var(--accent))';}else{btn.textContent='▸ CONFIRMAR E PAGAR';btn.style.background='linear-gradient(135deg,#007fa8,var(--accent))';}}
+function handlePay(){var name=document.getElementById('input-name').value.trim(),email=document.getElementById('input-email').value.trim(),valid=true;if(!name){document.getElementById('err-name').classList.add('visible');valid=false;}if(!email||!email.includes('@')){document.getElementById('err-email').classList.add('visible');valid=false;}if(!selectedCategory){document.getElementById('err-category').classList.add('visible');valid=false;}if(!selectedPC){document.getElementById('err-pc').classList.add('visible');valid=false;}if(!valid)return;if(reserved[selectedPC]){showToast('⚠ Este PC acabou de ser reservado!');buildPCGrid(selectedCategory);updateCounts();selectedPC=null;document.getElementById('confirm-section').style.display='none';return;}var pcToReserve=selectedPC,catToReserve=selectedCategory,price=CATEGORIES[catToReserve].price,before=isBeforeOpenDate();reserved[pcToReserve]={name:name,email:email,category:catToReserve,ts:Date.now(),pending:true};db.ref('reserved/'+pcToReserve).set(reserved[pcToReserve]).then(function(){if(before){document.getElementById('confirm-section').innerHTML='<div class="summary"><div style="text-align:center;padding:12px 0"><div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:8px">✓ PRÉ-RESERVA CONFIRMADA</div><div style="font-size:13px;color:var(--text-dim);line-height:1.7">PC <b style="color:#fff">'+pcToReserve+'</b> reservado para <b style="color:#fff">'+name+'</b>.<br>No dia <b style="color:var(--accent)">25/07</b> você receberá o link de pagamento por email.<br><span style="font-size:11px">Verifique também a caixa de spam 📧</span></div></div></div>';}else{window.open(mpLinks[catToReserve],'_blank');document.getElementById('confirm-section').innerHTML='<div class="summary" style="border-color:rgba(255,215,0,0.2)"><div style="text-align:center;padding:12px 0"><div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:var(--gold);margin-bottom:8px">⏳ AGUARDANDO PAGAMENTO</div><div style="font-size:13px;color:var(--text-dim);line-height:1.7">O link do Mercado Pago foi aberto.<br>Após o pagamento, aguarde a confirmação.<br><span style="color:var(--gold);font-size:11px">PC '+pcToReserve+' — '+name+'</span></div></div></div>';}selectedPC=null;selectedCategory=null;});}
+function toggleAdmLogin(){var l=document.getElementById('adm-login');l.classList.toggle('visible');if(l.classList.contains('visible')){l.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){document.getElementById('adm-pass').focus();},300);}}
 function admLogin(){var pass=document.getElementById('adm-pass').value;if(pass===ADM_PASS){document.getElementById('adm-login').classList.remove('visible');document.getElementById('adm-pass').value='';document.getElementById('err-adm').classList.remove('visible');document.getElementById('adm-panel').classList.add('visible');renderAdmList();document.getElementById('adm-panel').scrollIntoView({behavior:'smooth'});}else{document.getElementById('err-adm').classList.add('visible');document.getElementById('adm-pass').value='';}}
 function admLogout(){document.getElementById('adm-panel').classList.remove('visible');}
-function renderAdmList(){
-  var list=document.getElementById('adm-list');list.innerHTML='';
-  var entries=Object.keys(reserved).map(function(k){return[parseInt(k),reserved[k]];});entries.sort(function(a,b){return a[0]-b[0];});
-  if(entries.length===0){list.innerHTML='<div class="adm-empty">Nenhuma reserva ainda.</div>';updateAdmPcSelect();return;}
-  entries.forEach(function(entry){
-    var pc=entry[0],d=entry[1],cat=d.category||'epro';
-    var item=document.createElement('div');item.className='adm-item';if(d.pending)item.classList.add('pending-item');
-    var emailHtml=d.email?'<div style="font-size:10px;color:var(--accent);margin-top:2px">📧 '+d.email+'</div>':'<div class="adm-email-row"><input type="email" id="email-pc-'+pc+'" placeholder="Adicionar email..." /><button onclick="admAddEmail('+pc+')">+ EMAIL</button></div>';
-    var sb=d.pending?' <span class="pending-badge">AGUARDANDO</span>':'';
-    var btns=d.owner?'':(d.pending?'<div style="display:flex;gap:6px;flex-direction:column;align-items:flex-end"><button class="adm-confirm-btn" onclick="admConfirm('+pc+')">✓ CONFIRMAR</button>'+(d.email?'<button class="adm-confirm-btn" style="border-color:var(--accent);color:var(--accent)" onclick="sendEmailPreReserva('+pc+')">📧 EMAIL</button>':'')+'<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button></div>':'<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button>');
-    item.innerHTML='<div style="flex:1"><div class="adm-item-left"><div class="adm-pc-badge '+cat+'">PC'+pc+'</div><div><div class="adm-item-name">'+d.name+sb+'</div><div class="adm-item-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+'</div>'+emailHtml+'</div></div></div>'+btns;
-    list.appendChild(item);
-  });
-  updateAdmPcSelect();
-}
+function renderAdmList(){var list=document.getElementById('adm-list');list.innerHTML='';var entries=Object.keys(reserved).map(function(k){return[parseInt(k),reserved[k]];});entries.sort(function(a,b){return a[0]-b[0];});if(entries.length===0){list.innerHTML='<div class="adm-empty">Nenhuma reserva ainda.</div>';updateAdmPcSelect();return;}entries.forEach(function(entry){var pc=entry[0],d=entry[1],cat=d.category||'epro';var item=document.createElement('div');item.className='adm-item';if(d.pending)item.classList.add('pending-item');var emailHtml=d.email?'<div style="font-size:10px;color:var(--accent);margin-top:2px">📧 '+d.email+'</div>':'<div class="adm-email-row"><input type="email" id="email-pc-'+pc+'" placeholder="Adicionar email..." /><button onclick="admAddEmail('+pc+')">+ EMAIL</button></div>';var sb=d.pending?' <span class="pending-badge">AGUARDANDO</span>':'';var btns=d.owner?'':(d.pending?'<div style="display:flex;gap:6px;flex-direction:column;align-items:flex-end"><button class="adm-confirm-btn" onclick="admConfirm('+pc+')">✓ CONFIRMAR</button>'+(d.email?'<button class="adm-confirm-btn" style="border-color:var(--accent);color:var(--accent)" onclick="sendEmailPreReserva('+pc+')">📧 EMAIL</button>':'')+'<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button></div>':'<button class="adm-remove-btn" onclick="admRemove('+pc+')">REMOVER</button>');item.innerHTML='<div style="flex:1"><div class="adm-item-left"><div class="adm-pc-badge '+cat+'">PC'+pc+'</div><div><div class="adm-item-name">'+d.name+sb+'</div><div class="adm-item-cat">'+(CATEGORIES[cat]?CATEGORIES[cat].label:cat.toUpperCase())+'</div>'+emailHtml+'</div></div></div>'+btns;list.appendChild(item);});updateAdmPcSelect();}
 function admConfirm(pc){if(!reserved[pc])return;reserved[pc].pending=false;db.ref('reserved/'+pc).set(reserved[pc]).then(function(){renderAdmList();showToast('✓ PC '+pc+' confirmado!');});}
 function admRemove(pc){if(!confirm('Remover PC '+pc+'?'))return;delete reserved[pc];saveReserved();updateCounts();updateCategoryDisabled();renderAdmList();if(selectedCategory)buildPCGrid(selectedCategory);showToast('✓ PC '+pc+' liberado');}
 function updateAdmPcSelect(){var cat=document.getElementById('adm-add-cat').value,sel=document.getElementById('adm-add-pc');sel.innerHTML='<option value="">PC Nº...</option>';if(!cat)return;CATEGORIES[cat].pcs.forEach(function(num){if(!reserved[num]){var o=document.createElement('option');o.value=num;o.textContent='PC '+num;sel.appendChild(o);}});}
 function admAdd(){var name=document.getElementById('adm-add-name').value.trim(),cat=document.getElementById('adm-add-cat').value,pc=parseInt(document.getElementById('adm-add-pc').value);if(!name||!cat||!pc){showToast('⚠ Preencha todos os campos');return;}if(reserved[pc]){showToast('⚠ PC já reservado');return;}reserved[pc]={name:name,category:cat,ts:Date.now()};saveReserved();updateCounts();updateCategoryDisabled();renderAdmList();if(selectedCategory)buildPCGrid(selectedCategory);document.getElementById('adm-add-name').value='';document.getElementById('adm-add-cat').value='';document.getElementById('adm-add-pc').innerHTML='<option value="">PC Nº...</option>';showToast('✓ '+name+' adicionado ao PC '+pc);}
 function admReset(){if(!confirm('Resetar TODAS as reservas?'))return;reserved={};reserved[13]={name:'Danilo',category:'epro',ts:0,owner:true};saveReserved();updateCounts();updateCategoryDisabled();if(selectedCategory)buildPCGrid(selectedCategory);selectedPC=null;document.getElementById('confirm-section').style.display='none';renderAdmList();showToast('✓ Reservas resetadas');}
-
 function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3000);}
-
 var musicPlaying=false;
 function toggleMusic(){var audio=document.getElementById('bg-music'),btn=document.getElementById('music-btn');if(musicPlaying){audio.pause();btn.textContent='🎵';musicPlaying=false;}else{audio.play();btn.textContent='🔇';musicPlaying=true;}}
 document.addEventListener('click',function startMusic(){var audio=document.getElementById('bg-music');if(!musicPlaying){audio.play().then(function(){document.getElementById('music-btn').textContent='🔇';musicPlaying=true;}).catch(function(){});}document.removeEventListener('click',startMusic);},{once:true});
-
-function init(){
-  loadConfig();initReserved();initMapDots();
-  updateEventoDisplay();updateGruposDisplay();renderInterestList();updateConfirmedList();
-  updateCounts();updateCategoryDisabled();updatePayBtn();
-  document.getElementById('input-name').addEventListener('input',function(){document.getElementById('err-name').classList.remove('visible');if(selectedPC)showSummary();});
-}
+function init(){loadConfig();initReserved();initMapDots();updateEventoDisplay();updateGruposDisplay();renderInterestList();updateConfirmedList();updateCounts();updateCategoryDisabled();updatePayBtn();document.getElementById('input-name').addEventListener('input',function(){document.getElementById('err-name').classList.remove('visible');if(selectedPC)showSummary();});}
 document.addEventListener('DOMContentLoaded',function(){initCanvas();loadFirebase(function(){init();});});
 </script>
 
@@ -1011,8 +966,8 @@ document.addEventListener('DOMContentLoaded',function(){initCanvas();loadFirebas
   <div class="modal-box">
     <div class="modal-header"><span class="modal-title">🔍 MINHA RESERVA</span><button class="modal-close" onclick="closeReservaModal()">✕</button></div>
     <div class="modal-body">
-      <div style="margin-bottom:16px">
-        <div class="field-label" style="font-size:11px;margin-bottom:8px">Seu Nome</div>
+      <div style="margin-bottom:18px">
+        <div class="field-label" style="font-size:11px;margin-bottom:10px">Seu Nome</div>
         <input type="text" id="reserva-search" placeholder="Digite seu nome..." autocomplete="off" oninput="searchReserva()" />
       </div>
       <div id="reserva-result"></div>
