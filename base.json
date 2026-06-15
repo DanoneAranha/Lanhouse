@@ -1,0 +1,27 @@
+{
+  "id": "base",
+  "nome": "Evento Base",
+  "emoji": "🎮",
+  "cor": "#00d4ff",
+  "visivel": false,
+  "blocos": [
+    { "id": "header",      "ativo": true,  "ordem": 1 },
+    { "id": "eventoBanner","ativo": true,  "ordem": 2 },
+    { "id": "vagas",       "ativo": true,  "ordem": 3 },
+    { "id": "confirmados", "ativo": true,  "ordem": 4 },
+    { "id": "reserva",     "ativo": true,  "ordem": 5 },
+    { "id": "interesse",   "ativo": true,  "ordem": 6 },
+    { "id": "infoExtra",   "ativo": true,  "ordem": 7 },
+    { "id": "localizacao", "ativo": true,  "ordem": 8 }
+  ],
+  "info": {
+    "data": "",
+    "hora": "",
+    "valor": "",
+    "local": "",
+    "obs": ""
+  },
+  "musicas": [],
+  "categorias": [],
+  "mapa": "https://raw.githubusercontent.com/DanoneAranha/Lanhouse/main/Mapa.jpg"
+}
