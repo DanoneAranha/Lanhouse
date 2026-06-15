@@ -1,0 +1,39 @@
+{
+  "id": "lanhouse",
+  "nome": "Quest Lan House",
+  "emoji": "🖥️",
+  "cor": "#00d4ff",
+  "descricao": "Santana, São Paulo",
+  "visivel": true,
+  "herda": "base",
+  "blocos": [
+    { "id": "header",      "ativo": true,  "ordem": 1 },
+    { "id": "eventoBanner","ativo": true,  "ordem": 2 },
+    { "id": "vagas",       "ativo": true,  "ordem": 3 },
+    { "id": "confirmados", "ativo": true,  "ordem": 4 },
+    { "id": "reserva",     "ativo": true,  "ordem": 5 },
+    { "id": "interesse",   "ativo": true,  "ordem": 6 },
+    { "id": "infoExtra",   "ativo": true,  "ordem": 7 },
+    { "id": "localizacao", "ativo": true,  "ordem": 8 }
+  ],
+  "info": {
+    "data": "",
+    "hora": "",
+    "valor": "",
+    "local": "Quest Lan House · Santana, SP",
+    "obs": ""
+  },
+  "musicas": [
+    {
+      "nome": "Billie Jean — Michael Jackson",
+      "url": "https://raw.githubusercontent.com/DanoneAranha/Lanhouse/main/Michael%20Jackson%20-%20Billie%20Jean%20(Official%20Video).mp3"
+    }
+  ],
+  "categorias": [],
+  "mapa": "https://raw.githubusercontent.com/DanoneAranha/Lanhouse/main/Mapa.jpg",
+  "localizacao": {
+    "nome": "Quest Lan House Gamer",
+    "endereco": "R. Voluntários da Pátria, 3116 · Santana, São Paulo - SP",
+    "mapsLink": "https://maps.google.com/?q=R.+Voluntários+da+Pátria,+3116,+Santana,+São+Paulo,+SP"
+  }
+}
