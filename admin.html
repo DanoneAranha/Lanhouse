@@ -290,13 +290,16 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
 // ══════════════════════════════════════════════
 // ESTADO GLOBAL
 // ══════════════════════════════════════════════
 var STORAGE_KEY='quest_admin_config';
-var ADM_PASS_LOCAL='admin123';
-var cfg={token:'',repo:'',branch:'main',firebaseUrl:'',admPass:'admin123'};
+var cfg={token:'',repo:'',branch:'main',firebaseUrl:'https://lanhouse-30903-default-rtdb.firebaseio.com'};
+var dbAdmin=null;
+var ADM_PASS_FIREBASE=null;
 
 var eventosIndex=[];
 var eventoEmEdicao=null;
@@ -328,9 +331,24 @@ function saveLocalConfig(){
 // ══════════════════════════════════════════════
 // GATE / LOGIN
 // ══════════════════════════════════════════════
+function initFirebaseAdmin(cb){
+  if(!firebase.apps.length){
+    firebase.initializeApp({databaseURL:cfg.firebaseUrl||'https://lanhouse-30903-default-rtdb.firebaseio.com'});
+  }
+  dbAdmin=firebase.database();
+  dbAdmin.ref('admPass').once('value',function(s){
+    ADM_PASS_FIREBASE=s.val();
+    if(cb)cb();
+  });
+}
+
 function doGateLogin(){
   var pass=document.getElementById('gate-pass').value;
-  if(pass===cfg.admPass){
+  if(ADM_PASS_FIREBASE===null){
+    showToast('⟳ Ainda conectando ao Firebase, tente novamente',true);
+    return;
+  }
+  if(pass===ADM_PASS_FIREBASE){
     document.getElementById('gate').style.display='none';
     document.getElementById('app').style.display='block';
     initApp();
@@ -428,15 +446,18 @@ async function salvarConfigGithub(){
 function salvarSenhaAdmin(){
   var novaSenha=document.getElementById('cfg-nova-senha').value.trim();
   if(!novaSenha){showToast('⚠ Digite uma senha nova',true);return;}
-  cfg.admPass=novaSenha;
-  saveLocalConfig();
-  document.getElementById('cfg-nova-senha').value='';
-  showToast('✓ Senha alterada! Lembre-se de também atualizar no Firebase (admPass) para o botão ADMIN do site.');
+  dbAdmin.ref('admPass').set(novaSenha).then(function(){
+    ADM_PASS_FIREBASE=novaSenha;
+    document.getElementById('cfg-nova-senha').value='';
+    showToast('✓ Senha alterada no Firebase! Vale tanto aqui quanto no site principal.');
+  }).catch(function(e){
+    showToast('⚠ Erro ao salvar senha: '+e.message,true);
+  });
 }
 function salvarFirebaseConfig(){
   cfg.firebaseUrl=document.getElementById('cfg-firebase-url').value.trim();
   saveLocalConfig();
-  showToast('✓ Firebase salvo');
+  showToast('✓ Firebase salvo. Recarregue a página para aplicar a nova URL.');
 }
 
 // ══════════════════════════════════════════════
@@ -773,11 +794,12 @@ async function initApp(){
   document.getElementById('cfg-token').value=cfg.token;
   document.getElementById('cfg-repo').value=cfg.repo;
   document.getElementById('cfg-branch').value=cfg.branch;
-  document.getElementById('cfg-firebase-url').value=cfg.firebaseUrl;
 }
 
 document.addEventListener('DOMContentLoaded',function(){
   loadLocalConfig();
+  initFirebaseAdmin();
+  document.getElementById('cfg-firebase-url').value=cfg.firebaseUrl;
 });
 </script>
 </body>

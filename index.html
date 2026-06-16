@@ -25,6 +25,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
 
 /* ── TELA HOME ── */
+#admin-fixed-btn-global{position:fixed;top:16px;right:16px;z-index:999;background:rgba(255,107,53,0.12);border:1px solid #ff6b35;border-radius:6px;color:#ff6b35;font-family:var(--font-display);font-size:9px;letter-spacing:2px;padding:8px 14px;cursor:pointer;transition:all 0.2s;backdrop-filter:blur(10px);}
+#admin-fixed-btn-global:hover{background:rgba(255,107,53,0.25);}
 #home-screen{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;}
 .home-tag{font-family:var(--font-display);font-size:9px;letter-spacing:5px;color:var(--accent);margin-bottom:14px;opacity:0.7;animation:fadeUp 0.5s ease both;}
 .home-title{font-family:var(--font-display);font-size:48px;font-weight:900;color:#fff;letter-spacing:3px;margin-bottom:8px;animation:fadeUp 0.5s ease 0.1s both;text-align:center;}
@@ -245,6 +247,7 @@ a.gtag:hover{border-color:var(--accent);color:var(--accent);}
 
 <canvas id="particles-canvas"></canvas>
 <div class="toast" id="toast"></div>
+<button id="admin-fixed-btn-global" onclick="toggleAdmLogin()">⚙ ADMIN</button>
 
 <!-- ══ TELA HOME ══ -->
 <div id="home-screen">
@@ -260,7 +263,6 @@ a.gtag:hover{border-color:var(--accent);color:var(--accent);}
 <!-- ══ TELA EVENTO ══ -->
 <div id="evento-screen">
   <button class="back-btn" onclick="voltarHome()">← EVENTOS</button>
-  <button id="adm-fixed-btn" onclick="toggleAdmLogin()">⚙ ADMIN</button>
 
   <div class="page-wrap">
     <div id="fb-loading" style="display:none">⟳ CONECTANDO...</div>
@@ -384,27 +386,6 @@ a.gtag:hover{border-color:var(--accent);color:var(--accent);}
       </div>
     </div>
 
-    <!-- ADM LOGIN -->
-    <div class="adm-login" id="adm-login" style="display:none;background:var(--surface);border:1px solid #ff6b35;border-radius:10px;padding:22px;margin-bottom:16px;">
-      <div style="font-family:var(--font-display);font-size:10px;letter-spacing:3px;color:#ff6b35;margin-bottom:14px;">▸ ACESSO ADMINISTRADOR</div>
-      <div style="display:flex;gap:8px;">
-        <input type="password" id="adm-pass" placeholder="Senha..." onkeydown="if(event.key==='Enter')admLogin()" style="flex:1"/>
-        <button onclick="admLogin()" style="padding:12px 18px;background:#ff6b35;border:none;border-radius:6px;color:#000;font-family:var(--font-display);font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;">ENTRAR</button>
-      </div>
-      <div class="error-msg" id="err-adm" style="margin-top:8px">Senha incorreta.</div>
-    </div>
-
-    <!-- ADM PANEL (simplificado — painel completo será admin.html) -->
-    <div id="adm-panel" style="display:none;background:var(--surface);border:1px solid #ff6b35;border-radius:10px;padding:26px;margin-bottom:16px;">
-      <div style="font-family:var(--font-display);font-size:11px;letter-spacing:3px;color:#ff6b35;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;">
-        <span>⚙ PAINEL ADM</span>
-        <div style="display:flex;gap:8px;">
-          <a href="admin.html" target="_blank" style="padding:6px 12px;background:rgba(0,212,255,0.1);border:1px solid var(--accent);border-radius:4px;color:var(--accent);font-family:var(--font-display);font-size:9px;letter-spacing:1px;text-decoration:none;">⚙ ADMIN COMPLETO</a>
-          <button onclick="admLogout()" style="background:none;border:1px solid #ff6b35;border-radius:4px;color:#ff6b35;font-family:var(--font-display);font-size:9px;letter-spacing:1px;padding:5px 10px;cursor:pointer;">SAIR</button>
-        </div>
-      </div>
-      <div id="adm-quick-reservas"></div>
-    </div>
 
     <div class="footer" id="site-footer">RESERVAS · QUEST LAN HOUSE · 2026</div>
   </div>
@@ -1095,27 +1076,31 @@ function toggleVerMais(){
 }
 
 // ══════════════════════════════════════════════
-// ADM (rápido — painel completo em admin.html)
+// ADM (login global → redireciona pro admin.html)
 // ══════════════════════════════════════════════
 function toggleAdmLogin(){
-  var l=document.getElementById('adm-login');
-  l.style.display=l.style.display==='none'?'block':'none';
-  if(l.style.display==='block'){l.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){document.getElementById('adm-pass').focus();},300);}
+  document.getElementById('admin-login-modal').classList.add('open');
+  setTimeout(function(){document.getElementById('adm-pass-global').focus();},200);
 }
-function admLogin(){
-  var pass=document.getElementById('adm-pass').value;
+function closeAdminLoginModal(){
+  document.getElementById('admin-login-modal').classList.remove('open');
+  document.getElementById('adm-pass-global').value='';
+  document.getElementById('err-adm-global').classList.remove('visible');
+}
+function admLoginGlobal(){
+  var pass=document.getElementById('adm-pass-global').value;
+  if(!ADM_PASS){
+    showToast('⟳ Ainda conectando, tente novamente em 1s');
+    return;
+  }
   if(pass===ADM_PASS){
-    document.getElementById('adm-login').style.display='none';
-    document.getElementById('adm-pass').value='';
-    document.getElementById('err-adm').classList.remove('visible');
-    document.getElementById('adm-panel').style.display='block';
-    document.getElementById('adm-panel').scrollIntoView({behavior:'smooth'});
+    sessionStorage.setItem('admAuth','1');
+    window.location.href='admin.html';
   } else {
-    document.getElementById('err-adm').classList.add('visible');
-    document.getElementById('adm-pass').value='';
+    document.getElementById('err-adm-global').classList.add('visible');
+    document.getElementById('adm-pass-global').value='';
   }
 }
-function admLogout(){document.getElementById('adm-panel').style.display='none';}
 
 // ══════════════════════════════════════════════
 // MÚSICA
@@ -1154,6 +1139,7 @@ document.addEventListener('DOMContentLoaded', async function(){
   initCanvas();
   await carregarConfig();
   await carregarBase();
+  iniciarFirebaseGlobal();
 
   // Verifica se URL já tem evento
   var params=new URLSearchParams(window.location.search);
@@ -1170,6 +1156,15 @@ document.addEventListener('DOMContentLoaded', async function(){
   });
 });
 
+function iniciarFirebaseGlobal(){
+  if(!window.firebase){
+    loadFirebase(function(){
+      db.goOnline();
+      db.ref('admPass').once('value',function(s){ADM_PASS=s.val();});
+    });
+  }
+}
+
 window.addEventListener('popstate',function(e){
   if(e.state&&e.state.evento){
     abrirEvento(e.state.evento);
@@ -1178,5 +1173,20 @@ window.addEventListener('popstate',function(e){
   }
 });
 </script>
+<!-- MODAL ADMIN LOGIN (GLOBAL) -->
+<div class="modal-overlay" id="admin-login-modal" onclick="if(event.target===this)closeAdminLoginModal()">
+  <div class="modal-box" style="max-width:380px">
+    <div class="modal-header">
+      <span class="modal-title" style="color:#ff6b35">⚙ ACESSO ADMINISTRADOR</span>
+      <button class="modal-close" onclick="closeAdminLoginModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="password" id="adm-pass-global" placeholder="Senha..." onkeydown="if(event.key==='Enter')admLoginGlobal()" style="margin-bottom:10px"/>
+      <button onclick="admLoginGlobal()" style="width:100%;padding:12px;background:#ff6b35;border:none;border-radius:6px;color:#000;font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:2px;cursor:pointer;">ENTRAR</button>
+      <div class="error-msg" id="err-adm-global" style="margin-top:8px">Senha incorreta.</div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
